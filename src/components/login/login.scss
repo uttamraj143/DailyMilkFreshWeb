@@ -1,0 +1,102 @@
+.Login {
+  &__back {
+    background-color: #e8e4d9;
+  }
+}
+
+.show-password {
+  position: absolute;
+  right: 0px;
+  font-size: 10px;
+}
+
+.Signin {
+  font-size: 20px;
+  color: #807a7a;
+  padding: 2px;
+}
+
+.login-container {
+  padding: 20px;
+}
+
+.login-header {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.curved-div {
+  // background: #ff3c00;
+  color: #fff;
+  text-align: center;
+  transform: rotate(180deg);
+  @media screen and (min-width: 1000px) {
+    // height: 312px;
+    display: none;
+  }
+}
+.curved-div .heading {
+  position: absolute;
+  font-size: 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 1.5rem;
+}
+
+.curved-div svg {
+  display: block;
+
+  @media screen and (max-width: 450px) {
+    // height: 312px;
+  }
+
+  @media screen and (max-width: 770px) {
+    // height: 312px;
+  }
+}
+
+:focus {
+  outline: none;
+}
+
+.col-3 {
+  margin: 40px 3%;
+  position: relative;
+}
+
+/* necessary to give position: relative to parent. */
+input[type='text'] {
+  font: 15px/24px 'Lato', Arial, sans-serif;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+}
+input[type='password'] {
+  font: 15px/24px 'Lato', Arial, sans-serif;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+}
+
+.effect-2 {
+  border: 0;
+  padding: 7px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.effect-2 ~ .focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #3399ff;
+  transition: 0.4s;
+}
+.effect-2:focus ~ .focus-border {
+  width: 100%;
+  transition: 0.4s;
+  left: 0;
+}
