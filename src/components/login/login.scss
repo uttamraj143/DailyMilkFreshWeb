@@ -1,123 +1,113 @@
 .Login {
-  &__back {
-    background-color: #e8e4d9;
+  &__main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-}
 
-.show-password {
-  position: absolute;
-  right: 0px;
-  font-size: 10px;
-}
-
-.logo-image {
-  width: 300px;
-  height: 300px;
-  display: block;
-  margin: 0 auto;
-}
-
-.logo-caption {
-  text-transform: uppercase;
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 15px;
-  text-align: center;
-  color: #687980;
-}
-
-.signup {
-  margin-top: 10%;
-  width: 100%;
-  text-align: center;
-}
-
-.login-main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.login-container {
-  margin-top: 50px;
-  height: 630px;
-  width: 500px;
-  @media screen and (max-width: 1000px) {
-    padding: 5%;
-    height: 100vh;
-    width: 90%;
-    margin: auto;
+  &__sub-container {
+    margin-top: 50px;
+    height: 630px;
+    width: 500px;
+    @media screen and (max-width: 1000px) {
+      padding: 5%;
+      height: 100vh;
+      width: 90%;
+      margin: auto;
+    }
   }
-}
 
-.logo-name {
-  font-size: 40px;
-  text-align: center;
-  font-family: 'Courgette', cursive;
-}
+  &__logo-image {
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+  }
 
-.submit {
-  height: 48px;
-  width: 100%;
-  border-radius: 4px;
-  background-color: #df711b;
-  border: none;
-  font-family: Source Sans Pro, sans-serif;
-  font-size: 16px;
-  line-height: 26px;
-  text-align: center;
-  color: #fff;
-  margin-top: 32px;
-  cursor: pointer;
-}
-.login-header {
-  font-size: 20px;
-  margin: 40px 20px;
-  font-weight: 600;
-  text-transform: uppercase;
+  &__logo-name {
+    font-size: 40px;
+    text-align: center;
+    font-family: 'Courgette', cursive;
+  }
+
+  &__logo-caption {
+    text-transform: uppercase;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    color: #687980;
+  }
+
+  &__login-header {
+    font-size: 20px;
+    margin: 40px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &__col-3 {
+    margin: 0 3% 40px 3%;
+    position: relative;
+  }
+
+  &__signup {
+    margin-top: 10%;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__show-password {
+    position: absolute;
+    right: 0px;
+    font-size: 10px;
+    cursor: pointer;
+  }
+
+  &__submit {
+    height: 48px;
+    width: 100%;
+    border-radius: 4px;
+    background-color: #df711b;
+    border: none;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    color: #fff;
+    margin-top: 32px;
+    cursor: pointer;
+  }
+
+  &__input-focus-effect {
+    border: 0;
+    padding: 7px 0;
+    border-bottom: 1px solid #ccc;
+  }
+
+  &__input-focus-effect ~ .focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #3399ff;
+    transition: 0.4s;
+  }
+  &__input-focus-effect:focus ~ .focus-border {
+    width: 100%;
+    transition: 0.4s;
+    left: 0;
+  }
 }
 
 :focus {
   outline: none;
 }
 
-.col-3 {
-  margin: 0 3% 40px 3%;
-  position: relative;
-}
-
-/* necessary to give position: relative to parent. */
-input[type='text'] {
+input {
   font: 15px/24px 'Lato', Arial, sans-serif;
   color: #333;
   width: 100%;
   box-sizing: border-box;
   letter-spacing: 1px;
-}
-input[type='password'] {
-  font: 15px/24px 'Lato', Arial, sans-serif;
-  color: #333;
-  width: 100%;
-  box-sizing: border-box;
-  letter-spacing: 1px;
-}
-
-.effect-2 {
-  border: 0;
-  padding: 7px 0;
-  border-bottom: 1px solid #ccc;
-}
-
-.effect-2 ~ .focus-border {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: #3399ff;
-  transition: 0.4s;
-}
-.effect-2:focus ~ .focus-border {
-  width: 100%;
-  transition: 0.4s;
-  left: 0;
 }
