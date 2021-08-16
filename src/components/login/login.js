@@ -1,63 +1,57 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './login.scss';
+import DailyMilkFreshLogo from '../../DailyMilkFresh.png';
 
 export default function Login() {
   return (
     <div>
-      <div className="curved-div">
-        <svg
-          id="wave"
-          viewBox="0 0 1440 490"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
-              <stop stopColor="rgba(243, 106, 62, 1)" offset="0%"></stop>
-              <stop stopColor="rgba(255, 179, 11, 1)" offset="100%"></stop>
-            </linearGradient>
-          </defs>
-          <path
-            fill="url(#sw-gradient-0)"
-            d="M0,98L34.3,98C68.6,98,137,98,206,122.5C274.3,147,343,196,411,245C480,294,549,343,617,326.7C685.7,310,754,229,823,179.7C891.4,131,960,114,1029,138.8C1097.1,163,1166,229,1234,261.3C1302.9,294,1371,294,1440,261.3C1508.6,229,1577,163,1646,122.5C1714.3,82,1783,65,1851,81.7C1920,98,1989,147,2057,138.8C2125.7,131,2194,65,2263,57.2C2331.4,49,2400,98,2469,163.3C2537.1,229,2606,310,2674,285.8C2742.9,261,2811,131,2880,114.3C2948.6,98,3017,196,3086,220.5C3154.3,245,3223,196,3291,163.3C3360,131,3429,114,3497,155.2C3565.7,196,3634,294,3703,318.5C3771.4,343,3840,294,3909,245C3977.1,196,4046,147,4114,114.3C4182.9,82,4251,65,4320,89.8C4388.6,114,4457,180,4526,212.3C4594.3,245,4663,245,4731,236.8C4800,229,4869,212,4903,204.2L4937.1,196L4937.1,490L4902.9,490C4868.6,490,4800,490,4731,490C4662.9,490,4594,490,4526,490C4457.1,490,4389,490,4320,490C4251.4,490,4183,490,4114,490C4045.7,490,3977,490,3909,490C3840,490,3771,490,3703,490C3634.3,490,3566,490,3497,490C3428.6,490,3360,490,3291,490C3222.9,490,3154,490,3086,490C3017.1,490,2949,490,2880,490C2811.4,490,2743,490,2674,490C2605.7,490,2537,490,2469,490C2400,490,2331,490,2263,490C2194.3,490,2126,490,2057,490C1988.6,490,1920,490,1851,490C1782.9,490,1714,490,1646,490C1577.1,490,1509,490,1440,490C1371.4,490,1303,490,1234,490C1165.7,490,1097,490,1029,490C960,490,891,490,823,490C754.3,490,686,490,617,490C548.6,490,480,490,411,490C342.9,490,274,490,206,490C137.1,490,69,490,34,490L0,490Z"
-          ></path>
-        </svg>
-      </div>
+      <div className="login-main-container">
+        <div className="login-container">
+          <img
+            className="logo-image"
+            src={DailyMilkFreshLogo}
+            alt="this is logo"
+          ></img>
+          <div className="logo-name">DairyMilkFresh </div>
+          <div className="logo-caption">MILK AT your door step</div>
+          <div className="login-header">Login</div>
 
-      <div className="login-container">
-        <div className="login-header">Login</div>
-        <div className="Signin">Please sign in to continue</div>
+          <div className="col-3">
+            <input
+              class="effect-2"
+              type="text"
+              placeholder="Phone/Email"
+            ></input>
+            <span class="focus-border"></span>
+          </div>
 
-        <div className="col-3">
-          <input class="effect-2" type="text" placeholder="Phone/Email"></input>
-          <span class="focus-border"></span>
-        </div>
-
-        <div className="col-3">
-          <input
-            class="effect-2"
-            type="password"
-            placeholder="Password"
-          ></input>
-          <span className="focus-border"></span>
-          <span className="show-password">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              fill="currentColor"
-              class="bi bi-eye-slash"
-              viewBox="0 0 16 16"
-            >
-              <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
-              <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
-              <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
-            </svg>
-          </span>
-        </div>
-
-        <div>
-          Dont have an account ?<Link to="/about">SignUp</Link>
+          <div className="col-3">
+            <input
+              class="effect-2"
+              type="password"
+              placeholder="Password"
+            ></input>
+            <span className="focus-border"></span>
+            <span className="show-password">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-eye-slash"
+                viewBox="0 0 16 16"
+              >
+                <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+              </svg>
+            </span>
+          </div>
+          <input type="submit" value="Log In" class="submit"></input>
+          <div className="signup">
+            Dont have an account ?<Link to="/about"> SignUp</Link>
+          </div>
         </div>
       </div>
     </div>
