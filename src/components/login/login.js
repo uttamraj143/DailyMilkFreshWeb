@@ -18,7 +18,7 @@ export default function Login() {
           src={DailyMilkFreshLogo}
           alt="this is logo"
         ></img>
-        <div className="Login__logo-name">DairyMilkFresh </div>
+        <div className="Login__logo-name">DailyFreshMilk </div>
         <div className="Login__logo-caption">MILK AT your door step</div>
         <div className="Login__login-header">Login</div>
 
