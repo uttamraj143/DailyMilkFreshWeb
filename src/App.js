@@ -1,13 +1,20 @@
-import logo from './logo.svg';
 import './App.scss';
-import Login from './components/login/login';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Login from './components/login/Login';
+import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import Landing from './components/Landing';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Login exact path="/login"></Login>
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/dashboard" component={AdminDashboard} />
+          <Route exact={true} path="*" component={Landing} />
+        </Switch>
       </Router>
     </div>
   );

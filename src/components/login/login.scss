@@ -40,9 +40,15 @@
 
   &__login-header {
     font-size: 20px;
-    margin: 40px 20px;
+    margin: 30px 20px;
     font-weight: 600;
     text-transform: uppercase;
+  }
+
+  &__wrong-password {
+    color: red;
+    font-size: 15px;
+    margin: 10px 10px 10px 12px;
   }
 
   &__col-3 {
@@ -76,6 +82,10 @@
     color: #fff;
     margin-top: 32px;
     cursor: pointer;
+    &-disabled {
+      background-color: #808080;
+      cursor: auto;
+    }
   }
 
   &__input-focus-effect {
