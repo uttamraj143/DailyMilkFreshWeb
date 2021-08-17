@@ -1,14 +1,13 @@
-import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
-const Landing = (props) => {
+const Landing = () => {
   const isLoggedIn = () => {
     return localStorage.getItem('loggedIn');
   };
 
   return (
     <div>
-      {!isLoggedIn() ? <Redirect to="/login" /> : <Redirect to="/dashboard" />}
+      {isLoggedIn() ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
     </div>
   );
 };

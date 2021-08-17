@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './login.scss';
 import DailyMilkFreshLogo from '../../DailyMilkFresh.png';
-import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [wrongCredentials, setWrongCredentials] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   let history = useHistory();
@@ -15,24 +15,21 @@ export default function Login() {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // setUser(true);
-
-    e.preventDefault();
-    setIsLoggedIn(false);
-    if (username === '123' && password === 'chai') {
-      localStorage.setItem('loggedIn', true);
-      setIsLoggedIn(true);
-      return history.push('/dashboard');
-    } else {
-      console.log('error wrong passowr');
-    }
-  };
-
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // setIsLoggedIn(false);
+    if (username === '123' && password === 'chai') {
+      localStorage.setItem('loggedIn', true);
+      // setIsLoggedIn(true);
+      return history.push('/dashboard');
+    } else {
+      setWrongCredentials(true);
+    }
+  };
 
   return (
     <div className="Login__main-container">
@@ -45,7 +42,11 @@ export default function Login() {
         <div className="Login__logo-name">DailyFreshMilk </div>
         <div className="Login__logo-caption">MILK AT your door step</div>
         <div className="Login__login-header">Login</div>
-
+        {wrongCredentials ? (
+          <div className="Login__wrong-password">
+            You have entered wrong Username/Password
+          </div>
+        ) : null}
         <div className="Login__col-3">
           <input
             className="Login__input-focus-effect"

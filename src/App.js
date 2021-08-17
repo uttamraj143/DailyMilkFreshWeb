@@ -1,9 +1,7 @@
 import './App.scss';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Login from './components/login/Login';
-import FourZeroFour from './components/FourZeroFour';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import Landing from './components/Landing';
 
@@ -15,7 +13,7 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/dashboard" component={AdminDashboard} />
-          <Route exact={true} path="*" component={FourZeroFour} />
+          <Route exact={true} path="*" component={Landing} />
         </Switch>
       </Router>
     </div>
