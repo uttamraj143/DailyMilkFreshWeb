@@ -2,13 +2,37 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './login.scss';
 import DailyMilkFreshLogo from '../../DailyMilkFresh.png';
+import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  let history = useHistory();
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // setUser(true);
+
+    e.preventDefault();
+    setIsLoggedIn(false);
+    if (username === '123' && password === 'chai') {
+      localStorage.setItem('loggedIn', true);
+      setIsLoggedIn(true);
+      return history.push('/dashboard');
+    } else {
+      console.log('error wrong passowr');
+    }
+  };
+
+  function validateForm() {
+    return username.length > 0 && password.length > 0;
+  }
 
   return (
     <div className="Login__main-container">
@@ -27,6 +51,8 @@ export default function Login() {
             className="Login__input-focus-effect"
             type="text"
             placeholder="Phone/Email"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
           ></input>
           <span className="focus-border"></span>
         </div>
@@ -35,6 +61,8 @@ export default function Login() {
           <input
             className="Login__input-focus-effect"
             type={showPassword ? 'text' : 'password'}
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             placeholder="Password"
           ></input>
           <span className="focus-border"></span>
@@ -70,9 +98,19 @@ export default function Login() {
             </span>
           )}
         </div>
-        <input type="submit" value="Log In" className="Login__submit"></input>
+        <input
+          onClick={handleLogin}
+          disabled={!validateForm()}
+          type="submit"
+          value="Log In"
+          className={
+            validateForm()
+              ? 'Login__submit'
+              : 'Login__submit Login__submit-disabled'
+          }
+        ></input>
         <div className="Login__signup">
-          Dont have an account ?<Link to="/about"> SignUp</Link>
+          Dont have an account ?<Link to="/"> SignUp</Link>
         </div>
       </div>
     </div>

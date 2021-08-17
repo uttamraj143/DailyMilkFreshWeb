@@ -76,6 +76,10 @@
     color: #fff;
     margin-top: 32px;
     cursor: pointer;
+    &-disabled {
+      background-color: #808080;
+      cursor: auto;
+    }
   }
 
   &__input-focus-effect {
