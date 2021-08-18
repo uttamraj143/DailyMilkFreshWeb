@@ -2,7 +2,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Login from './components/login/Login';
-import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import Dashboard from './components/Dashboard/Dashboard';
 import Landing from './components/Landing';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/dashboard" component={AdminDashboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route exact={true} path="*" component={Landing} />
         </Switch>
       </Router>
