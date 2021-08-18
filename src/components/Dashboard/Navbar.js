@@ -4,6 +4,38 @@ import { useHistory } from 'react-router-dom';
 
 export default function Navbar(props) {
   const [selectedMenuOption, setselectedMenuOption] = useState('Welcome Agent');
+  const [adminMenuOptions] = useState([
+    {
+      title: 'Orders',
+      value: 'orders list',
+    },
+    {
+      value: 'agents list',
+      title: 'Agents',
+    },
+    {
+      value: 'users list',
+      title: 'Users',
+    },
+    {
+      value: 'Production Statistics',
+      title: 'Statistics',
+    },
+    {
+      value: 'settings',
+      title: 'settings',
+    },
+  ]);
+  const [agentMenuOptions] = useState([
+    {
+      title: 'Orders',
+      value: 'orders list',
+    },
+    {
+      value: 'settings',
+      title: 'settings',
+    },
+  ]);
 
   let history = useHistory();
   const openSidebarMenus = useRef();
@@ -11,6 +43,7 @@ export default function Navbar(props) {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem('loggedIn');
+    localStorage.removeItem('isAdmin');
     return history.push('/');
   };
 
@@ -37,46 +70,31 @@ export default function Navbar(props) {
         </label>
 
         <div id="sidebarMenu">
+          <div className="sidebarMenuHeader">
+            {props.isAdmin ? 'Admin' : 'Agent'} Dashboard <br />{' '}
+            <span>Have a Happy Day </span>
+          </div>
+
           <ul className="sidebarMenuInner">
-            <li>
-              Agent Dashboard <span>Please take care of Milk</span>
-            </li>
-            <li>
-              <div
-                onClick={(e) => {
-                  changeMenu(e, 'orders list');
-                }}
-              >
-                Orders
-              </div>
-            </li>
-            <li>
-              <div
-                onClick={(e) => {
-                  changeMenu(e, 'Agents List');
-                }}
-              >
-                Agents
-              </div>
-            </li>
-            <li>
-              <div
-                onClick={(e) => {
-                  changeMenu(e, 'users list');
-                }}
-              >
-                Users
-              </div>
-            </li>
-            <li>
-              <div
-                onClick={(e) => {
-                  changeMenu(e, 'Production Statistics');
-                }}
-              >
-                Statistics
-              </div>
-            </li>
+            {props.isAdmin
+              ? adminMenuOptions.map((item, i) => {
+                  return (
+                    <li key={i}>
+                      <div onClick={(e) => changeMenu(e, item.value)}>
+                        {item.title}
+                      </div>
+                    </li>
+                  );
+                })
+              : agentMenuOptions.map((item, i) => {
+                  return (
+                    <li key={i}>
+                      <div onClick={(e) => changeMenu(e, item.value)}>
+                        {item.title}
+                      </div>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
       </div>
