@@ -1,4 +1,4 @@
-import './navbar.scss';
+import './Navbar.scss';
 import { useHistory } from 'react-router-dom';
 
 export default function Navbar() {
@@ -11,66 +11,52 @@ export default function Navbar() {
   };
 
   return (
-    <div>
-      <div class="header">
-        <button>Logo</button>
-        <button onClick={handleLogout}>Log Out</button>
+    <div class="header">
+      <div>
+        <input
+          type="checkbox"
+          class="openSidebarMenu"
+          id="openSidebarMenu"
+        ></input>
+        <label for="openSidebarMenu" class="sidebarIconToggle">
+          <div class="spinner diagonal part-1"></div>
+          <div class="spinner horizontal"></div>
+          <div class="spinner diagonal part-2"></div>
+        </label>
+
+        <div id="sidebarMenu">
+          <ul class="sidebarMenuInner">
+            <li>
+              Jelena Jovanovic <span>Web Developer</span>
+            </li>
+            <li>
+              <a href="https://vanila.io">Company</a>
+            </li>
+            <li>
+              <a href="https://instagram.com/plavookac">Instagram</a>
+            </li>
+            <li>
+              <a href="https://twitter.com/plavookac">Twitter</a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/channel/UCDfZM0IK6RBgud8HYGFXAJg">
+                YouTube
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/plavookac/">Linkedin</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <input
-        type="checkbox"
-        class="openSidebarMenu"
-        id="openSidebarMenu"
-      ></input>
-      <label for="openSidebarMenu" class="sidebarIconToggle">
-        <div class="spinner diagonal part-1"></div>
-        <div class="spinner horizontal"></div>
-        <div class="spinner diagonal part-2"></div>
-      </label>
-      <div id="sidebarMenu">
-        <ul class="sidebarMenuInner">
-          <li>
-            Jelena Jovanovic <span>Web Developer</span>
-          </li>
-          <li>
-            <a href="https://vanila.io" target="_blank">
-              Company
-            </a>
-          </li>
-          <li>
-            <a href="https://instagram.com/plavookac" target="_blank">
-              Instagram
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/plavookac" target="_blank">
-              Twitter
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.youtube.com/channel/UCDfZM0IK6RBgud8HYGFXAJg"
-              target="_blank"
-            >
-              YouTube
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/plavookac/" target="_blank">
-              Linkedin
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div id="center" class="main center">
-        <div class="mainInner">
-          <div>PURE CSS SIDEBAR TOGGLE MENU</div>
-        </div>
-        <div class="mainInner">
-          <div>PURE CSS SIDEBAR TOGGLE MENU</div>
-        </div>
-        <div class="mainInner">
-          <div>PURE CSS SIDEBAR TOGGLE MENU</div>
-        </div>
+      <div>Component name</div>
+      <div onClick={handleLogout} className="logout-container">
+        <img
+          class="logout-image"
+          alt="dsds"
+          src="https://pbs.twimg.com/profile_images/378800000639740507/fc0aaad744734cd1dbc8aeb3d51f8729_400x400.jpeg"
+        ></img>
+        <div class="logout-text">LOGOUT</div>
       </div>
     </div>
   );

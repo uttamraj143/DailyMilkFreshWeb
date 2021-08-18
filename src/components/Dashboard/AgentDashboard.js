@@ -1,11 +1,14 @@
+import './AgentDashboard.scss';
 import Navbar from './Navbar';
-import Topbar from './TopBar';
 
 export default function AgentDashboard() {
   return (
     <div>
-      agent is here
       <Navbar></Navbar>
+      <div className="AgentDashboard__main-container">
+        lorem
+        <p>lorem ipsum here</p>
+      </div>
     </div>
   );
 }
