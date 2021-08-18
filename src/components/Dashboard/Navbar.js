@@ -1,10 +1,12 @@
 import './Navbar.scss';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function Navbar(props) {
   const [selectedMenuOption, setselectedMenuOption] = useState('Welcome Agent');
+
   let history = useHistory();
+  const openSidebarMenus = useRef();
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -15,6 +17,8 @@ export default function Navbar(props) {
   const changeMenu = (e, sal) => {
     e.preventDefault();
     setselectedMenuOption(sal);
+    props.currentMenuSelection(sal); // emitting data to parent
+    openSidebarMenus.current.checked = false;
   };
 
   return (
@@ -22,6 +26,7 @@ export default function Navbar(props) {
       <div>
         <input
           type="checkbox"
+          ref={openSidebarMenus}
           className="openSidebarMenu"
           id="openSidebarMenu"
         ></input>
