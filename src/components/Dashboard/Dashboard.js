@@ -17,9 +17,9 @@ export default function Dashboard() {
       ) : (
         <div>
           {isAdmin ? (
-            <AdminDashboard></AdminDashboard>
+            <AdminDashboard isAdmin="isAdmin"></AdminDashboard>
           ) : (
-            <AgentDashboard></AgentDashboard>
+            <AgentDashboard isAdmin="isAdmin"></AgentDashboard>
           )}
         </div>
       )}
