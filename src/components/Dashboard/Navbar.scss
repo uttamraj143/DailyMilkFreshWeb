@@ -141,3 +141,10 @@ input[type='checkbox']:checked ~ .sidebarIconToggle > .diagonal.part-2 {
   border-radius: 50px;
   float: left;
 }
+
+.component-name {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
