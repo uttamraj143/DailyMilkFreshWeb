@@ -1,8 +1,7 @@
 export default function Settings() {
   return (
     <div>
-      {' '}
-      <span>skdjslkjdsldlssk</span>{' '}
+      <span>skdjslkjdsldlssk</span>
     </div>
   );
 }

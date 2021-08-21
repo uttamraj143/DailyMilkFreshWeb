@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import './login.scss';
 import DailyMilkFreshLogo from '../../DailyMilkFresh.png';
 
@@ -111,9 +111,9 @@ export default function Login() {
               : 'Login__submit Login__submit-disabled'
           }
         ></input>
-        {/* <div className="Login__signup">
-          Dont have an account ?<Link to="/"> SignUp</Link>
-        </div> */}
+        <div className="Login__signup">
+          Forgot your password ? <Link to="/"> Reset</Link>
+        </div>
       </div>
     </div>
   );
