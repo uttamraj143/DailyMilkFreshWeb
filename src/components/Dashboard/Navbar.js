@@ -1,16 +1,69 @@
 import './Navbar.scss';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function Navbar(props) {
-  const [selectedMenuOption, setselectedMenuOption] = useState('Welcome Agent');
+  const [selectedMenuOption, setselectedMenuOption] = useState('Welcome');
+  const [adminMenuOptions] = useState([
+    {
+      title: 'Orders',
+      value: 'orders_list',
+    },
+    {
+      title: 'Agents',
+      value: 'agents_list',
+    },
+    {
+      title: 'Users',
+      value: 'users_list',
+    },
+    // {
+    //   title: 'Statistics',
+    //   value: 'production_statistics',
+    // },
+    { title: 'Export Data', value: 'export_data' },
+    {
+      value: 'settings',
+      title: 'settings',
+    },
+  ]);
+  const [agentMenuOptions] = useState([
+    {
+      title: 'Orders',
+      value: 'orders_list',
+    },
+    {
+      title: 'settings',
+      value: 'settings',
+    },
+  ]);
 
   let history = useHistory();
   const openSidebarMenus = useRef();
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          openSidebarMenus.current.checked = false;
+        }
+      }
+
+      // Bind the event listener
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [ref]);
+  }
 
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem('loggedIn');
+    localStorage.removeItem('isAdmin');
     return history.push('/');
   };
 
@@ -22,7 +75,7 @@ export default function Navbar(props) {
   };
 
   return (
-    <div className="header">
+    <div ref={wrapperRef} className="Navbar__header">
       <div>
         <input
           type="checkbox"
@@ -30,66 +83,61 @@ export default function Navbar(props) {
           className="openSidebarMenu"
           id="openSidebarMenu"
         ></input>
-        <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
+        <label htmlFor="openSidebarMenu" className="Navbar__sidebarIconToggle">
           <div className="spinner diagonal part-1"></div>
           <div className="spinner horizontal"></div>
           <div className="spinner diagonal part-2"></div>
         </label>
 
-        <div id="sidebarMenu">
-          <ul className="sidebarMenuInner">
-            <li>
-              Agent Dashboard <span>Please take care of Milk</span>
-            </li>
-            <li>
-              <div
-                onClick={(e) => {
-                  changeMenu(e, 'orders list');
-                }}
-              >
-                Orders
-              </div>
-            </li>
-            <li>
-              <div
-                onClick={(e) => {
-                  changeMenu(e, 'Agents List');
-                }}
-              >
-                Agents
-              </div>
-            </li>
-            <li>
-              <div
-                onClick={(e) => {
-                  changeMenu(e, 'users list');
-                }}
-              >
-                Users
-              </div>
-            </li>
-            <li>
-              <div
-                onClick={(e) => {
-                  changeMenu(e, 'Production Statistics');
-                }}
-              >
-                Statistics
-              </div>
-            </li>
+        <div id="sidebarMenu" className="Navbar__sidebarMenu">
+          <div className="Navbar__sidebarMenu-header">
+            {props.isAdmin ? 'Admin' : 'Agent'} Dashboard <br />{' '}
+            <span>Have a Happy Day </span>
+          </div>
+
+          <ul className="Navbar__sidebarMenu-inner">
+            {props.isAdmin
+              ? adminMenuOptions.map((item, i) => {
+                  return (
+                    <li key={i}>
+                      <div onClick={(e) => changeMenu(e, item.value)}>
+                        {item.title}
+                      </div>
+                    </li>
+                  );
+                })
+              : agentMenuOptions.map((item, i) => {
+                  return (
+                    <li key={i}>
+                      <div onClick={(e) => changeMenu(e, item.value)}>
+                        {item.title}
+                      </div>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
       </div>
 
-      <div className="component-name">{selectedMenuOption}</div>
-
-      <div onClick={handleLogout} className="logout-container">
-        <img
-          className="logout-image"
-          alt="dsds"
-          src="https://pbs.twimg.com/profile_images/378800000639740507/fc0aaad744734cd1dbc8aeb3d51f8729_400x400.jpeg"
-        ></img>
-        <div className="logout-text">LOGOUT</div>
+      <div className="Navbar__component-name">{selectedMenuOption}</div>
+      <div onClick={handleLogout} className="Navbar__logout-container">
+        <div className="Navbar__logout-image">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="white"
+            className="bi bi-person-circle"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            <path
+              fillRule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+            />
+          </svg>
+        </div>
+        <div className="Navbar__logout-text">LOGOUT</div>
       </div>
     </div>
   );

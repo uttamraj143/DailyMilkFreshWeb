@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import './login.scss';
 import DailyMilkFreshLogo from '../../DailyMilkFresh.png';
 
@@ -23,6 +23,7 @@ export default function Login() {
     e.preventDefault();
     // setIsLoggedIn(false);
     if (username === '123' && password === 'chai') {
+      localStorage.setItem('isAdmin', true);
       localStorage.setItem('loggedIn', true);
       // setIsLoggedIn(true);
       return history.push('/dashboard');
@@ -111,7 +112,7 @@ export default function Login() {
           }
         ></input>
         <div className="Login__signup">
-          Dont have an account ?<Link to="/"> SignUp</Link>
+          Forgot your password ? <Link to="/"> Reset</Link>
         </div>
       </div>
     </div>
