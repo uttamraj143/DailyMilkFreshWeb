@@ -7,7 +7,7 @@ import Users from './Users.js';
 import Agents from './Agents';
 import Settings from './Settings';
 import ExportData from './ExportData';
-import ProductionStatistics from './ProductionStatistics';
+import Statistics from './Statistics';
 
 export default function Dashboard() {
   const isAdmin = () => {
@@ -36,7 +36,7 @@ export default function Dashboard() {
       case 'settings':
         return <Settings />;
       default:
-        return <ProductionStatistics />;
+        return <Statistics />;
     }
   };
 

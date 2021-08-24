@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
+import Button from '@material-ui/core/Button';
+import './Statistics.scss';
 
 const chartConfig = {
   type: 'bar',
@@ -76,23 +78,40 @@ const config = {
 };
 
 export default function ProductionStatistics() {
+  const [chartInstance, setChartInstance] = useState(null);
   const chartContainer = useRef(null);
   const chartContainer2 = useRef(null);
 
+  const onButtonClick = () => {
+    const data = [15, 39, 13, 5, 2, 38];
+    updateDataset(0, data);
+  };
+
+  const updateDataset = (datasetIndex, newData) => {
+    chartInstance.data.datasets[datasetIndex].data = newData;
+    chartInstance.update();
+  };
+
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
-      const newChartInstance = new Chart(chartContainer.current, config);
+      new Chart(chartContainer.current, config);
     }
   }, [chartContainer]);
 
   useEffect(() => {
     if (chartContainer2 && chartContainer2.current) {
       const newChartInstance = new Chart(chartContainer2.current, chartConfig);
+      setChartInstance(newChartInstance);
     }
   }, [chartContainer2]);
 
   return (
     <div style={{ maxWidth: '522px' }}>
+      <div className="Statistics__refresh-button">
+        <Button onClick={onButtonClick} variant="outlined" color="primary">
+          Refresh Data from Server
+        </Button>
+      </div>
       <canvas ref={chartContainer2} />
       <canvas ref={chartContainer} />
     </div>

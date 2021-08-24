@@ -1,5 +1,5 @@
 import './Navbar.scss';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function Navbar(props) {
@@ -17,10 +17,10 @@ export default function Navbar(props) {
       title: 'Users',
       value: 'users_list',
     },
-    {
-      title: 'Statistics',
-      value: 'production_statistics',
-    },
+    // {
+    //   title: 'Statistics',
+    //   value: 'production_statistics',
+    // },
     { title: 'Export Data', value: 'export_data' },
     {
       value: 'settings',
@@ -40,6 +40,25 @@ export default function Navbar(props) {
 
   let history = useHistory();
   const openSidebarMenus = useRef();
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          openSidebarMenus.current.checked = false;
+        }
+      }
+
+      // Bind the event listener
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [ref]);
+  }
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -56,7 +75,7 @@ export default function Navbar(props) {
   };
 
   return (
-    <div className="Navbar__header">
+    <div ref={wrapperRef} className="Navbar__header">
       <div>
         <input
           type="checkbox"
@@ -70,13 +89,13 @@ export default function Navbar(props) {
           <div className="spinner diagonal part-2"></div>
         </label>
 
-        <div id="sidebarMenu">
-          <div className="sidebarMenuHeader">
+        <div id="sidebarMenu" className="Navbar__sidebarMenu">
+          <div className="Navbar__sidebarMenu-header">
             {props.isAdmin ? 'Admin' : 'Agent'} Dashboard <br />{' '}
             <span>Have a Happy Day </span>
           </div>
 
-          <ul className="Navbar__sidebarMenuInner">
+          <ul className="Navbar__sidebarMenu-inner">
             {props.isAdmin
               ? adminMenuOptions.map((item, i) => {
                   return (
@@ -100,10 +119,9 @@ export default function Navbar(props) {
         </div>
       </div>
 
-      <div className="component-name">{selectedMenuOption}</div>
-
-      <div onClick={handleLogout} className="logout-container">
-        <div className="logout-image">
+      <div className="Navbar__component-name">{selectedMenuOption}</div>
+      <div onClick={handleLogout} className="Navbar__logout-container">
+        <div className="Navbar__logout-image">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -119,7 +137,7 @@ export default function Navbar(props) {
             />
           </svg>
         </div>
-        <div className="logout-text">LOGOUT</div>
+        <div className="Navbar__logout-text">LOGOUT</div>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@
     position: fixed;
     height: 60px !important;
     overflow: hidden;
+    z-index: 2;
   }
   &__sidebarIconToggle {
     transition: all 0.3s;
@@ -24,18 +25,25 @@
     width: 22px;
     margin-top: -7px;
   }
-  &__main {
-    // margin: 0 auto;
-    // display: block;
-    // height: 100%;
-    // margin-top: 60px;
+
+  &__sidebarMenu {
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 22px;
+    width: 250px;
+    margin-top: 40px;
+    transform: translateX(-250px);
+    transition: transform 250ms ease-in-out;
+    background: linear-gradient(180deg, #fc466b 0%, #3f5efb 100%);
   }
-  &__sidebarMenuInner {
+
+  &__sidebarMenu-inner {
     margin: 0;
     padding: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
-  &__sidebarMenuInner li {
+  &__sidebarMenu-inner li {
     list-style: none;
     color: #fff;
     text-transform: uppercase;
@@ -44,7 +52,7 @@
     cursor: pointer;
     border-bottom: 1px solid rgba(255, 255, 255, 0.102);
   }
-  &__sidebarMenuHeader {
+  &__sidebarMenu-header {
     display: block;
     color: #fff;
     text-transform: uppercase;
@@ -55,18 +63,33 @@
       font-size: 14px;
     }
   }
-}
 
-#sidebarMenu {
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 22px;
-  width: 250px;
-  margin-top: 40px;
-  transform: translateX(-250px);
-  transition: transform 250ms ease-in-out;
-  background: linear-gradient(180deg, #fc466b 0%, #3f5efb 100%);
+  &__logout-container {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__logout-text {
+    font-size: 10px;
+    color: white;
+  }
+
+  &__logout-image {
+    text-decoration: none;
+    float: right;
+    width: 25px;
+    border-radius: 50px;
+    float: left;
+  }
+
+  &__component-name {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
 }
 
 input[type='checkbox']:checked ~ #sidebarMenu {
@@ -122,32 +145,4 @@ input[type='checkbox']:checked ~ .sidebarIconToggle > .diagonal.part-2 {
   box-sizing: border-box;
   transform: rotate(-135deg);
   margin-top: -9px;
-}
-
-.logout-container {
-  display: flex;
-  cursor: pointer;
-  flex-direction: column;
-  align-items: center;
-}
-
-.logout-text {
-  font-size: 10px;
-  color: white;
-}
-
-.logout-image {
-  text-decoration: none;
-  float: right;
-
-  width: 25px;
-  border-radius: 50px;
-  float: left;
-}
-
-.component-name {
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  text-transform: uppercase;
 }
