@@ -7,20 +7,21 @@ export default function Navbar(props) {
   const [adminMenuOptions] = useState([
     {
       title: 'Orders',
-      value: 'orders list',
+      value: 'orders_list',
     },
     {
-      value: 'agents list',
       title: 'Agents',
+      value: 'agents_list',
     },
     {
-      value: 'users list',
       title: 'Users',
+      value: 'users_list',
     },
     {
-      value: 'Production Statistics',
       title: 'Statistics',
+      value: 'production_statistics',
     },
+    { title: 'Export Data', value: 'export_data' },
     {
       value: 'settings',
       title: 'settings',
@@ -29,11 +30,11 @@ export default function Navbar(props) {
   const [agentMenuOptions] = useState([
     {
       title: 'Orders',
-      value: 'orders list',
+      value: 'orders_list',
     },
     {
-      value: 'settings',
       title: 'settings',
+      value: 'settings',
     },
   ]);
 
@@ -55,7 +56,7 @@ export default function Navbar(props) {
   };
 
   return (
-    <div className="header">
+    <div className="Navbar__header">
       <div>
         <input
           type="checkbox"
@@ -63,7 +64,7 @@ export default function Navbar(props) {
           className="openSidebarMenu"
           id="openSidebarMenu"
         ></input>
-        <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
+        <label htmlFor="openSidebarMenu" className="Navbar__sidebarIconToggle">
           <div className="spinner diagonal part-1"></div>
           <div className="spinner horizontal"></div>
           <div className="spinner diagonal part-2"></div>
@@ -75,7 +76,7 @@ export default function Navbar(props) {
             <span>Have a Happy Day </span>
           </div>
 
-          <ul className="sidebarMenuInner">
+          <ul className="Navbar__sidebarMenuInner">
             {props.isAdmin
               ? adminMenuOptions.map((item, i) => {
                   return (

@@ -6,6 +6,7 @@ import Orders from './Orders';
 import Users from './Users.js';
 import Agents from './Agents';
 import Settings from './Settings';
+import ExportData from './ExportData';
 import ProductionStatistics from './ProductionStatistics';
 
 export default function Dashboard() {
@@ -24,12 +25,14 @@ export default function Dashboard() {
 
   const adminComponents = () => {
     switch (currentComponent) {
-      case 'orders list':
+      case 'orders_list':
         return <Orders />;
-      case 'agents list':
+      case 'agents_list':
         return <Agents />;
-      case 'users list':
+      case 'users_list':
         return <Users />;
+      case 'export_data':
+        return <ExportData />;
       case 'settings':
         return <Settings />;
       default:
