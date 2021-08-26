@@ -74,6 +74,15 @@ export default function Navbar(props) {
     openSidebarMenus.current.checked = false;
   };
 
+  const defaultNavbarHeader = () => {
+    switch (selectedMenuOption) {
+      case 'Welcome':
+        return props.isAdmin === true ? 'Welcome Admin' : 'Welcome Agent';
+      default:
+        return selectedMenuOption;
+    }
+  };
+
   return (
     <div ref={wrapperRef} className="Navbar__header">
       <div>
@@ -91,12 +100,12 @@ export default function Navbar(props) {
 
         <div id="sidebarMenu" className="Navbar__sidebarMenu">
           <div className="Navbar__sidebarMenu-header">
-            {props.isAdmin ? 'Admin' : 'Agent'} Dashboard <br />{' '}
+            {props.isAdmin === true ? 'Admin' : 'Agent'} Dashboard <br />
             <span>Have a Happy Day </span>
           </div>
 
           <ul className="Navbar__sidebarMenu-inner">
-            {props.isAdmin
+            {props.isAdmin === true
               ? adminMenuOptions.map((item, i) => {
                   return (
                     <li key={i}>
@@ -119,7 +128,7 @@ export default function Navbar(props) {
         </div>
       </div>
 
-      <div className="Navbar__component-name">{selectedMenuOption}</div>
+      <div className="Navbar__component-name">{defaultNavbarHeader()}</div>
       <div onClick={handleLogout} className="Navbar__logout-container">
         <div className="Navbar__logout-image">
           <svg

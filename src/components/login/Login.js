@@ -22,8 +22,13 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     // setIsLoggedIn(false);
-    if (username === '123' && password === 'chai') {
+    if (username === 'admin' && password === '1234') {
       localStorage.setItem('isAdmin', true);
+      localStorage.setItem('loggedIn', true);
+      // setIsLoggedIn(true);
+      return history.push('/dashboard');
+    } else if (username === 'agent' && password === '1234') {
+      localStorage.setItem('isAdmin', false);
       localStorage.setItem('loggedIn', true);
       // setIsLoggedIn(true);
       return history.push('/dashboard');

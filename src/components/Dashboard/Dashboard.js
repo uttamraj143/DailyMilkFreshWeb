@@ -60,7 +60,7 @@ export default function Dashboard() {
             currentMenuSelection={currentSelection}
           ></Navbar>
           <div className="AgentDashboard__main-container">
-            {isAdmin ? adminComponents() : agentComponents()}
+            {isAdmin === true ? adminComponents() : agentComponents()}
           </div>
         </div>
       )}
