@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import './login.scss';
-import DailyMilkFreshLogo from '../../DailyMilkFresh.png';
+import DailyMilkFreshLogo from 'logo.png';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,8 +40,8 @@ export default function Login() {
           src={DailyMilkFreshLogo}
           alt="this is logo"
         ></img>
-        <div className="Login__logo-name">DailyFreshMilk </div>
-        <div className="Login__logo-caption">MILK AT your door step</div>
+        {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
+        {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
         <div className="Login__login-header">Login</div>
         {wrongCredentials ? (
           <div className="Login__wrong-password">
