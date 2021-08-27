@@ -32,8 +32,8 @@
 
   &__blue {
     padding: 4px 20px;
-    color: #002f4e;
-    background-color: #c0dcee;
+    color: #137881;
+    background-color: #bef3f8;
     font-weight: bold;
     border-radius: 6px;
   }
@@ -77,12 +77,23 @@
     font-weight: bold;
     border-radius: 6px;
   }
-}
 
-.item {
-  flex: 0 0 400px;
-  color: #171e42;
-  padding: 10px 30px;
-  margin-left: 10px;
-  margin-top: 10px;
+  &__products-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__order {
+    flex: 0 0 400px;
+    color: #171e42;
+    padding: 10px 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+    @media screen and (max-width: 400px) {
+      flex: 0 0 320px;
+      margin-left: 0px;
+      padding: 10px 10px;
+    }
+  }
 }

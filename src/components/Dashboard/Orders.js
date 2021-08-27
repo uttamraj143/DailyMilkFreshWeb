@@ -108,7 +108,7 @@ export default function Orders() {
     let statss = orders.find((item) => item.QRNumber === userqr);
     return statss
       ? statss.status.charAt(0).toUpperCase() + statss.status.slice(1)
-      : 'NA';
+      : 'Not Available';
   };
 
   const orderStatusColor = (userqr) => {
@@ -131,7 +131,7 @@ export default function Orders() {
       <div className="Orders__card-container">
         {users.map((user, index) => {
           return (
-            <Paper key={index} className="item" elevation={2}>
+            <Paper key={index} className="Orders__order" elevation={2}>
               <div className="Orders__date-address-row">
                 <div className="Orders__date">{orderDate(user.QRNumber)}</div>
                 <div className="Orders__address">{user.address}</div>
@@ -168,12 +168,12 @@ export default function Orders() {
               </div>
 
               <div className="Orders__products-row">
-                <div className="Orders__product-id">{user.date}</div>
-                <div className="Orders__product">{user.address}</div>
+                <div className="Orders__product-id">Products</div>
+                <div className="Orders__product">{user.Products}</div>
               </div>
-              <div className="Orders__deliveryStatus-row">
-                <div className="Orders__date">{user.date}</div>
-                <div className="Orders__address">{user.address}</div>
+              <div className="Orders__products-row">
+                <div className="Orders__date">Scan QR</div>
+                <div className="Orders__address">scanned</div>
               </div>
             </Paper>
           );
