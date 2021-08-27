@@ -2,7 +2,7 @@ import { Redirect } from 'react-router-dom';
 
 const Landing = () => {
   const isLoggedIn = () => {
-    return localStorage.getItem('loggedIn');
+    return JSON.parse(localStorage.getItem('loggedIn'));
   };
 
   return (

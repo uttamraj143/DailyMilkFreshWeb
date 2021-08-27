@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import './login.scss';
-import DailyMilkFreshLogo from '../../DailyMilkFresh.png';
+import DailyMilkFreshLogo from 'logo.png';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,8 +22,13 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     // setIsLoggedIn(false);
-    if (username === '123' && password === 'chai') {
+    if (username === 'admin' && password === '1234') {
       localStorage.setItem('isAdmin', true);
+      localStorage.setItem('loggedIn', true);
+      // setIsLoggedIn(true);
+      return history.push('/dashboard');
+    } else if (username === 'agent' && password === '1234') {
+      localStorage.setItem('isAdmin', false);
       localStorage.setItem('loggedIn', true);
       // setIsLoggedIn(true);
       return history.push('/dashboard');
@@ -40,8 +45,8 @@ export default function Login() {
           src={DailyMilkFreshLogo}
           alt="this is logo"
         ></img>
-        <div className="Login__logo-name">DailyFreshMilk </div>
-        <div className="Login__logo-caption">MILK AT your door step</div>
+        {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
+        {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
         <div className="Login__login-header">Login</div>
         {wrongCredentials ? (
           <div className="Login__wrong-password">

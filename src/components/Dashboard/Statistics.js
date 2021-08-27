@@ -81,6 +81,7 @@ export default function ProductionStatistics() {
   const [chartInstance, setChartInstance] = useState(null);
   const chartContainer = useRef(null);
   const chartContainer2 = useRef(null);
+  const chartContainer4 = useRef(null);
 
   const onButtonClick = () => {
     const data = [15, 39, 13, 5, 2, 38];
@@ -105,6 +106,13 @@ export default function ProductionStatistics() {
     }
   }, [chartContainer2]);
 
+  useEffect(() => {
+    if (chartContainer4 && chartContainer4.current) {
+      const newChartInstance = new Chart(chartContainer4.current, chartConfig);
+      setChartInstance(newChartInstance);
+    }
+  }, [chartContainer4]);
+
   return (
     <div style={{ maxWidth: '522px' }}>
       <div className="Statistics__refresh-button">
@@ -112,8 +120,18 @@ export default function ProductionStatistics() {
           Refresh Data from Server
         </Button>
       </div>
+      <div> Daily Milk Delivery Quantity (total delivered on this date) </div>
       <canvas ref={chartContainer2} />
+      <div>
+        Per Agent Milk Delivery Quantity (total delivered by selected Agent
+        today/any day selection from Calender drop down)
+      </div>
       <canvas ref={chartContainer} />
+      <div>
+        {' '}
+        Daily Milk Delivery Quantity by Type last month (cow/buffallo / ghee)
+      </div>
+      <canvas ref={chartContainer4} />
     </div>
   );
 }

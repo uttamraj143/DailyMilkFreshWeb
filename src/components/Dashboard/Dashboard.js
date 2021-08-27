@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import './Dashboard.scss';
-import Navbar from './Navbar';
-import Orders from './Orders';
-import Users from './Users.js';
-import Agents from './Agents';
-import Settings from './Settings';
-import ExportData from './ExportData';
-import Statistics from './Statistics';
+import Navbar from 'components/Dashboard/Navbar';
+import Orders from 'components/Dashboard/Orders';
+import Users from 'components/Dashboard/Users.js';
+import Agents from 'components/Dashboard/Agents';
+import Settings from 'components/Dashboard/Settings';
+import ExportData from 'components/Dashboard/ExportData';
+import Statistics from 'components/Dashboard/Statistics';
 
 export default function Dashboard() {
   const isAdmin = () => {
-    return localStorage.getItem('isAdmin');
+    return JSON.parse(localStorage.getItem('isAdmin'));
   };
 
   const isLoggedIn = () => {
-    return localStorage.getItem('loggedIn');
+    return JSON.parse(localStorage.getItem('loggedIn'));
   };
   const [currentComponent, setCurrentComponent] = useState('Welcome');
 
@@ -56,11 +56,11 @@ export default function Dashboard() {
       ) : (
         <div>
           <Navbar
-            isAdmin={isAdmin}
+            isAdmin={isAdmin()}
             currentMenuSelection={currentSelection}
           ></Navbar>
           <div className="AgentDashboard__main-container">
-            {isAdmin ? adminComponents() : agentComponents()}
+            {isAdmin() ? adminComponents() : agentComponents()}
           </div>
         </div>
       )}
