@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import './Dashboard.scss';
-import Navbar from 'components/Dashboard/Navbar';
-import Orders from 'components/Dashboard/Orders';
-import Users from 'components/Dashboard/Users.js';
-import Agents from 'components/Dashboard/Agents';
+import Navbar from 'components/common/Navbar';
+import Orders from 'components/Orders/Orders';
+import Users from 'components/Users/Users.js';
+import Agents from 'components/Agents/Agents';
 import Settings from 'components/Dashboard/Settings';
 import ExportData from 'components/Dashboard/ExportData';
 import Statistics from 'components/Dashboard/Statistics';
