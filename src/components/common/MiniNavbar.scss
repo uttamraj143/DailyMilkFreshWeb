@@ -1,0 +1,15 @@
+.MiniNavbar {
+  &__main {
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid orange;
+    padding: 5px;
+    max-width: 411px;
+    min-width: 350px;
+  }
+  &__flexcenter {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

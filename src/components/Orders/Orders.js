@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import OrdersListing from 'components/Orders/OrdersListing';
 import OrderPage from 'components/Orders/OrderPage';
+import MiniNavbar from 'components/common/MiniNavbar';
 import './Orders.scss';
 
 export default function Orders() {
@@ -110,8 +111,16 @@ export default function Orders() {
     setCurrentUser(user);
   };
 
+  const clearCurrentUser = () => {
+    setCurrentUser(null);
+  };
+
   return (
     <div className="Orders__main-container">
+      {currentUser ? (
+        <MiniNavbar clearCurrentUser={clearCurrentUser}></MiniNavbar>
+      ) : null}
+
       {currentUser ? (
         <OrderPage order={currentUser}></OrderPage>
       ) : (

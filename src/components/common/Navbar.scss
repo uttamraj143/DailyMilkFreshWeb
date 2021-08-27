@@ -10,7 +10,7 @@
     box-shadow: none;
     background-color: #90a0ee;
     position: fixed;
-    height: 60px !important;
+    height: 50px !important;
     overflow: hidden;
     z-index: 2;
   }
@@ -30,7 +30,7 @@
     height: 100%;
     position: fixed;
     left: 0;
-    top: 22px;
+    top: 12px;
     width: 250px;
     margin-top: 40px;
     transform: translateX(-250px);
@@ -89,6 +89,7 @@
     font-size: 20px;
     font-weight: 600;
     text-transform: uppercase;
+    cursor: pointer;
   }
 }
 

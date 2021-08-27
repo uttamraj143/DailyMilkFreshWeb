@@ -66,6 +66,11 @@ export default function Navbar(props) {
     return history.push('/');
   };
 
+  const homepage = (e) => {
+    e.preventDefault();
+    return history.push('/');
+  };
+
   const changeMenu = (e, sal) => {
     e.preventDefault();
     setselectedMenuOption(sal);
@@ -127,7 +132,9 @@ export default function Navbar(props) {
         </div>
       </div>
 
-      <div className="Navbar__component-name">{defaultNavbarHeader()}</div>
+      <div onClick={(e) => homepage(e)} className="Navbar__component-name">
+        {defaultNavbarHeader()}
+      </div>
       <div onClick={handleLogout} className="Navbar__logout-container">
         <div className="Navbar__logout-image">
           <svg
