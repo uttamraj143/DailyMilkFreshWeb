@@ -11,11 +11,11 @@ import Statistics from 'components/Dashboard/Statistics';
 
 export default function Dashboard() {
   const isAdmin = () => {
-    return localStorage.getItem('isAdmin');
+    return JSON.parse(localStorage.getItem('isAdmin'));
   };
 
   const isLoggedIn = () => {
-    return localStorage.getItem('loggedIn');
+    return JSON.parse(localStorage.getItem('loggedIn'));
   };
   const [currentComponent, setCurrentComponent] = useState('Welcome');
 
