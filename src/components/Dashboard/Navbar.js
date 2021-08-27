@@ -62,8 +62,7 @@ export default function Navbar(props) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem('loggedIn');
-    localStorage.removeItem('isAdmin');
+    localStorage.clear();
     return history.push('/');
   };
 
@@ -77,7 +76,7 @@ export default function Navbar(props) {
   const defaultNavbarHeader = () => {
     switch (selectedMenuOption) {
       case 'Welcome':
-        return props.isAdmin === true ? 'Welcome Admin' : 'Welcome Agent';
+        return props.isAdmin ? 'Welcome Admin' : 'Welcome Agent';
       default:
         return selectedMenuOption;
     }
@@ -100,12 +99,12 @@ export default function Navbar(props) {
 
         <div id="sidebarMenu" className="Navbar__sidebarMenu">
           <div className="Navbar__sidebarMenu-header">
-            {props.isAdmin === true ? 'Admin' : 'Agent'} Dashboard <br />
+            {props.isAdmin ? 'Admin' : 'Agent'} Dashboard <br />
             <span>Have a Happy Day </span>
           </div>
 
           <ul className="Navbar__sidebarMenu-inner">
-            {props.isAdmin === true
+            {props.isAdmin
               ? adminMenuOptions.map((item, i) => {
                   return (
                     <li key={i}>

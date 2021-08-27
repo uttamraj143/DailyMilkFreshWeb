@@ -56,11 +56,11 @@ export default function Dashboard() {
       ) : (
         <div>
           <Navbar
-            isAdmin={isAdmin}
+            isAdmin={isAdmin()}
             currentMenuSelection={currentSelection}
           ></Navbar>
           <div className="AgentDashboard__main-container">
-            {isAdmin === true ? adminComponents() : agentComponents()}
+            {isAdmin() ? adminComponents() : agentComponents()}
           </div>
         </div>
       )}

@@ -1,0 +1,40 @@
+.Orders {
+  &__main-container {
+    display: flex;
+    padding: 15px;
+  }
+
+  &__card-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__date-address-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #80808066;
+    padding-bottom: 7px;
+  }
+
+  &__customername {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__cust-id {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+  }
+}
+
+.item {
+  flex: 0 0 400px;
+  color: #171e42;
+  padding: 10px 30px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
