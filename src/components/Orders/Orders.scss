@@ -1,7 +1,10 @@
 .Orders {
   &__main-container {
-    display: flex;
+    // display: flex;
     padding: 15px;
+    @media screen and (max-width: 450px) {
+      padding: 6px;
+    }
   }
 
   &__card-container {
@@ -85,15 +88,17 @@
   }
 
   &__order {
-    flex: 0 0 400px;
+    // flex: 0 0 400px;
+    flex: 0 0 355px;
     color: #171e42;
     padding: 10px 30px;
     margin-left: 10px;
     margin-top: 10px;
-    @media screen and (max-width: 400px) {
-      flex: 0 0 320px;
+    cursor: pointer;
+    @media screen and (max-width: 450px) {
+      flex: 0 0 96%;
       margin-left: 0px;
-      padding: 10px 10px;
+      padding: 10px 5px;
     }
   }
 }

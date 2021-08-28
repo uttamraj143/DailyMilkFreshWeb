@@ -1,9 +1,9 @@
 import './Navbar.scss';
 import { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import DailyMilkFreshLogo from 'logo.png';
 
 export default function Navbar(props) {
-  const [selectedMenuOption, setselectedMenuOption] = useState('Welcome');
   const [adminMenuOptions] = useState([
     {
       title: 'Orders',
@@ -66,20 +66,15 @@ export default function Navbar(props) {
     return history.push('/');
   };
 
-  const changeMenu = (e, sal) => {
+  const homepage = (e) => {
     e.preventDefault();
-    setselectedMenuOption(sal);
-    props.currentMenuSelection(sal); // emitting data to parent
-    openSidebarMenus.current.checked = false;
+    return history.push('/');
   };
 
-  const defaultNavbarHeader = () => {
-    switch (selectedMenuOption) {
-      case 'Welcome':
-        return props.isAdmin ? 'Welcome Admin' : 'Welcome Agent';
-      default:
-        return selectedMenuOption;
-    }
+  const changeMenu = (e, sal) => {
+    e.preventDefault();
+    props.currentMenuSelection(sal); // emitting data to parent
+    openSidebarMenus.current.checked = false;
   };
 
   return (
@@ -127,7 +122,14 @@ export default function Navbar(props) {
         </div>
       </div>
 
-      <div className="Navbar__component-name">{defaultNavbarHeader()}</div>
+      <div onClick={(e) => homepage(e)} className="Navbar__component-name">
+        <img
+          height="80px"
+          width="150px"
+          src={DailyMilkFreshLogo}
+          alt="Daily"
+        ></img>
+      </div>
       <div onClick={handleLogout} className="Navbar__logout-container">
         <div className="Navbar__logout-image">
           <svg
