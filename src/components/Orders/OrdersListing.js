@@ -73,7 +73,7 @@ export default function OrdersListing(props) {
 
             <div className="Orders__products-row">
               <div className="Orders__product-id">Products</div>
-              <div className="Orders__product">{user.Products}</div>
+              <div className="Orders__product">{user.Products.join(', ')}</div>
             </div>
             <div className="Orders__products-row">
               <div className="Orders__date">Scan QR</div>

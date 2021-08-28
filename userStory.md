@@ -5,3 +5,5 @@ react Error: Canvas is already in use. Chart with ID '0' must be destroyed befor
 sidebar - plain color - Selected one Highlight with ICOns
 
 update good fonts
+
+lazy Load - all Orders

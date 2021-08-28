@@ -1,5 +1,6 @@
 {
   "name": "dailymilkfresh",
+  "homepage": "http://www.admin.dailyfresh.farm/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

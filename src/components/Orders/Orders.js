@@ -117,10 +117,10 @@ export default function Orders() {
 
   return (
     <div className="Orders__main-container">
-      {currentUser ? (
-        <MiniNavbar clearCurrentUser={clearCurrentUser}></MiniNavbar>
-      ) : null}
-
+      <MiniNavbar
+        isVisible={currentUser}
+        clearCurrentUser={clearCurrentUser}
+      ></MiniNavbar>
       {currentUser ? (
         <OrderPage order={currentUser}></OrderPage>
       ) : (
