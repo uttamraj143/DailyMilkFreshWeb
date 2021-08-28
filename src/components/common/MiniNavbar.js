@@ -6,6 +6,16 @@ export default function MiniNavbar(props) {
     props.clearCurrentUser(); // emit
   };
 
+  const sortByName = (e) => {
+    e.preventDefault();
+    props.sortByName();
+  };
+
+  const sortByNumber = (e) => {
+    e.preventDefault();
+    props.sortByNumber();
+  };
+
   return (
     <div className="MiniNavbar__main">
       {props.isVisible ? (
@@ -26,7 +36,10 @@ export default function MiniNavbar(props) {
         </div>
       ) : (
         <>
-          <div className="MiniNavbar__flexcenter">
+          <div
+            onClick={(e) => sortByName(e)}
+            className="MiniNavbar__flexcenter"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
@@ -42,7 +55,10 @@ export default function MiniNavbar(props) {
             </svg>{' '}
             <span>Name</span>
           </div>
-          <div className="MiniNavbar__flexcenter">
+          <div
+            onClick={(e) => sortByNumber(e)}
+            className="MiniNavbar__flexcenter"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"

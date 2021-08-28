@@ -2,6 +2,11 @@ import './Navbar.scss';
 import { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import DailyMilkFreshLogo from 'logo.png';
+import settingsIcon from 'components/common/settingsIcon.svg';
+import cartIcon from 'components/common/cartIcon.svg';
+import usersIcon from 'components/common/users.svg';
+import userBadge from 'components/common/userBadge.svg';
+import cloudDownload from 'components/common/cloudDownload.svg';
 
 export default function Navbar(props) {
   const [adminMenuOptions] = useState([
@@ -77,6 +82,25 @@ export default function Navbar(props) {
     openSidebarMenus.current.checked = false;
   };
 
+  const menuIcon = (menuNumber) => {
+    switch (menuNumber.toString()) {
+      case '1':
+        return cartIcon;
+      case '2':
+        return userBadge;
+      case '3':
+        return usersIcon;
+      case '4':
+        return cloudDownload;
+      case '5':
+        return settingsIcon;
+      default:
+        return settingsIcon;
+    }
+  };
+
+  const menuitems = props.isAdmin ? adminMenuOptions : agentMenuOptions;
+
   return (
     <div ref={wrapperRef} className="Navbar__header">
       <div>
@@ -99,25 +123,22 @@ export default function Navbar(props) {
           </div>
 
           <ul className="Navbar__sidebarMenu-inner">
-            {props.isAdmin
-              ? adminMenuOptions.map((item, i) => {
-                  return (
-                    <li key={i}>
-                      <div onClick={(e) => changeMenu(e, item.value)}>
-                        {item.title}
-                      </div>
-                    </li>
-                  );
-                })
-              : agentMenuOptions.map((item, i) => {
-                  return (
-                    <li key={i}>
-                      <div onClick={(e) => changeMenu(e, item.value)}>
-                        {item.title}
-                      </div>
-                    </li>
-                  );
-                })}
+            {menuitems.map((item, i) => {
+              return (
+                <li key={i}>
+                  <div className="Navbar__sideMenu-icons">
+                    <img
+                      className="Navbar__sideMenu-icons-img"
+                      src={menuIcon(i + 1)}
+                      alt="settings"
+                    ></img>
+                    <span onClick={(e) => changeMenu(e, item.value)}>
+                      {item.title}
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

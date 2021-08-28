@@ -52,6 +52,16 @@
     cursor: pointer;
     border-bottom: 1px solid #ffffff;
   }
+
+  &__sideMenu-icons {
+    display: flex;
+    align-items: center;
+  }
+
+  &__sideMenu-icons-img {
+    padding-right: 20px;
+  }
+
   &__sidebarMenu-header {
     display: block;
     color: #fff;

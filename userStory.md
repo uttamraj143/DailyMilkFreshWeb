@@ -1,3 +1,11 @@
+1. Customer should have their monthly calendar, in that they can select milk and products
+2. Customer order details be mailed/messaged/notification
+3. Order details should be updated in DB
+4. This order should be assigned to Respective Agent/delivery boy & (delivery boy can update quantity)
+5. Per customer can download their monthly bills (in excel)
+6. Rates, payment need not implement
+7. There is existing Milk management in wordpress, check implementation
+
 add email login validation and phone number validation
 
 react Error: Canvas is already in use. Chart with ID '0' must be destroyed before the canvas can be reused.
@@ -7,3 +15,6 @@ sidebar - plain color - Selected one Highlight with ICOns
 update good fonts
 
 lazy Load - all Orders
+
+Protected Routes using hooks
+https://medium.com/@subalerts/creating-protected-routes-in-react-js-89e95974a822
