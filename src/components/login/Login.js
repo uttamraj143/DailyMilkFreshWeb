@@ -39,7 +39,7 @@ export default function Login() {
 
   return (
     <div className="Login__main-container">
-      <div className="Login__sub-container">
+      <form className="Login__sub-container">
         <img
           className="Login__logo-image"
           src={DailyMilkFreshLogo}
@@ -119,7 +119,7 @@ export default function Login() {
         <div className="Login__signup">
           Forgot your password ? <Link to="/"> Reset</Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

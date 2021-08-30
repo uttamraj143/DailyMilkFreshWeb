@@ -10,8 +10,6 @@ add email login validation and phone number validation
 
 react Error: Canvas is already in use. Chart with ID '0' must be destroyed before the canvas can be reused.
 
-sidebar - plain color - Selected one Highlight with ICOns
-
 update good fonts
 
 lazy Load - all Orders
@@ -20,3 +18,4 @@ Protected Routes using hooks
 https://medium.com/@subalerts/creating-protected-routes-in-react-js-89e95974a822
 
 https://cdn.dribbble.com/users/420440/videos/12419/add_booking.mp4
+ https://dummyapi.io/data/v1/user?page=1&limit=10

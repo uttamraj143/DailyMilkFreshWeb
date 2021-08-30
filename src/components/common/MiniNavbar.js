@@ -27,8 +27,8 @@ export default function MiniNavbar(props) {
         <div onClick={(e) => goback(e)} className="MiniNavbar__flexcenter">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="25"
+            height="25"
             fill="currentColor"
             viewBox="0 0 16 16"
           >
@@ -47,8 +47,8 @@ export default function MiniNavbar(props) {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
+              width="25"
+              height="25"
               fill="currentColor"
               viewBox="0 0 16 16"
             >
@@ -66,8 +66,8 @@ export default function MiniNavbar(props) {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
+              width="25"
+              height="25"
               fill="currentColor"
               viewBox="0 0 16 16"
             >
@@ -85,8 +85,8 @@ export default function MiniNavbar(props) {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
+              width="25"
+              height="25"
               fill="currentColor"
               viewBox="0 0 16 16"
             >

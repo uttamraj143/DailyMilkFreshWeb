@@ -163,13 +163,6 @@ export default function Orders() {
 
   return (
     <div className="Orders__main-container">
-      <MiniNavbar
-        isVisible={currentUser}
-        clearCurrentUser={clearCurrentUser}
-        sortByName={sortByName}
-        sortByNumber={sortByNumber}
-        sortByLocation={sortByLocation}
-      ></MiniNavbar>
       {currentUser ? (
         <OrderPage order={currentUser}></OrderPage>
       ) : (
@@ -179,6 +172,13 @@ export default function Orders() {
           users={users}
         ></OrdersListing>
       )}
+      <MiniNavbar
+        isVisible={currentUser}
+        clearCurrentUser={clearCurrentUser}
+        sortByName={sortByName}
+        sortByNumber={sortByNumber}
+        sortByLocation={sortByLocation}
+      ></MiniNavbar>
     </div>
   );
 }

@@ -5,8 +5,17 @@
     border: 2px solid orange;
     padding: 5px;
     max-width: 411px;
-    min-width: 350px;
+    min-width: 96%;
     margin: auto;
+    @media screen and (max-width: 450px){
+      position: fixed;
+      border: none;
+      border-top: 2px solid orange;
+      bottom: 0px;
+      background: white;
+      font-size: 14px;
+      padding: 0px;
+    }
   }
   &__flexcenter {
     display: flex;
