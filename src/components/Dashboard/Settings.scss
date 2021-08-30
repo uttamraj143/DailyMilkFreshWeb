@@ -75,6 +75,22 @@
     margin-top: 6px;
   }
 
+  &__email:focus,
+  &__password:focus {
+    width: 100%;
+    transition: 0.4s;
+    border: 2px solid pink;
+    left: 0;
+  }
+
+  &__password {
+    border: 2px solid #d3d3d34d;
+    border-radius: 8px;
+    height: 39px;
+    transition: 0.4s;
+    margin-top: 6px;
+  }
+
   &__submit {
     width: 300px;
     border-radius: 50px;
@@ -86,12 +102,5 @@
     height: 39px;
     margin: auto;
     display: block;
-  }
-
-  &__email:focus {
-    width: 100%;
-    transition: 0.4s;
-    border: 2px solid pink;
-    left: 0;
   }
 }

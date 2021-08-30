@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import Button from '@material-ui/core/Button';
 import './Statistics.scss';
+import TextField from '@material-ui/core/TextField';
 
 const chartConfig = {
   type: 'bar',
@@ -115,6 +116,18 @@ export default function ProductionStatistics() {
 
   return (
     <div style={{ maxWidth: '522px' }}>
+      <form className="Statistics__calendar" noValidate>
+        <TextField
+          id="datetime-local"
+          label="Choose date"
+          type="datetime-local"
+          defaultValue="2021-01-24T10:30"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </form>
+
       <div className="Statistics__refresh-button">
         <Button onClick={onButtonClick} variant="outlined" color="primary">
           Refresh Data from Server

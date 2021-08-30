@@ -18,7 +18,8 @@ export default function Settings() {
 
   const assignUserProfile = (e, formType) => {
     e.preventDefault();
-    // e.persist();
+    e.persist();
+    if (selectedProfile) return;
     if (formType === 'firstName')
       setUserProfile({ ...user, firstName: e.target.value });
     if (formType === 'lastName')
@@ -111,7 +112,7 @@ export default function Settings() {
               onChange={(e) => assignUserProfile(e, 'password')}
               value={user.password}
               type="password"
-              className="Settings__email"
+              className="Settings__password"
             ></input>
           </div>
           <div className="Settings__field-container">
