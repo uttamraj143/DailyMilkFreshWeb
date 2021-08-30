@@ -116,34 +116,31 @@ export default function ProductionStatistics() {
 
   return (
     <div style={{ maxWidth: '522px' }}>
-      <form className="Statistics__calendar" noValidate>
+      <form noValidate>
         <TextField
-          id="datetime-local"
-          label="Choose date"
-          type="datetime-local"
-          defaultValue="2021-01-24T10:30"
+          id='date'
+          label='Date '
+          type='date'
+          defaultValue={new Date().toLocaleDateString('fr-CA')}
           InputLabelProps={{
             shrink: true,
           }}
         />
       </form>
 
-      <div className="Statistics__refresh-button">
-        <Button onClick={onButtonClick} variant="outlined" color="primary">
+      <div className='Statistics__refresh-button'>
+        <Button onClick={onButtonClick} variant='outlined' color='primary'>
           Refresh Data from Server
         </Button>
       </div>
       <div> Daily Milk Delivery Quantity (total delivered on this date) </div>
       <canvas ref={chartContainer2} />
       <div>
-        Per Agent Milk Delivery Quantity (total delivered by selected Agent
-        today/any day selection from Calender drop down)
+        Per Agent Milk Delivery Quantity (total delivered by selected Agent today/any day selection from
+        Calender drop down)
       </div>
       <canvas ref={chartContainer} />
-      <div>
-        {' '}
-        Daily Milk Delivery Quantity by Type last month (cow/buffallo / ghee)
-      </div>
+      <div> Daily Milk Delivery Quantity by Type last month (cow/buffallo / ghee)</div>
       <canvas ref={chartContainer4} />
     </div>
   );

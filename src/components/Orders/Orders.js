@@ -121,32 +121,20 @@ export default function Orders() {
 
   const sortByName = () => {
     if (sortName) {
-      setUsers(
-        users.sort((a, b) => a.customername.localeCompare(b.customername))
-      );
+      setUsers(users.sort((a, b) => a.customername.localeCompare(b.customername)));
       setSortName(!sortName);
     } else {
-      setUsers(
-        users.sort((a, b) => b.customername.localeCompare(a.customername))
-      );
+      setUsers(users.sort((a, b) => b.customername.localeCompare(a.customername)));
       setSortName(!sortName);
     }
   };
 
   const sortByNumber = (e) => {
     if (sortNumbers) {
-      setUsers(
-        users
-          .slice(0)
-          .sort((a, b) => parseInt(a.QRNumber) - parseInt(b.QRNumber))
-      );
+      setUsers(users.slice(0).sort((a, b) => parseInt(a.QRNumber) - parseInt(b.QRNumber)));
       setSortNumbers(!sortNumbers);
     } else {
-      setUsers(
-        users
-          .slice(0)
-          .sort((a, b) => parseInt(b.QRNumber) - parseInt(a.QRNumber))
-      );
+      setUsers(users.slice(0).sort((a, b) => parseInt(b.QRNumber) - parseInt(a.QRNumber)));
       setSortNumbers(!sortNumbers);
     }
   };
@@ -162,23 +150,21 @@ export default function Orders() {
   };
 
   return (
-    <div className="Orders__main-container">
+    <div className='Orders__main-container'>
+      <MiniNavbar
+        isVisible={currentUser}
+        clearCurrentUser={clearCurrentUser}
+        sortByName={sortByName}
+        sortByNumber={sortByNumber}
+        sortByLocation={sortByLocation}></MiniNavbar>
       {currentUser ? (
         <OrderPage order={currentUser}></OrderPage>
       ) : (
         <OrdersListing
           currentUserSelection={currentUserSelection}
           orders={orders}
-          users={users}
-        ></OrdersListing>
+          users={users}></OrdersListing>
       )}
-      <MiniNavbar
-        isVisible={currentUser}
-        clearCurrentUser={clearCurrentUser}
-        sortByName={sortByName}
-        sortByNumber={sortByNumber}
-        sortByLocation={sortByLocation}
-      ></MiniNavbar>
     </div>
   );
 }
