@@ -53,7 +53,7 @@ const CHART_COLORS = {
 };
 
 const config = {
-  type: 'pie',
+  type: 'doughnut',
   data: {
     labels: ['Red', 'Orange', 'Yellow', 'Green'],
     datasets: [
@@ -65,6 +65,7 @@ const config = {
     ],
   },
   options: {
+    cutout: '80%',
     responsive: true,
     plugins: {
       legend: {
@@ -115,12 +116,12 @@ export default function ProductionStatistics() {
   }, [chartContainer4]);
 
   return (
-    <div style={{ maxWidth: '522px' }}>
+    <div style={{ maxWidth: '300px' }}>
       <form noValidate>
         <TextField
-          id='date'
-          label='Date '
-          type='date'
+          id="date"
+          label="Date "
+          type="date"
           defaultValue={new Date().toLocaleDateString('fr-CA')}
           InputLabelProps={{
             shrink: true,
@@ -128,19 +129,26 @@ export default function ProductionStatistics() {
         />
       </form>
 
-      <div className='Statistics__refresh-button'>
-        <Button onClick={onButtonClick} variant='outlined' color='primary'>
+      <div className="Statistics__refresh-button">
+        <Button onClick={onButtonClick} variant="outlined" color="primary">
           Refresh Data from Server
         </Button>
       </div>
-      <div> Daily Milk Delivery Quantity (total delivered on this date) </div>
-      <canvas ref={chartContainer2} />
       <div>
-        Per Agent Milk Delivery Quantity (total delivered by selected Agent today/any day selection from
-        Calender drop down)
+        Daily Milk Delivery Quantity (total delivered on this date)
+        <canvas ref={chartContainer2} />
       </div>
-      <canvas ref={chartContainer} />
-      <div> Daily Milk Delivery Quantity by Type last month (cow/buffallo / ghee)</div>
+      <div>
+        Per Agent Milk Delivery Quantity (total delivered by selected Agent
+        today/any day selection from Calender drop down)
+      </div>
+      <div>
+        <canvas ref={chartContainer} />
+      </div>
+      <div>
+        {' '}
+        Daily Milk Delivery Quantity by Type last month (cow/buffallo / ghee)
+      </div>
       <canvas ref={chartContainer4} />
     </div>
   );
