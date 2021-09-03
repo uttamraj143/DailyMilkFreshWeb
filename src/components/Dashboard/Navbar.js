@@ -55,70 +55,63 @@ export default function Navbar(props) {
   };
 
   return (
-    <div className="navbar">
+    <div className='navbar'>
       <div>
         <input
-          type="checkbox"
+          type='checkbox'
           ref={openSidebarMenus}
-          className="openSidebarMenu"
-          id="openSidebarMenu"
-        ></input>
-        <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
-          <div className="spinner diagonal part-1"></div>
-          <div className="spinner horizontal"></div>
-          <div className="spinner diagonal part-2"></div>
+          className='openSidebarMenu'
+          id='openSidebarMenu'></input>
+        <label htmlFor='openSidebarMenu' className='sidebarIconToggle'>
+          <div className='spinner diagonal part-1'></div>
+          <div className='spinner horizontal'></div>
+          <div className='spinner diagonal part-2'></div>
         </label>
 
-        <div id="sidebarMenu">
-          <div className="sidebarMenuHeader">
-            {props.isAdmin ? 'Admin' : 'Agent'} Dashboard <br />{' '}
-            <span>Have a Happy Day </span>
+        <div id='sidebarMenu'>
+          <div className='sidebarMenuHeader'>
+            {props.isAdmin ? 'Admin' : 'Agent'} Dashboard <br /> <span>Have a Happy Day </span>
           </div>
 
-          <ul className="sidebarMenuInner">
+          <ul className='sidebarMenuInner'>
             {props.isAdmin
               ? adminMenuOptions.map((item, i) => {
-                return (
-                  <li key={i}>
-                    <div onClick={(e) => changeMenu(e, item.value)}>
-                      {item.title}
-                    </div>
-                  </li>
-                );
-              })
+                  return (
+                    <li onClick={(e) => changeMenu(e, item.value)} key={i}>
+                      <div>{item.title}</div>
+                    </li>
+                  );
+                })
               : agentMenuOptions.map((item, i) => {
-                return (
-                  <li key={i}>
-                    <div onClick={(e) => changeMenu(e, item.value)}>
-                      {item.title}
-                    </div>
-                  </li>
-                );
-              })}
+                  return (
+                    <li onClick={(e) => changeMenu(e, item.value)} key={i}>
+                      <div>{item.title}</div>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
       </div>
 
-      <div className="component-name">{selectedMenuOption}</div>
+      <div className='component-name'>{selectedMenuOption}</div>
 
-      <div onClick={handleLogout} className="logout-container">
-        <div className="logout-image">
+      <div onClick={handleLogout} className='logout-container'>
+        <div className='logout-image'>
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="25"
-            fill="white"
-            className="bi bi-person-circle"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            xmlns='http://www.w3.org/2000/svg'
+            width='25'
+            height='25'
+            fill='white'
+            className='bi bi-person-circle'
+            viewBox='0 0 16 16'>
+            <path d='M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z' />
             <path
-              fillRule="evenodd"
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+              fillRule='evenodd'
+              d='M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z'
             />
           </svg>
         </div>
-        <div className="logout-text">LOGOUT</div>
+        <div className='logout-text'>LOGOUT</div>
       </div>
     </div>
   );

@@ -1,6 +1,13 @@
 .Statistics {
-  &__refresh-button {
-    display: flex;
-    justify-content: center;
+  &__main-container {
+    max-width: 400px;
+    @media screen and (max-width: 450px) {
+      max-width: 86%;
+    }
+  }
+
+  &__donough {
+    max-width: 300px;
+    margin: 40px auto;
   }
 }

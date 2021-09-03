@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
+import Button from '@material-ui/core/Button';
 
 export default function Agents() {
   const [select, setSelection] = useState([]);
@@ -33,8 +34,7 @@ export default function Agents() {
       sortable: false,
       width: 160,
       valueGetter: (params) =>
-        `${params.getValue(params.id, 'firstName') || ''} ${params.getValue(params.id, 'lastName') || ''
-        }`,
+        `${params.getValue(params.id, 'firstName') || ''} ${params.getValue(params.id, 'lastName') || ''}`,
     },
   ];
 
@@ -60,6 +60,12 @@ export default function Agents() {
 
   return (
     <div style={{ height: 400, width: '100%' }}>
+      <div className='Export__refresh-button'>
+        <Button variant='outlined' color='primary'>
+          Refresh Data from Server
+        </Button>
+      </div>
+
       <DataGrid
         nodeRef={nodeRef}
         rows={rows}
