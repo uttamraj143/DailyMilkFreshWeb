@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import "./login.scss";
 import DailyMilkFreshLogo from "logo.png";
-import axios from "axios";
+import { axiosInstance } from "axiosConfig";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,9 +29,9 @@ export default function Login() {
     };
     // setIsLoggedIn(false);
 
-    axios({
+    axiosInstance({
       method: "POST",
-      url: "http://dailyfreshmilk-980670318.us-east-1.elb.amazonaws.com/user/login",
+      url: "user/login",
       data: data,
     })
       .then((res) => {
@@ -43,9 +43,9 @@ export default function Login() {
       });
   };
   const validateToken = (authcode) => {
-    axios({
+    axiosInstance({
       method: "POST",
-      url: "http://dailyfreshmilk-980670318.us-east-1.elb.amazonaws.com/oauth/token",
+      url: "oauth/token",
       headers: {
         grant_type: "code",
         code: authcode,
@@ -56,9 +56,9 @@ export default function Login() {
   };
 
   const getUserDetails = (token) => {
-    axios({
+    axiosInstance({
       method: "GET",
-      url: "http://dailyfreshmilk-980670318.us-east-1.elb.amazonaws.com/user/details",
+      url: "user/details",
       headers: {
         access_token: token,
       },
