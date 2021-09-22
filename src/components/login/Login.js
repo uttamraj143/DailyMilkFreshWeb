@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import './login.scss';
-import DailyMilkFreshLogo from 'logo.png';
+import { useState } from "react";
+import { useHistory, Link } from "react-router-dom";
+import "./login.scss";
+import DailyMilkFreshLogo from "logo.png";
+import axios from "axios";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [wrongCredentials, setWrongCredentials] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   let history = useHistory();
 
   const toggleShowPassword = () => {
@@ -21,22 +22,62 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    let data = {
+      phone_no: username,
+      password: password,
+      app_token: "uuid",
+    };
     // setIsLoggedIn(false);
-    if (username === 'admin' && password === '1234') {
-      localStorage.setItem('isAdmin', true);
-      localStorage.setItem('loggedIn', true);
-      // setIsLoggedIn(true);
-      return history.push('/dashboard');
-    } else if (username === 'agent' && password === '1234') {
-      localStorage.setItem('isAdmin', false);
-      localStorage.setItem('loggedIn', true);
-      // setIsLoggedIn(true);
-      return history.push('/dashboard');
-    } else {
-      setWrongCredentials(true);
-    }
+
+    axios({
+      method: "POST",
+      url: "http://dailyfreshmilk-980670318.us-east-1.elb.amazonaws.com/user/login",
+      data: data,
+    })
+      .then((res) => {
+        validateToken(res.data.code);
+      })
+      .catch((err) => {
+        setWrongCredentials(true);
+        console.log("error in request", err);
+      });
+  };
+  const validateToken = (authcode) => {
+    axios({
+      method: "POST",
+      url: "http://dailyfreshmilk-980670318.us-east-1.elb.amazonaws.com/oauth/token",
+      headers: {
+        grant_type: "code",
+        code: authcode,
+      },
+    }).then((res) => {
+      getUserDetails(res.data.access_token);
+    });
   };
 
+  const getUserDetails = (token) => {
+    axios({
+      method: "GET",
+      url: "http://dailyfreshmilk-980670318.us-east-1.elb.amazonaws.com/user/details",
+      headers: {
+        access_token: token,
+      },
+    }).then((res) => {
+      localStorage.setItem("userDetails", JSON.stringify(res.data.data));
+
+      if (res.data.data.user_type === 1) {
+        localStorage.setItem("isAdmin", true);
+        localStorage.setItem("loggedIn", true);
+        // setIsLoggedIn(true);
+        return history.push("/dashboard");
+      } else if (res.data.data.user_type === 2) {
+        localStorage.setItem("isAdmin", false);
+        localStorage.setItem("loggedIn", true);
+        // setIsLoggedIn(true);
+        return history.push("/dashboard");
+      }
+    });
+  };
   return (
     <div className="Login__main-container">
       <form className="Login__sub-container">
@@ -67,7 +108,7 @@ export default function Login() {
         <div className="Login__col-3">
           <input
             className="Login__input-focus-effect"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder="Password"
@@ -112,8 +153,8 @@ export default function Login() {
           value="Log In"
           className={
             validateForm()
-              ? 'Login__submit'
-              : 'Login__submit Login__submit-disabled'
+              ? "Login__submit"
+              : "Login__submit Login__submit-disabled"
           }
         ></input>
         <div className="Login__signup">
