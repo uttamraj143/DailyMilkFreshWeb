@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const baseURL = process.env.hostname;
+
 export const axiosInstance = axios.create({
-  baseURL: "http://dailyfreshmilk-980670318.us-east-1.elb.amazonaws.com/",
+  baseURL: baseURL,
   timeout: 1000,
-  headers: { "X-Custom-Header": "foobar" },
+  headers: { "X-Custom-Header": 'foobar'},
 });

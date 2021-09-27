@@ -32,6 +32,7 @@ export default function Login() {
     axiosInstance({
       method: "POST",
       url: "user/login",
+      headers: { "X-Custom-Header": 'loginBar'},
       data: data,
     })
       .then((res) => {
@@ -50,9 +51,14 @@ export default function Login() {
         grant_type: "code",
         code: authcode,
       },
-    }).then((res) => {
-      getUserDetails(res.data.access_token);
-    });
+    })
+      .then((res) => {
+        getUserDetails(res.data.access_token);
+      })
+      .catch((err) => {
+        setWrongCredentials(true);
+        console.log("error in request", err);
+      });
   };
 
   const getUserDetails = (token) => {
