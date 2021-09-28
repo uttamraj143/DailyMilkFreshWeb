@@ -1,9 +1,11 @@
 import axios from "axios";
 
-const baseURL = process.env.hostname;
+const baseurl = process.env.hostname;
 
 export const axiosInstance = axios.create({
-  baseURL: baseURL,
-  timeout: 1000,
-  headers: { "X-Custom-Header": 'foobar'},
+  baseURL: process.env.hostname,
+  timeout: 10000,
+  headers: { "X-Custom-Header": "foobar" },
 });
+
+// export default axiosInstance;

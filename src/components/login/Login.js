@@ -3,6 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import "./login.scss";
 import DailyMilkFreshLogo from "logo.png";
 import { axiosInstance } from "axiosConfig";
+import auth from "store/auth";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,12 +30,8 @@ export default function Login() {
     };
     // setIsLoggedIn(false);
 
-    axiosInstance({
-      method: "POST",
-      url: "user/login",
-      headers: { "X-Custom-Header": 'loginBar'},
-      data: data,
-    })
+    auth
+      .userlogin(data)
       .then((res) => {
         validateToken(res.data.code);
       })

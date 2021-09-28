@@ -1,9 +1,10 @@
-import './App.scss';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import "./App.scss";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Login from 'components/login/Login';
-import Dashboard from 'components/Dashboard/Dashboard';
-import Landing from 'components/common/Landing';
+import Login from "components/login/Login";
+import Dashboard from "components/Dashboard/Dashboard";
+import Landing from "components/common/Landing";
+require("dotenv").config({ path: "../.env" });
 
 function App() {
   return (
