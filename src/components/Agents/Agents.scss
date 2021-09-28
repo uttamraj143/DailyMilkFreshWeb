@@ -1,0 +1,105 @@
+.Agents {
+    &__main-container {
+      // display: flex;
+      padding: 15px;
+      @media screen and (max-width: 450px) {
+        padding: 6px;
+      }
+    }
+  
+    &__card-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    &__date-address-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #80808066;
+      padding-bottom: 7px;
+    }
+  
+    &__customername {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+  
+    &__cust-id {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+    }
+  
+    &__blue {
+      padding: 4px 20px;
+      color: #137881;
+      background-color: #bef3f8;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+  
+    &__red {
+      padding: 4px 20px;
+      color: #d84040;
+      background-color: #ffe9ec;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+  
+    &__grey {
+      padding: 4px 20px;
+      color: #585656;
+      background-color: #ebe6e6;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+  
+    &__yellow {
+      padding: 4px 20px;
+      color: rgba(0, 0, 0, 0.719);
+      background-color: #f1f1b5;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+  
+    &__green {
+      padding: 4px 20px;
+      color: #4e6e4e;
+      background-color: #a8c4a88a;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+  
+    &__orange {
+      padding: 4px 20px;
+      color: rgba(0, 0, 0, 0.719);
+      background-color: #e7a01b;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+  
+    &__products-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+  
+    &__order {
+      // flex: 0 0 400px;
+      flex: 0 0 355px;
+      color: #171e42;
+      padding: 10px 30px;
+      margin-left: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      @media screen and (max-width: 450px) {
+        flex: 0 0 96%;
+        margin-left: 0px;
+        padding: 10px 5px;
+      }
+    }
+  }
+  
