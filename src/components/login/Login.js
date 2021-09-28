@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import "./login.scss";
 import DailyMilkFreshLogo from "logo.png";
-import { axiosInstance } from "axiosConfig";
-import auth from "store/auth";
+import { userlogin, getToken, getUser } from "store/auth";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +17,7 @@ export default function Login() {
   };
 
   function validateForm() {
-    return username.length > 0 && password.length > 0;
+    return username.length > 3 && password.length > 3;
   }
 
   const handleLogin = (e) => {
@@ -30,8 +29,7 @@ export default function Login() {
     };
     // setIsLoggedIn(false);
 
-    auth
-      .userlogin(data)
+    userlogin(data)
       .then((res) => {
         validateToken(res.data.code);
       })
@@ -41,14 +39,7 @@ export default function Login() {
       });
   };
   const validateToken = (authcode) => {
-    axiosInstance({
-      method: "POST",
-      url: "oauth/token",
-      headers: {
-        grant_type: "code",
-        code: authcode,
-      },
-    })
+    getToken(authcode)
       .then((res) => {
         getUserDetails(res.data.access_token);
       })
@@ -59,13 +50,7 @@ export default function Login() {
   };
 
   const getUserDetails = (token) => {
-    axiosInstance({
-      method: "GET",
-      url: "user/details",
-      headers: {
-        access_token: token,
-      },
-    }).then((res) => {
+    getUser(token).then((res) => {
       localStorage.setItem("userDetails", JSON.stringify(res.data.data));
 
       if (res.data.data.user_type === 1) {

@@ -1,9 +1,6 @@
-import { axiosInstance } from "axiosConfig";
+import axiosInstance from "axiosConfig";
 
-const userlogin = (data) => {
-  // let headers = {
-  //   "tom-Header": "loginBar",
-  // };
+export const userlogin = (data) => {
   return axiosInstance({
     method: "POST",
     url: "user/login",
@@ -11,14 +8,23 @@ const userlogin = (data) => {
   });
 };
 
-// const get = id => {
-//   return http.get(`/tutorials/${id}`);
-// };
+export const getToken = (authcode) => {
+  return axiosInstance({
+    method: "POST",
+    url: "oauth/token",
+    headers: {
+      grant_type: "code",
+      code: authcode,
+    },
+  });
+};
 
-// const handleLogin = data => {
-//   return http.post("/tutorials", data);
-// };
-
-export default {
-  userlogin,
+export const getUser = (token) => {
+  return axiosInstance({
+    method: "GET",
+    url: "user/details",
+    headers: {
+      access_token: token,
+    },
+  });
 };
