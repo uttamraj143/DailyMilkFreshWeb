@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import './Dashboard.scss';
-import Navbar from 'components/common/Navbar';
-import Orders from 'components/Orders/Orders';
-import Users from 'components/Users/Users.js';
-import Agents from 'components/Agents/Agents';
-import Settings from 'components/Dashboard/Settings';
-import ExportData from 'components/Dashboard/ExportData';
-import Statistics from 'components/Dashboard/Statistics';
+import React, { useState, useContext } from "react";
+import { Redirect } from "react-router-dom";
+import "./Dashboard.scss";
+import Navbar from "components/common/Navbar";
+import Orders from "components/Orders/Orders";
+import Users from "components/Users/Users.js";
+import Agents from "components/Agents/Agents";
+import Settings from "components/Dashboard/Settings";
+import ExportData from "components/Dashboard/ExportData";
+import Statistics from "components/Dashboard/Statistics";
+import UserContext from "UserContext";
 
 export default function Dashboard() {
+  const userInfo = useContext(UserContext);
   const isAdmin = () => {
-    return JSON.parse(localStorage.getItem('isAdmin'));
+    return userInfo.isAdmin;
   };
 
   const isLoggedIn = () => {
-    return JSON.parse(localStorage.getItem('loggedIn'));
+    return userInfo.isLoggedIn;
   };
-  const [currentComponent, setCurrentComponent] = useState('Welcome');
+  const [currentComponent, setCurrentComponent] = useState("Welcome");
 
   const currentSelection = (sal) => {
     setCurrentComponent(sal);
@@ -25,15 +27,15 @@ export default function Dashboard() {
 
   const adminComponents = () => {
     switch (currentComponent) {
-      case 'orders_list':
+      case "orders_list":
         return <Orders />;
-      case 'agents_list':
+      case "agents_list":
         return <Agents />;
-      case 'users_list':
+      case "users_list":
         return <Users />;
-      case 'export_data':
+      case "export_data":
         return <ExportData />;
-      case 'settings':
+      case "settings":
         return <Settings />;
       default:
         return <Statistics />;
@@ -42,7 +44,7 @@ export default function Dashboard() {
 
   const agentComponents = () => {
     switch (currentComponent) {
-      case 'settings':
+      case "settings":
         return <Settings />;
       default:
         return <Orders />;

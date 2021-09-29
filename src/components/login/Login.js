@@ -9,12 +9,13 @@ import UserContext from "UserContext";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [wrongCredentials, setWrongCredentials] = useState(false);
+  const [notAuthorised, setNotAuthorised] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
-  const asdsd = useContext(UserContext);
+
+  const userInfo = useContext(UserContext);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -31,7 +32,7 @@ export default function Login() {
       password: password,
       app_token: uuidv4(),
     };
-    // setIsLoggedIn(false);
+    userInfo.toggleLogin(false, null);
 
     userlogin(data)
       .then((res) => {
@@ -58,15 +59,13 @@ export default function Login() {
       localStorage.setItem("userDetails", JSON.stringify(res.data.data));
 
       if (res.data.data.user_type === 1) {
-        localStorage.setItem("isAdmin", true);
-        localStorage.setItem("loggedIn", true);
-        // setIsLoggedIn(true);
+        userInfo.toggleLogin(true, token, true);
         return history.push("/dashboard");
       } else if (res.data.data.user_type === 2) {
-        localStorage.setItem("isAdmin", false);
-        localStorage.setItem("loggedIn", true);
-        // setIsLoggedIn(true);
+        userInfo.toggleLogin(true, token, false);
         return history.push("/dashboard");
+      } else {
+        setNotAuthorised(true);
       }
     });
   };
@@ -80,10 +79,15 @@ export default function Login() {
         ></img>
         {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
         {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
-        <div className="Login__login-header">Login {asdsd}</div>
+        <div className="Login__login-header">Login</div>
         {wrongCredentials ? (
           <div className="Login__wrong-password">
             You have entered wrong Username/Password
+          </div>
+        ) : null}
+        {notAuthorised ? (
+          <div className="Login__wrong-password">
+            You do not have permissions
           </div>
         ) : null}
         <div className="Login__col-3">
