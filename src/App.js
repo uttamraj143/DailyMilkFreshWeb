@@ -5,7 +5,6 @@ import UserContext from "UserContext";
 import Login from "components/login/Login";
 import Dashboard from "components/Dashboard/Dashboard";
 import Landing from "components/common/Landing";
-require("dotenv").config({ path: "../.env" });
 
 export default function App() {
   const pastLogin = localStorage.getItem("loggedIn");
