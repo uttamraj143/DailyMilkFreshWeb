@@ -18,13 +18,3 @@ export const getToken = (authcode) => {
     },
   });
 };
-
-export const getUser = (token) => {
-  return axiosInstance({
-    method: "GET",
-    url: "user/details",
-    headers: {
-      access_token: token,
-    },
-  });
-};

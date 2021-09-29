@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import "./login.scss";
 import DailyMilkFreshLogo from "logo.png";
-import { userlogin, getToken, getUser } from "store/auth";
+import { userlogin, getToken } from "store/auth";
+import { getUser } from "store/user";
+import { v4 as uuidv4 } from "uuid";
+import UserContext from "UserContext";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,6 +14,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
+  const asdsd = useContext(UserContext);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -25,7 +29,7 @@ export default function Login() {
     let data = {
       phone_no: username,
       password: password,
-      app_token: "uuid",
+      app_token: uuidv4(),
     };
     // setIsLoggedIn(false);
 
@@ -76,7 +80,7 @@ export default function Login() {
         ></img>
         {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
         {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
-        <div className="Login__login-header">Login</div>
+        <div className="Login__login-header">Login {asdsd}</div>
         {wrongCredentials ? (
           <div className="Login__wrong-password">
             You have entered wrong Username/Password
