@@ -18,4 +18,7 @@ Protected Routes using hooks
 https://medium.com/@subalerts/creating-protected-routes-in-react-js-89e95974a822
 
 https://cdn.dribbble.com/users/420440/videos/12419/add_booking.mp4
- https://dummyapi.io/data/v1/user?page=1&limit=10
+https://dummyapi.io/data/v1/user?page=1&limit=10
+
+https://www.savaslabs.com/blog/using-react-global-state-hooks-and-context
+https://medium.com/@akrush95/global-cached-state-in-react-using-hooks-context-and-local-storage-166eacf8ab46

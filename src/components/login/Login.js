@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import "./login.scss";
 import DailyMilkFreshLogo from "logo.png";
-import { userlogin, getToken, getUser } from "store/auth";
+import { userlogin, getToken } from "store/auth";
+import { getUser } from "store/user";
+import { v4 as uuidv4 } from "uuid";
+import UserContext from "UserContext";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [wrongCredentials, setWrongCredentials] = useState(false);
+  const [notAuthorised, setNotAuthorised] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
+
+  const userInfo = useContext(UserContext);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -25,9 +30,9 @@ export default function Login() {
     let data = {
       phone_no: username,
       password: password,
-      app_token: "uuid",
+      app_token: uuidv4(),
     };
-    // setIsLoggedIn(false);
+    userInfo.toggleLogin(false, null);
 
     userlogin(data)
       .then((res) => {
@@ -54,15 +59,13 @@ export default function Login() {
       localStorage.setItem("userDetails", JSON.stringify(res.data.data));
 
       if (res.data.data.user_type === 1) {
-        localStorage.setItem("isAdmin", true);
-        localStorage.setItem("loggedIn", true);
-        // setIsLoggedIn(true);
+        userInfo.toggleLogin(true, token, true);
         return history.push("/dashboard");
       } else if (res.data.data.user_type === 2) {
-        localStorage.setItem("isAdmin", false);
-        localStorage.setItem("loggedIn", true);
-        // setIsLoggedIn(true);
+        userInfo.toggleLogin(true, token, false);
         return history.push("/dashboard");
+      } else {
+        setNotAuthorised(true);
       }
     });
   };
@@ -80,6 +83,11 @@ export default function Login() {
         {wrongCredentials ? (
           <div className="Login__wrong-password">
             You have entered wrong Username/Password
+          </div>
+        ) : null}
+        {notAuthorised ? (
+          <div className="Login__wrong-password">
+            You do not have permissions
           </div>
         ) : null}
         <div className="Login__col-3">

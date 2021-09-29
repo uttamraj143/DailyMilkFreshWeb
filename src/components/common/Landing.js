@@ -1,8 +1,13 @@
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
+
+import { useContext } from "react";
+import UserContext from "UserContext";
 
 const Landing = () => {
+  const userInfo = useContext(UserContext);
+
   const isLoggedIn = () => {
-    return JSON.parse(localStorage.getItem('loggedIn'));
+    return userInfo.isLoggedIn;
   };
 
   return (

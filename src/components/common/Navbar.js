@@ -1,45 +1,47 @@
-import './Navbar.scss';
-import { useState, useRef, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import DailyMilkFreshLogo from 'logo.png';
-import settingsIcon from 'components/common/settingsIcon.svg';
-import cartIcon from 'components/common/cartIcon.svg';
-import usersIcon from 'components/common/users.svg';
-import userBadge from 'components/common/userBadge.svg';
-import cloudDownload from 'components/common/cloudDownload.svg';
+import "./Navbar.scss";
+import { useState, useRef, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import DailyMilkFreshLogo from "logo.png";
+import settingsIcon from "components/common/settingsIcon.svg";
+import cartIcon from "components/common/cartIcon.svg";
+import usersIcon from "components/common/users.svg";
+import userBadge from "components/common/userBadge.svg";
+import cloudDownload from "components/common/cloudDownload.svg";
+import UserContext from "UserContext";
 
 export default function Navbar(props) {
+  const userInfo = useContext(UserContext);
   const [adminMenuOptions] = useState([
     {
-      title: 'Orders',
-      value: 'orders_list',
+      title: "Orders",
+      value: "orders_list",
     },
     {
-      title: 'Agents',
-      value: 'agents_list',
+      title: "Agents",
+      value: "agents_list",
     },
     {
-      title: 'Users',
-      value: 'users_list',
+      title: "Users",
+      value: "users_list",
     },
     // {
     //   title: 'Statistics',
     //   value: 'production_statistics',
     // },
-    { title: 'Export Data', value: 'export_data' },
+    { title: "Export Data", value: "export_data" },
     {
-      value: 'settings',
-      title: 'settings',
+      value: "settings",
+      title: "settings",
     },
   ]);
   const [agentMenuOptions] = useState([
     {
-      title: 'Orders',
-      value: 'orders_list',
+      title: "Orders",
+      value: "orders_list",
     },
     {
-      title: 'settings',
-      value: 'settings',
+      title: "settings",
+      value: "settings",
     },
   ]);
 
@@ -57,10 +59,10 @@ export default function Navbar(props) {
       }
 
       // Bind the event listener
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
       return () => {
         // Unbind the event listener on clean up
-        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
   }
@@ -68,12 +70,13 @@ export default function Navbar(props) {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.clear();
-    return history.push('/');
+    userInfo.toggleLogin(false, null, false);
+    return history.push("/");
   };
 
   const homepage = (e) => {
     e.preventDefault();
-    return history.push('/');
+    return history.push("/");
   };
 
   const changeMenu = (e, sal) => {
@@ -84,15 +87,15 @@ export default function Navbar(props) {
 
   const menuIcon = (menuNumber) => {
     switch (menuNumber.toString()) {
-      case '1':
+      case "1":
         return cartIcon;
-      case '2':
+      case "2":
         return userBadge;
-      case '3':
+      case "3":
         return usersIcon;
-      case '4':
+      case "4":
         return cloudDownload;
-      case '5':
+      case "5":
         return settingsIcon;
       default:
         return settingsIcon;
@@ -118,7 +121,7 @@ export default function Navbar(props) {
 
         <div id="sidebarMenu" className="Navbar__sidebarMenu">
           <div className="Navbar__sidebarMenu-header">
-            {props.isAdmin ? 'Admin' : 'Agent'} Dashboard <br />
+            {props.isAdmin ? "Admin" : "Agent"} Dashboard <br />
             <span>Have a Happy Day </span>
           </div>
 
