@@ -8,18 +8,18 @@ import Landing from "components/common/Landing";
 require("dotenv").config({ path: "../.env" });
 
 export default function App() {
-  const pastLogin = localStorage.getItem("loggedIn");
-  const pastIsAdmin = localStorage.getItem("isAdmin");
+  const pastLogin = JSON.parse(localStorage.getItem("loggedIn"));
+  const pastIsAdmin = JSON.parse(localStorage.getItem("isAdmin"));
   const [isLoggedIn, setIsLoggedIn] = useState(pastLogin || false);
   const [isAdmin, setIsAdmin] = useState(pastIsAdmin || false);
   const [access_token, setAccessToken] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem("loggedIn", isLoggedIn);
+    localStorage.setItem("loggedIn", Boolean(isLoggedIn));
   }, [isLoggedIn]);
 
   useEffect(() => {
-    localStorage.setItem("isAdmin", isAdmin);
+    localStorage.setItem("isAdmin", Boolean(isAdmin));
   }, [isAdmin]);
 
   const toggleLogin = (bool, token, admin) => {

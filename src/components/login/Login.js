@@ -79,7 +79,7 @@ export default function Login() {
         ></img>
         {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
         {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
-        <div className="Login__login-header">Login</div>
+        <div className="Login__login-header"> Sign in - Admin Panel </div>
         {wrongCredentials ? (
           <div className="Login__wrong-password">
             You have entered wrong Username/Password
@@ -94,7 +94,7 @@ export default function Login() {
           <input
             className="Login__input-focus-effect"
             type="text"
-            placeholder="Phone/Email"
+            placeholder="Phone Number"
             onChange={(e) => setUsername(e.target.value)}
             value={username}
           ></input>

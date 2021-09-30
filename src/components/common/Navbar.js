@@ -102,7 +102,7 @@ export default function Navbar(props) {
     }
   };
 
-  const menuitems = props.isAdmin ? adminMenuOptions : agentMenuOptions;
+  const menuitems = userInfo.isAdmin ? adminMenuOptions : agentMenuOptions;
 
   return (
     <div ref={wrapperRef} className="Navbar__header">
@@ -121,7 +121,7 @@ export default function Navbar(props) {
 
         <div id="sidebarMenu" className="Navbar__sidebarMenu">
           <div className="Navbar__sidebarMenu-header">
-            {props.isAdmin ? "Admin" : "Agent"} Dashboard <br />
+            {userInfo.isAdmin ? "Admin" : "Agent"} Dashboard <br />
             <span>Have a Happy Day </span>
           </div>
 
