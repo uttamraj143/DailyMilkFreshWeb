@@ -10,9 +10,10 @@ require("dotenv").config({ path: "../.env" });
 export default function App() {
   const pastLogin = JSON.parse(localStorage.getItem("loggedIn"));
   const pastIsAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+  const pastAccessToken = sessionStorage.getItem("access_token");
   const [isLoggedIn, setIsLoggedIn] = useState(pastLogin || false);
   const [isAdmin, setIsAdmin] = useState(pastIsAdmin || false);
-  const [access_token, setAccessToken] = useState(null);
+  const [access_token, setAccessToken] = useState(pastAccessToken || null);
 
   useEffect(() => {
     localStorage.setItem("loggedIn", Boolean(isLoggedIn));
@@ -21,6 +22,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("isAdmin", Boolean(isAdmin));
   }, [isAdmin]);
+
+  useEffect(() => {
+    sessionStorage.setItem("access_token", access_token);
+  }, [access_token]);
 
   const toggleLogin = (bool, token, admin) => {
     setIsLoggedIn(bool);

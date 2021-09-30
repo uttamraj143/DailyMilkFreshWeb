@@ -70,6 +70,7 @@ export default function Navbar(props) {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.clear();
+    sessionStorage.clear();
     userInfo.toggleLogin(false, null, false);
     return history.push("/");
   };

@@ -10,13 +10,13 @@ export const getUser = (token) => {
   });
 };
 
-export const listUsers = (type) => {
+export const listUsers = (type, access_token) => {
   return axiosInstance({
-    method: "GET",
+    method: "POST",
     url: "/user/listUsers",
     data: {
       type_of_user: type,
     },
-    headers: { access_token: "access_token" },
+    headers: { access_token: access_token },
   });
 };
