@@ -22,3 +22,4 @@ https://dummyapi.io/data/v1/user?page=1&limit=10
 
 https://www.savaslabs.com/blog/using-react-global-state-hooks-and-context
 https://medium.com/@akrush95/global-cached-state-in-react-using-hooks-context-and-local-storage-166eacf8ab46
+https://egghead.io/lessons/react-share-logic-across-multiple-react-components-with-custom-hooks

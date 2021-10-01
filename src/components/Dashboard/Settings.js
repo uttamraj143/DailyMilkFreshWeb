@@ -1,14 +1,14 @@
-import './Settings.scss';
-import { useState } from 'react';
+import "./Settings.scss";
+import { useState } from "react";
 
 export default function Settings() {
   const [selectedProfile, setSelectedProfile] = useState(true);
   const [user, setUserProfile] = useState({
-    firstName: 'Chai',
-    lastName: 'Arige',
-    email: 'chai@arige.com',
-    phoneNumber: '12345678',
-    password: '',
+    name: "Chai",
+    lastName: "Arige",
+    email: "chai@arige.com",
+    phoneNumber: "12345678",
+    password: "",
   });
 
   const toggleProfileSelection = (e) => {
@@ -20,16 +20,16 @@ export default function Settings() {
     e.preventDefault();
     e.persist();
     if (selectedProfile) return;
-    if (formType === 'firstName')
+    if (formType === "firstName")
       setUserProfile({ ...user, firstName: e.target.value });
-    if (formType === 'lastName')
+    if (formType === "lastName")
       setUserProfile({ ...user, lastName: e.target.value });
-    if (formType === 'password')
+    if (formType === "password")
       setUserProfile({ ...user, password: e.target.value });
   };
 
   const submitUserProfile = (e) => {
-    console.error('api error');
+    console.error("api error");
   };
 
   return (
@@ -39,8 +39,8 @@ export default function Settings() {
           onClick={(e) => toggleProfileSelection(e)}
           className={
             selectedProfile
-              ? 'Settings__heading-left Settings__heading-left-selected'
-              : 'Settings__heading-left'
+              ? "Settings__heading-left Settings__heading-left-selected"
+              : "Settings__heading-left"
           }
         >
           Profile
@@ -49,8 +49,8 @@ export default function Settings() {
           onClick={(e) => toggleProfileSelection(e)}
           className={
             !selectedProfile
-              ? 'Settings__heading-right Settings__heading-right-selected'
-              : 'Settings__heading-right'
+              ? "Settings__heading-right Settings__heading-right-selected"
+              : "Settings__heading-right"
           }
         >
           Edit Profile
@@ -61,7 +61,7 @@ export default function Settings() {
         <label className="Settings__label">First Name</label>
         <input
           value={user.firstName}
-          onChange={(e) => assignUserProfile(e, 'firstName')}
+          onChange={(e) => assignUserProfile(e, "firstName")}
           className="Settings__firstname"
           type="text"
           placeholder="First Name"
@@ -72,7 +72,7 @@ export default function Settings() {
       <div className="Settings__field-container">
         <label className="Settings__label">Last Name</label>
         <input
-          onChange={(e) => assignUserProfile(e, 'lastName')}
+          onChange={(e) => assignUserProfile(e, "lastName")}
           value={user.lastName}
           type="text"
           placeholder="Last Name"
@@ -109,7 +109,7 @@ export default function Settings() {
           <div className="Settings__field-container">
             <label className="Settings__label">Password</label>
             <input
-              onChange={(e) => assignUserProfile(e, 'password')}
+              onChange={(e) => assignUserProfile(e, "password")}
               value={user.password}
               type="password"
               className="Settings__password"

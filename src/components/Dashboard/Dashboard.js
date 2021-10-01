@@ -57,10 +57,7 @@ export default function Dashboard() {
         <Redirect to="/login" />
       ) : (
         <div>
-          <Navbar
-            isAdmin={isAdmin()}
-            currentMenuSelection={currentSelection}
-          ></Navbar>
+          <Navbar currentMenuSelection={currentSelection}></Navbar>
           <div className="AgentDashboard__main-container">
             {isAdmin() ? adminComponents() : agentComponents()}
           </div>

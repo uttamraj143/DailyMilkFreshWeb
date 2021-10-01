@@ -3,23 +3,29 @@ import "./App.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UserContext from "UserContext";
 import Login from "components/login/Login";
+import Forgot from "components/login/ForgotPassword";
 import Dashboard from "components/Dashboard/Dashboard";
 import Landing from "components/common/Landing";
 
 export default function App() {
-  const pastLogin = localStorage.getItem("loggedIn");
-  const pastIsAdmin = localStorage.getItem("isAdmin");
+  const pastLogin = JSON.parse(localStorage.getItem("loggedIn"));
+  const pastIsAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+  const pastAccessToken = sessionStorage.getItem("access_token");
   const [isLoggedIn, setIsLoggedIn] = useState(pastLogin || false);
   const [isAdmin, setIsAdmin] = useState(pastIsAdmin || false);
-  const [access_token, setAccessToken] = useState(null);
+  const [access_token, setAccessToken] = useState(pastAccessToken || null);
 
   useEffect(() => {
-    localStorage.setItem("loggedIn", isLoggedIn);
+    localStorage.setItem("loggedIn", Boolean(isLoggedIn));
   }, [isLoggedIn]);
 
   useEffect(() => {
-    localStorage.setItem("isAdmin", isAdmin);
+    localStorage.setItem("isAdmin", Boolean(isAdmin));
   }, [isAdmin]);
+
+  useEffect(() => {
+    sessionStorage.setItem("access_token", access_token);
+  }, [access_token]);
 
   const toggleLogin = (bool, token, admin) => {
     setIsLoggedIn(bool);
