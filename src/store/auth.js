@@ -18,3 +18,24 @@ export const getToken = (authcode) => {
     },
   });
 };
+
+export const forgotpasswordToken = (phoneNumber) => {
+  return axiosInstance({
+    method: "POST",
+    url: "user/forgot",
+    data: {
+      phone_no: phoneNumber,
+    },
+  });
+};
+
+export const changePassword = (data) => {
+  return axiosInstance({
+    method: "POST",
+    url: `user/${data.code}/password`,
+    data: {
+      pin: 1234,
+      npassword: data.newpassword,
+    },
+  });
+};

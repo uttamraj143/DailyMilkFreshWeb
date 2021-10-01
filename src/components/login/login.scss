@@ -8,10 +8,11 @@
   &__sub-container {
     height: 430px;
     width: 500px;
+    margin: 50px auto;
     @media screen and (max-width: 1000px) {
-      padding: 5%;
+      padding: 0;
       height: 100vh;
-      width: 90%;
+      width: 95%;
       margin: auto;
     }
   }
@@ -42,7 +43,7 @@
 
   &__login-header {
     font-size: 24px;
-    margin: 30px 20px;
+    margin: 30px;
     // font-weight: 600;
     // text-transform: uppercase;
     font-family: "Courgette", cursive;
@@ -52,21 +53,34 @@
   &__wrong-password {
     color: red;
     font-size: 15px;
-    margin: 10px 10px 10px 12px;
+    margin: 30px;
+  }
+
+  &__success-password {
+    font-weight: 500;
+    font-size: 20px;
+    color: #687980;
   }
 
   &__col-3 {
-    margin: 0 3% 40px 3%;
+    margin: 30px;
     position: relative;
+    @media screen and (max-width: 700px) {
+      margin: 10px;
+    }
   }
 
   &__signup {
-    margin-top: 10%;
+    margin: 30px;
     width: 100%;
     text-align: left;
     cursor: pointer;
     color: chocolate;
     font-weight: 600;
+    @media screen and (max-width: 700px) {
+      margin: 10px;
+      padding-top: 20px;
+    }
   }
 
   &__show-password {
