@@ -3,9 +3,9 @@ import "./App.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UserContext from "UserContext";
 import Login from "components/login/Login";
+import Forgot from "components/login/ForgotPassword";
 import Dashboard from "components/Dashboard/Dashboard";
 import Landing from "components/common/Landing";
-require("dotenv").config({ path: "../.env" });
 
 export default function App() {
   const pastLogin = JSON.parse(localStorage.getItem("loggedIn"));

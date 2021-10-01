@@ -12,7 +12,7 @@ const Landing = () => {
 
   return (
     <div>
-      {isLoggedIn() ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+      {isLoggedIn() === true ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
     </div>
   );
 };

@@ -6,8 +6,7 @@
   }
 
   &__sub-container {
-    margin-top: 50px;
-    height: 630px;
+    height: 430px;
     width: 500px;
     @media screen and (max-width: 1000px) {
       padding: 5%;
@@ -21,7 +20,7 @@
     width: 450px;
     height: 300px;
     display: block;
-    margin: 0 auto;
+    margin: 50px auto 0;
     @media screen and (max-width: 700px) {
       width: 90%;
     }
@@ -64,7 +63,10 @@
   &__signup {
     margin-top: 10%;
     width: 100%;
-    text-align: center;
+    text-align: left;
+    cursor: pointer;
+    color: chocolate;
+    font-weight: 600;
   }
 
   &__show-password {
