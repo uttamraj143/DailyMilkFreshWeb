@@ -198,7 +198,7 @@ export default function Login() {
           <input
             onClick={(e) => handleForgotPassword(e)}
             type="submit"
-            value="Log In"
+            value="Change Password"
             className="Login__submit"
           ></input>
         </form>
