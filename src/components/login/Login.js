@@ -11,7 +11,6 @@ import ForgotPassword from "./ForgotPassword";
 export default function Login() {
   const [resetPasswordClicked, setResetPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [notAuthorised, setNotAuthorised] = useState(false);
   const [clickedonce, setClickOnce] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -69,13 +68,15 @@ export default function Login() {
 
   const getUserDetails = (token, refresh_token) => {
     getUser(token).then((res) => {
-      localStorage.setItem("userDetails", JSON.stringify(res.data.data));
+      // localStorage.setItem("userDetails", );
 
       if (res.data.data.user_type === 1) {
         userInfo.toggleLogin(true, token, true, refresh_token);
+        userInfo.saveuserDetails(res.data.data);
         return history.push("/dashboard");
       } else if (res.data.data.user_type === 2) {
         userInfo.toggleLogin(true, token, false, refresh_token);
+        userInfo.saveuserDetails(res.data.data);
         return history.push("/dashboard");
       } else {
         setapiresponse(res.response.data.message);

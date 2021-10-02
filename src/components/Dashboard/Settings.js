@@ -1,13 +1,14 @@
 import "./Settings.scss";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import UserContext from "UserContext";
 
 export default function Settings() {
+  const userInfo = useContext(UserContext);
   const [selectedProfile, setSelectedProfile] = useState(true);
   const [user, setUserProfile] = useState({
-    name: "Chai",
-    lastName: "Arige",
-    email: "chai@arige.com",
-    phoneNumber: "12345678",
+    name: userInfo.user || "",
+    email: "",
+    phoneNumber: "",
     password: "",
   });
 
@@ -21,9 +22,7 @@ export default function Settings() {
     e.persist();
     if (selectedProfile) return;
     if (formType === "firstName")
-      setUserProfile({ ...user, firstName: e.target.value });
-    if (formType === "lastName")
-      setUserProfile({ ...user, lastName: e.target.value });
+      setUserProfile({ ...user, name: e.target.value });
     if (formType === "password")
       setUserProfile({ ...user, password: e.target.value });
   };
@@ -58,25 +57,14 @@ export default function Settings() {
       </div>
 
       <div className="Settings__field-container">
-        <label className="Settings__label">First Name</label>
+        <label className="Settings__label">Name</label>
         <input
           value={user.firstName}
-          onChange={(e) => assignUserProfile(e, "firstName")}
+          onChange={(e) => assignUserProfile(e, "name")}
           className="Settings__firstname"
           type="text"
-          placeholder="First Name"
+          placeholder="Name"
           name="firstName"
-        ></input>
-      </div>
-
-      <div className="Settings__field-container">
-        <label className="Settings__label">Last Name</label>
-        <input
-          onChange={(e) => assignUserProfile(e, "lastName")}
-          value={user.lastName}
-          type="text"
-          placeholder="Last Name"
-          className="Settings__firstname"
         ></input>
       </div>
 

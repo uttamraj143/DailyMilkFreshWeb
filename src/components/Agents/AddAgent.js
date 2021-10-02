@@ -2,12 +2,15 @@ import { useState } from "react";
 import { registerUser } from "store/user";
 
 export default function AddAgent() {
-  const [name, setname] = useState("");
-  const [email_id, setEmail] = useState("");
-  const [phone_no, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [user_type, setType] = useState(2);
-  const [app_token, setToken] = useState("");
+  const [user, setUserProfile] = useState({
+    name: "",
+    email_id: "",
+    phone_no: "",
+    password: "",
+    app_token: "",
+  });
+
+  const [user_type] = useState(2);
 
   const handleAddAgent = () => {
     registerUser().then((res) => {
@@ -22,9 +25,9 @@ export default function AddAgent() {
           <input
             className="Login__input-focus-effect"
             type="text"
-            placeholder="Enter OTP"
-            onChange={(e) => setname(e.target.value)}
-            value={name}
+            placeholder="Name"
+            onChange={(e) => setUserProfile({ ...user, name: e.target.value })}
+            value={user.name}
           ></input>
           <span className="focus-border"></span>
         </div>
