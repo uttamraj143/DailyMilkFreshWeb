@@ -1,17 +1,8 @@
 import Paper from "@material-ui/core/Paper";
 
 export default function OrdersListing(props) {
-  const addAgent = (e) => {
-    e.preventDefault();
-    console.log("0000");
-  };
-
   return (
     <div className="Agents__card-container">
-      <div className="Agents__refresh-button">
-        <button onClick={(e) => addAgent(e)}>Add new Agent</button>
-      </div>
-
       {props.agents.map((user, index) => {
         return (
           <Paper key={index} className="Agents__order" elevation={2}>

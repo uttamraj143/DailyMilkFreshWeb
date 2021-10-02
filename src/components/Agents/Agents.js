@@ -17,8 +17,17 @@ export default function Agents() {
     });
   }, [userInfo.access_token]);
 
+  const addAgent = (e) => {
+    e.preventDefault();
+    console.log("0000");
+  };
+
   return (
     <div className="Orders__main-container">
+      <div className="Agents__refresh-button">
+        <button onClick={(e) => addAgent(e)}>Add new Agent</button>
+      </div>
+
       {agents.length ? (
         <AgentsListing agents={agents}></AgentsListing>
       ) : (

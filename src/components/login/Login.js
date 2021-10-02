@@ -32,6 +32,7 @@ export default function Login() {
   const toggleForgotPassword = (e) => {
     e.preventDefault();
     setResetPassword(true);
+    setapiresponse(null);
   };
 
   const handleLogin = (e) => {

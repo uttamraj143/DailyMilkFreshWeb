@@ -30,8 +30,10 @@ export default function ForgotPassword(props) {
     };
     changePassword(data)
       .then((res) => {
+        props.setapiresponse(res.data.message);
         setTimeout(() => {
           props.setResetPassword(false);
+          props.setapiresponse(null);
         }, 6000);
       })
       .catch((res) => {
@@ -44,7 +46,9 @@ export default function ForgotPassword(props) {
       <div className="Login__login-header">Forgot Password</div>
       {props.apiresponsemessage ? (
         <div className="Login__col-3">
-          <span className="Login__success-password">{props.apiresponsemessage}</span>
+          <span className="Login__success-password">
+            {props.apiresponsemessage}
+          </span>
         </div>
       ) : null}
       {!validcode ? (
