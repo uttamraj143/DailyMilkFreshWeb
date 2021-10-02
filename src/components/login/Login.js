@@ -11,11 +11,12 @@ import ForgotPassword from "./ForgotPassword";
 export default function Login() {
   const [resetPasswordClicked, setResetPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [wrongCredentials, setWrongCredentials] = useState(false);
   const [notAuthorised, setNotAuthorised] = useState(false);
   const [clickedonce, setClickOnce] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [apiresponsemessage, setapiresponse] = useState(null);
+
   let history = useHistory();
 
   const userInfo = useContext(UserContext);
@@ -49,7 +50,7 @@ export default function Login() {
         setClickOnce(false);
       })
       .catch((err) => {
-        setWrongCredentials(true);
+        setapiresponse(err.response.data.message);
         setClickOnce(false);
         console.log("error in request", err);
       });
@@ -60,7 +61,7 @@ export default function Login() {
         getUserDetails(res.data.access_token);
       })
       .catch((err) => {
-        setWrongCredentials(true);
+        setapiresponse(err.response.data.message);
         console.log("error in request", err);
       });
   };
@@ -76,7 +77,7 @@ export default function Login() {
         userInfo.toggleLogin(true, token, false);
         return history.push("/dashboard");
       } else {
-        setNotAuthorised(true);
+        setapiresponse(res.response.data.message);
       }
     });
   };
@@ -93,15 +94,8 @@ export default function Login() {
           {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
           {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
           <div className="Login__login-header"> Sign in - Admin Panel </div>
-          {wrongCredentials ? (
-            <div className="Login__wrong-password">
-              You have entered wrong Username/Password
-            </div>
-          ) : null}
-          {notAuthorised ? (
-            <div className="Login__wrong-password">
-              You do not have permissions
-            </div>
+          {apiresponsemessage ? (
+            <div className="Login__wrong-password">{apiresponsemessage}</div>
           ) : null}
           <div className="Login__col-3">
             <input
@@ -187,6 +181,8 @@ export default function Login() {
           username={username}
           setUsername={setUsername}
           setResetPassword={setResetPassword}
+          apiresponsemessage={apiresponsemessage}
+          setapiresponse={setapiresponse}
           clickedonce={clickedonce}
           setClickOnce={setClickOnce}
         ></ForgotPassword>

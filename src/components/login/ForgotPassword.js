@@ -6,7 +6,6 @@ export default function ForgotPassword(props) {
   const [otp, setNewotp] = useState("");
   const [newpassword, setNewPassword] = useState("");
   const [validcode, setvalidcode] = useState(null);
-  const [apiresponsemessage, setapiresponse] = useState(null);
 
   const fetchOtpToken = (e) => {
     e.preventDefault();
@@ -17,7 +16,7 @@ export default function ForgotPassword(props) {
         props.setClickOnce(false);
       })
       .catch((res) => {
-        setapiresponse(res.response.message);
+        props.setapiresponse(res.response.message);
         props.setClickOnce(false);
       });
   };
@@ -36,16 +35,16 @@ export default function ForgotPassword(props) {
         }, 6000);
       })
       .catch((res) => {
-        setapiresponse(res.response.data.message);
+        props.setapiresponse(res.response.data.message);
       });
   };
 
   return (
     <form className="Login__sub-container">
       <div className="Login__login-header">Forgot Password</div>
-      {apiresponsemessage ? (
+      {props.apiresponsemessage ? (
         <div className="Login__col-3">
-          <span className="Login__success-password">{apiresponsemessage}</span>
+          <span className="Login__success-password">{props.apiresponsemessage}</span>
         </div>
       ) : null}
       {!validcode ? (
