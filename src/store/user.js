@@ -10,6 +10,20 @@ export const getUser = (token) => {
   });
 };
 
+export const editUser = (data) => {
+  return axiosInstance({
+    method: "POST",
+    url: "user/update",
+    data: {
+      name: data.name,
+      email_id: data.email_id,
+    },
+    headers: {
+      access_token: data.access_token,
+    },
+  });
+};
+
 export const listUsers = (type, access_token) => {
   return axiosInstance({
     method: "POST",

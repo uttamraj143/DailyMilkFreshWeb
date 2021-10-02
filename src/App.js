@@ -56,6 +56,7 @@ export default function App() {
     isLoggedIn: isLoggedIn,
     access_token: access_token,
     isAdmin: isAdmin,
+    userDetails: userDetails,
     toggleLogin,
     saveuserDetails,
   };

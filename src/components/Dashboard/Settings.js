@@ -1,15 +1,16 @@
 import "./Settings.scss";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import UserContext from "UserContext";
+import { editUser } from "store/user";
 
 export default function Settings() {
   const userInfo = useContext(UserContext);
   const [selectedProfile, setSelectedProfile] = useState(true);
   const [user, setUserProfile] = useState({
-    name: userInfo.user || "",
-    email: "",
-    phoneNumber: "",
-    password: "",
+    name: "",
+    email_id: "",
+    phone_no: "",
+    address: "",
   });
 
   const toggleProfileSelection = (e) => {
@@ -17,18 +18,33 @@ export default function Settings() {
     setSelectedProfile(!selectedProfile);
   };
 
+  useEffect(() => {
+    console.log(userInfo.userDetails);
+    setUserProfile((prevState) => ({
+      ...prevState,
+      ...userInfo.userDetails,
+    }));
+  }, [userInfo]);
+
   const assignUserProfile = (e, formType) => {
     e.preventDefault();
     e.persist();
     if (selectedProfile) return;
-    if (formType === "firstName")
-      setUserProfile({ ...user, name: e.target.value });
-    if (formType === "password")
-      setUserProfile({ ...user, password: e.target.value });
+    if (formType === "name") setUserProfile({ ...user, name: e.target.value });
+    if (formType === "email")
+      setUserProfile({ ...user, email_id: e.target.value });
   };
 
   const submitUserProfile = (e) => {
-    console.error("api error");
+    let data = {
+      name: user.name,
+      email_id: user.email_id,
+      access_token: userInfo.access_token,
+    };
+    editUser(data).then((res) => {
+      userInfo.saveuserDetails(res.data);
+      alert("Successfully saved");
+    });
   };
 
   return (
@@ -59,12 +75,22 @@ export default function Settings() {
       <div className="Settings__field-container">
         <label className="Settings__label">Name</label>
         <input
-          value={user.firstName}
+          value={user.name}
           onChange={(e) => assignUserProfile(e, "name")}
           className="Settings__firstname"
           type="text"
           placeholder="Name"
           name="firstName"
+        ></input>
+      </div>
+
+      <div className="Settings__field-container">
+        <label className="Settings__label">Email</label>
+        <input
+          onChange={(e) => assignUserProfile(e, "email")}
+          value={user.email_id}
+          type="text"
+          className="Settings__firstname"
         ></input>
       </div>
 
@@ -74,19 +100,19 @@ export default function Settings() {
             <label className="Settings__label">Phone</label>
             <input
               readOnly
-              value={user.phoneNumber}
+              value={user.phone_no}
               type="text"
               className="Settings__email"
             ></input>
           </div>
 
           <div className="Settings__field-container">
-            <label className="Settings__label">Email</label>
+            <label className="Settings__label">Address</label>
             <input
-              readOnly
-              value={user.email}
+              onChange={(e) => assignUserProfile(e, "email")}
+              value={user.address}
               type="text"
-              className="Settings__email"
+              className="Settings__firstname"
             ></input>
           </div>
         </div>
@@ -94,15 +120,6 @@ export default function Settings() {
 
       {!selectedProfile && (
         <div>
-          <div className="Settings__field-container">
-            <label className="Settings__label">Password</label>
-            <input
-              onChange={(e) => assignUserProfile(e, "password")}
-              value={user.password}
-              type="password"
-              className="Settings__password"
-            ></input>
-          </div>
           <div className="Settings__field-container">
             <input
               onClick={(e) => submitUserProfile(e)}
