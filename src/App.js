@@ -22,12 +22,12 @@ export default function App() {
   useEffect(() => {
     if (!access_token) return localStorage.setItem("loggedIn", Boolean(false));
     localStorage.setItem("loggedIn", Boolean(isLoggedIn));
-  }, [isLoggedIn]);
+  }, [isLoggedIn, access_token]);
 
   useEffect(() => {
     if (!access_token) return localStorage.setItem("loggedIn", Boolean(false));
     localStorage.setItem("isAdmin", Boolean(isAdmin));
-  }, [isAdmin]);
+  }, [isAdmin, access_token]);
 
   useEffect(() => {
     localStorage.setItem("userDetails", JSON.stringify(userDetails));

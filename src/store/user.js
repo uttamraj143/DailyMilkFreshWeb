@@ -35,12 +35,13 @@ export const listUsers = (type, access_token) => {
   });
 };
 
-export const registerUser = (token) => {
+export const registerUser = (data) => {
   return axiosInstance({
     method: "POST",
     url: "/user/register/",
+    data: data.user,
     headers: {
-      access_token: token,
+      access_token: data.access_token,
     },
   });
 };

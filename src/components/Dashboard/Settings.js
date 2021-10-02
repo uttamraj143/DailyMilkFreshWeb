@@ -19,7 +19,6 @@ export default function Settings() {
   };
 
   useEffect(() => {
-    console.log(userInfo.userDetails);
     setUserProfile((prevState) => ({
       ...prevState,
       ...userInfo.userDetails,
@@ -110,7 +109,7 @@ export default function Settings() {
             <label className="Settings__label">Address</label>
             <input
               onChange={(e) => assignUserProfile(e, "email")}
-              value={user.address}
+              value={user.address || ""}
               type="text"
               className="Settings__firstname"
             ></input>

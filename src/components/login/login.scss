@@ -108,8 +108,7 @@
     cursor: pointer;
     &-disabled {
       background-color: #808080;
-      background: linear-gradient(278deg, #a1a59e, #4f4f50);
-      cursor: auto;
+      cursor: not-allowed;
     }
   }
 

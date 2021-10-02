@@ -7,6 +7,18 @@
     }
   }
 
+  &__sub-container {
+    height: 430px;
+    width: 500px;
+    margin: 50px auto;
+    @media screen and (max-width: 1000px) {
+      padding: 0;
+      height: 100vh;
+      width: 95%;
+      margin: auto;
+    }
+  }
+
   &__status {
     display: flex;
     align-items: center;
@@ -63,6 +75,9 @@
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
+    &-disabled {
+      cursor: not-allowed;
+    }
   }
 
   &__order {
