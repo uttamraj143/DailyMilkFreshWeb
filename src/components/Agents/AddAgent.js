@@ -1,9 +1,15 @@
 import { useState, useCallback } from "react";
-import { registerUser } from "store/user";
-import "./Agents.scss";
 import { v4 as uuidv4 } from "uuid";
-
 import { debounce } from "lodash";
+import {
+  passwordValidation,
+  emailValidation,
+  addressValidation,
+  phoneValidation,
+  nameValidation,
+} from "./validators";
+import { registerUser, verifyRegisteredUser } from "store/user";
+import "./Agents.scss";
 
 export default function AddAgent(props) {
   const [user, setUserProfile] = useState({
@@ -19,82 +25,57 @@ export default function AddAgent(props) {
     Welcome: "Please fill all mandatory fields",
   });
 
-  const nameValidation = (fieldValue) => {
-    if (/[^a-zA-Z -]/.test(fieldValue)) {
-      return setErrors((prevState) => ({
-        ...prevState,
-        Username: "Invalid characters in Name",
-      }));
-    }
-    if (fieldValue.trim().length < 3) {
-      return setErrors((prevState) => ({
-        ...prevState,
-        Username: "Name needs to be at least three characters",
-      }));
-    }
-    return null;
-  };
-
-  const phoneValidation = (fieldValue) => {
-    if (/^[6-9]\d{9}$/.test(fieldValue)) {
-      return null;
-    } else {
-      return setErrors((prevState) => ({
-        ...prevState,
-        phone: "Enter proper Phone",
-      }));
-    }
-  };
-
-  const emailValidation = (email) => {
-    if (
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-        email
-      )
-    ) {
-      return null;
-    } else
-      return setErrors((prevState) => ({
-        ...prevState,
-        Email: "Please enter a valid email",
-      }));
-  };
-
-  const addressValidation = (addr) => {
-    if (addr.length < 5)
-      return setErrors((prevState) => ({
-        ...prevState,
-        Address: "Please enter a valid address",
-      }));
-  };
-
-  const passwordValidation = (pass) => {
-    if (pass.length < 8)
-      return setErrors((prevState) => ({
-        ...prevState,
-        Password: "Please enter a valid password min 8 char",
-      }));
-  };
-
   function validatedForm() {
     return Boolean(Object.keys(errors).length);
   }
 
   const validForm = () => {
     setErrors({});
-    emailValidation(user.email_id);
-    nameValidation(user.name);
-    phoneValidation(user.phone_no);
-    addressValidation(user.address);
-    passwordValidation(user.password);
+    let emailvalid = emailValidation(user.email_id);
+    let namevalid = nameValidation(user.name);
+    let phonevalid = phoneValidation(user.phone_no);
+    let addressvalid = addressValidation(user.address);
+    let passwordvalid = passwordValidation(user.password);
+
+    if (emailvalid) {
+      setErrors((prevState) => ({
+        ...prevState,
+        Email: emailvalid,
+      }));
+    }
+
+    if (namevalid) {
+      setErrors((prevState) => ({
+        ...prevState,
+        Username: namevalid,
+      }));
+    }
+
+    if (phonevalid) {
+      setErrors((prevState) => ({
+        ...prevState,
+        Phone: phonevalid,
+      }));
+    }
+    if (addressvalid) {
+      setErrors((prevState) => ({
+        ...prevState,
+        Address: addressvalid,
+      }));
+    }
+    if (passwordvalid) {
+      setErrors((prevState) => ({
+        ...prevState,
+        Password: passwordvalid,
+      }));
+    }
   };
 
   async function handleAddAgent(e) {
     e.preventDefault();
     await validForm();
-    console.log(!validatedForm());
     if (!validatedForm()) {
-      await submitData();
+      await submitData(e);
     }
   }
 
@@ -103,9 +84,12 @@ export default function AddAgent(props) {
       user,
       access_token: props.access_token,
     };
+    console.log(data);
     registerUser(data)
       .then((res) => {
-        alert("successfully saved");
+        verifyRegisteredUser(res.code, 1234).then((res) => {
+          alert("successfully saved");
+        });
       })
       .catch((err) => {
         console.log(
@@ -117,7 +101,7 @@ export default function AddAgent(props) {
       });
   };
 
-  const submitData = useCallback(debounce(submitDataFinal, 20000), []);
+  const submitData = useCallback(debounce(submitDataFinal, 5000), []);
 
   return (
     <div className="Agents__sub-container">
@@ -137,7 +121,7 @@ export default function AddAgent(props) {
             type="text"
             required
             placeholder="Name"
-            minlength="3"
+            minLength="3"
             onChange={(e) => setUserProfile({ ...user, name: e.target.value })}
             value={user.name}
           ></input>
@@ -162,9 +146,8 @@ export default function AddAgent(props) {
           <input
             required
             pattern="\d*"
-            required
-            minlength="10"
-            maxlength="10"
+            minLength="10"
+            maxLength="10"
             className="Login__input-focus-effect"
             type="text"
             placeholder="Phone Number"
@@ -182,7 +165,7 @@ export default function AddAgent(props) {
             className="Login__input-focus-effect"
             type="text"
             placeholder="Address"
-            minlength="5"
+            minLength="5"
             onChange={(e) =>
               setUserProfile({ ...user, address: e.target.value })
             }
@@ -197,7 +180,7 @@ export default function AddAgent(props) {
             className="Login__input-focus-effect"
             type="text"
             placeholder="Password"
-            minlength="8"
+            minLength="8"
             onChange={(e) =>
               setUserProfile({ ...user, password: e.target.value })
             }

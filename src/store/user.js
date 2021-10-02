@@ -45,3 +45,10 @@ export const registerUser = (data) => {
     },
   });
 };
+
+export const verifyRegisteredUser = (data) => {
+  return axiosInstance({
+    method: "POST",
+    url: `/user/${data.verify_code}/verify/${data.otp}`,
+  });
+};
