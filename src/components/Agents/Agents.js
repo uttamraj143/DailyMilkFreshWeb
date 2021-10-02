@@ -39,7 +39,10 @@ export default function Agents() {
           </div>
 
           {addagenttoggle ? (
-            <AddAgent access_token={userInfo.access_token}></AddAgent>
+            <AddAgent
+              addAgentClicked={addAgentClicked}
+              access_token={userInfo.access_token}
+            ></AddAgent>
           ) : (
             <AgentsListing agents={agents}></AgentsListing>
           )}

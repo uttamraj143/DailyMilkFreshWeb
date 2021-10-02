@@ -1,13 +1,6 @@
 import { useState, useCallback } from "react";
+import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
-import { debounce } from "lodash";
-import {
-  passwordValidation,
-  emailValidation,
-  addressValidation,
-  phoneValidation,
-  nameValidation,
-} from "./validators";
 import { registerUser, verifyRegisteredUser } from "store/user";
 import "./Agents.scss";
 
@@ -21,182 +14,122 @@ export default function AddAgent(props) {
     user_type: "2",
     app_token: uuidv4(),
   });
-  const [errors, setErrors] = useState({
-    Welcome: "Please fill all mandatory fields",
-  });
 
-  function validatedForm() {
-    return Boolean(Object.keys(errors).length);
-  }
-
-  const validForm = () => {
-    setErrors({});
-    let emailvalid = emailValidation(user.email_id);
-    let namevalid = nameValidation(user.name);
-    let phonevalid = phoneValidation(user.phone_no);
-    let addressvalid = addressValidation(user.address);
-    let passwordvalid = passwordValidation(user.password);
-
-    if (emailvalid) {
-      setErrors((prevState) => ({
-        ...prevState,
-        Email: emailvalid,
-      }));
-    }
-
-    if (namevalid) {
-      setErrors((prevState) => ({
-        ...prevState,
-        Username: namevalid,
-      }));
-    }
-
-    if (phonevalid) {
-      setErrors((prevState) => ({
-        ...prevState,
-        Phone: phonevalid,
-      }));
-    }
-    if (addressvalid) {
-      setErrors((prevState) => ({
-        ...prevState,
-        Address: addressvalid,
-      }));
-    }
-    if (passwordvalid) {
-      setErrors((prevState) => ({
-        ...prevState,
-        Password: passwordvalid,
-      }));
-    }
+  const onSubmit = (data) => {
+    setUserProfile({ ...user, ...data });
+    submitDataFinal();
   };
-
-  async function handleAddAgent(e) {
-    e.preventDefault();
-    await validForm();
-    if (!validatedForm()) {
-      await submitData(e);
-    }
-  }
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
   const submitDataFinal = () => {
     let data = {
       user,
       access_token: props.access_token,
     };
-    console.log(data);
     registerUser(data)
       .then((res) => {
-        verifyRegisteredUser(res.code, 1234).then((res) => {
-          alert("successfully saved");
-        });
+        verifyRegister(res.code, 1234);
       })
       .catch((err) => {
-        console.log(
-          "Failed",
-          err.response.data.message,
-          err.response.statusText
-        );
-        alert("Failed");
+        console.log("Failed", err.response);
+        // alert("Failed");
       });
   };
 
-  const submitData = useCallback(debounce(submitDataFinal, 5000), []);
+  const verifyRegister = (code, otp) => {
+    verifyRegisteredUser(code, otp)
+      .then((res) => {
+        alert("successfully saved");
+        setTimeout(() => {
+          props.addAgentClicked();
+        }, 2000);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  // const submitData = useCallback(debounce(submitDataFinal, 5000), []);
 
   return (
     <div className="Agents__sub-container">
-      {validatedForm
-        ? Object.entries(errors).map(([key, value]) => {
-            return (
-              <span style={{ color: "red" }}>
-                {key} : {value} <br />
-              </span>
-            );
-          })
-        : null}
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="Login__col-3">
           <input
             className="Login__input-focus-effect"
             type="text"
-            required
             placeholder="Name"
-            minLength="3"
-            onChange={(e) => setUserProfile({ ...user, name: e.target.value })}
-            value={user.name}
+            {...register("name", { required: true, min: 5 })}
           ></input>
+          {errors.name && <span>Name needs to be at least 5 characters</span>}
+
           <span className="focus-border"></span>
         </div>
 
         <div className="Login__col-3">
           <input
-            required
             className="Login__input-focus-effect"
             type="text"
             placeholder="Email"
-            onChange={(e) =>
-              setUserProfile({ ...user, email_id: e.target.value })
-            }
-            value={user.email_id}
+            {...register("email_id", {
+              required: true,
+              pattern:
+                /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
+            })}
           ></input>
           <span className="focus-border"></span>
         </div>
 
         <div className="Login__col-3">
           <input
-            required
-            pattern="\d*"
-            minLength="10"
-            maxLength="10"
             className="Login__input-focus-effect"
-            type="text"
             placeholder="Phone Number"
-            onChange={(e) =>
-              setUserProfile({ ...user, phone_no: e.target.value })
-            }
-            value={user.phone_no}
-          ></input>
+            type="number"
+            {...register("phone_no", {
+              required: true,
+              // pattern: /^[6789]\d{9}$/,
+              min: 10,
+            })}
+          />
+          {errors.phone_no && <span>This field is required</span>}
+
           <span className="focus-border"></span>
         </div>
 
         <div className="Login__col-3">
           <input
-            required
             className="Login__input-focus-effect"
             type="text"
             placeholder="Address"
-            minLength="5"
-            onChange={(e) =>
-              setUserProfile({ ...user, address: e.target.value })
-            }
-            value={user.address}
+            {...register("address", { required: true, min: 5 })}
           ></input>
           <span className="focus-border"></span>
         </div>
 
         <div className="Login__col-3">
           <input
-            required
             className="Login__input-focus-effect"
-            type="text"
+            type="password"
             placeholder="Password"
-            minLength="8"
-            onChange={(e) =>
-              setUserProfile({ ...user, password: e.target.value })
-            }
-            value={user.password}
+            {...register("password", { required: true, min: 8 })}
           ></input>
           <span className="focus-border"></span>
         </div>
+        {errors.password && (
+          <span>Please enter a valid password min 8 char"</span>
+        )}
 
         <div className="Login__col-3">
           <input
             className={
-              validatedForm()
+              errors.length
                 ? "Agents__refresh-button Agents__refresh-button-disabled"
                 : "Agents__refresh-button"
             }
-            onClick={(e) => handleAddAgent(e)}
             type="submit"
             value="Add New Agent"
           ></input>
