@@ -3,7 +3,6 @@ import "./App.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UserContext from "UserContext";
 import Login from "components/login/Login";
-import Forgot from "components/login/ForgotPassword";
 import Dashboard from "components/Dashboard/Dashboard";
 import Landing from "components/common/Landing";
 
