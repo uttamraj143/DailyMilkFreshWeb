@@ -13,6 +13,7 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(pastLogin || false);
   const [isAdmin, setIsAdmin] = useState(pastIsAdmin || false);
   const [access_token, setAccessToken] = useState(pastAccessToken || null);
+  const [refresh_token, setRefreshToken] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("loggedIn", Boolean(isLoggedIn));
@@ -26,10 +27,15 @@ export default function App() {
     sessionStorage.setItem("access_token", access_token);
   }, [access_token]);
 
-  const toggleLogin = (bool, token, admin) => {
+  useEffect(() => {
+    sessionStorage.setItem("refresh_token", refresh_token);
+  }, [refresh_token]);
+
+  const toggleLogin = (bool, token, admin, refresh) => {
     setIsLoggedIn(bool);
     setAccessToken(token);
     setIsAdmin(admin);
+    setRefreshToken(refresh);
   };
 
   const userSettings = {
