@@ -20,3 +20,13 @@ export const listUsers = (type, access_token) => {
     headers: { access_token: access_token },
   });
 };
+
+export const registerUser = (token) => {
+  return axiosInstance({
+    method: "POST",
+    url: "/user/register/",
+    headers: {
+      access_token: token,
+    },
+  });
+};
