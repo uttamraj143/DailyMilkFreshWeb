@@ -1,17 +1,19 @@
 import { useState, useContext } from "react";
-import { useHistory, Link } from "react-router-dom";
-import "./login.scss";
-import DailyMilkFreshLogo from "logo.png";
+import { useHistory } from "react-router-dom";
 import { userlogin, getToken } from "store/auth";
 import { getUser } from "store/user";
 import { v4 as uuidv4 } from "uuid";
 import UserContext from "UserContext";
+import "./login.scss";
+import DailyMilkFreshLogo from "logo.png";
+import ForgotPassword from "./ForgotPassword";
 
 export default function Login() {
   const [resetPasswordClicked, setResetPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [wrongCredentials, setWrongCredentials] = useState(false);
   const [notAuthorised, setNotAuthorised] = useState(false);
+  const [clickedonce, setClickOnce] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
@@ -29,17 +31,11 @@ export default function Login() {
   const toggleForgotPassword = (e) => {
     e.preventDefault();
     setResetPassword(true);
-    // submitApi
-  };
-
-  const handleForgotPassword = (e) => {
-    e.preventDefault();
-    // submitApi
-    setResetPassword(false);
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setClickOnce(true);
     let data = {
       phone_no: username,
       password: password,
@@ -50,9 +46,11 @@ export default function Login() {
     userlogin(data)
       .then((res) => {
         validateToken(res.data.code);
+        setClickOnce(false);
       })
       .catch((err) => {
         setWrongCredentials(true);
+        setClickOnce(false);
         console.log("error in request", err);
       });
   };
@@ -163,17 +161,19 @@ export default function Login() {
               </span>
             )}
           </div>
-          <input
-            onClick={handleLogin}
-            disabled={!validateForm()}
-            type="submit"
-            value="Log In"
-            className={
-              validateForm()
-                ? "Login__submit"
-                : "Login__submit Login__submit-disabled"
-            }
-          ></input>
+          <div className="Login__col-3">
+            <input
+              onClick={handleLogin}
+              disabled={!validateForm() || clickedonce}
+              type="submit"
+              value="Log In"
+              className={
+                validateForm()
+                  ? "Login__submit"
+                  : "Login__submit Login__submit-disabled"
+              }
+            ></input>
+          </div>
 
           <div
             className="Login__signup"
@@ -183,25 +183,13 @@ export default function Login() {
           </div>
         </form>
       ) : (
-        <form className="Login__sub-container">
-          <div className="Login__login-header">Forgot Password</div>
-          <div className="Login__col-3">
-            <input
-              className="Login__input-focus-effect"
-              type="text"
-              placeholder="Phone Number"
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-            ></input>
-            <span className="focus-border"></span>
-          </div>
-          <input
-            onClick={(e) => handleForgotPassword(e)}
-            type="submit"
-            value="Change Password"
-            className="Login__submit"
-          ></input>
-        </form>
+        <ForgotPassword
+          username={username}
+          setUsername={setUsername}
+          setResetPassword={setResetPassword}
+          clickedonce={clickedonce}
+          setClickOnce={setClickOnce}
+        ></ForgotPassword>
       )}
     </div>
   );
