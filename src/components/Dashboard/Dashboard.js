@@ -4,6 +4,7 @@ import "./Dashboard.scss";
 import Navbar from "components/common/Navbar";
 import Orders from "components/Orders/Orders";
 import Users from "components/Users/Users.js";
+import Products from "components/Products/Products";
 import Agents from "components/Agents/Agents";
 import Settings from "components/Dashboard/Settings";
 import ExportData from "components/Dashboard/ExportData";
@@ -33,6 +34,8 @@ export default function Dashboard() {
         return <Agents />;
       case "users_list":
         return <Users />;
+      case "products_list":
+        return <Products />;
       case "export_data":
         return <ExportData />;
       case "settings":

@@ -28,6 +28,10 @@ export default function Navbar(props) {
     //   title: 'Statistics',
     //   value: 'production_statistics',
     // },
+    {
+      title: "Products",
+      value: "products_list",
+    },
     { title: "Export Data", value: "export_data" },
     {
       value: "settings",
