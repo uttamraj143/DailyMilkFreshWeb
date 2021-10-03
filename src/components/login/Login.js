@@ -11,11 +11,11 @@ import ForgotPassword from "./ForgotPassword";
 export default function Login() {
   const [resetPasswordClicked, setResetPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [wrongCredentials, setWrongCredentials] = useState(false);
-  const [notAuthorised, setNotAuthorised] = useState(false);
   const [clickedonce, setClickOnce] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [apiresponsemessage, setapiresponse] = useState(null);
+
   let history = useHistory();
 
   const userInfo = useContext(UserContext);
@@ -31,6 +31,7 @@ export default function Login() {
   const toggleForgotPassword = (e) => {
     e.preventDefault();
     setResetPassword(true);
+    setapiresponse(null);
   };
 
   const handleLogin = (e) => {
@@ -41,7 +42,7 @@ export default function Login() {
       password: password,
       app_token: uuidv4(),
     };
-    userInfo.toggleLogin(false, null);
+    userInfo.toggleLogin(false, null, false, null);
 
     userlogin(data)
       .then((res) => {
@@ -49,7 +50,7 @@ export default function Login() {
         setClickOnce(false);
       })
       .catch((err) => {
-        setWrongCredentials(true);
+        setapiresponse(err.response.data.message);
         setClickOnce(false);
         console.log("error in request", err);
       });
@@ -57,26 +58,28 @@ export default function Login() {
   const validateToken = (authcode) => {
     getToken(authcode)
       .then((res) => {
-        getUserDetails(res.data.access_token);
+        getUserDetails(res.data.access_token, res.data.refresh_token);
       })
       .catch((err) => {
-        setWrongCredentials(true);
+        setapiresponse(err.response.data.message);
         console.log("error in request", err);
       });
   };
 
-  const getUserDetails = (token) => {
+  const getUserDetails = (token, refresh_token) => {
     getUser(token).then((res) => {
-      localStorage.setItem("userDetails", JSON.stringify(res.data.data));
+      // localStorage.setItem("userDetails", );
 
       if (res.data.data.user_type === 1) {
-        userInfo.toggleLogin(true, token, true);
+        userInfo.toggleLogin(true, token, true, refresh_token);
+        userInfo.saveuserDetails(res.data.data);
         return history.push("/dashboard");
       } else if (res.data.data.user_type === 2) {
-        userInfo.toggleLogin(true, token, false);
+        userInfo.toggleLogin(true, token, false, refresh_token);
+        userInfo.saveuserDetails(res.data.data);
         return history.push("/dashboard");
       } else {
-        setNotAuthorised(true);
+        setapiresponse(res.response.data.message);
       }
     });
   };
@@ -93,15 +96,8 @@ export default function Login() {
           {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
           {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
           <div className="Login__login-header"> Sign in - Admin Panel </div>
-          {wrongCredentials ? (
-            <div className="Login__wrong-password">
-              You have entered wrong Username/Password
-            </div>
-          ) : null}
-          {notAuthorised ? (
-            <div className="Login__wrong-password">
-              You do not have permissions
-            </div>
+          {apiresponsemessage ? (
+            <div className="Login__wrong-password">{apiresponsemessage}</div>
           ) : null}
           <div className="Login__col-3">
             <input
@@ -187,6 +183,8 @@ export default function Login() {
           username={username}
           setUsername={setUsername}
           setResetPassword={setResetPassword}
+          apiresponsemessage={apiresponsemessage}
+          setapiresponse={setapiresponse}
           clickedonce={clickedonce}
           setClickOnce={setClickOnce}
         ></ForgotPassword>

@@ -19,6 +19,17 @@ export const getToken = (authcode) => {
   });
 };
 
+export const refreshToken = (authcode) => {
+  return axiosInstance({
+    method: "POST",
+    url: "oauth/token",
+    headers: {
+      grant_type: "refresh",
+      refresh_token: authcode,
+    },
+  });
+};
+
 export const forgotpasswordToken = (phoneNumber) => {
   return axiosInstance({
     method: "POST",

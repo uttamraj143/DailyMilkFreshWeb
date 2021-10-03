@@ -1,14 +1,16 @@
 import "./Settings.scss";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import UserContext from "UserContext";
+import { editUser } from "store/user";
 
 export default function Settings() {
+  const userInfo = useContext(UserContext);
   const [selectedProfile, setSelectedProfile] = useState(true);
   const [user, setUserProfile] = useState({
-    name: "Chai",
-    lastName: "Arige",
-    email: "chai@arige.com",
-    phoneNumber: "12345678",
-    password: "",
+    name: "",
+    email_id: "",
+    phone_no: "",
+    address: "",
   });
 
   const toggleProfileSelection = (e) => {
@@ -16,20 +18,32 @@ export default function Settings() {
     setSelectedProfile(!selectedProfile);
   };
 
+  useEffect(() => {
+    setUserProfile((prevState) => ({
+      ...prevState,
+      ...userInfo.userDetails,
+    }));
+  }, [userInfo]);
+
   const assignUserProfile = (e, formType) => {
     e.preventDefault();
     e.persist();
     if (selectedProfile) return;
-    if (formType === "firstName")
-      setUserProfile({ ...user, firstName: e.target.value });
-    if (formType === "lastName")
-      setUserProfile({ ...user, lastName: e.target.value });
-    if (formType === "password")
-      setUserProfile({ ...user, password: e.target.value });
+    if (formType === "name") setUserProfile({ ...user, name: e.target.value });
+    if (formType === "email")
+      setUserProfile({ ...user, email_id: e.target.value });
   };
 
   const submitUserProfile = (e) => {
-    console.error("api error");
+    let data = {
+      name: user.name,
+      email_id: user.email_id,
+      access_token: userInfo.access_token,
+    };
+    editUser(data).then((res) => {
+      userInfo.saveuserDetails(res.data);
+      alert("Successfully saved");
+    });
   };
 
   return (
@@ -58,24 +72,23 @@ export default function Settings() {
       </div>
 
       <div className="Settings__field-container">
-        <label className="Settings__label">First Name</label>
+        <label className="Settings__label">Name</label>
         <input
-          value={user.firstName}
-          onChange={(e) => assignUserProfile(e, "firstName")}
+          value={user.name}
+          onChange={(e) => assignUserProfile(e, "name")}
           className="Settings__firstname"
           type="text"
-          placeholder="First Name"
+          placeholder="Name"
           name="firstName"
         ></input>
       </div>
 
       <div className="Settings__field-container">
-        <label className="Settings__label">Last Name</label>
+        <label className="Settings__label">Email</label>
         <input
-          onChange={(e) => assignUserProfile(e, "lastName")}
-          value={user.lastName}
+          onChange={(e) => assignUserProfile(e, "email")}
+          value={user.email_id}
           type="text"
-          placeholder="Last Name"
           className="Settings__firstname"
         ></input>
       </div>
@@ -86,19 +99,19 @@ export default function Settings() {
             <label className="Settings__label">Phone</label>
             <input
               readOnly
-              value={user.phoneNumber}
+              value={user.phone_no}
               type="text"
               className="Settings__email"
             ></input>
           </div>
 
           <div className="Settings__field-container">
-            <label className="Settings__label">Email</label>
+            <label className="Settings__label">Address</label>
             <input
-              readOnly
-              value={user.email}
+              onChange={(e) => assignUserProfile(e, "email")}
+              value={user.address || ""}
               type="text"
-              className="Settings__email"
+              className="Settings__firstname"
             ></input>
           </div>
         </div>
@@ -106,15 +119,6 @@ export default function Settings() {
 
       {!selectedProfile && (
         <div>
-          <div className="Settings__field-container">
-            <label className="Settings__label">Password</label>
-            <input
-              onChange={(e) => assignUserProfile(e, "password")}
-              value={user.password}
-              type="password"
-              className="Settings__password"
-            ></input>
-          </div>
           <div className="Settings__field-container">
             <input
               onClick={(e) => submitUserProfile(e)}

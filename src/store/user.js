@@ -10,6 +10,20 @@ export const getUser = (token) => {
   });
 };
 
+export const editUser = (data) => {
+  return axiosInstance({
+    method: "POST",
+    url: "user/update",
+    data: {
+      name: data.name,
+      email_id: data.email_id,
+    },
+    headers: {
+      access_token: data.access_token,
+    },
+  });
+};
+
 export const listUsers = (type, access_token) => {
   return axiosInstance({
     method: "POST",
@@ -18,5 +32,23 @@ export const listUsers = (type, access_token) => {
       type_of_user: type,
     },
     headers: { access_token: access_token },
+  });
+};
+
+export const registerUser = (data) => {
+  return axiosInstance({
+    method: "POST",
+    url: "/user/register/",
+    data: data.user,
+    headers: {
+      access_token: data.access_token,
+    },
+  });
+};
+
+export const verifyRegisteredUser = (data) => {
+  return axiosInstance({
+    method: "POST",
+    url: `/user/${data.verify_code}/verify/${data.otp}`,
   });
 };
