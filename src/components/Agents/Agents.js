@@ -15,13 +15,19 @@ export default function Agents() {
   const [addagenttoggle, toggleAddAgent] = useState(false);
 
   useEffect(() => {
-    listUsers(2, userInfo.access_token).then((res) => {
-      setAgents(res.data.data);
-    });
-  }, [userInfo.access_token]);
+    listUsers(2, userInfo.access_token)
+      .then((res) => {
+        setAgents(res.data.data);
+      })
+      .catch((res) => {
+        if (res.response.status === 401) {
+          userInfo.refreshAccessToken();
+        }
+      });
+  }, [userInfo.access_token, addagenttoggle]);
 
   const addAgentClicked = (e) => {
-    e.preventDefault();
+    e && e.preventDefault();
     toggleAddAgent(!addagenttoggle);
   };
 

@@ -16,7 +16,7 @@ export default function Users() {
 
   useEffect(() => {
     getAllUsers(userInfo.access_token);
-  }, [userInfo.access_token]);
+  }, [userInfo.access_token, addagenttoggle]);
 
   const getAllUsers = () => {
     listUsers(3, userInfo.access_token)
@@ -31,7 +31,7 @@ export default function Users() {
   };
 
   const addUserClicked = (e) => {
-    e.preventDefault();
+    e && e.preventDefault();
     toggleAddUser(!addagenttoggle);
   };
 

@@ -38,17 +38,6 @@ export default function AddProduct(props) {
       });
   };
 
-  const verifyRegister = (code, otp) => {
-    // verifyRegisteredProduct(code, otp)
-    //   .then((res) => {
-    //     alert("successfully saved");
-    //
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.response);
-    //   });
-  };
-
   // const submitData = useCallback(debounce(submitDataFinal, 5000), []);
 
   return (

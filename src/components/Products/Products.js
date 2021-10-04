@@ -31,7 +31,7 @@ export default function Products() {
   }, [userInfo.access_token]);
 
   const addProductClicked = (e) => {
-    e.preventDefault();
+    e && e.preventDefault();
     toggleAddProduct(!addagenttoggle);
   };
 
