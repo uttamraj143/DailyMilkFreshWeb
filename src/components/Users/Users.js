@@ -15,10 +15,20 @@ export default function Users() {
   const [addagenttoggle, toggleAddUser] = useState(false);
 
   useEffect(() => {
-    listUsers(3, userInfo.access_token).then((res) => {
-      setUsers(res.data.data);
-    });
+    getAllUsers(userInfo.access_token);
   }, [userInfo.access_token]);
+
+  const getAllUsers = () => {
+    listUsers(3, userInfo.access_token)
+      .then((res) => {
+        setUsers(res.data.data);
+      })
+      .catch((res) => {
+        if (res.response.status === 401) {
+          userInfo.refreshAccessToken();
+        }
+      });
+  };
 
   const addUserClicked = (e) => {
     e.preventDefault();

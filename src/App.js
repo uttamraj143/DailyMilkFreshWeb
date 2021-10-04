@@ -5,12 +5,13 @@ import UserContext from "UserContext";
 import Login from "components/login/Login";
 import Dashboard from "components/Dashboard/Dashboard";
 import Landing from "components/common/Landing";
+import { refreshToken } from "store/auth";
 
 export default function App() {
   const pastLogin = JSON.parse(localStorage.getItem("loggedIn"));
   const pastIsAdmin = JSON.parse(localStorage.getItem("isAdmin"));
   const pastAccessToken = sessionStorage.getItem("access_token");
-  const pastRefreshToken = sessionStorage.getItem("refresh_token");
+  const pastRefreshToken = localStorage.getItem("refresh_token");
   const pastUserdetails = JSON.parse(localStorage.getItem("userDetails"));
 
   const [userDetails, setUserDetails] = useState(pastUserdetails || {});
@@ -38,26 +39,30 @@ export default function App() {
   }, [access_token]);
 
   useEffect(() => {
-    sessionStorage.setItem("refresh_token", refresh_token);
+    localStorage.setItem("refresh_token", refresh_token);
   }, [refresh_token]);
-
-  const toggleLogin = (bool, token, admin, refresh) => {
-    setIsLoggedIn(bool);
-    setAccessToken(token);
-    setIsAdmin(admin);
-    setRefreshToken(refresh);
-  };
 
   const saveuserDetails = (data) => {
     setUserDetails(data);
   };
 
+  const refreshAccessToken = () => {
+    refreshToken(refresh_token).then((res) => {
+      setAccessToken(res.data.access_token);
+    });
+  };
+
   const userSettings = {
     isLoggedIn: isLoggedIn,
     access_token: access_token,
+    refresh_token: refresh_token,
     isAdmin: isAdmin,
     userDetails: userDetails,
-    toggleLogin,
+    refreshAccessToken,
+    setIsLoggedIn,
+    setAccessToken,
+    setIsAdmin,
+    setRefreshToken,
     saveuserDetails,
   };
 

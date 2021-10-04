@@ -42,7 +42,11 @@ export default function Login() {
       password: password,
       app_token: uuidv4(),
     };
-    userInfo.toggleLogin(false, null, false, null);
+
+    userInfo.setIsLoggedIn(false);
+    userInfo.setAccessToken(null);
+    userInfo.setIsAdmin(false);
+    userInfo.setRefreshToken(null);
 
     userlogin(data)
       .then((res) => {
@@ -71,11 +75,17 @@ export default function Login() {
       // localStorage.setItem("userDetails", );
 
       if (res.data.data.user_type === 1) {
-        userInfo.toggleLogin(true, token, true, refresh_token);
+        userInfo.setIsLoggedIn(true);
+        userInfo.setAccessToken(token);
+        userInfo.setIsAdmin(true);
+        userInfo.setRefreshToken(refresh_token);
         userInfo.saveuserDetails(res.data.data);
         return history.push("/dashboard");
       } else if (res.data.data.user_type === 2) {
-        userInfo.toggleLogin(true, token, false, refresh_token);
+        userInfo.setIsLoggedIn(true);
+        userInfo.setAccessToken(token);
+        userInfo.setIsAdmin(false);
+        userInfo.setRefreshToken(refresh_token);
         userInfo.saveuserDetails(res.data.data);
         return history.push("/dashboard");
       } else {

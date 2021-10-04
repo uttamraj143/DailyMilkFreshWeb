@@ -16,12 +16,18 @@ export default function Products() {
   const [addagenttoggle, toggleAddProduct] = useState(false);
 
   useEffect(() => {
-    listProducts(1, userInfo.access_token).then((res) => {
-      setProducts(res.data.data);
-    });
-    listProducts(0, userInfo.access_token).then((res) => {
-      setNotProducts(res.data.data);
-    });
+    listProducts(1, userInfo.access_token)
+      .then((res) => {
+        setProducts(res.data.data);
+        listProducts(0, userInfo.access_token).then((res) => {
+          setNotProducts(res.data.data);
+        });
+      })
+      .catch((res) => {
+        if (res.response.status === 401) {
+          userInfo.refreshAccessToken();
+        }
+      });
   }, [userInfo.access_token]);
 
   const addProductClicked = (e) => {

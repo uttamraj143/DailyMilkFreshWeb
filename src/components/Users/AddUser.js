@@ -15,9 +15,13 @@ export default function AddUser(props) {
     app_token: uuidv4(),
   });
 
-  const onSubmit = (data) => {
-    setUserProfile({ ...user, ...data });
-    submitDataFinal();
+  const onSubmit = async (data) => {
+    const returnedTarget = Object.assign(user, data);
+    await setUserProfile({ ...returnedTarget });
+    console.log(errors);
+    if (errors.length) return;
+    console.log(user);
+    // submitDataFinal();
   };
   const {
     register,
@@ -59,18 +63,25 @@ export default function AddUser(props) {
     <div className="Users__sub-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="Login__col-3">
+          {errors.name && (
+            <div className="Users__errors">
+              Name needs to be at least 5 characters
+            </div>
+          )}
           <input
             className="Login__input-focus-effect"
             type="text"
             placeholder="Name"
             {...register("name", { required: true, min: 5 })}
           ></input>
-          {errors.name && <span>Name needs to be at least 5 characters</span>}
 
           <span className="focus-border"></span>
         </div>
 
         <div className="Login__col-3">
+          {errors.email_id && (
+            <span className="Users__errors">Please enter correct email</span>
+          )}
           <input
             className="Login__input-focus-effect"
             type="text"
@@ -81,26 +92,30 @@ export default function AddUser(props) {
                 /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
             })}
           ></input>
+
           <span className="focus-border"></span>
         </div>
 
         <div className="Login__col-3">
+          {errors.phone_no && (
+            <span className="Users__errors">Please enter phone number</span>
+          )}
           <input
             className="Login__input-focus-effect"
             placeholder="Phone Number"
             type="number"
             {...register("phone_no", {
               required: true,
-              // pattern: /^[6789]\d{9}$/,
-              min: 10,
+              pattern: /^[6789]\d{9}$/,
             })}
           />
-          {errors.phone_no && <span>This field is required</span>}
-
           <span className="focus-border"></span>
         </div>
 
         <div className="Login__col-3">
+          {errors.address && (
+            <span className="Users__errors">Please enter address</span>
+          )}
           <input
             className="Login__input-focus-effect"
             type="text"
@@ -111,6 +126,12 @@ export default function AddUser(props) {
         </div>
 
         <div className="Login__col-3">
+          {errors.password && (
+            <span className="Users__errors">
+              Please enter a valid password min 8 char"
+            </span>
+          )}
+
           <input
             className="Login__input-focus-effect"
             type="password"
@@ -119,9 +140,6 @@ export default function AddUser(props) {
           ></input>
           <span className="focus-border"></span>
         </div>
-        {errors.password && (
-          <span>Please enter a valid password min 8 char"</span>
-        )}
 
         <div className="Login__col-3">
           <input

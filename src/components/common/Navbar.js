@@ -75,7 +75,10 @@ export default function Navbar(props) {
     e.preventDefault();
     localStorage.clear();
     sessionStorage.clear();
-    userInfo.toggleLogin(false, null, false, null);
+    userInfo.setIsLoggedIn(false);
+    userInfo.setAccessToken(null);
+    userInfo.setIsAdmin(false);
+    userInfo.setRefreshToken(null);
     return history.push("/");
   };
 

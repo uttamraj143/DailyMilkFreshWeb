@@ -29,6 +29,10 @@
     flex-wrap: wrap;
   }
 
+  &__errors {
+    color: red;
+  }
+
   &__date-address-row {
     display: flex;
     justify-content: space-between;
