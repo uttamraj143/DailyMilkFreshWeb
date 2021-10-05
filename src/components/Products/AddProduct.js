@@ -58,7 +58,7 @@ export default function AddProduct(props) {
             {...register("name", {
               required: "required",
               minLength: {
-                value: 8,
+                value: 3,
                 message: "Please enter a valid password min 8 char",
               },
             })}
