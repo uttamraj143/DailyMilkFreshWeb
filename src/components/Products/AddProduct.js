@@ -10,9 +10,11 @@ export default function AddProduct(props) {
     price: "",
   });
 
-  const onSubmit = (data) => {
-    setProductProfile({ ...product, ...data });
-    submitDataFinal();
+  const onSubmit = async (data) => {
+    const returnedTarget = Object.assign(product, data);
+    setProductProfile({ ...returnedTarget });
+    if (errors.length) return;
+    await submitDataFinal();
   };
   const {
     register,
@@ -44,43 +46,57 @@ export default function AddProduct(props) {
     <div className="Products__sub-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="Login__col-3">
+          {errors.name && (
+            <div className="Users__errors">
+              Name needs to be at least 3 characters
+            </div>
+          )}
           <input
             className="Login__input-focus-effect"
             type="text"
             placeholder="Name"
-            {...register("name", { required: true, min: 3 })}
+            {...register("name", {
+              required: "required",
+              minLength: {
+                value: 8,
+                message: "Please enter a valid password min 8 char",
+              },
+            })}
           ></input>
-          {errors.name && <span>Name needs to be at least 3 characters</span>}
-
           <span className="focus-border"></span>
         </div>
 
         <div className="Login__col-3">
+          {errors.price && (
+            <div className="Users__errors">This field is required</div>
+          )}
+
           <input
             className="Login__input-focus-effect"
             placeholder="Price"
             type="number"
             {...register("price", {
-              required: true,
+              required: "required",
               min: 1,
             })}
           />
-          {errors.price && <span>This field is required</span>}
           <span className="focus-border"></span>
         </div>
 
         <div className="Login__col-3">
+          {errors.description && (
+            <div className="Users__errors">
+              Please enter a valid description min 8 char"
+            </div>
+          )}
           <input
             className="Login__input-focus-effect"
             type="description"
             placeholder="Description"
-            {...register("description", { required: true, min: 5 })}
+            {...register("description", { required: "required", min: 5 })}
           ></input>
           <span className="focus-border"></span>
         </div>
-        {errors.description && (
-          <span>Please enter a valid description min 8 char"</span>
-        )}
 
         <div className="Login__col-3">
           <input
