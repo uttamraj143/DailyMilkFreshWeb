@@ -10,7 +10,7 @@ import UserContext from "UserContext";
 
 export default function Products() {
   const userInfo = useContext(UserContext);
-
+  const [spinner, toggleSpinner] = useState(true);
   const [products, setProducts] = useState([]);
   const [not_products, setNotProducts] = useState([]);
   const [addagenttoggle, toggleAddProduct] = useState(false);
@@ -21,11 +21,13 @@ export default function Products() {
         setProducts(res.data.data);
         listProducts(0, userInfo.access_token).then((res) => {
           setNotProducts(res.data.data);
+          toggleSpinner(false);
         });
       })
       .catch((res) => {
         if (res.response.status === 401) {
           userInfo.refreshAccessToken();
+          toggleSpinner(true);
         }
       });
   }, [userInfo.access_token]);
@@ -37,17 +39,16 @@ export default function Products() {
 
   return (
     <div className="Products__main-container">
-      {products.length ? (
+      <div>
+        <button
+          className="Products__refresh-button"
+          onClick={(e) => addProductClicked(e)}
+        >
+          {addagenttoggle ? "Cancel Adding" : "Add new Product"}
+        </button>
+      </div>
+      {!spinner ? (
         <div>
-          <div>
-            <button
-              className="Products__refresh-button"
-              onClick={(e) => addProductClicked(e)}
-            >
-              {addagenttoggle ? "Cancel Adding" : "Add new Product"}
-            </button>
-          </div>
-
           {addagenttoggle ? (
             <AddProduct
               toggleAddProduct={toggleAddProduct}
