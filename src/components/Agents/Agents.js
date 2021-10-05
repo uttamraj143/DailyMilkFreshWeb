@@ -10,17 +10,19 @@ import UserContext from "UserContext";
 
 export default function Agents() {
   const userInfo = useContext(UserContext);
-
   const [agents, setAgents] = useState([]);
   const [addagenttoggle, toggleAddAgent] = useState(false);
+  const [spinner, toggleSpinner] = useState(true);
 
   useEffect(() => {
     listUsers(2, userInfo.access_token)
       .then((res) => {
+        toggleSpinner(false);
         setAgents(res.data.data);
       })
       .catch((res) => {
         if (res.response.status === 401) {
+          toggleSpinner(true);
           userInfo.refreshAccessToken();
         }
       });
@@ -33,17 +35,16 @@ export default function Agents() {
 
   return (
     <div className="Agents__main-container">
-      {agents.length ? (
+      <div>
+        <button
+          className="Agents__refresh-button"
+          onClick={(e) => addAgentClicked(e)}
+        >
+          {addagenttoggle ? "Cancel Adding" : "Add new Agent"}
+        </button>
+      </div>
+      {!spinner ? (
         <div>
-          <div>
-            <button
-              className="Agents__refresh-button"
-              onClick={(e) => addAgentClicked(e)}
-            >
-              {addagenttoggle ? "Cancel Adding" : "Add new Agent"}
-            </button>
-          </div>
-
           {addagenttoggle ? (
             <AddAgent
               addAgentClicked={addAgentClicked}

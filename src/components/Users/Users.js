@@ -10,7 +10,7 @@ import UserContext from "UserContext";
 
 export default function Users() {
   const userInfo = useContext(UserContext);
-
+  const [spinner, toggleSpinner] = useState(true);
   const [users, setUsers] = useState([]);
   const [addagenttoggle, toggleAddUser] = useState(false);
 
@@ -21,10 +21,12 @@ export default function Users() {
   const getAllUsers = () => {
     listUsers(3, userInfo.access_token)
       .then((res) => {
+        toggleSpinner(false);
         setUsers(res.data.data);
       })
       .catch((res) => {
         if (res.response.status === 401) {
+          toggleSpinner(true);
           userInfo.refreshAccessToken();
         }
       });
@@ -37,17 +39,16 @@ export default function Users() {
 
   return (
     <div className="Users__main-container">
-      {users.length ? (
+      <div>
+        <button
+          className="Users__refresh-button"
+          onClick={(e) => addUserClicked(e)}
+        >
+          {addagenttoggle ? "Cancel Adding" : "Add new User"}
+        </button>
+      </div>
+      {!spinner ? (
         <div>
-          <div>
-            <button
-              className="Users__refresh-button"
-              onClick={(e) => addUserClicked(e)}
-            >
-              {addagenttoggle ? "Cancel Adding" : "Add new User"}
-            </button>
-          </div>
-
           {addagenttoggle ? (
             <AddUser
               addUserClicked={addUserClicked}
