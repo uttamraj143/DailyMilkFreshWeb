@@ -1,4 +1,5 @@
 import { useState } from "react";
+import jwt from "jsonwebtoken";
 import { changePassword, forgotpasswordToken } from "store/auth";
 import "./login.scss";
 
@@ -23,10 +24,19 @@ export default function ForgotPassword(props) {
 
   const handleForgotPassword = (e) => {
     e.preventDefault();
+
+    let tokkk = jwt.sign(
+      {
+        data: newpassword,
+      },
+      "secret",
+      { expiresIn: 60 * 1 }
+    );
+
     let data = {
       code: validcode,
       otp: otp,
-      newpassword: newpassword,
+      newpassword: tokkk,
     };
     changePassword(data)
       .then((res) => {
@@ -34,7 +44,7 @@ export default function ForgotPassword(props) {
         setTimeout(() => {
           props.setResetPassword(false);
           props.setapiresponse(null);
-        }, 6000);
+        }, 3000);
       })
       .catch((res) => {
         props.setapiresponse(res.response.data.message);

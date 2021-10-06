@@ -136,16 +136,14 @@ export default function Navbar(props) {
           <ul className="Navbar__sidebarMenu-inner">
             {menuitems.map((item, i) => {
               return (
-                <li key={i}>
+                <li key={i} onClick={(e) => changeMenu(e, item.value)}>
                   <div className="Navbar__sideMenu-icons">
                     <img
                       className="Navbar__sideMenu-icons-img"
                       src={menuIcon(i + 1)}
                       alt="settings"
                     ></img>
-                    <span onClick={(e) => changeMenu(e, item.value)}>
-                      {item.title}
-                    </span>
+                    <span>{item.title}</span>
                   </div>
                 </li>
               );

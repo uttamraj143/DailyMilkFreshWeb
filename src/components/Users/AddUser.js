@@ -1,6 +1,10 @@
 import { useState, useCallback } from "react";
+// external imports
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
+
+// internal imports
+import MySnack from "components/common/MySnack";
 import { registerUser, verifyRegisteredUser } from "store/user";
 import "./Users.scss";
 
@@ -15,6 +19,7 @@ export default function AddUser(props) {
     app_token: uuidv4(),
   });
   const [verifyUser, setVerifyUser] = useState(null);
+  const [alertmessage, setalertmessage] = useState(null);
 
   const onSubmit = async (data) => {
     const returnedTarget = Object.assign(user, data);
@@ -45,25 +50,24 @@ export default function AddUser(props) {
       })
       .catch((err) => {
         console.log("Failed", err.response);
-        alert("Failed");
+        setalertmessage("Failed");
       });
   };
 
   const verifyRegister = (data) => {
-    console.log(data);
     let datas = {
       verify_code: verifyUser,
       otp: data.otp,
     };
     verifyRegisteredUser(datas)
       .then((res) => {
-        alert("successfully saved");
+        setalertmessage("successfully saved");
         setTimeout(() => {
           props.addUserClicked();
         }, 2000);
       })
       .catch((err) => {
-        alert("Failed");
+        setalertmessage("Failed to saved");
         console.log(err.response);
       });
   };
@@ -211,6 +215,7 @@ export default function AddUser(props) {
           </form>
         </>
       )}
+      {alertmessage && <MySnack message={alertmessage} />}
     </div>
   );
 }

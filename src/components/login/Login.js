@@ -1,13 +1,14 @@
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import jwt from "jsonwebtoken";
+
 import { userlogin, getToken } from "store/auth";
 import { getUser } from "store/user";
-import { v4 as uuidv4 } from "uuid";
 import UserContext from "UserContext";
 import "./login.scss";
 import DailyMilkFreshLogo from "logo.png";
 import ForgotPassword from "./ForgotPassword";
-import jwt from "jsonwebtoken";
 
 export default function Login() {
   const [resetPasswordClicked, setResetPassword] = useState(false);
@@ -98,7 +99,7 @@ export default function Login() {
         userInfo.saveuserDetails(res.data.data);
         return history.push("/dashboard");
       } else {
-        setapiresponse(res.response.data.message);
+        setapiresponse("Un Authorized User");
       }
     });
   };

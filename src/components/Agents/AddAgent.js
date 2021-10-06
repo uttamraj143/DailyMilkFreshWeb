@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
+import MySnack from "components/common/MySnack";
 import { registerUser, verifyRegisteredUser } from "store/user";
 import "./Agents.scss";
 
@@ -16,6 +17,7 @@ export default function AddAgent(props) {
   });
 
   const [verifyUser, setVerifyUser] = useState(null);
+  const [alertmessage, setalertmessage] = useState(null);
 
   const onSubmit = async (data) => {
     const returnedTarget = Object.assign(user, data);
@@ -45,7 +47,7 @@ export default function AddAgent(props) {
       })
       .catch((err) => {
         console.log("Failed", err.response);
-        // alert("Failed");
+        setalertmessage("Failed");
       });
   };
 
@@ -56,13 +58,13 @@ export default function AddAgent(props) {
     };
     verifyRegisteredUser(datas)
       .then((res) => {
-        alert("successfully saved");
+        setalertmessage("successfully saved");
         setTimeout(() => {
           props.addAgentClicked();
         }, 2000);
       })
       .catch((err) => {
-        alert("Failed");
+        setalertmessage("Failed to saved");
         console.log(err.response);
       });
   };
@@ -208,6 +210,7 @@ export default function AddAgent(props) {
           </form>
         </>
       )}
+      {alertmessage && <MySnack message={alertmessage} />}
     </div>
   );
 }
