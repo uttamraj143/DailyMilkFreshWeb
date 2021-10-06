@@ -7,6 +7,7 @@ import UserContext from "UserContext";
 import "./login.scss";
 import DailyMilkFreshLogo from "logo.png";
 import ForgotPassword from "./ForgotPassword";
+import jwt from "jsonwebtoken";
 
 export default function Login() {
   const [resetPasswordClicked, setResetPassword] = useState(false);
@@ -37,9 +38,18 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     setClickOnce(true);
+
+    let tokkk = jwt.sign(
+      {
+        data: password,
+      },
+      "secret",
+      { expiresIn: 60 * 1 }
+    );
+
     let data = {
       phone_no: username,
-      password: password,
+      password: tokkk,
       app_token: uuidv4(),
     };
 
@@ -47,7 +57,6 @@ export default function Login() {
     userInfo.setAccessToken(null);
     userInfo.setIsAdmin(false);
     userInfo.setRefreshToken(null);
-
     userlogin(data)
       .then((res) => {
         validateToken(res.data.code);
