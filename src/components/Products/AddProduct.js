@@ -1,6 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { addProduct, updateProduct } from "store/products";
+import { addProduct } from "store/products";
 import "./Products.scss";
 
 export default function AddProduct(props) {

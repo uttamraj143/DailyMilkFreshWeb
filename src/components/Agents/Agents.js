@@ -15,17 +15,20 @@ export default function Agents() {
   const [spinner, toggleSpinner] = useState(true);
 
   useEffect(() => {
-    listUsers(2, userInfo.access_token)
-      .then((res) => {
-        toggleSpinner(false);
-        setAgents(res.data.data);
-      })
-      .catch((res) => {
-        if (res.response.status === 401) {
-          toggleSpinner(true);
-          userInfo.refreshAccessToken();
-        }
-      });
+    function getAllAgents() {
+      listUsers(2, userInfo.access_token)
+        .then((res) => {
+          toggleSpinner(false);
+          setAgents(res.data.data);
+        })
+        .catch((res) => {
+          if (res.response.status === 401) {
+            toggleSpinner(true);
+            userInfo.refreshAccessToken();
+          }
+        });
+    }
+    getAllAgents();
   }, [userInfo.access_token, addagenttoggle]);
 
   const addAgentClicked = (e) => {

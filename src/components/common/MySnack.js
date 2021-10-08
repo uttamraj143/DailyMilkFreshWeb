@@ -1,9 +1,7 @@
-import { useState } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 
 export default function MySnack(props) {
-  const [isOpen, setIsopen] = useState(true);
   return (
     <div>
       <Snackbar
@@ -11,7 +9,7 @@ export default function MySnack(props) {
           vertical: "bottom",
           horizontal: "left",
         }}
-        open={isOpen}
+        open={true}
         autoHideDuration={2000}
         message={props.message}
         action={

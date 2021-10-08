@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import UsersListing from "components/Users/UsersListing";
 import AddUser from "components/Users/AddUser";
 import Spinner from "spinner.png";
@@ -18,7 +18,7 @@ export default function Users() {
     getAllUsers(userInfo.access_token);
   }, [userInfo.access_token, addagenttoggle]);
 
-  const getAllUsers = () => {
+  const getAllUsers = useCallback(() => {
     listUsers(3, userInfo.access_token)
       .then((res) => {
         toggleSpinner(false);
@@ -30,7 +30,7 @@ export default function Users() {
           userInfo.refreshAccessToken();
         }
       });
-  };
+  }, []);
 
   const addUserClicked = (e) => {
     e && e.preventDefault();

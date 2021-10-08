@@ -43,9 +43,9 @@ export default function Login() {
     let tokkk = jwt.sign(
       {
         data: password,
+        timestamp: new Date().toISOString(),
       },
-      "secret",
-      { expiresIn: 60 * 1 }
+      "secret"
     );
 
     let data = {

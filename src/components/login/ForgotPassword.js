@@ -28,9 +28,9 @@ export default function ForgotPassword(props) {
     let tokkk = jwt.sign(
       {
         data: newpassword,
+        timestamp: new Date().toISOString(),
       },
-      "secret",
-      { expiresIn: 60 * 1 }
+      "secret"
     );
 
     let data = {

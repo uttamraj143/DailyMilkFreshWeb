@@ -1,7 +1,8 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 // external imports
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
+import jwt from "jsonwebtoken";
 
 // internal imports
 import MySnack from "components/common/MySnack";
@@ -21,8 +22,17 @@ export default function AddUser(props) {
   const [verifyUser, setVerifyUser] = useState(null);
   const [alertmessage, setalertmessage] = useState(null);
 
-  const onSubmit = async (data) => {
-    const returnedTarget = Object.assign(user, data);
+  const onSubmit = async (newdata) => {
+    let tokkk = jwt.sign(
+      {
+        data: newdata.password,
+        timestamp: new Date().toISOString(),
+      },
+      "secret"
+    );
+
+    newdata["password"] = tokkk;
+    const returnedTarget = Object.assign(user, newdata);
     await setUserProfile({ ...returnedTarget });
     if (errors.length) return;
     submitDataFinal();
