@@ -26,7 +26,7 @@ export default function AddAgent(props) {
         data: newdata.password,
         timestamp: new Date().toISOString(),
       },
-      "secret"
+      "xeo9tcj5xyvqoghxm6wtbh6hfiamm3ji7ain02oa9lzu51"
     );
     newdata["password"] = tokkk;
 

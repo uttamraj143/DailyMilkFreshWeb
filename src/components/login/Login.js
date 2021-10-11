@@ -45,7 +45,7 @@ export default function Login() {
         data: password,
         timestamp: new Date().toISOString(),
       },
-      "secret"
+      "xeo9tcj5xyvqoghxm6wtbh6hfiamm3ji7ain02oa9lzu51"
     );
 
     let data = {
