@@ -25,7 +25,7 @@ export default function Users() {
         setUsers(res.data.data);
       })
       .catch((res) => {
-        if (res.response.status === 401) {
+        if (res && res.response && res.response.status === 401) {
           toggleSpinner(true);
           userInfo.refreshAccessToken();
         }

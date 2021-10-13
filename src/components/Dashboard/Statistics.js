@@ -1,31 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
-import './Statistics.scss';
-import TextField from '@material-ui/core/TextField';
+import React, { useState, useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
+import "./Statistics.scss";
+import TextField from "@mui/material/TextField";
 
 const chartConfig = {
-  type: 'line',
+  type: "line",
   data: {
-    labels: ['25th', '26th', '27th', '28th', '29th', '30th'],
+    labels: ["25th", "26th", "27th", "28th", "29th", "30th"],
     datasets: [
       {
-        label: '# of Votes',
+        label: "# of Votes",
         data: [22, 23, 23, 25, 21, 28],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
         ],
         borderWidth: 1,
       },
@@ -39,15 +39,23 @@ const chartConfig = {
 };
 
 const milkTypeProduct = {
-  type: 'bar',
+  type: "bar",
   data: {
-    labels: ['cow', 'buffallo', 'Ghee'],
+    labels: ["cow", "buffallo", "Ghee"],
     datasets: [
       {
-        label: '# of Votes',
+        label: "# of Votes",
         data: [122, 99, 23],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+        ],
         borderWidth: 1,
       },
     ],
@@ -61,29 +69,29 @@ const milkTypeProduct = {
   },
 };
 
-const chartColors = ['red', 'orange', 'yellow', 'green'];
+const chartColors = ["red", "orange", "yellow", "green"];
 const agentChartconfig = {
-  type: 'doughnut',
+  type: "doughnut",
   data: {
-    labels: ['agent 1', 'agent 2', 'agent 3', 'agent 4'],
+    labels: ["agent 1", "agent 2", "agent 3", "agent 4"],
     datasets: [
       {
-        label: 'Dataset 1',
+        label: "Dataset 1",
         data: [5, 23, 10, 6],
         backgroundColor: chartColors.map((i) => i),
       },
     ],
   },
   options: {
-    cutout: '80%',
+    cutout: "80%",
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
       title: {
         display: true,
-        text: 'Chart.js Pie Chart',
+        text: "Chart.js Pie Chart",
       },
     },
   },
@@ -120,19 +128,22 @@ export default function ProductionStatistics() {
 
   useEffect(() => {
     if (chartContainer4 && chartContainer4.current) {
-      const newChartInstance = new Chart(chartContainer4.current, milkTypeProduct);
+      const newChartInstance = new Chart(
+        chartContainer4.current,
+        milkTypeProduct
+      );
       setChartInstance(newChartInstance);
     }
   }, [chartContainer4]);
 
   return (
-    <div className='Statistics__main-container'>
+    <div className="Statistics__main-container">
       <form noValidate>
         <TextField
-          id='date'
-          label='Date '
-          type='date'
-          defaultValue={new Date().toLocaleDateString('fr-CA')}
+          id="date"
+          label="Date "
+          type="date"
+          defaultValue={new Date().toLocaleDateString("fr-CA")}
           InputLabelProps={{
             shrink: true,
           }}
@@ -143,13 +154,16 @@ export default function ProductionStatistics() {
         <canvas ref={chartContainer2} />
       </div>
       <div>
-        Per Agent Milk Delivery Quantity (total delivered by selected Agent today/any day selection from
-        Calender drop down)
+        Per Agent Milk Delivery Quantity (total delivered by selected Agent
+        today/any day selection from Calender drop down)
       </div>
-      <div className='Statistics__donough'>
+      <div className="Statistics__donough">
         <canvas ref={chartContainer} />
       </div>
-      <div> Daily Milk Delivery Quantity by Type last month (cow/buffallo / ghee)</div>
+      <div>
+        {" "}
+        Daily Milk Delivery Quantity by Type last month (cow/buffallo / ghee)
+      </div>
       <canvas ref={chartContainer4} />
     </div>
   );

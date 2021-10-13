@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import { useState } from "react";
+import InputLabel from "@mui/material/InputLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from "@mui/material/NativeSelect";
 
 export default function OrderPage(props) {
   const [state, setState] = useState({
-    age: '',
-    name: 'hai',
+    age: "",
+    name: "hai",
   });
 
   const handleChange = (event) => {
@@ -21,17 +21,18 @@ export default function OrderPage(props) {
   return (
     <div>
       <FormControl>
-        <InputLabel shrink htmlFor='age-native-label-placeholder'>
+        <InputLabel shrink htmlFor="age-native-label-placeholder">
           Order status
         </InputLabel>
         <NativeSelect
           value={state.age}
           onChange={handleChange}
           inputProps={{
-            name: 'age',
-            id: 'age-native-label-placeholder',
-          }}>
-          <option value='booked'>booked</option>
+            name: "age",
+            id: "age-native-label-placeholder",
+          }}
+        >
+          <option value="booked">booked</option>
           <option>intransit</option>
           <option>pickedup</option>
           <option>delivered</option>
@@ -40,9 +41,10 @@ export default function OrderPage(props) {
         <FormHelperText>change order status</FormHelperText>
       </FormControl>
       <div>
-        dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls
-        dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls
-        dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls
+        dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls
+        dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls
+        dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls
+        dsdsdskljdldkjdkljdls
       </div>
     </div>
   );

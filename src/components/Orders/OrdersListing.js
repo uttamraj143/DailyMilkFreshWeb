@@ -1,21 +1,21 @@
-import Paper from '@material-ui/core/Paper';
+import Paper from "@mui/material/Paper";
 
 export default function OrdersListing(props) {
   const orderStatus = (userqr) => {
     let statss = props.orders.find((item) => item.QRNumber === userqr);
     return statss
       ? statss.status.charAt(0).toUpperCase() + statss.status.slice(1)
-      : 'Not Available';
+      : "Not Available";
   };
 
   const orderStatusColor = (userqr) => {
     let statss = props.orders.find((item) => item.QRNumber === userqr);
-    if (statss && statss.status === 'booked') return 'Orders__blue';
-    if (statss && statss.status === 'pickedup') return 'Orders__yellow';
-    if (statss && statss.status === 'intransit') return 'Orders__orange';
-    if (statss && statss.status === 'delivered') return 'Orders__green';
-    if (statss && statss.status === 'cancelled') return 'Orders__red';
-    return 'Orders__grey';
+    if (statss && statss.status === "booked") return "Orders__blue";
+    if (statss && statss.status === "pickedup") return "Orders__yellow";
+    if (statss && statss.status === "intransit") return "Orders__orange";
+    if (statss && statss.status === "delivered") return "Orders__green";
+    if (statss && statss.status === "cancelled") return "Orders__red";
+    return "Orders__grey";
   };
 
   const orderDate = (userqr) => {
@@ -60,7 +60,7 @@ export default function OrdersListing(props) {
                 &nbsp; {user.QRNumber}
               </div>
               <div
-                className={'Orders__status ' + orderStatusColor(user.QRNumber)}
+                className={"Orders__status " + orderStatusColor(user.QRNumber)}
               >
                 {orderStatus(user.QRNumber)}
               </div>
@@ -73,7 +73,7 @@ export default function OrdersListing(props) {
 
             <div className="Orders__products-row">
               <div className="Orders__product-id">Products</div>
-              <div className="Orders__product">{user.Products.join(', ')}</div>
+              <div className="Orders__product">{user.Products.join(", ")}</div>
             </div>
             <div className="Orders__products-row">
               <div className="Orders__date">Scan QR</div>
