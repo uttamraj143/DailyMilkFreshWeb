@@ -2,11 +2,13 @@ import "./Navbar.scss";
 import { useState, useRef, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import DailyMilkFreshLogo from "logo.png";
-import settingsIcon from "components/common/settingsIcon.svg";
-import cartIcon from "components/common/cartIcon.svg";
-import usersIcon from "components/common/users.svg";
-import userBadge from "components/common/userBadge.svg";
-import cloudDownload from "components/common/cloudDownload.svg";
+import settingsIcon from "components/svgs/settingsIcon.svg";
+import cartIcon from "components/svgs/cartIcon.svg";
+import truckIcon from "components/svgs/truck.svg";
+import usersIcon from "components/svgs/users.svg";
+import userBadge from "components/svgs/userBadge.svg";
+import exportIcon from "components/svgs/export.svg";
+import listIcon from "components/svgs/checkList.svg";
 import UserContext from "UserContext";
 
 export default function Navbar(props) {
@@ -31,6 +33,10 @@ export default function Navbar(props) {
     {
       title: "Products",
       value: "products_list",
+    },
+    {
+      title: "Deliveries",
+      value: "deliveries",
     },
     { title: "Export Data", value: "export_data" },
     {
@@ -102,9 +108,11 @@ export default function Navbar(props) {
       case "3":
         return usersIcon;
       case "4":
-        return cloudDownload;
+        return listIcon;
       case "5":
-        return settingsIcon;
+        return truckIcon;
+      case "6":
+        return exportIcon;
       default:
         return settingsIcon;
     }
