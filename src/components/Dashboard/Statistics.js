@@ -103,15 +103,15 @@ export default function ProductionStatistics() {
   const chartContainer2 = useRef(null);
   const chartContainer4 = useRef(null);
 
-  // const onButtonClick = () => {
-  //   const data = [15, 39, 13, 5, 2, 38];
-  //   updateDataset(0, data);
-  // };
+  const onButtonClick = () => {
+    const data = [15, 39, 13, 5, 2, 38];
+    updateDataset(0, data);
+  };
 
-  // const updateDataset = (datasetIndex, newData) => {
-  //   chartInstance.data.datasets[datasetIndex].data = newData;
-  //   chartInstance.update();
-  // };
+  const updateDataset = (datasetIndex, newData) => {
+    chartInstance.data.datasets[datasetIndex].data = newData;
+    chartInstance.update();
+  };
 
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
@@ -149,7 +149,7 @@ export default function ProductionStatistics() {
           }}
         />
       </form>
-      <div>
+      <div onClick={(e) => onButtonClick(e)}>
         Daily Milk Delivery Quantity (total delivered on this date)
         <canvas ref={chartContainer2} />
       </div>

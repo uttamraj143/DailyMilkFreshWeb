@@ -30,7 +30,7 @@ export default function Products() {
           toggleSpinner(true);
         }
       });
-  }, [userInfo.access_token, addagenttoggle]);
+  }, [userInfo.access_token, userInfo, addagenttoggle]);
 
   const addProductClicked = (e) => {
     e && e.preventDefault();

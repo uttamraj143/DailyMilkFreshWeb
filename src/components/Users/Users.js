@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useCallback } from "react";
+import { useState, useEffect, useContext } from "react";
 import UsersListing from "components/Users/UsersListing";
 import AddUser from "components/Users/AddUser";
 import Spinner from "spinner.png";
@@ -15,22 +15,21 @@ export default function Users() {
   const [addagenttoggle, toggleAddUser] = useState(false);
 
   useEffect(() => {
-    getAllUsers(userInfo.access_token);
-  }, [userInfo.access_token, addagenttoggle]);
-
-  const getAllUsers = useCallback(() => {
-    listUsers(3, userInfo.access_token)
-      .then((res) => {
-        toggleSpinner(false);
-        setUsers(res.data.data);
-      })
-      .catch((res) => {
-        if (res && res.response && res.response.status === 401) {
-          toggleSpinner(true);
-          userInfo.refreshAccessToken();
-        }
-      });
-  }, []);
+    const getAllUsers = () => {
+      listUsers(3, userInfo.access_token)
+        .then((res) => {
+          toggleSpinner(false);
+          setUsers(res.data.data);
+        })
+        .catch((res) => {
+          if (res && res.response && res.response.status === 401) {
+            toggleSpinner(true);
+            userInfo.refreshAccessToken();
+          }
+        });
+    };
+    getAllUsers();
+  }, [userInfo.access_token, addagenttoggle, userInfo]);
 
   const addUserClicked = (e) => {
     e && e.preventDefault();

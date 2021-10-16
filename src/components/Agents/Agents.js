@@ -29,7 +29,7 @@ export default function Agents() {
         });
     }
     getAllAgents();
-  }, [userInfo.access_token, addagenttoggle]);
+  }, [userInfo.access_token, addagenttoggle, userInfo]);
 
   const addAgentClicked = (e) => {
     e && e.preventDefault();

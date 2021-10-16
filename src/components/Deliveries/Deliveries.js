@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "UserContext";
 import { listDeliveryTypes } from "store/deliveries";
+import AssignUsers from "components/Deliveries/AssignUsers";
 import Paper from "@mui/material/Paper";
-import deleteIcon from "components/svgs/delete.svg";
+// import deleteIcon from "components/svgs/delete.svg";
 import editIcon from "components/svgs/pencil.svg";
 import saveIcon from "components/svgs/save.svg";
 import "./Deliveries.scss";
@@ -33,10 +34,10 @@ export default function Deliveries() {
     setEdit(id);
   };
 
-  const deleteItem = (e) => {
-    e.preventDefault();
-    console.log("confirn");
-  };
+  // const deleteItem = (e) => {
+  //   e.preventDefault();
+  //   console.log("confirn");
+  // };
 
   const saveHandle = (e) => {
     e.preventDefault();
@@ -45,6 +46,8 @@ export default function Deliveries() {
 
   return (
     <div className="Deliveries__main-container">
+      <button className="Users__refresh-button">Add new Delivery Type</button>
+
       {deliverytotal.length &&
         deliverytotal.map((item, index) => {
           return (
@@ -88,18 +91,22 @@ export default function Deliveries() {
                       src={editIcon}
                       alt="delete"
                     ></img>
-                    <img
+                    {/* <img
                       className="Deliveries__types-svg"
                       onClick={(e) => deleteItem(e, item.id)}
                       src={deleteIcon}
                       alt="delete"
-                    ></img>
+                    ></img> */}
                   </>
                 )}
               </div>
             </Paper>
           );
         })}
+
+      <div>
+        <AssignUsers />
+      </div>
     </div>
   );
 }
