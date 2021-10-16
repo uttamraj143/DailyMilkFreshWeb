@@ -1,0 +1,28 @@
+.Deliveries {
+  &__main-container {
+    display: block;
+    min-width: 400px;
+  }
+
+  &__types-container {
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  &__types-container-img {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__types-svg {
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  &__edit-input {
+    margin: 10px 0;
+  }
+}
