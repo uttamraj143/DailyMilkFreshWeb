@@ -2,6 +2,21 @@
   &__main-container {
     display: block;
     min-width: 400px;
+    @media screen and (max-width: 700px) {
+      width: 96%;
+      min-width: unset;
+    }
+  }
+
+  &__add-button {
+    background: transparent;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    &-disabled {
+      cursor: not-allowed;
+    }
   }
 
   &__types-container {
