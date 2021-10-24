@@ -7,8 +7,8 @@
     max-width: 411px;
     min-width: 96%;
     margin: auto;
-    @media screen and (max-width: 450px){
-      position: fixed;
+    @media screen and (max-width: 450px) {
+      // position: fixed;
       border: none;
       border-top: 2px solid orange;
       bottom: 0px;
