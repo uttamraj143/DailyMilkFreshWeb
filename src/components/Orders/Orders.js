@@ -2,6 +2,10 @@ import { useState } from "react";
 import OrdersListing from "components/Orders/OrdersListing";
 import OrderPage from "components/Orders/OrderPage";
 import MiniNavbar from "components/common/MiniNavbar";
+// import { ReactComponent as cartIcon } from "components/svgs/cartIcon.svg";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
 import "./Orders.scss";
 
 export default function Orders() {
@@ -9,6 +13,8 @@ export default function Orders() {
   const [sortNumbers, setSortNumbers] = useState(false);
   const [sortName, setSortName] = useState(false);
   const [sortLocation, setSortLocation] = useState(false);
+  const [page, setPage] = useState(1);
+  const [sortOrders, setSortOrders] = useState([]);
 
   const [orders] = useState([
     {
@@ -33,6 +39,66 @@ export default function Orders() {
     },
     {
       QRNumber: "29",
+      date: "14 June 2021, 08: 36",
+      status: "cancelled",
+    },
+    {
+      QRNumber: "126",
+      date: "14 June 2021, 08: 36",
+      status: "pickedup",
+    },
+    {
+      QRNumber: "127",
+      date: "14 June 2021, 08: 36",
+      status: "intransit",
+    },
+    {
+      QRNumber: "128",
+      date: "14 June 2021, 08: 36",
+      status: "delivered",
+    },
+    {
+      QRNumber: "129",
+      date: "14 June 2021, 08: 36",
+      status: "cancelled",
+    },
+    {
+      QRNumber: "130",
+      date: "14 June 2021, 08: 36",
+      status: "pickedup",
+    },
+    {
+      QRNumber: "131",
+      date: "14 June 2021, 08: 36",
+      status: "intransit",
+    },
+    {
+      QRNumber: "132",
+      date: "14 June 2021, 08: 36",
+      status: "delivered",
+    },
+    {
+      QRNumber: "133",
+      date: "14 June 2021, 08: 36",
+      status: "cancelled",
+    },
+    {
+      QRNumber: "134",
+      date: "14 June 2021, 08: 36",
+      status: "pickedup",
+    },
+    {
+      QRNumber: "135",
+      date: "14 June 2021, 08: 36",
+      status: "intransit",
+    },
+    {
+      QRNumber: "136",
+      date: "14 June 2021, 08: 36",
+      status: "delivered",
+    },
+    {
+      QRNumber: "137",
       date: "14 June 2021, 08: 36",
       status: "cancelled",
     },
@@ -109,6 +175,62 @@ export default function Orders() {
       address: "Nallagandla",
       QRNumber: "33",
     },
+    {
+      Products: ["Cow Milk", "Buffallo Milk"],
+      customername: "subramanyam",
+      date: "14 June 2021, 08: 36",
+      address: "Nallagandla",
+      QRNumber: "126",
+    },
+    {
+      Products: ["Cow Milk", "Buffallo Milk"],
+      customername: "subramanyam",
+      date: "14 June 2021, 08: 36",
+      address: "Nallagandla",
+      QRNumber: "127",
+    },
+    {
+      Products: ["Cow Milk", "Buffallo Milk"],
+      customername: "subramanyam",
+      date: "14 June 2021, 08: 36",
+      address: "Nallagandla",
+      QRNumber: "128",
+    },
+    {
+      Products: ["Cow Milk", "Buffallo Milk"],
+      customername: "subramanyam",
+      date: "14 June 2021, 08: 36",
+      address: "Nallagandla",
+      QRNumber: "129",
+    },
+    {
+      Products: ["Cow Milk", "Buffallo Milk"],
+      customername: "subramanyam",
+      date: "14 June 2021, 08: 36",
+      address: "Nallagandla",
+      QRNumber: "130",
+    },
+    {
+      Products: ["Cow Milk", "Buffallo Milk"],
+      customername: "subramanyam",
+      date: "14 June 2021, 08: 36",
+      address: "Nallagandla",
+      QRNumber: "131",
+    },
+    {
+      Products: ["Cow Milk", "Buffallo Milk"],
+      customername: "subramanyam",
+      date: "14 June 2021, 08: 36",
+      address: "Nallagandla",
+      QRNumber: "132",
+    },
+    {
+      Products: ["Cow Milk", "Buffallo Milk"],
+      customername: "subramanyam",
+      date: "14 June 2021, 08: 36",
+      address: "Nallagandla",
+      QRNumber: "133",
+    },
   ]);
 
   const currentUserSelection = (user) => {
@@ -161,8 +283,20 @@ export default function Orders() {
     }
   };
 
+  const modifyOrders = (e, val) => {
+    e.preventDefault();
+    setPage(val);
+    const slicedArray = orders.slice(val - 1, val);
+    console.log(slicedArray);
+    return setSortOrders(slicedArray);
+  };
+
   return (
     <div className="Orders__main-container">
+      <div className="Orders__main-heading">
+        {/* <cartIcon fill="red" stroke="green" alt="dds" /> */}
+        My Orders
+      </div>
       <MiniNavbar
         isVisible={currentUser}
         clearCurrentUser={clearCurrentUser}
@@ -173,11 +307,29 @@ export default function Orders() {
       {currentUser ? (
         <OrderPage order={currentUser}></OrderPage>
       ) : (
-        <OrdersListing
-          currentUserSelection={currentUserSelection}
-          orders={orders}
-          users={users}
-        ></OrdersListing>
+        <div>
+          <OrdersListing
+            currentUserSelection={currentUserSelection}
+            orders={sortOrders}
+            users={users}
+          ></OrdersListing>
+          <div className="Orders__pagination">
+            <Stack spacing={2}>
+              <Pagination
+                onChange={(event, val) => modifyOrders(event, val)}
+                variant="outlined"
+                color="primary"
+                boundaryCount={2}
+                count={
+                  orders.length % 6 === 0
+                    ? orders.length / 6
+                    : Math.floor(orders.length / 6) + 1
+                }
+                page={page}
+              />
+            </Stack>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -7,6 +7,25 @@
     }
   }
 
+  &__main-heading {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1;
+    margin-left: 12px;
+    white-space: pre;
+    text-transform: none;
+    white-space: normal;
+  }
+
+  &__pagination {
+    padding: 20px;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+  }
+
   &__card-container {
     display: flex;
     flex-wrap: wrap;

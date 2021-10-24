@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 import Paper from "@mui/material/Paper";
 
+import TextField from "@mui/material/TextField";
+
 import { userlogin, getToken } from "store/auth";
 import { getUser } from "store/user";
 import UserContext from "UserContext";
@@ -124,25 +126,29 @@ export default function Login() {
               <div className="Login__wrong-password">{apiresponsemessage}</div>
             ) : null}
             <div className="Login__col-3">
-              <input
-                className="Login__input-focus-effect"
-                type="text"
-                placeholder="Phone Number"
-                onChange={(e) => setUsername(e.target.value)}
+              <TextField
+                error={false}
+                id="outlined-error"
+                label="Phone Number"
+                defaultValue="Hello World"
+                fullWidth
+                size="small"
                 value={username}
-              ></input>
-              <span className="focus-border"></span>
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
 
             <div className="Login__col-3">
-              <input
-                className="Login__input-focus-effect"
+              <TextField
                 type={showPassword ? "text" : "password"}
-                onChange={(e) => setPassword(e.target.value)}
+                error={false}
+                id="outlined-error"
+                label="Password"
+                fullWidth
+                size="small"
                 value={password}
-                placeholder="Password"
-              ></input>
-              <span className="focus-border"></span>
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
               {showPassword ? (
                 <span
@@ -160,6 +166,7 @@ export default function Login() {
                 </span>
               )}
             </div>
+
             <div className="Login__col-3">
               <input
                 onClick={handleLogin}
