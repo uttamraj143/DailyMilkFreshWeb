@@ -2,13 +2,15 @@ import "./Navbar.scss";
 import { useState, useRef, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import DailyMilkFreshLogo from "logo.png";
-import settingsIcon from "components/svgs/settingsIcon.svg";
-import cartIcon from "components/svgs/cartIcon.svg";
-import truckIcon from "components/svgs/truck.svg";
-import usersIcon from "components/svgs/users.svg";
-import userBadge from "components/svgs/userBadge.svg";
-import exportIcon from "components/svgs/export.svg";
-import listIcon from "components/svgs/checkList.svg";
+
+import { ReactComponent as SettingsIcon } from "components/svgs/settingsIcon.svg";
+
+import { ReactComponent as CartIcon } from "components/svgs/cartIcon.svg";
+import { ReactComponent as TruckIcon } from "components/svgs/truck.svg";
+import { ReactComponent as UsersIcon } from "components/svgs/users.svg";
+import { ReactComponent as UserBadge } from "components/svgs/userBadge.svg";
+import { ReactComponent as ExportIcon } from "components/svgs/export.svg";
+import { ReactComponent as ListIcon } from "components/svgs/checkList.svg";
 import UserContext from "UserContext";
 
 export default function Navbar(props) {
@@ -102,19 +104,19 @@ export default function Navbar(props) {
   const menuIcon = (menuNumber) => {
     switch (menuNumber.toString()) {
       case "1":
-        return cartIcon;
+        return <CartIcon style={{ color: "white" }} />;
       case "2":
-        return userBadge;
+        return <UserBadge style={{ color: "white" }} />;
       case "3":
-        return usersIcon;
+        return <UsersIcon style={{ color: "white" }} />;
       case "4":
-        return listIcon;
+        return <ListIcon style={{ color: "white" }} />;
       case "5":
-        return truckIcon;
+        return <TruckIcon style={{ color: "white" }} />;
       case "6":
-        return exportIcon;
+        return <ExportIcon style={{ color: "white" }} />;
       default:
-        return settingsIcon;
+        return <SettingsIcon style={{ color: "white" }} />;
     }
   };
 
@@ -146,12 +148,10 @@ export default function Navbar(props) {
               return (
                 <li key={i} onClick={(e) => changeMenu(e, item.value)}>
                   <div className="Navbar__sideMenu-icons">
-                    <img
-                      className="Navbar__sideMenu-icons-img"
-                      src={menuIcon(i + 1)}
-                      alt="settings"
-                    ></img>
-                    <span>{item.title}</span>
+                    {menuIcon(i + 1)}
+                    <span className="Navbar__sideMenu-icons-img">
+                      {item.title}
+                    </span>
                   </div>
                 </li>
               );

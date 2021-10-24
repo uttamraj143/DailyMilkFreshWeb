@@ -127,10 +127,9 @@ export default function Login() {
             ) : null}
             <div className="Login__col-3">
               <TextField
-                error={false}
-                id="outlined-error"
+                error={Boolean(apiresponsemessage)}
+                id="username"
                 label="Phone Number"
-                defaultValue="Hello World"
                 fullWidth
                 size="small"
                 value={username}
@@ -141,8 +140,8 @@ export default function Login() {
             <div className="Login__col-3">
               <TextField
                 type={showPassword ? "text" : "password"}
-                error={false}
-                id="outlined-error"
+                error={Boolean(apiresponsemessage)}
+                id="password"
                 label="Password"
                 fullWidth
                 size="small"
