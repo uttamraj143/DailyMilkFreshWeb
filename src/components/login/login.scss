@@ -3,15 +3,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    text-align: center;
+    height: 100vh;
+  }
+
+  &__paper {
+    margin: auto;
+    width: 500px;
+    @media screen and (max-width: 500px) {
+      width: unset;
+    }
   }
 
   &__sub-container {
-    height: 430px;
+    height: auto;
     width: 500px;
     margin: 50px auto;
     @media screen and (max-width: 1000px) {
       padding: 0;
-      height: 100vh;
       width: 95%;
       margin: auto;
     }
@@ -46,9 +56,6 @@
     margin: 30px;
     // font-weight: 600;
     // text-transform: uppercase;
-    font-family: "Courgette", cursive;
-    font-family: "Poppins", sans-serif;
-    // font-family: 'Raleway', sans-serif;
     color: #37a4db;
   }
 
@@ -87,7 +94,8 @@
 
   &__show-password {
     position: absolute;
-    right: 0px;
+    right: 7px;
+    top: 7px;
     font-size: 10px;
     cursor: pointer;
   }

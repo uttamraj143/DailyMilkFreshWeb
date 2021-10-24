@@ -2,6 +2,9 @@ import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
+import Paper from "@mui/material/Paper";
+
+import TextField from "@mui/material/TextField";
 
 import { userlogin, getToken } from "store/auth";
 import { getUser } from "store/user";
@@ -107,89 +110,95 @@ export default function Login() {
   };
   return (
     <div className="Login__main-container">
-      <img
-        className="Login__logo-image"
-        src={DailyMilkFreshLogo}
-        alt="this is logo"
-      ></img>
+      <Paper className="Login__paper" elevation={2}>
+        <img
+          className="Login__logo-image"
+          src={DailyMilkFreshLogo}
+          alt="this is logo"
+        ></img>
 
-      {!resetPasswordClicked ? (
-        <form className="Login__sub-container">
-          {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
-          {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
-          <div className="Login__login-header"> Sign in - Admin Panel </div>
-          {apiresponsemessage ? (
-            <div className="Login__wrong-password">{apiresponsemessage}</div>
-          ) : null}
-          <div className="Login__col-3">
-            <input
-              className="Login__input-focus-effect"
-              type="text"
-              placeholder="Phone Number"
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-            ></input>
-            <span className="focus-border"></span>
-          </div>
+        {!resetPasswordClicked ? (
+          <form className="Login__sub-container">
+            {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
+            {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
+            <div className="Login__login-header"> Sign in - Admin Panel </div>
+            {apiresponsemessage ? (
+              <div className="Login__wrong-password">{apiresponsemessage}</div>
+            ) : null}
+            <div className="Login__col-3">
+              <TextField
+                error={Boolean(apiresponsemessage)}
+                id="username"
+                label="Phone Number"
+                fullWidth
+                size="small"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
 
-          <div className="Login__col-3">
-            <input
-              className="Login__input-focus-effect"
-              type={showPassword ? "text" : "password"}
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              placeholder="Password"
-            ></input>
-            <span className="focus-border"></span>
+            <div className="Login__col-3">
+              <TextField
+                type={showPassword ? "text" : "password"}
+                error={Boolean(apiresponsemessage)}
+                id="password"
+                label="Password"
+                fullWidth
+                size="small"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-            {showPassword ? (
-              <span
-                onClick={toggleShowPassword}
-                className="Login__show-password"
-              >
-                <img className="" src={eyecloseIcon} alt="closeeye"></img>
-              </span>
-            ) : (
-              <span
-                onClick={toggleShowPassword}
-                className="Login__show-password"
-              >
-                <img className="" src={eyeopenIcon} alt="closeeye"></img>
-              </span>
-            )}
-          </div>
-          <div className="Login__col-3">
-            <input
-              onClick={handleLogin}
-              disabled={!validateForm() || clickedonce}
-              type="submit"
-              value="Log In"
-              className={
-                validateForm()
-                  ? "Login__submit"
-                  : "Login__submit Login__submit-disabled"
-              }
-            ></input>
-          </div>
+              {showPassword ? (
+                <span
+                  onClick={toggleShowPassword}
+                  className="Login__show-password"
+                >
+                  <img className="" src={eyecloseIcon} alt="closeeye"></img>
+                </span>
+              ) : (
+                <span
+                  onClick={toggleShowPassword}
+                  className="Login__show-password"
+                >
+                  <img className="" src={eyeopenIcon} alt="closeeye"></img>
+                </span>
+              )}
+            </div>
 
-          <div
-            className="Login__signup"
-            onClick={(e) => toggleForgotPassword(e)}
-          >
-            <span className="Login__forgot"> Forgot your password ? </span>
-          </div>
-        </form>
-      ) : (
-        <ForgotPassword
-          username={username}
-          setUsername={setUsername}
-          setResetPassword={setResetPassword}
-          apiresponsemessage={apiresponsemessage}
-          setapiresponse={setapiresponse}
-          clickedonce={clickedonce}
-          setClickOnce={setClickOnce}
-        ></ForgotPassword>
-      )}
+            <div className="Login__col-3">
+              <input
+                onClick={handleLogin}
+                disabled={!validateForm() || clickedonce}
+                type="submit"
+                value="Log In"
+                className={
+                  validateForm()
+                    ? "Login__submit"
+                    : "Login__submit Login__submit-disabled"
+                }
+              ></input>
+            </div>
+
+            <div
+              className="Login__signup"
+              onClick={(e) => toggleForgotPassword(e)}
+            >
+              <span className="Login__forgot"> Forgot your password ? </span>
+            </div>
+          </form>
+        ) : (
+          <ForgotPassword
+            username={username}
+            setUsername={setUsername}
+            setResetPassword={setResetPassword}
+            apiresponsemessage={apiresponsemessage}
+            setapiresponse={setapiresponse}
+            clickedonce={clickedonce}
+            setClickOnce={setClickOnce}
+          ></ForgotPassword>
+        )}
+      </Paper>
     </div>
   );
 }

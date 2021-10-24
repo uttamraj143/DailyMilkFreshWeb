@@ -2,7 +2,7 @@
     xmlns="http://www.w3.org/2000/svg"
     width="25"
     height="25"
-    fill="currect"
+    fill="currentColor"
     className="bi bi-eye"
     viewBox="0 0 16 16"
 >
