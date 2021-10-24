@@ -2,7 +2,7 @@ import { useState } from "react";
 import OrdersListing from "components/Orders/OrdersListing";
 import OrderPage from "components/Orders/OrderPage";
 import MiniNavbar from "components/common/MiniNavbar";
-// import { ReactComponent as cartIcon } from "components/svgs/cartIcon.svg";
+import { ReactComponent as CartIcon } from "components/svgs/cartIcon.svg";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
@@ -294,7 +294,7 @@ export default function Orders() {
   return (
     <div className="Orders__main-container">
       <div className="Orders__main-heading">
-        {/* <cartIcon fill="red" stroke="green" alt="dds" /> */}
+        <CartIcon style={{ color: "#90a0ee" }} />
         My Orders
       </div>
       <MiniNavbar

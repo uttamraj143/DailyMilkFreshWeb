@@ -41,7 +41,7 @@ export default function Navbar(props) {
     { title: "Export Data", value: "export_data" },
     {
       value: "settings",
-      title: "settings",
+      title: "Account",
     },
   ]);
   const [agentMenuOptions] = useState([

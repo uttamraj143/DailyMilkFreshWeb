@@ -44,6 +44,15 @@ export default function Dashboard() {
         return <ExportData />;
       case "settings":
         return <Settings />;
+
+      case "1":
+        return <Orders />;
+      case "2":
+        return <Deliveries />;
+      case "3":
+        return <Agents />;
+      case "4":
+        return <Settings />;
       default:
         return <Statistics />;
     }
@@ -68,7 +77,7 @@ export default function Dashboard() {
           <div className="AgentDashboard__main-container">
             {isAdmin() ? adminComponents() : agentComponents()}
           </div>
-          <MobileNav className="chaii"> </MobileNav>
+          <MobileNav currentMenuSelection={currentSelection}></MobileNav>
         </div>
       )}
     </div>

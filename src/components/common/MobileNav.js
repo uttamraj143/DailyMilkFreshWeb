@@ -1,28 +1,22 @@
-import * as React from "react";
+import { useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 
 import Paper from "@mui/material/Paper";
-import settingsIcon from "components/svgs/settingsIcon.svg";
-import cartIcon from "components/svgs/cartIcon.svg";
-import truckIcon from "components/svgs/truck.svg";
-import usersIcon from "components/svgs/users.svg";
-import userBadge from "components/svgs/userBadge.svg";
-import exportIcon from "components/svgs/export.svg";
-import listIcon from "components/svgs/checkList.svg";
-import CheckBoxOutlineBlankIcon from "components/svgs/unchecked.svg";
+import { ReactComponent as SettingsIcon } from "components/svgs/settingsIcon.svg";
+import { ReactComponent as CartIcon } from "components/svgs/cartIcon.svg";
+import { ReactComponent as TruckIcon } from "components/svgs/truck.svg";
 
-export default function FixedBottomNavigation() {
-  const [value, setValue] = React.useState(0);
-  const ref = React.useRef(null);
+export default function MobileNav(props) {
+  const [value, setValue] = useState(0);
+  const ref = useRef(null);
 
-  const RestoreIcon = <img src={userBadge} fontSize="small" />;
-  const FavoriteIcon = <img src={CheckBoxOutlineBlankIcon} fontSize="small" />;
-  const ArchiveIcon = (
-    <img style={{ color: "black" }} src={userBadge} fontSize="small" />
-  );
+  const changeMobileMenu = (e, sal) => {
+    e.preventDefault();
+    props.currentMenuSelection((sal + 1).toString()); // emitting data to parent
+  };
 
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
@@ -36,12 +30,26 @@ export default function FixedBottomNavigation() {
           showLabels
           value={value}
           onChange={(event, newValue) => {
+            changeMobileMenu(event, newValue);
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Recents" icon={RestoreIcon} />
-          <BottomNavigationAction label="Favorites" icon={FavoriteIcon} />
-          <BottomNavigationAction label="Archive" icon={ArchiveIcon} />
+          <BottomNavigationAction
+            label="Orders"
+            icon={<CartIcon style={{ color: "#90a0ee" }} />}
+          />
+          <BottomNavigationAction
+            label="Deliveries"
+            icon={<TruckIcon style={{ color: "#90a0ee" }} />}
+          />
+          <BottomNavigationAction
+            label="Agents"
+            icon={<CartIcon style={{ color: "#90a0ee" }} />}
+          />
+          <BottomNavigationAction
+            label="Account"
+            icon={<SettingsIcon style={{ color: "#90a0ee" }} />}
+          />
         </BottomNavigation>
       </Paper>
     </Box>
