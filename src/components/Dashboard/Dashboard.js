@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import "./Dashboard.scss";
 import Navbar from "components/common/Navbar";
+import MobileNav from "components/common/MobileNav";
 import Orders from "components/Orders/Orders";
 import Users from "components/Users/Users.js";
 import Products from "components/Products/Products";
@@ -67,6 +68,7 @@ export default function Dashboard() {
           <div className="AgentDashboard__main-container">
             {isAdmin() ? adminComponents() : agentComponents()}
           </div>
+          <MobileNav className="chaii"> </MobileNav>
         </div>
       )}
     </div>
