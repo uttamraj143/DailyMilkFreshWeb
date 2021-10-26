@@ -7,6 +7,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
 import { ReactComponent as SettingsIcon } from "components/svgs/settingsIcon.svg";
 import { ReactComponent as CartIcon } from "components/svgs/cartIcon.svg";
+import { ReactComponent as QrIcon } from "components/svgs/qrcode.svg";
 import { ReactComponent as TruckIcon } from "components/svgs/truck.svg";
 
 export default function MobileNav(props) {
@@ -43,8 +44,8 @@ export default function MobileNav(props) {
             icon={<TruckIcon style={{ color: "#90a0ee" }} />}
           />
           <BottomNavigationAction
-            label="Agents"
-            icon={<CartIcon style={{ color: "#90a0ee" }} />}
+            label="Scan QR"
+            icon={<QrIcon style={{ color: "#90a0ee" }} />}
           />
           <BottomNavigationAction
             label="Account"
