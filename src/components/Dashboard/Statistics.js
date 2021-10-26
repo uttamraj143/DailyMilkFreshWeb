@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 import "./Statistics.scss";
 import TextField from "@mui/material/TextField";
+import { ReactComponent as CartIcon } from "components/svgs/graphIncrease.svg";
 
 const chartConfig = {
   type: "line",
@@ -138,7 +139,15 @@ export default function ProductionStatistics() {
 
   return (
     <div className="Statistics__main-container">
-      <form noValidate>
+      <div className="Orders__main-heading">
+        <CartIcon style={{ color: "#90a0ee" }} />
+        &nbsp; Admin Panel
+      </div>
+      {/* <a target="_blank" href="https://wa.me?send?text=Hello%20World!">
+          Share with Whatsapp
+        </a> */}
+
+      <form className="" noValidate>
         <TextField
           id="date"
           label="Date "

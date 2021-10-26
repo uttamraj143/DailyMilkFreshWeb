@@ -3,6 +3,10 @@
     padding-top: 60px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-left: 200px;
+    @media screen and (max-width: 1025px) {
+      margin-left: unset;
+      align-items: center;
+    }
   }
 }

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import AgentsListing from "components/Agents/AgentsListing";
 import AddAgent from "components/Agents/AddAgent";
 import Spinner from "spinner.png";
+import { ReactComponent as UsersIcon } from "components/svgs/userBadge.svg";
 
 // import MiniNavbar from 'components/common/MiniNavbar';
 import "./Agents.scss";
@@ -38,14 +39,20 @@ export default function Agents() {
 
   return (
     <div className="Agents__main-container">
-      <div>
-        <button
-          className="Agents__refresh-button"
-          onClick={(e) => addAgentClicked(e)}
-        >
-          {addagenttoggle ? "Cancel Adding" : "Add new Agent"}
-        </button>
+      <div className="Orders__main-heading">
+        <div>
+          <UsersIcon style={{ color: "#90a0ee" }} /> &nbsp; Agents
+        </div>
+        <div>
+          <button
+            className="Agents__refresh-button"
+            onClick={(e) => addAgentClicked(e)}
+          >
+            {addagenttoggle ? "Cancel Adding" : "Add new Agent"}
+          </button>
+        </div>
       </div>
+
       {!spinner ? (
         <div>
           {addagenttoggle ? (

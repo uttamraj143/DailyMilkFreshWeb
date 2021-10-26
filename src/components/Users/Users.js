@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import UsersListing from "components/Users/UsersListing";
 import AddUser from "components/Users/AddUser";
 import Spinner from "spinner.png";
+import { ReactComponent as UserBadge } from "components/svgs/users.svg";
 
 // import MiniNavbar from 'components/common/MiniNavbar';
 import "./Users.scss";
@@ -38,14 +39,20 @@ export default function Users() {
 
   return (
     <div className="Users__main-container">
-      <div>
-        <button
-          className="Users__refresh-button"
-          onClick={(e) => addUserClicked(e)}
-        >
-          {addagenttoggle ? "Cancel Adding" : "Add new User"}
-        </button>
+      <div className="Orders__main-heading">
+        <div>
+          <UserBadge style={{ color: "#90a0ee" }} /> &nbsp; Users
+        </div>
+        <div>
+          <button
+            className="Users__refresh-button"
+            onClick={(e) => addUserClicked(e)}
+          >
+            {addagenttoggle ? "Cancel Adding" : "Add new User"}
+          </button>
+        </div>
       </div>
+
       {!spinner ? (
         <div>
           {addagenttoggle ? (

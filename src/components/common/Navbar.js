@@ -64,13 +64,14 @@ export default function Navbar(props) {
 
   let history = useHistory();
   const openSidebarMenus = useRef();
+  const [windowWidh] = useState(Boolean(window.innerWidth > 1025));
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
   function useOutsideAlerter(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
+        if (!windowWidh && ref.current && !ref.current.contains(event.target)) {
           openSidebarMenus.current.checked = false;
         }
       }
@@ -103,7 +104,7 @@ export default function Navbar(props) {
   const changeMenu = (e, sal) => {
     e.preventDefault();
     props.currentMenuSelection(sal); // emitting data to parent
-    openSidebarMenus.current.checked = false;
+    if (!windowWidh) openSidebarMenus.current.checked = false;
   };
 
   const menuIcon = (menuNumber) => {
@@ -111,9 +112,9 @@ export default function Navbar(props) {
       case "1":
         return <CartIcon style={{ color: "white" }} />;
       case "2":
-        return <UserBadge style={{ color: "white" }} />;
-      case "3":
         return <UsersIcon style={{ color: "white" }} />;
+      case "3":
+        return <UserBadge style={{ color: "white" }} />;
       case "4":
         return <ListIcon style={{ color: "white" }} />;
       case "5":
@@ -134,6 +135,7 @@ export default function Navbar(props) {
       <div>
         <input
           type="checkbox"
+          defaultChecked={windowWidh}
           ref={openSidebarMenus}
           className="openSidebarMenu"
           id="openSidebarMenu"

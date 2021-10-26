@@ -27,11 +27,12 @@
   }
 
   &__sidebarMenu {
-    height: 100%;
+    height: calc(94vh - 60px);
+    overflow-y: auto;
     position: fixed;
     left: 0;
     top: 12px;
-    width: 250px;
+    width: 200px;
     margin-top: 40px;
     transform: translateX(-250px);
     transition: transform 250ms ease-in-out;
