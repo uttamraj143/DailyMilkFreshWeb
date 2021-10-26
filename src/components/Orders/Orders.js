@@ -294,8 +294,8 @@ export default function Orders() {
   return (
     <div className="Orders__main-container">
       <div className="Orders__main-heading">
-        <div>
-          <CartIcon style={{ color: "#90a0ee" }} /> &nbsp; My Orders
+        <div className="General-main-heading">
+          <CartIcon /> {"  "} My Orders
         </div>
       </div>
       <MiniNavbar

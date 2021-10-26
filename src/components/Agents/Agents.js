@@ -3,6 +3,8 @@ import AgentsListing from "components/Agents/AgentsListing";
 import AddAgent from "components/Agents/AddAgent";
 import Spinner from "spinner.png";
 import { ReactComponent as UsersIcon } from "components/svgs/userBadge.svg";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 // import MiniNavbar from 'components/common/MiniNavbar';
 import "./Agents.scss";
@@ -14,6 +16,7 @@ export default function Agents() {
   const [agents, setAgents] = useState([]);
   const [addagenttoggle, toggleAddAgent] = useState(false);
   const [spinner, toggleSpinner] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     function getAllAgents() {
@@ -40,12 +43,12 @@ export default function Agents() {
   return (
     <div className="Agents__main-container">
       <div className="Orders__main-heading">
-        <div>
-          <UsersIcon style={{ color: "#90a0ee" }} /> &nbsp; Agents
+        <div className="General-main-heading">
+          <UsersIcon /> {"  "} Agents
         </div>
         <div>
           <button
-            className="Agents__refresh-button"
+            className="Users__refresh-button"
             onClick={(e) => addAgentClicked(e)}
           >
             {addagenttoggle ? "Cancel Adding" : "Add new Agent"}
@@ -61,7 +64,26 @@ export default function Agents() {
               access_token={userInfo.access_token}
             ></AddAgent>
           ) : (
-            <AgentsListing agents={agents}></AgentsListing>
+            <>
+              <AgentsListing agents={agents}></AgentsListing>
+
+              <div className="Orders__pagination">
+                <Stack spacing={2}>
+                  <Pagination
+                    // onChange={(event, val) => modifyOrders(event, val)}
+                    variant="outlined"
+                    color="primary"
+                    boundaryCount={2}
+                    count={
+                      agents.length % 6 === 0
+                        ? agents.length / 6
+                        : Math.floor(agents.length / 6) + 1
+                    }
+                    page={page}
+                  />
+                </Stack>
+              </div>
+            </>
           )}
         </div>
       ) : (

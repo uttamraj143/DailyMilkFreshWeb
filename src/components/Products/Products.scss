@@ -71,16 +71,6 @@
     margin-bottom: 20px;
   }
 
-  &__refresh-button {
-    background: transparent;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    &-disabled {
-      cursor: not-allowed;
-    }
-  }
-
   &__order {
     // flex: 0 0 400px;
     flex: 0 0 355px;

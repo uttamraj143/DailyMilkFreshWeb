@@ -2,7 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import ProductsListing from "components/Products/ProductsListing";
 import AddProduct from "components/Products/AddProduct";
 import Spinner from "spinner.png";
-
+import { ReactComponent as ProductIcon } from "components/svgs/checkList.svg";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 // import MiniNavbar from 'components/common/MiniNavbar';
 import "./Products.scss";
 import { listProducts } from "store/products";
@@ -14,6 +16,7 @@ export default function Products() {
   const [products, setProducts] = useState([]);
   const [not_products, setNotProducts] = useState([]);
   const [addagenttoggle, toggleAddProduct] = useState(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     listProducts(1, userInfo.access_token)
@@ -41,14 +44,20 @@ export default function Products() {
 
   return (
     <div className="Products__main-container">
-      <div>
-        <button
-          className="Products__refresh-button"
-          onClick={(e) => addProductClicked(e)}
-        >
-          {addagenttoggle ? "Cancel Adding" : "Add new Product"}
-        </button>
+      <div className="Orders__main-heading">
+        <div className="General-main-heading">
+          <ProductIcon /> {"  "} Products
+        </div>
+        <div>
+          <button
+            className="Users__refresh-button"
+            onClick={(e) => addProductClicked(e)}
+          >
+            {addagenttoggle ? "Cancel Adding" : "Add new Product"}
+          </button>
+        </div>
       </div>
+
       {!spinner ? (
         <div>
           {addagenttoggle ? (
@@ -60,6 +69,23 @@ export default function Products() {
             <>
               <ProductsListing products={products}></ProductsListing>
               <ProductsListing products={not_products}></ProductsListing>
+
+              <div className="Orders__pagination">
+                <Stack spacing={2}>
+                  <Pagination
+                    // onChange={(event, val) => modifyOrders(event, val)}
+                    variant="outlined"
+                    color="primary"
+                    boundaryCount={2}
+                    count={
+                      products.length % 2 === 0
+                        ? products.length / 2
+                        : Math.floor(products.length / 2) + 1
+                    }
+                    page={page}
+                  />
+                </Stack>
+              </div>
             </>
           )}
         </div>

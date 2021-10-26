@@ -102,8 +102,8 @@ export default function AddProduct(props) {
           <input
             className={
               errors.length
-                ? "Products__refresh-button Products__refresh-button-disabled"
-                : "Products__refresh-button"
+                ? "Users__refresh-button Users__refresh-button-disabled"
+                : "Users__refresh-button"
             }
             type="submit"
             value="Add New Product"
