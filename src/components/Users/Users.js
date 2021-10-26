@@ -16,6 +16,7 @@ export default function Users() {
   const [users, setUsers] = useState([]);
   const [addagenttoggle, toggleAddUser] = useState(false);
   const [page, setPage] = useState(1);
+  const [modifiedUsers, setSortUsers] = useState([]);
 
   useEffect(() => {
     const getAllUsers = () => {
@@ -34,9 +35,20 @@ export default function Users() {
     getAllUsers();
   }, [userInfo.access_token, addagenttoggle, userInfo]);
 
+  useEffect(() => {
+    modifyUsers(null, 1);
+  }, [users]);
+
   const addUserClicked = (e) => {
     e && e.preventDefault();
     toggleAddUser(!addagenttoggle);
+  };
+
+  const modifyUsers = (e, val) => {
+    e && e.preventDefault();
+    setPage(val);
+    const slicedArray = users.slice((val - 1) * 6, val * 6);
+    return setSortUsers(slicedArray);
   };
 
   return (
@@ -64,19 +76,19 @@ export default function Users() {
             ></AddUser>
           ) : (
             <>
-              <UsersListing users={users}></UsersListing>
+              <UsersListing users={modifiedUsers}></UsersListing>
 
               <div className="Orders__pagination">
                 <Stack spacing={2}>
                   <Pagination
-                    // onChange={(event, val) => modifyOrders(event, val)}
+                    onChange={(event, val) => modifyUsers(event, val)}
                     variant="outlined"
                     color="primary"
                     boundaryCount={2}
                     count={
-                      users.length % 2 === 0
-                        ? users.length / 2
-                        : Math.floor(users.length / 2) + 1
+                      users.length % 6 === 0
+                        ? users.length / 6
+                        : Math.floor(users.length / 6) + 1
                     }
                     page={page}
                   />
