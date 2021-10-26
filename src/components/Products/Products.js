@@ -25,7 +25,9 @@ export default function Products() {
         });
       })
       .catch((res) => {
-        if (res.response.status === 401) {
+        // optional chaining
+        let status = res?.response?.status;
+        if (status & (status === 401)) {
           userInfo.refreshAccessToken();
           toggleSpinner(true);
         }

@@ -9,6 +9,7 @@ import { ReactComponent as CartIcon } from "components/svgs/cartIcon.svg";
 import { ReactComponent as TruckIcon } from "components/svgs/truck.svg";
 import { ReactComponent as UsersIcon } from "components/svgs/users.svg";
 import { ReactComponent as UserBadge } from "components/svgs/userBadge.svg";
+import { ReactComponent as AssignUserIcon } from "components/svgs/userPlus.svg";
 import { ReactComponent as ExportIcon } from "components/svgs/export.svg";
 import { ReactComponent as ListIcon } from "components/svgs/checkList.svg";
 import UserContext from "UserContext";
@@ -21,12 +22,12 @@ export default function Navbar(props) {
       value: "orders_list",
     },
     {
-      title: "Agents",
-      value: "agents_list",
-    },
-    {
       title: "Users",
       value: "users_list",
+    },
+    {
+      title: "Agents",
+      value: "agents_list",
     },
     // {
     //   title: 'Statistics',
@@ -39,6 +40,10 @@ export default function Navbar(props) {
     {
       title: "Deliveries",
       value: "deliveries",
+    },
+    {
+      value: "assign_users",
+      title: "Assign Users",
     },
     { title: "Export Data", value: "export_data" },
     {
@@ -114,6 +119,8 @@ export default function Navbar(props) {
       case "5":
         return <TruckIcon style={{ color: "white" }} />;
       case "6":
+        return <AssignUserIcon style={{ color: "white" }} />;
+      case "7":
         return <ExportIcon style={{ color: "white" }} />;
       default:
         return <SettingsIcon style={{ color: "white" }} />;

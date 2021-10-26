@@ -12,6 +12,7 @@ import ExportData from "components/Dashboard/ExportData";
 import Statistics from "components/Dashboard/Statistics";
 import UserContext from "UserContext";
 import Deliveries from "components/Deliveries/Deliveries";
+import AssignUsers from "components/AssigningUsersToAgent/AssignUsers";
 
 export default function Dashboard() {
   const userInfo = useContext(UserContext);
@@ -38,6 +39,8 @@ export default function Dashboard() {
         return <Users />;
       case "products_list":
         return <Products />;
+      case "assign_users":
+        return <AssignUsers />;
       case "deliveries":
         return <Deliveries />;
       case "export_data":

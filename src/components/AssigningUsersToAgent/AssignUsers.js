@@ -9,7 +9,7 @@ const icon = <img src={CheckBoxOutlineBlankIcon} fontSize="small" />;
 const checkedIcon = <img src={CheckBoxIcon} fontSize="small" />;
 <CheckBoxIcon fontSize="small" />;
 
-export default function CheckboxesTags() {
+export default function AssignUsers() {
   return (
     <Autocomplete
       multiple
