@@ -25,6 +25,6 @@ https://medium.com/@akrush95/global-cached-state-in-react-using-hooks-context-an
 https://egghead.io/lessons/react-share-logic-across-multiple-react-components-with-custom-hooks
 
 add Footer
-pagination to Orders
 Sort according to Date and fetch only with Date
-mobile menu bottom
+
+https://www.codegrepper.com/code-examples/javascript/pass+context+from+one+file+to+another+reactjs
