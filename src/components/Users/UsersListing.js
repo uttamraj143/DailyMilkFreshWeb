@@ -18,7 +18,7 @@ export default function OrdersListing(props) {
             </div>
 
             <div className="Users__products-row">
-              <div className="Users__cust-heading">Customer</div>
+              <div className="Users__cust-heading">Customer Name</div>
               <div className="Users__right-column">{user.name}</div>
             </div>
             <div className="Users__products-row">
