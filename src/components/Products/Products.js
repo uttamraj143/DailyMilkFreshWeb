@@ -14,18 +14,14 @@ export default function Products() {
   const userInfo = useContext(UserContext);
   const [spinner, toggleSpinner] = useState(true);
   const [products, setProducts] = useState([]);
-  const [not_products, setNotProducts] = useState([]);
   const [addagenttoggle, toggleAddProduct] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   useEffect(() => {
-    listProducts(1, userInfo.access_token)
+    listProducts(null, userInfo.access_token)
       .then((res) => {
         setProducts(res.data.data);
-        listProducts(0, userInfo.access_token).then((res) => {
-          setNotProducts(res.data.data);
-          toggleSpinner(false);
-        });
+        toggleSpinner(false);
       })
       .catch((res) => {
         // optional chaining
@@ -67,8 +63,15 @@ export default function Products() {
             ></AddProduct>
           ) : (
             <>
-              <ProductsListing products={products}></ProductsListing>
-              <ProductsListing products={not_products}></ProductsListing>
+              {products.map((product, index) => {
+                return (
+                  <ProductsListing
+                    access_token={userInfo.access_token}
+                    key={index}
+                    products={product}
+                  ></ProductsListing>
+                );
+              })}
 
               <div className="Orders__pagination">
                 <Stack spacing={2}>

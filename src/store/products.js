@@ -11,13 +11,12 @@ export const listProducts = (num, access_token) => {
   });
 };
 
-export const updateProduct = (data) => {
+export const updateProduct = (access_token, id, data) => {
   return axiosInstance({
     method: "POST",
-    url: `/user/${data.access_token}/verify/${data.otp}`,
-    data: {
-      availability: data.num,
-    },
+    url: `/product/${id}/update`,
+    data: data,
+    headers: { access_token: access_token },
   });
 };
 
