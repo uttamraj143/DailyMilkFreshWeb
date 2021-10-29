@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 import "./Statistics.scss";
 import TextField from "@mui/material/TextField";
-import { ReactComponent as CartIcon } from "components/svgs/graphIncrease.svg";
+import { ReactComponent as GraphIcon } from "components/svgs/graphIncrease.svg";
 
 const chartConfig = {
-  type: "line",
+  type: "bar",
   data: {
     labels: ["25th", "26th", "27th", "28th", "29th", "30th"],
     datasets: [
@@ -30,12 +30,36 @@ const chartConfig = {
         ],
         borderWidth: 1,
       },
+      // {
+      //   label: "# of Votes",
+      //   data: [12, 13, 31, 21, 21, 22],
+      //   backgroundColor: [
+      //     "rgba(255, 99, 132, 0.2)",
+      //     "rgba(54, 162, 235, 0.2)",
+      //     "rgba(255, 206, 86, 0.2)",
+      //     "rgba(75, 192, 192, 0.2)",
+      //     "rgba(153, 102, 255, 0.2)",
+      //     "rgba(255, 159, 64, 0.2)",
+      //   ],
+      //   borderColor: [
+      //     "rgba(255, 99, 132, 1)",
+      //     "rgba(54, 162, 235, 1)",
+      //     "rgba(255, 206, 86, 1)",
+      //     "rgba(75, 192, 192, 1)",
+      //     "rgba(153, 102, 255, 1)",
+      //     "rgba(255, 159, 64, 1)",
+      //   ],
+      //   borderWidth: 1,
+      // },
     ],
   },
   options: {
     scales: {
       y: { min: 16 },
     },
+    barThickness: 16,
+    barPercentage: 0.5,
+    borderRadius: 5,
   },
 };
 
@@ -140,12 +164,19 @@ export default function ProductionStatistics() {
   return (
     <div className="Statistics__main-container">
       <div className="Orders__main-heading">
-        <CartIcon style={{ color: "#90a0ee" }} />
-        &nbsp; Admin Panel
+        <div className="General-main-heading">
+          <GraphIcon /> {"  "} Admin Panel
+        </div>
+        <div>
+          {/* <a
+            className="Users__refresh-button"
+            target="_blank"
+            href="https://wa.me?send?text=Hello%20World!"
+          >
+            Whatsapp
+          </a> */}
+        </div>
       </div>
-      {/* <a target="_blank" href="https://wa.me?send?text=Hello%20World!">
-          Share with Whatsapp
-        </a> */}
 
       <form className="" noValidate>
         <TextField

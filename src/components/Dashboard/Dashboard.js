@@ -12,6 +12,7 @@ import ExportData from "components/Dashboard/ExportData";
 import Statistics from "components/Dashboard/Statistics";
 import UserContext from "UserContext";
 import Deliveries from "components/Deliveries/Deliveries";
+import DeliveryTypes from "components/Deliveries/DeliveryTypes";
 import AssignUsers from "components/AssigningUsersToAgent/AssignUsers";
 
 export default function Dashboard() {
@@ -45,6 +46,8 @@ export default function Dashboard() {
         return <Deliveries />;
       case "export_data":
         return <ExportData />;
+      case "delivery_type":
+        return <DeliveryTypes />;
       case "settings":
         return <Settings />;
 

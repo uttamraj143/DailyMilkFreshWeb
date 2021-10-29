@@ -5,6 +5,7 @@ import editIcon from "components/svgs/pencil.svg";
 import saveIcon from "components/svgs/save.svg";
 
 export default function ListDeliveryTypes(props) {
+  const [singleDeliveryType, setDeliveryType] = useState(props.deliverytype);
   const [editing, setEdit] = useState(false);
 
   const editItem = (e, id) => {
@@ -12,7 +13,14 @@ export default function ListDeliveryTypes(props) {
     setEdit(id);
   };
 
-  // const deleteItem = (e) => {
+  const handleChange = (e) => {
+    e.preventDefault();
+    let name = e.target.value;
+    console.log(name);
+  };
+
+  //  DONT SHARE DELETE to Customer
+  // c const deleteItem = (e) => {
   //   e.preventDefault();
   //   console.log("confirn");
   // };
@@ -23,61 +31,51 @@ export default function ListDeliveryTypes(props) {
   };
 
   return (
-    <>
-      {props.deliverytotal.map((item, index) => {
-        return (
-          <Paper
-            key={index}
-            className="Deliveries__types-container"
-            elevation={2}
-          >
-            {editing === item.id ? (
-              <div>
-                <input
-                  className="Deliveries__edit-input"
-                  onChange={editItem}
-                  value={item.name}
-                />
-                <input
-                  className="Deliveries__edit-input"
-                  onChange={editItem}
-                  value={item.description}
-                />
-              </div>
-            ) : (
-              <div className="Deliveries__types-container">
-                {item.name} : {item.description}
-              </div>
-            )}
+    <Paper className="Deliveries__types-container" elevation={2}>
+      {editing === singleDeliveryType.id ? (
+        <div>
+          <input
+            className="Deliveries__edit-input"
+            onChange={(e) => handleChange(e)}
+            value={singleDeliveryType.name}
+          />
+          <input
+            className="Deliveries__edit-input"
+            onChange={(e) => handleChange(e)}
+            value={singleDeliveryType.description}
+          />
+        </div>
+      ) : (
+        <div className="Deliveries__types-container">
+          {singleDeliveryType.name} : {singleDeliveryType.description}
+        </div>
+      )}
 
-            <div className="Deliveries__types-container-img">
-              {editing === item.id ? (
-                <img
-                  className="Deliveries__types-svg"
-                  src={saveIcon}
-                  alt="save"
-                  onClick={saveHandle}
-                ></img>
-              ) : (
-                <>
-                  <img
-                    className="Deliveries__types-svg"
-                    onClick={(e) => editItem(e, item.id)}
-                    src={editIcon}
-                    alt="delete"
-                  ></img>
-                  {/* <img
+      <div className="Deliveries__types-container-img">
+        {editing === singleDeliveryType.id ? (
+          <img
+            className="Deliveries__types-svg"
+            src={saveIcon}
+            alt="save"
+            onClick={saveHandle}
+          ></img>
+        ) : (
+          <>
+            <img
+              className="Deliveries__types-svg"
+              onClick={((e) => editItem, singleDeliveryType.id)}
+              src={editIcon}
+              alt="delete"
+            ></img>
+            {/* <img
         className="Deliveries__types-svg"
-        onClick={(e) => deleteItem(e, item.id)}
+        onClick={(e) => deleteItem(e, singleDeliveryType.id)}
         src={deleteIcon}
         alt="delete"
       ></img> */}
-                </>
-              )}
-            </div>
-          </Paper>
-        );
-      })}
-    </>
+          </>
+        )}
+      </div>
+    </Paper>
   );
 }

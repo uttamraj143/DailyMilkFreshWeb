@@ -5,8 +5,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import CheckBoxOutlineBlankIcon from "components/svgs/unchecked.svg";
 import CheckBoxIcon from "components/svgs/checked.svg";
 
-const icon = <img src={CheckBoxOutlineBlankIcon} fontSize="small" />;
-const checkedIcon = <img src={CheckBoxIcon} fontSize="small" />;
+const icon = <img src={CheckBoxOutlineBlankIcon} alt="dsd" fontSize="small" />;
+const checkedIcon = <img src={CheckBoxIcon} alt="dsds" fontSize="small" />;
 <CheckBoxIcon fontSize="small" />;
 
 export default function AssignUsers() {
