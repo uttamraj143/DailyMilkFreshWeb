@@ -1,0 +1,10 @@
+.AssignUsers {
+  &__main {
+    // display: flex;
+    padding: 15px;
+    @media screen and (max-width: 450px) {
+      padding: 6px;
+      width: 100%;
+    }
+  }
+}
