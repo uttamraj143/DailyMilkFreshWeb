@@ -1,9 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "UserContext";
-import { listDeliveryTypes } from "store/deliveries";
-import AssignUsers from "components/Deliveries/AssignUsers";
+import { listDeliveryTypes, addDeliveryTypes } from "store/deliveries";
 
-import ListDeliveryTypes from "components/SuperUsers/ListDeliveryTypes";
+import ListDeliveryTypes from "components/Deliveries/ListDeliveryTypes";
 import "./Deliveries.scss";
 
 export default function DeliveryTypes() {
@@ -27,17 +26,29 @@ export default function DeliveryTypes() {
     getDeliveryTypes();
   }, [userInfo.access_token, userInfo]);
 
+  const addDeliverytype = (e) => {
+    e.preventDefault();
+    toggleType(!addDeliveryTypeToggle);
+  };
+
   return (
     <div className="Deliveries__main-container">
-      <button className="Deliveries__add-button">Add new Delivery Type</button>
+      <button
+        onClick={(e) => addDeliverytype(e)}
+        className="Users__refresh-button"
+      >
+        Add new Delivery Type
+      </button>
 
-      {deliverytotal.length && (
-        <ListDeliveryTypes deliverytotal={deliverytotal} />
-      )}
-
-      <div className="mmm">
-        <AssignUsers />
-      </div>
+      {deliverytotal.map((item, index) => {
+        return (
+          <ListDeliveryTypes
+            access_token={userInfo.access_token}
+            key={index}
+            deliverytype={item}
+          />
+        );
+      })}
     </div>
   );
 }

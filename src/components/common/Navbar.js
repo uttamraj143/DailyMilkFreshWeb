@@ -12,6 +12,7 @@ import { ReactComponent as UserBadge } from "components/svgs/userBadge.svg";
 import { ReactComponent as AssignUserIcon } from "components/svgs/userPlus.svg";
 import { ReactComponent as ExportIcon } from "components/svgs/export.svg";
 import { ReactComponent as ListIcon } from "components/svgs/checkList.svg";
+import { ReactComponent as NumberList } from "components/svgs/number_list.svg";
 import UserContext from "UserContext";
 
 export default function Navbar(props) {
@@ -44,6 +45,10 @@ export default function Navbar(props) {
     {
       value: "assign_users",
       title: "Assign Users",
+    },
+    {
+      value: "delivery_type",
+      title: "Delivery Types",
     },
     { title: "Export Data", value: "export_data" },
     {
@@ -122,6 +127,8 @@ export default function Navbar(props) {
       case "6":
         return <AssignUserIcon style={{ color: "white" }} />;
       case "7":
+        return <NumberList style={{ color: "white" }} />;
+      case "8":
         return <ExportIcon style={{ color: "white" }} />;
       default:
         return <SettingsIcon style={{ color: "white" }} />;

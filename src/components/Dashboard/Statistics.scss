@@ -1,7 +1,8 @@
 .Statistics {
   &__main-container {
+    padding: 15px;
     @media screen and (max-width: 450px) {
-      max-width: 86%;
+      padding: 6px;
     }
   }
 

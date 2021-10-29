@@ -16,7 +16,7 @@ export default function Agents() {
   const [agents, setAgents] = useState([]);
   const [addagenttoggle, toggleAddAgent] = useState(false);
   const [spinner, toggleSpinner] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   useEffect(() => {
     function getAllAgents() {
