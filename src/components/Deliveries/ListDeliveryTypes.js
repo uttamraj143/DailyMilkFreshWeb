@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Paper from "@mui/material/Paper";
 // import deleteIcon from "components/svgs/delete.svg";
+import cancelIcon from "components/svgs/cancel.svg";
 import editIcon from "components/svgs/pencil.svg";
 import saveIcon from "components/svgs/save.svg";
+import { updateDeliveryTypes } from "store/deliveries";
 
 export default function ListDeliveryTypes(props) {
   const [singleDeliveryType, setDeliveryType] = useState(props.deliverytype);
@@ -13,10 +15,20 @@ export default function ListDeliveryTypes(props) {
     setEdit(id);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e, no) => {
     e.preventDefault();
-    let name = e.target.value;
-    console.log(name);
+
+    switch (no) {
+      case 1:
+        return setDeliveryType({ ...singleDeliveryType, name: e.target.value });
+      case 2:
+        return setDeliveryType({
+          ...singleDeliveryType,
+          description: e.target.value,
+        });
+      default:
+        return;
+    }
   };
 
   //  DONT SHARE DELETE to Customer
@@ -27,6 +39,11 @@ export default function ListDeliveryTypes(props) {
 
   const saveHandle = (e) => {
     e.preventDefault();
+    let data = {
+      name: singleDeliveryType.name,
+      description: singleDeliveryType.description,
+    };
+    updateDeliveryTypes(props.access_token, data, singleDeliveryType.id);
     setEdit(false);
   };
 
@@ -36,12 +53,12 @@ export default function ListDeliveryTypes(props) {
         <div>
           <input
             className="Deliveries__edit-input"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChange(e, 1)}
             value={singleDeliveryType.name}
           />
           <input
             className="Deliveries__edit-input"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChange(e, 2)}
             value={singleDeliveryType.description}
           />
         </div>
@@ -53,17 +70,25 @@ export default function ListDeliveryTypes(props) {
 
       <div className="Deliveries__types-container-img">
         {editing === singleDeliveryType.id ? (
-          <img
-            className="Deliveries__types-svg"
-            src={saveIcon}
-            alt="save"
-            onClick={saveHandle}
-          ></img>
+          <>
+            <img
+              className="Deliveries__types-svg"
+              src={saveIcon}
+              alt="save"
+              onClick={(e) => saveHandle(e)}
+            ></img>
+            <img
+              className="Deliveries__types-svg"
+              src={cancelIcon}
+              alt="save"
+              onClick={(e) => setEdit(false)}
+            ></img>
+          </>
         ) : (
           <>
             <img
               className="Deliveries__types-svg"
-              onClick={((e) => editItem, singleDeliveryType.id)}
+              onClick={(e) => editItem(e, singleDeliveryType.id)}
               src={editIcon}
               alt="delete"
             ></img>

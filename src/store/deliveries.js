@@ -8,21 +8,20 @@ export const listDeliveryTypes = (access_token) => {
   });
 };
 
-// export const updateProduct = (data) => {
-//   return axiosInstance({
-//     method: "POST",
-//     url: `/user/${data.access_token}/verify/${data.otp}`,
-//     data: {
-//       availability: data.num,
-//     },
-//   });
-// };
+export const updateDeliveryTypes = (access_token, senddata, id) => {
+  return axiosInstance({
+    method: "POST",
+    url: `deliverytype/${id}/updatedeliverytype`,
+    headers: { access_token: access_token },
+    data: senddata,
+  });
+};
 
-// export const addProduct = (data) => {
-//   return axiosInstance({
-//     method: "POST",
-//     url: "product/add",
-//     data: data.product,
-//     headers: { access_token: data.access_token },
-//   });
-// };
+export const addDeliveryTypes = (data) => {
+  return axiosInstance({
+    method: "POST",
+    url: "deliverytype/adddeliverytype",
+    data: data,
+    headers: { access_token: data.access_token },
+  });
+};

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "UserContext";
-import { listDeliveryTypes } from "store/deliveries";
+import { listDeliveryTypes, addDeliveryTypes } from "store/deliveries";
 
 import ListDeliveryTypes from "components/Deliveries/ListDeliveryTypes";
 import "./Deliveries.scss";
@@ -41,7 +41,13 @@ export default function DeliveryTypes() {
       </button>
 
       {deliverytotal.map((item, index) => {
-        return <ListDeliveryTypes key={index} deliverytype={item} />;
+        return (
+          <ListDeliveryTypes
+            access_token={userInfo.access_token}
+            key={index}
+            deliverytype={item}
+          />
+        );
       })}
     </div>
   );
