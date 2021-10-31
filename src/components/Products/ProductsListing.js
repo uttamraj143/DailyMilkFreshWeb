@@ -26,7 +26,7 @@ export default function ProductsListing(props) {
   };
 
   return (
-    <div className="Products__card-container">
+    <div className="Products__card-box">
       <Paper className="Products__order" elevation={2}>
         <div className="Products__customername">
           <div className="Products__cust-id">In Stock </div>

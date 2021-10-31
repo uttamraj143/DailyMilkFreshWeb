@@ -53,46 +53,50 @@ export default function Products() {
           </button>
         </div>
       </div>
+      <div className="Products__card-container">
+        {addagenttoggle ? (
+          <AddProduct
+            toggleAddProduct={toggleAddProduct}
+            access_token={userInfo.access_token}
+          ></AddProduct>
+        ) : (
+          <>
+            {products.map((product, index) => {
+              return (
+                <ProductsListing
+                  access_token={userInfo.access_token}
+                  key={index}
+                  products={product}
+                ></ProductsListing>
+              );
+            })}
+          </>
+        )}
+      </div>
 
-      {!spinner ? (
-        <div>
-          {addagenttoggle ? (
-            <AddProduct
-              toggleAddProduct={toggleAddProduct}
-              access_token={userInfo.access_token}
-            ></AddProduct>
-          ) : (
-            <>
-              {products.map((product, index) => {
-                return (
-                  <ProductsListing
-                    access_token={userInfo.access_token}
-                    key={index}
-                    products={product}
-                  ></ProductsListing>
-                );
-              })}
-
-              <div className="Orders__pagination">
-                <Stack spacing={2}>
-                  <Pagination
-                    // onChange={(event, val) => modifyOrders(event, val)}
-                    variant="outlined"
-                    color="primary"
-                    boundaryCount={2}
-                    count={
-                      products.length % 2 === 0
-                        ? products.length / 2
-                        : Math.floor(products.length / 2) + 1
-                    }
-                    page={page}
-                  />
-                </Stack>
-              </div>
-            </>
-          )}
-        </div>
-      ) : (
+      <div
+        className={
+          addagenttoggle
+            ? "Orders__pagination Orders__pagination-none"
+            : "Orders__pagination"
+        }
+      >
+        <Stack spacing={2}>
+          <Pagination
+            // onChange={(event, val) => modifyOrders(event, val)}
+            variant="outlined"
+            color="primary"
+            boundaryCount={2}
+            count={
+              products.length % 2 === 0
+                ? products.length / 2
+                : Math.floor(products.length / 2) + 1
+            }
+            page={page}
+          />
+        </Stack>
+      </div>
+      {spinner && (
         <div className="Products__spinner">
           <img height="150px" width="150px" src={Spinner} alt="Daily"></img>
         </div>
