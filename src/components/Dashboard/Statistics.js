@@ -57,7 +57,7 @@ const chartConfig = {
     scales: {
       y: { min: 16 },
     },
-    barThickness: 16,
+    barThickness: 30,
     barPercentage: 0.5,
     borderRadius: 5,
   },
@@ -91,6 +91,9 @@ const milkTypeProduct = {
         min: 19,
       },
     },
+    barThickness: 50,
+    barPercentage: 0.8,
+    borderRadius: 5,
   },
 };
 

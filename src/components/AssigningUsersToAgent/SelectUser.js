@@ -17,12 +17,12 @@ export default function SelectUser(props) {
     const getAllUsers = () => {
       listUsers(3, props.access_token)
         .then((res) => {
-          toggleSpinner(false);
+          // toggleSpinner(false);
           setUsers(res.data.data);
         })
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
-            toggleSpinner(true);
+            // toggleSpinner(true);
             props.refreshAccessToken();
           }
         });
