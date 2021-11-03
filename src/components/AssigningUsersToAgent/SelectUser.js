@@ -24,7 +24,7 @@ export default function SelectUser(props) {
           if (res && res.response && res.response.status === 401) {
             // toggleSpinner(true);
             // props.refreshAccessToken();
-            window.location.reload();
+            // window.location.reload();
           }
         });
     };

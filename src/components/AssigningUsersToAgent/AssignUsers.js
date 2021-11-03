@@ -57,7 +57,9 @@ export default function AssignUsers() {
       ],
     };
 
-    assigningUsersToAgent(userInfo.access_token, submit);
+    assigningUsersToAgent(userInfo.access_token, submit).then((res) => {
+      setSenddata([]);
+    });
   };
 
   function getSteps() {
@@ -71,7 +73,6 @@ export default function AssignUsers() {
   }
 
   const handleData = (e, g, n) => {
-    console.log(g, n);
     e.preventDefault();
     if (n === "agent") setSenddata({ ...sendData, agent_id: g });
     if (n === "user") setSenddata({ ...sendData, user_id: g });
@@ -88,7 +89,7 @@ export default function AssignUsers() {
           <>
             <SelectAgent
               access_token={userInfo.access_token}
-              refreshAccessToken={userInfo.refreshAccessToken()}
+              refreshAccessToken={userInfo.refreshAccessToken}
               handleData={handleData}
             />
           </>
@@ -99,7 +100,7 @@ export default function AssignUsers() {
           <>
             <SelectUser
               handleData={handleData}
-              refreshAccessToken={userInfo.refreshAccessToken()}
+              refreshAccessToken={userInfo.refreshAccessToken}
               access_token={userInfo.access_token}
             />
           </>
@@ -109,7 +110,7 @@ export default function AssignUsers() {
           <>
             <SelectProduct
               handleData={handleData}
-              refreshAccessToken={userInfo.refreshAccessToken()}
+              refreshAccessToken={userInfo.refreshAccessToken}
               access_token={userInfo.access_token}
             />
           </>
@@ -119,7 +120,7 @@ export default function AssignUsers() {
           <>
             <SelectQuantity
               handleData={handleData}
-              refreshAccessToken={userInfo.refreshAccessToken()}
+              refreshAccessToken={userInfo.refreshAccessToken}
               access_token={userInfo.access_token}
             />
           </>
@@ -129,7 +130,7 @@ export default function AssignUsers() {
           <>
             <SelectDeliveryType
               handleData={handleData}
-              refreshAccessToken={userInfo.refreshAccessToken()}
+              refreshAccessToken={userInfo.refreshAccessToken}
               access_token={userInfo.access_token}
             />
           </>
