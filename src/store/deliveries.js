@@ -17,11 +17,11 @@ export const updateDeliveryTypes = (access_token, senddata, id) => {
   });
 };
 
-export const addDeliveryTypes = (data) => {
+export const addDeliveryTypes = (access_token, data) => {
   return axiosInstance({
     method: "POST",
     url: "deliverytype/adddeliverytype",
     data: data,
-    headers: { access_token: data.access_token },
+    headers: { access_token: access_token },
   });
 };

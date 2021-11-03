@@ -2,6 +2,7 @@
   &__main-container {
     display: block;
     min-width: 400px;
+    padding: 15px;
     @media screen and (max-width: 700px) {
       width: 96%;
       min-width: unset;

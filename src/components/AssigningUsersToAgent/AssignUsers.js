@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import UserContext from "UserContext";
 import { ReactComponent as UserBadge } from "components/svgs/users.svg";
 
@@ -13,97 +13,103 @@ import "components/AssigningUsersToAgent/AssignUsers.scss";
 import Spinner from "spinner.png";
 import SelectProduct from "components/AssigningUsersToAgent/SelectProduct";
 import SelectUser from "components/AssigningUsersToAgent/SelectUser";
-
-
-//  Stepper - load components
-//  1. Select Agent - Single Dropdown
-//  2. Select List Users  (single User id)
-//  3. Select Product
-//  4. Select Quantity
-//  5. Select Delivery type
-
+import SelectAgent from "components/AssigningUsersToAgent/SelectAgent";
+import SelectQuantity from "components/AssigningUsersToAgent/SelectQuantity";
+import SelectDeliveryType from "components/AssigningUsersToAgent/SelectDeliveryType";
 
 export default function AssignUsers() {
   const userInfo = useContext(UserContext);
-  // const [spinner, toggleSpinner] = useState(true);
+  const [spinner, toggleSpinner] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
+  const [sendData, setSenddata] = useState({
+    agent_id: "",
+    // assignlist: {
+    user_id: "",
+    quantity: "",
+    delivery_type: "",
+    product_type: "",
+    price: "",
+    // },
+  });
   const steps = getSteps();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    if (activeStep === steps.length) {
+      alert(5);
+    }
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-  
+
   function getSteps() {
     return [
-      "Basic information",
-      "Contact Information",
-      "Personal Information",
-      "Payment",
+      "Select Agent",
+      "Select User",
+      "Select Product",
+      "Select Quantity",
+      "Select Delivery type",
     ];
   }
-  
+
+  const handleData = (e, g, n) => {
+    console.log(g, n);
+    e.preventDefault();
+    if (n === "agent") setSenddata({ ...sendData, agent_id: g });
+    if (n === "user") setSenddata({ ...sendData, user_id: g });
+    if (n === "delivery_type") setSenddata({ ...sendData, delivery_type: g });
+    if (n === "product") setSenddata({ ...sendData, product_type: g });
+    if (n === "quantity") setSenddata({ ...sendData, quantity: g });
+    if (n === "price") setSenddata({ ...sendData, price: g });
+  };
+
   function getStepContent(step) {
     switch (step) {
       case 0:
         return (
           <>
-            {/* <TextField
-              id="first-name"
-              label="First Name"
-              variant="outlined"
-              placeholder="Enter Your First Name"
-              fullWidth
-              margin="normal"
-              name="firstName"
-            /> */}
-            <SelectUser/>
+            <SelectAgent
+              access_token={userInfo.access_token}
+              handleData={handleData}
+            />
           </>
         );
-  
+
       case 1:
         return (
           <>
-            {/* <TextField
-              id="email"
-              label="E-mail"
-              variant="outlined"
-              placeholder="Enter Your E-mail Address"
-              fullWidth
-              margin="normal"
-              name="emailAddress"
-            /> */}
-            <SelectProduct/>
-            </>
+            <SelectUser
+              handleData={handleData}
+              access_token={userInfo.access_token}
+            />
+          </>
         );
       case 2:
         return (
           <>
-            <TextField
-              id="address1"
-              label="Address 1"
-              variant="outlined"
-              placeholder="Enter Your Address 1"
-              fullWidth
-              margin="normal"
-              name="address1"
+            <SelectProduct
+              handleData={handleData}
+              access_token={userInfo.access_token}
             />
           </>
         );
       case 3:
         return (
           <>
-            <TextField
-              id="cardNumber"
-              label="Card Number"
-              variant="outlined"
-              placeholder="Enter Your Card Number"
-              fullWidth
-              margin="normal"
-              name="cardNumber"
+            <SelectQuantity
+              handleData={handleData}
+              access_token={userInfo.access_token}
+            />
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <SelectDeliveryType
+              handleData={handleData}
+              access_token={userInfo.access_token}
             />
           </>
         );
@@ -111,7 +117,7 @@ export default function AssignUsers() {
         return "unknown step";
     }
   }
-  
+
   return (
     <div className="AssignUsers__main">
       <div className="Orders__main-heading">
@@ -120,20 +126,11 @@ export default function AssignUsers() {
         </div>
       </div>
 
-      <div>
+      <div className="AssignUsers__sub">
         <Stepper alternativeLabel activeStep={activeStep}>
           {steps.map((step, index) => {
             const labelProps = {};
             const stepProps = {};
-            labelProps.optional = (
-              <Typography
-                variant="caption"
-                align="center"
-                style={{ display: "block" }}
-              >
-                optional
-              </Typography>
-            );
 
             return (
               <Step {...stepProps} key={index}>
@@ -144,23 +141,24 @@ export default function AssignUsers() {
         </Stepper>
 
         {activeStep === steps.length ? (
-          <Typography variant="h3" align="center">
-            Thank You
+          <Typography variant="h4" align="center">
+            Agent Assigned to User Successfully
           </Typography>
         ) : (
           <>
             <form>{getStepContent(activeStep)}</form>
-            <Button disabled={activeStep === 0} onClick={handleBack}>
-              back
-            </Button>
+            {/* <Button disabled={activeStep === 0} onClick={handleBack}>
+              Back
+            </Button> */}
 
             <Button
               className=""
               variant="contained"
+              // disabled={if not selected data}
               color="primary"
               onClick={handleNext}
             >
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              {activeStep === steps.length - 1 ? "Submit" : "Next"}
             </Button>
           </>
         )}

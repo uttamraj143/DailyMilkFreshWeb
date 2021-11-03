@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
-import { listUsers } from "store/user";
 import CheckBoxOutlineBlankIcon from "components/svgs/unchecked.svg";
 import CheckBoxIcon from "components/svgs/checked.svg";
 
@@ -11,35 +9,19 @@ const checkedIcon = <img src={CheckBoxIcon} alt="dsds" fontSize="small" />;
 <CheckBoxIcon fontSize="small" />;
 
 export default function SelectUser(props) {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    const getAllUsers = () => {
-      listUsers(2, props.access_token)
-        .then((res) => {
-          // toggleSpinner(false);
-          setUsers(res.data.data);
-        })
-        .catch((res) => {
-          if (res && res.response && res.response.status === 401) {
-            window.location.reload();
-            // toggleSpinner(true);
-            // props.refreshAccessToken();
-          }
-        });
-    };
-    getAllUsers();
-  }, []);
+  const all = Array(100)
+    .fill()
+    .map((_, index) => index + 1);
 
   return (
     <div className="AssignUsers__main">
       <Autocomplete
         // multiple
-        onChange={(e, value) => props.handleData(e, value.user_id, "agent")}
         id="checkboxes-tags-demo"
-        options={users}
+        onChange={(e, value) => props.handleData(e, value, "quantity")}
+        options={all}
         // disableCloseOnSelect
-        getOptionLabel={(option) => option.name}
+        getOptionLabel={(option) => option.toString()}
         renderOption={(props, option, { selected }) => (
           <li {...props}>
             <Checkbox
@@ -48,11 +30,15 @@ export default function SelectUser(props) {
               style={{ marginRight: 8 }}
               checked={selected}
             />
-            {option.name}
+            {option}
           </li>
         )}
         renderInput={(params) => (
-          <TextField {...params} label="Select Agents" placeholder="Agents" />
+          <TextField
+            {...params}
+            label="Select quantity"
+            placeholder="quantity"
+          />
         )}
       />
     </div>

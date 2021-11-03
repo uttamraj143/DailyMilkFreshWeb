@@ -23,7 +23,8 @@ export default function SelectUser(props) {
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
             // toggleSpinner(true);
-            props.refreshAccessToken();
+            // props.refreshAccessToken();
+            window.location.reload();
           }
         });
     };
@@ -35,8 +36,9 @@ export default function SelectUser(props) {
       <Autocomplete
         // multiple
         id="checkboxes-tags-demo"
+        onChange={(e, value) => props.handleData(e, value.user_id, "user")}
         options={users}
-        disableCloseOnSelect
+        // disableCloseOnSelect
         getOptionLabel={(option) => option.name}
         renderOption={(props, option, { selected }) => (
           <li {...props}>
@@ -50,7 +52,7 @@ export default function SelectUser(props) {
           </li>
         )}
         renderInput={(params) => (
-          <TextField {...params} label="Checkboxes" placeholder="Favorites" />
+          <TextField {...params} label="Select Users" placeholder="Users" />
         )}
       />
     </div>
