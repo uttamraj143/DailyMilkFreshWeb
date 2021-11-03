@@ -31,14 +31,18 @@ export default function SelectProduct(props) {
     getAllProducts();
   }, []);
 
+  const sendproduct = (e, value) => {
+    e.preventDefault();
+    props.handleData(e, value.product_type, "product");
+    props.handleData(e, value.price, "price");
+  };
+
   return (
     <div className="AssignUsers__main">
       <Autocomplete
         // multiple
         id="checkboxes-tags-demo"
-        onChange={(e, value) =>
-          props.handleData(e, value.product_type, "product")
-        }
+        onChange={(e, value) => sendproduct(e, value)}
         options={products}
         // disableCloseOnSelect
         getOptionLabel={(option) => option.name}

@@ -5,21 +5,22 @@ import { ReactComponent as UserBadge } from "components/svgs/users.svg";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import TextField from "@mui/material/TextField";
+// import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import "components/AssigningUsersToAgent/AssignUsers.scss";
-import Spinner from "spinner.png";
+// import Spinner from "spinner.png";
 import SelectProduct from "components/AssigningUsersToAgent/SelectProduct";
 import SelectUser from "components/AssigningUsersToAgent/SelectUser";
 import SelectAgent from "components/AssigningUsersToAgent/SelectAgent";
 import SelectQuantity from "components/AssigningUsersToAgent/SelectQuantity";
 import SelectDeliveryType from "components/AssigningUsersToAgent/SelectDeliveryType";
+import { assigningUsersToAgent } from "store/assignUsers";
 
 export default function AssignUsers() {
   const userInfo = useContext(UserContext);
-  const [spinner, toggleSpinner] = useState(true);
+  // const [spinner, toggleSpinner] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
   const [sendData, setSenddata] = useState({
     agent_id: "",
@@ -35,13 +36,28 @@ export default function AssignUsers() {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    if (activeStep === steps.length) {
-      alert(5);
-    }
   };
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
+  // const handleBack = () => {
+  //   setActiveStep(activeStep - 1);
+  // };
+
+  const SubmitData = (e) => {
+    e.preventDefault();
+    let submit = {
+      agent_id: sendData.agent_id,
+      assignlist: [
+        {
+          user_id: sendData.user_id,
+          quantity: sendData.quantity,
+          delivery_type: sendData.delivery_type,
+          product_type: sendData.product_type,
+          price: "",
+        },
+      ],
+    };
+
+    assigningUsersToAgent(userInfo.access_token, submit);
   };
 
   function getSteps() {
@@ -72,6 +88,7 @@ export default function AssignUsers() {
           <>
             <SelectAgent
               access_token={userInfo.access_token}
+              refreshAccessToken={userInfo.refreshAccessToken()}
               handleData={handleData}
             />
           </>
@@ -82,6 +99,7 @@ export default function AssignUsers() {
           <>
             <SelectUser
               handleData={handleData}
+              refreshAccessToken={userInfo.refreshAccessToken()}
               access_token={userInfo.access_token}
             />
           </>
@@ -91,6 +109,7 @@ export default function AssignUsers() {
           <>
             <SelectProduct
               handleData={handleData}
+              refreshAccessToken={userInfo.refreshAccessToken()}
               access_token={userInfo.access_token}
             />
           </>
@@ -100,6 +119,7 @@ export default function AssignUsers() {
           <>
             <SelectQuantity
               handleData={handleData}
+              refreshAccessToken={userInfo.refreshAccessToken()}
               access_token={userInfo.access_token}
             />
           </>
@@ -109,6 +129,7 @@ export default function AssignUsers() {
           <>
             <SelectDeliveryType
               handleData={handleData}
+              refreshAccessToken={userInfo.refreshAccessToken()}
               access_token={userInfo.access_token}
             />
           </>
@@ -126,7 +147,7 @@ export default function AssignUsers() {
         </div>
       </div>
 
-      <div className="AssignUsers__sub">
+      <Paper className="AssignUsers__sub" elevation={2}>
         <Stepper alternativeLabel activeStep={activeStep}>
           {steps.map((step, index) => {
             const labelProps = {};
@@ -156,13 +177,15 @@ export default function AssignUsers() {
               variant="contained"
               // disabled={if not selected data}
               color="primary"
-              onClick={handleNext}
+              onClick={(e) =>
+                activeStep === steps.length - 1 ? SubmitData(e) : handleNext(e)
+              }
             >
               {activeStep === steps.length - 1 ? "Submit" : "Next"}
             </Button>
           </>
         )}
-      </div>
+      </Paper>
     </div>
   );
 }

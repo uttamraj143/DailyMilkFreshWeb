@@ -22,9 +22,8 @@ export default function SelectUser(props) {
         })
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
-            window.location.reload();
             // toggleSpinner(true);
-            // props.refreshAccessToken();
+            props.refreshAccessToken();
           }
         });
     };
