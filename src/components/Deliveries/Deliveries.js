@@ -26,7 +26,7 @@ export default function Deliveries() {
     listProducts(null, userInfo.access_token).then((res) => {
       setProducts(res.data.data);
     });
-  }, []);
+  }, [userInfo.access_token]);
 
   const SubmitData = (e, g, n) => {
     e.preventDefault();

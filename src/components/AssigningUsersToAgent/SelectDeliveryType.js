@@ -13,21 +13,22 @@ const checkedIcon = <img src={CheckBoxIcon} alt="dsds" fontSize="small" />;
 
 export default function SelectUser(props) {
   const [deliverytotal, setDeliveryTypes] = useState([]);
+  const { access_token, refreshAccessToken } = props;
 
   useEffect(() => {
     const getAllTypes = () => {
-      listDeliveryTypes(props.access_token)
+      listDeliveryTypes(access_token)
         .then((res) => {
           setDeliveryTypes(res.data.data);
         })
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
-            props.refreshAccessToken();
+            refreshAccessToken();
           }
         });
     };
     getAllTypes();
-  }, [props.access_token]);
+  }, [access_token, refreshAccessToken]);
 
   return (
     <div className="AssignUsers__main">

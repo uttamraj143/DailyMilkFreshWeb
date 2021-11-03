@@ -11,11 +11,12 @@ const checkedIcon = <img src={CheckBoxIcon} alt="dsds" fontSize="small" />;
 <CheckBoxIcon fontSize="small" />;
 
 export default function SelectUser(props) {
+  const { access_token, refreshAccessToken } = props;
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const getAllUsers = () => {
-      listUsers(3, props.access_token)
+      listUsers(3, access_token)
         .then((res) => {
           // toggleSpinner(false);
           setUsers(res.data.data);
@@ -23,13 +24,13 @@ export default function SelectUser(props) {
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
             // toggleSpinner(true);
-            props.refreshAccessToken();
+            refreshAccessToken();
             // window.location.reload();
           }
         });
     };
     getAllUsers();
-  }, [props.access_token]);
+  }, [access_token, refreshAccessToken]);
 
   return (
     <div className="AssignUsers__main">

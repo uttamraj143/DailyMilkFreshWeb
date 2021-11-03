@@ -38,9 +38,9 @@ export default function AssignUsers() {
     setActiveStep(activeStep + 1);
   };
 
-  // const handleBack = () => {
-  //   setActiveStep(activeStep - 1);
-  // };
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
 
   const SubmitData = (e) => {
     e.preventDefault();
@@ -52,14 +52,27 @@ export default function AssignUsers() {
           quantity: sendData.quantity,
           delivery_type: sendData.delivery_type,
           product_type: sendData.product_type,
-          price: "",
+          price: sendData.price,
         },
       ],
     };
 
-    assigningUsersToAgent(userInfo.access_token, submit).then((res) => {
-      setSenddata([]);
-    });
+    assigningUsersToAgent(userInfo.access_token, submit)
+      .then((res) => {
+        setSenddata({
+          agent_id: "",
+          user_id: "",
+          quantity: "",
+          delivery_type: "",
+          product_type: "",
+          price: "",
+        });
+        setActiveStep(0);
+        alert("successfully saved");
+      })
+      .catch((res) => {
+        alert("Please try again");
+      });
   };
 
   function getSteps() {
@@ -73,13 +86,20 @@ export default function AssignUsers() {
   }
 
   const handleData = (e, g, n) => {
-    e.preventDefault();
+    e && e.preventDefault();
     if (n === "agent") setSenddata({ ...sendData, agent_id: g });
     if (n === "user") setSenddata({ ...sendData, user_id: g });
     if (n === "delivery_type") setSenddata({ ...sendData, delivery_type: g });
-    if (n === "product") setSenddata({ ...sendData, product_type: g });
     if (n === "quantity") setSenddata({ ...sendData, quantity: g });
-    if (n === "price") setSenddata({ ...sendData, price: g });
+  };
+
+  const handlePData = (e, value) => {
+    e.preventDefault();
+    setSenddata({
+      ...sendData,
+      price: value.price,
+      product_type: value.product_type,
+    });
   };
 
   function getStepContent(step) {
@@ -109,7 +129,8 @@ export default function AssignUsers() {
         return (
           <>
             <SelectProduct
-              handleData={handleData}
+              // handleData={handleData}
+              handlePData={handlePData}
               refreshAccessToken={userInfo.refreshAccessToken}
               access_token={userInfo.access_token}
             />
@@ -169,9 +190,9 @@ export default function AssignUsers() {
         ) : (
           <>
             <form>{getStepContent(activeStep)}</form>
-            {/* <Button disabled={activeStep === 0} onClick={handleBack}>
+            <Button disabled={activeStep === 0} onClick={handleBack}>
               Back
-            </Button> */}
+            </Button>
 
             <Button
               className=""

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import UsersListing from "components/Users/UsersListing";
 import AddUser from "components/Users/AddUser";
 import Spinner from "spinner.png";
@@ -17,6 +17,16 @@ export default function Users() {
   const [addagenttoggle, toggleAddUser] = useState(false);
   const [page, setPage] = useState(1);
   const [modifiedUsers, setSortUsers] = useState([]);
+
+  const modifyUsers = useCallback(
+    (e, val) => {
+      e && e.preventDefault();
+      setPage(val);
+      const slicedArray = users.slice((val - 1) * 6, val * 6);
+      return setSortUsers(slicedArray);
+    },
+    [users]
+  );
 
   useEffect(() => {
     const getAllUsers = () => {
@@ -37,18 +47,11 @@ export default function Users() {
 
   useEffect(() => {
     modifyUsers(null, 1);
-  }, [users]);
+  }, [users, modifyUsers]);
 
   const addUserClicked = (e) => {
     e && e.preventDefault();
     toggleAddUser(!addagenttoggle);
-  };
-
-  const modifyUsers = (e, val) => {
-    e && e.preventDefault();
-    setPage(val);
-    const slicedArray = users.slice((val - 1) * 6, val * 6);
-    return setSortUsers(slicedArray);
   };
 
   return (

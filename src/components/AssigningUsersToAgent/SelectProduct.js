@@ -13,9 +13,11 @@ const checkedIcon = <img src={CheckBoxIcon} alt="dsds" fontSize="small" />;
 export default function SelectProduct(props) {
   const [products, setProducts] = useState([]);
 
+  const { access_token, refreshAccessToken, handlePData } = props;
+
   useEffect(() => {
     const getAllProducts = () => {
-      listProducts(null, props.access_token)
+      listProducts(null, access_token)
         .then((res) => {
           setProducts(res.data.data);
           //   toggleSpinner(false);
@@ -23,25 +25,19 @@ export default function SelectProduct(props) {
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
             // toggleSpinner(true);
-            props.refreshAccessToken();
+            refreshAccessToken();
           }
         });
     };
     getAllProducts();
-  }, [props.access_token]);
-
-  const sendproduct = (e, value) => {
-    e.preventDefault();
-    props.handleData(e, value.product_type, "product");
-    props.handleData(e, value.price, "price");
-  };
+  }, [access_token, refreshAccessToken]);
 
   return (
     <div className="AssignUsers__main">
       <Autocomplete
         // multiple
         id="checkboxes-tags-demo"
-        onChange={(e, value) => sendproduct(e, value)}
+        onChange={(e, value) => handlePData(e, value)}
         options={products}
         // disableCloseOnSelect
         getOptionLabel={(option) => option.name}
