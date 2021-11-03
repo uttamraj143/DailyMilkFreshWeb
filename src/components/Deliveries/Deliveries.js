@@ -53,7 +53,7 @@ export default function Deliveries() {
     <div className="Deliveries__main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
-          <CartIcon /> {"  "} Delivery Type
+          <CartIcon /> {"  "} Deliveries
         </div>
       </div>
 
@@ -73,7 +73,7 @@ export default function Deliveries() {
       <div>
         {deliveries.map((item, index) => {
           return (
-            <Paper key={index} elevation={2}>
+            <Paper key={index} className="Agents__order" elevation={2}>
               <div> delivery_id : {item.delivery_id}</div>
               <div> user_id: {agentName(item.user_id)} </div>
               <div> agent_id: {agentName(item.agent_id)}</div>

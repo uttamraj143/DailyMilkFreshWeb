@@ -23,13 +23,13 @@ export default function SelectUser(props) {
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
             // toggleSpinner(true);
-            // props.refreshAccessToken();
+            props.refreshAccessToken();
             // window.location.reload();
           }
         });
     };
     getAllUsers();
-  }, []);
+  }, [props.access_token]);
 
   return (
     <div className="AssignUsers__main">

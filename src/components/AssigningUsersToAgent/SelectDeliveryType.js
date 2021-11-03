@@ -22,12 +22,12 @@ export default function SelectUser(props) {
         })
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
-            window.location.reload();
+            props.refreshAccessToken();
           }
         });
     };
     getAllTypes();
-  }, []);
+  }, [props.access_token]);
 
   return (
     <div className="AssignUsers__main">

@@ -28,7 +28,7 @@ export default function SelectUser(props) {
         });
     };
     getAllUsers();
-  }, []);
+  }, [props.access_token]);
 
   return (
     <div className="AssignUsers__main">

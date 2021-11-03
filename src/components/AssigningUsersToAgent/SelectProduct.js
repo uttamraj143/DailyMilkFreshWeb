@@ -23,13 +23,12 @@ export default function SelectProduct(props) {
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
             // toggleSpinner(true);
-            // props.refreshAccessToken();
-            window.location.reload();
+            props.refreshAccessToken();
           }
         });
     };
     getAllProducts();
-  }, []);
+  }, [props.access_token]);
 
   const sendproduct = (e, value) => {
     e.preventDefault();

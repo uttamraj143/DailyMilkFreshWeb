@@ -6,7 +6,7 @@
 6. Rates, payment need not implement
 7. There is existing Milk management in wordpress, check implementation
 
-add email login validation and phone number validation
+<!-- add email login validation and phone number validation -->
 
 react Error: Canvas is already in use. Chart with ID '0' must be destroyed before the canvas can be reused.
 
@@ -28,3 +28,7 @@ add Footer
 Sort according to Date and fetch only with Date
 
 https://www.codegrepper.com/code-examples/javascript/pass+context+from+one+file+to+another+reactjs
+
+REDUX
+REDUX
+REDUX
