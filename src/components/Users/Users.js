@@ -1,7 +1,9 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 import UsersListing from "components/Users/UsersListing";
 import AddUser from "components/Users/AddUser";
-import Spinner from "spinner.png";
+// import Spinner from "spinner.png";
+import Spinner from "components/common/Spinner";
+import Skeleton from "@mui/material/Skeleton";
 import { ReactComponent as UserBadge } from "components/svgs/users.svg";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -101,8 +103,16 @@ export default function Users() {
           )}
         </div>
       ) : (
-        <div className="Users__spinner">
-          <img height="150px" width="150px" src={Spinner} alt="Daily"></img>
+        <div className="Users__spinners">
+          <Spinner />
+          <Skeleton animation="wave" height={100} width="80%" />
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            width={210}
+            height={118}
+          />
+          {/* <img height="150px" width="150px" src={Spinner} alt="Daily"></img> */}
         </div>
       )}
     </div>

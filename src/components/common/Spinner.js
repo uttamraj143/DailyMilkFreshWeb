@@ -12,7 +12,7 @@ export default function Mspinner(props) {
     <div>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={props.spinner}
+        open={true}
         // onClick={handleClose}
       >
         <CircularProgress color="inherit" />

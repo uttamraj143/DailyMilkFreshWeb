@@ -10,7 +10,8 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import "components/AssigningUsersToAgent/AssignUsers.scss";
-// import Spinner from "spinner.png";
+import Spinner from "components/common/Spinner";
+import Skeleton from "@mui/material/Skeleton";
 import SelectProduct from "components/AssigningUsersToAgent/SelectProduct";
 import SelectUser from "components/AssigningUsersToAgent/SelectUser";
 import SelectAgent from "components/AssigningUsersToAgent/SelectAgent";
@@ -20,7 +21,7 @@ import { assigningUsersToAgent } from "store/assignUsers";
 
 export default function AssignUsers() {
   const userInfo = useContext(UserContext);
-  // const [spinner, toggleSpinner] = useState(true);
+  const [spinner, toggleSpinner] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [sendData, setSenddata] = useState({
     agent_id: "",
@@ -44,6 +45,7 @@ export default function AssignUsers() {
 
   const SubmitData = (e) => {
     e.preventDefault();
+    toggleSpinner(true);
     let submit = {
       agent_id: sendData.agent_id,
       assignlist: [
@@ -68,9 +70,11 @@ export default function AssignUsers() {
           price: "",
         });
         setActiveStep(0);
+        toggleSpinner(false);
         alert("successfully saved");
       })
       .catch((res) => {
+        toggleSpinner(false);
         alert("Please try again");
       });
   };
@@ -169,45 +173,61 @@ export default function AssignUsers() {
         </div>
       </div>
 
-      <Paper className="AssignUsers__sub" elevation={2}>
-        <Stepper alternativeLabel activeStep={activeStep}>
-          {steps.map((step, index) => {
-            const labelProps = {};
-            const stepProps = {};
+      {!spinner ? (
+        <Paper className="AssignUsers__sub" elevation={2}>
+          <Stepper alternativeLabel activeStep={activeStep}>
+            {steps.map((step, index) => {
+              const labelProps = {};
+              const stepProps = {};
 
-            return (
-              <Step {...stepProps} key={index}>
-                <StepLabel {...labelProps}>{step}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
+              return (
+                <Step {...stepProps} key={index}>
+                  <StepLabel {...labelProps}>{step}</StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
 
-        {activeStep === steps.length ? (
-          <Typography variant="h4" align="center">
-            Agent Assigned to User Successfully
-          </Typography>
-        ) : (
-          <>
-            <form>{getStepContent(activeStep)}</form>
-            <Button disabled={activeStep === 0} onClick={handleBack}>
-              Back
-            </Button>
+          {activeStep === steps.length ? (
+            <Typography variant="h4" align="center">
+              Agent Assigned to User Successfully
+            </Typography>
+          ) : (
+            <>
+              <form>{getStepContent(activeStep)}</form>
+              <Button disabled={activeStep === 0} onClick={handleBack}>
+                Back
+              </Button>
 
-            <Button
-              className=""
-              variant="contained"
-              // disabled={if not selected data}
-              color="primary"
-              onClick={(e) =>
-                activeStep === steps.length - 1 ? SubmitData(e) : handleNext(e)
-              }
-            >
-              {activeStep === steps.length - 1 ? "Submit" : "Next"}
-            </Button>
-          </>
-        )}
-      </Paper>
+              <Button
+                className=""
+                variant="contained"
+                // disabled={if not selected data}
+                color="primary"
+                onClick={(e) =>
+                  activeStep === steps.length - 1
+                    ? SubmitData(e)
+                    : handleNext(e)
+                }
+              >
+                {activeStep === steps.length - 1 ? "Submit" : "Next"}
+              </Button>
+            </>
+          )}
+        </Paper>
+      ) : (
+        <>
+          {" "}
+          <Spinner />
+          <Skeleton animation="wave" height={100} width="80%" />
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            width={210}
+            height={118}
+          />{" "}
+        </>
+      )}
     </div>
   );
 }

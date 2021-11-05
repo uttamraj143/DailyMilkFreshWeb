@@ -1,10 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import AgentsListing from "components/Agents/AgentsListing";
 import AddAgent from "components/Agents/AddAgent";
-import Spinner from "spinner.png";
+// import Spinner from "spinner.png";
+import Spinner from "components/common/Spinner";
 import { ReactComponent as UsersIcon } from "components/svgs/userBadge.svg";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import Skeleton from "@mui/material/Skeleton";
 
 // import MiniNavbar from 'components/common/MiniNavbar';
 import "./Agents.scss";
@@ -22,7 +24,9 @@ export default function Agents() {
     function getAllAgents() {
       listUsers(2, userInfo.access_token)
         .then((res) => {
-          toggleSpinner(false);
+          setTimeout(() => {
+            toggleSpinner(false);
+          }, 1000);
           setAgents(res.data.data);
         })
         .catch((res) => {
@@ -87,8 +91,17 @@ export default function Agents() {
           )}
         </div>
       ) : (
-        <div className="Agents__spinner">
-          <img height="150px" width="150px" src={Spinner} alt="Daily"></img>
+        <div className="Agents__spinners">
+          <Spinner />
+          <Skeleton animation="wave" height={100} width="80%" />
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            width={210}
+            height={118}
+          />
+
+          {/* <img height="150px" width="150px" src={Spinner} alt="Daily"></img> */}
         </div>
       )}
     </div>
