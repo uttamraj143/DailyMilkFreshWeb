@@ -8,7 +8,7 @@ import Users from "components/Users/Users.js";
 import Products from "components/Products/Products";
 import Agents from "components/Agents/Agents";
 import Settings from "components/Dashboard/Settings";
-import ExportData from "components/Dashboard/ExportData";
+// import ExportData from "components/Dashboard/ExportData";
 import Statistics from "components/Dashboard/Statistics";
 import UserContext from "UserContext";
 import Deliveries from "components/Deliveries/Deliveries";
@@ -44,8 +44,8 @@ export default function Dashboard() {
         return <AssignUsers />;
       case "deliveries":
         return <Deliveries />;
-      case "export_data":
-        return <ExportData />;
+      // case "export_data":
+      //   return <ExportData />;
       case "delivery_type":
         return <DeliveryTypes />;
       case "settings":

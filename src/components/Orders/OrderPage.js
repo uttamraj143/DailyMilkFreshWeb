@@ -40,12 +40,7 @@ export default function OrderPage(props) {
         </NativeSelect>
         <FormHelperText>change order status</FormHelperText>
       </FormControl>
-      <div>
-        dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls
-        dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls
-        dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls dsdsdskljdldkjdkljdls
-        dsdsdskljdldkjdkljdls
-      </div>
+      <div>Scan me</div>
     </div>
   );
 }

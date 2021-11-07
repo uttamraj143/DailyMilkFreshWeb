@@ -23,6 +23,10 @@ export default function Navbar(props) {
       value: "orders_list",
     },
     {
+      title: "Deliveries",
+      value: "deliveries",
+    },
+    {
       title: "Users",
       value: "users_list",
     },
@@ -39,10 +43,6 @@ export default function Navbar(props) {
       value: "products_list",
     },
     {
-      title: "Deliveries",
-      value: "deliveries",
-    },
-    {
       value: "assign_users",
       title: "Assign Users",
     },
@@ -50,7 +50,7 @@ export default function Navbar(props) {
       value: "delivery_type",
       title: "Delivery Types",
     },
-    { title: "Export Data", value: "export_data" },
+    // { title: "Export Data", value: "export_data" },
     {
       value: "settings",
       title: "Account",
@@ -128,8 +128,8 @@ export default function Navbar(props) {
         return <AssignUserIcon style={{ color: "white" }} />;
       case "7":
         return <NumberList style={{ color: "white" }} />;
-      case "8":
-        return <ExportIcon style={{ color: "white" }} />;
+      // case "8":
+      //   return <ExportIcon style={{ color: "white" }} />;
       default:
         return <SettingsIcon style={{ color: "white" }} />;
     }

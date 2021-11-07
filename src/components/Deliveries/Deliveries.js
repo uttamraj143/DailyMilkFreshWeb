@@ -31,6 +31,7 @@ export default function Deliveries() {
   const SubmitData = (e, g, n) => {
     e.preventDefault();
     let submit = "";
+    setDeliveries([]);
 
     if (n === "agent") submit = { agent_id: g };
     if (n === "user") submit = { user_id: g };
@@ -53,7 +54,7 @@ export default function Deliveries() {
     <div className="Deliveries__main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
-          <CartIcon /> {"  "} Deliveries
+          <CartIcon /> {"  "} Orders
         </div>
       </div>
 
