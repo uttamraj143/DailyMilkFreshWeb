@@ -11,7 +11,7 @@ import Settings from "components/Dashboard/Settings";
 // import ExportData from "components/Dashboard/ExportData";
 import Statistics from "components/Dashboard/Statistics";
 import UserContext from "UserContext";
-import Deliveries from "components/Deliveries/Deliveries";
+// import Deliveries from "components/Deliveries/Deliveries";
 import DeliveryTypes from "components/Deliveries/DeliveryTypes";
 import AssignUsers from "components/AssigningUsersToAgent/AssignUsers";
 

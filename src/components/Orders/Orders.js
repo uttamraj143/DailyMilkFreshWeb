@@ -12,6 +12,7 @@ import { listAgentUsers } from "store/assignUsers";
 import { listUsers } from "store/user";
 import { listProducts } from "store/products";
 import { listDeliveryTypes } from "store/deliveries";
+import ExportData from "components/Dashboard/ExportData";
 import "./Orders.scss";
 
 export default function Orders() {
@@ -22,57 +23,60 @@ export default function Orders() {
   const [sortName, setSortName] = useState(false);
   const [sortLocation, setSortLocation] = useState(false);
   const [page, setPage] = useState(1);
+  const [orders, setOrders] = useState([]);
+  const [convertedOrders, setConvertedOrders] = useState([]);
   const [sortOrders, setSortOrders] = useState([]);
   const [users, setUsers] = useState([]);
   const [spinner, toggleSpinner] = useState(false);
   const [products, setProducts] = useState([]);
-  const [orders, setOrders] = useState([]);
   const [deliveryTypes, setDeliveryTypes] = useState([]);
+
+  const { access_token, refreshAccessToken } = userInfo;
 
   useEffect(() => {
     toggleSpinner(true);
-    listAgentUsers(userInfo.access_token)
+    listAgentUsers(access_token)
       .then((res) => {
         setOrders(res.data.data);
       })
       .catch((res) => {
         console.log(res);
         if (res && res.response && res.response.status === 401) {
-          userInfo.refreshAccessToken();
+          refreshAccessToken();
         }
       });
-    listUsers(null, userInfo.access_token)
+    listUsers(null, access_token)
       .then((res) => {
         setUsers(res.data.data);
       })
       .catch((res) => {
         console.log(res);
         if (res && res.response && res.response.status === 401) {
-          userInfo.refreshAccessToken();
+          refreshAccessToken();
         }
       });
-    listDeliveryTypes(userInfo.access_token)
+    listDeliveryTypes(access_token)
       .then((res) => {
         setDeliveryTypes(res.data.data);
       })
       .catch((res) => {
         console.log(res);
         if (res && res.response && res.response.status === 401) {
-          userInfo.refreshAccessToken();
+          refreshAccessToken();
         }
       });
-    listProducts(null, userInfo.access_token)
+    listProducts(null, access_token)
       .then((res) => {
-        toggleSpinner(false);
         setProducts(res.data.data);
       })
       .catch((res) => {
         console.log(res);
         if (res && res.response && res.response.status === 401) {
-          userInfo.refreshAccessToken();
+          refreshAccessToken();
         }
       });
-  }, [userInfo.access_token]);
+    toggleSpinner(false);
+  }, [access_token, refreshAccessToken]);
 
   const currentUserSelection = (user) => {
     setCurrentUser(user);
@@ -84,35 +88,64 @@ export default function Orders() {
 
   const sortByName = () => {
     return;
-    if (sortName) {
-      setUsers(users.sort((a, b) => a.name.localeCompare(b.name)));
-      setSortName(!sortName);
-    } else {
-      setUsers(users.sort((a, b) => b.name.localeCompare(a.name)));
-      setSortName(!sortName);
-    }
+    // if (sortName) {
+    //   setUsers(users.sort((a, b) => a.name.localeCompare(b.name)));
+    //   setSortName(!sortName);
+    // } else {
+    //   setUsers(users.sort((a, b) => b.name.localeCompare(a.name)));
+    //   setSortName(!sortName);
+    // }
   };
 
   const sortByNumber = (e) => {
     return;
-    if (sortNumbers) {
-      setUsers(orders.slice(0).sort((a, b) => parseInt(a.id) - parseInt(b.id)));
-      setSortNumbers(!sortNumbers);
-    } else {
-      setUsers(orders.slice(0).sort((a, b) => parseInt(b.id) - parseInt(a.id)));
-      setSortNumbers(!sortNumbers);
-    }
+    // if (sortNumbers) {
+    //   setUsers(orders.slice(0).sort((a, b) => parseInt(a.id) - parseInt(b.id)));
+    //   setSortNumbers(!sortNumbers);
+    // } else {
+    //   setUsers(orders.slice(0).sort((a, b) => parseInt(b.id) - parseInt(a.id)));
+    //   setSortNumbers(!sortNumbers);
+    // }
   };
 
   const sortByLocation = (e) => {
     return;
-    if (sortLocation) {
-      setUsers(users.sort((a, b) => a.address.localeCompare(b.address)));
-      setSortLocation(!sortLocation);
-    } else {
-      setUsers(users.sort((a, b) => b.address.localeCompare(a.address)));
-      setSortLocation(!sortLocation);
-    }
+    // if (sortLocation) {
+    //   setUsers(users.sort((a, b) => a.address.localeCompare(b.address)));
+    //   setSortLocation(!sortLocation);
+    // } else {
+    //   setUsers(users.sort((a, b) => b.address.localeCompare(a.address)));
+    //   setSortLocation(!sortLocation);
+    // }
+  };
+
+  const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
+
+  const orderStatus = (userqr) => {
+    let statss = orderstatus[userqr];
+    return statss ? statss : "Not Available";
+  };
+
+  const orderDate = (userqr) => {
+    let dateItem = orders.find((item) => item.QRNumber === userqr);
+    return dateItem ? dateItem.date : new Date(Date.now()).toLocaleString();
+  };
+
+  const customername = (id) => {
+    let nameItem = users.find((item) => item.user_id === id);
+    let status = nameItem?.name;
+    return status;
+  };
+
+  const orderType = (id) => {
+    let nameItem =
+      deliveryTypes && deliveryTypes.find((item) => item.delivery_type === id);
+    return nameItem && nameItem.name;
+  };
+
+  const orderProducts = (id) => {
+    let nameItem = products.find((item) => item.product_type === id);
+    return nameItem && nameItem.name;
   };
 
   const modifyOrders = useCallback(
@@ -120,9 +153,26 @@ export default function Orders() {
       e && e.preventDefault();
       setPage(val);
       const slicedArray = orders.slice((val - 1) * 6, val * 6);
-      return setSortOrders(slicedArray);
+      setSortOrders(slicedArray);
+
+      setConvertedOrders([]);
+      orders.forEach((item) => {
+        let abc = {
+          user_name: customername(item.user_id),
+          agent_name: customername(item.agent_id),
+          delivery_type: orderType(item.delivery_type),
+          product: orderProducts(item.product_type),
+          delivery_status: orderStatus(item.delivery_status),
+          quantity: item.quantity,
+          price: item.price,
+          id: item.id,
+          modified_at: orderDate(item.modified_at),
+        };
+
+        setConvertedOrders((prevData) => [...prevData, abc]);
+      });
     },
-    [orders]
+    [orders, addexport]
   );
 
   useEffect(() => {
@@ -132,7 +182,16 @@ export default function Orders() {
   return (
     <div className="Orders__main-container">
       {spinner ? (
-        <Spinner />
+        <>
+          <Spinner />
+          <Skeleton animation="wave" height={100} width="80%" />
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            width={210}
+            height={118}
+          />
+        </>
       ) : (
         <>
           <div className="Orders__main-heading">
@@ -142,47 +201,58 @@ export default function Orders() {
             <div>
               <button
                 className="Users__refresh-button"
-                onClick={(e) => exportToggle(addexport)}
+                onClick={(e) => exportToggle(!addexport)}
               >
-                {"Export current data"}
+                {addexport ? "Back to Orders" : "Export current data"}
               </button>
             </div>
           </div>
-          <MiniNavbar
-            isVisible={currentUser}
-            clearCurrentUser={clearCurrentUser}
-            sortByName={sortByName}
-            sortByNumber={sortByNumber}
-            sortByLocation={sortByLocation}
-          ></MiniNavbar>
-          {currentUser ? (
-            <OrderPage order={currentUser}></OrderPage>
+          {addexport ? (
+            <ExportData
+              users={users}
+              deliveryTypes={deliveryTypes}
+              products={products}
+              orders={convertedOrders}
+            />
           ) : (
-            <div>
-              <OrdersListing
-                currentUserSelection={currentUserSelection}
-                orders={sortOrders}
-                users={users}
-                deliveryTypes={deliveryTypes}
-                products={products}
-              ></OrdersListing>
-              <div className="Orders__pagination">
-                <Stack spacing={2}>
-                  <Pagination
-                    onChange={(event, val) => modifyOrders(event, val)}
-                    variant="outlined"
-                    color="primary"
-                    boundaryCount={2}
-                    count={
-                      orders.length % 6 === 0
-                        ? orders.length / 6
-                        : Math.floor(orders.length / 6) + 1
-                    }
-                    page={page}
-                  />
-                </Stack>
-              </div>
-            </div>
+            <>
+              <MiniNavbar
+                isVisible={currentUser}
+                clearCurrentUser={clearCurrentUser}
+                sortByName={sortByName}
+                sortByNumber={sortByNumber}
+                sortByLocation={sortByLocation}
+              ></MiniNavbar>
+              {currentUser ? (
+                <OrderPage order={currentUser}></OrderPage>
+              ) : (
+                <div>
+                  <OrdersListing
+                    currentUserSelection={currentUserSelection}
+                    orders={sortOrders}
+                    users={users}
+                    deliveryTypes={deliveryTypes}
+                    products={products}
+                  ></OrdersListing>
+                  <div className="Orders__pagination">
+                    <Stack spacing={2}>
+                      <Pagination
+                        onChange={(event, val) => modifyOrders(event, val)}
+                        variant="outlined"
+                        color="primary"
+                        boundaryCount={2}
+                        count={
+                          orders.length % 6 === 0
+                            ? orders.length / 6
+                            : Math.floor(orders.length / 6) + 1
+                        }
+                        page={page}
+                      />
+                    </Stack>
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </>
       )}

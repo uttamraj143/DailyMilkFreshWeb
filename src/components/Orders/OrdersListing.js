@@ -1,38 +1,31 @@
 import Paper from "@mui/material/Paper";
-import { useState } from "react";
+// import { useState } from "react";
 
 export default function OrdersListing(props) {
-  const [orderstatus] = useState([
-    "booked",
-    "intransit",
-    "delivered",
-    "pickedup",
-    "red",
-  ]);
+  const openCustomer = (e, userqr) => {
+    e.preventDefault();
+    props.currentUserSelection(userqr); // emitting data to parent
+  };
+
+  const orderStatusColor = (id) => {
+    if (id === "0") return "Orders__blue"; // booked
+    if (id === "1") return "Orders__green"; //delivered
+    if (id === "2") return "Orders__red"; //cancelled
+    if (id === "3") return "Orders__orange"; //intransit
+    if (id === "4") return "Orders__yellow"; // pickedup
+    return "Orders__grey";
+  };
+
+  const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
 
   const orderStatus = (userqr) => {
     let statss = orderstatus[userqr];
     return statss ? statss : "Not Available";
   };
 
-  const orderStatusColor = (id) => {
-    if (id == 0) return "Orders__blue"; // booked
-    if (2) return "Orders__green"; //delivered
-    if (3) return "Orders__red"; //cancelled
-    if (6) return "Orders__orange"; //intransit
-    if (4) return "Orders__yellow"; // pickedup
-    // if (6) return "Orders__orange"; //intransit
-    return "Orders__grey";
-  };
-
   const orderDate = (userqr) => {
     let dateItem = props.orders.find((item) => item.QRNumber === userqr);
     return dateItem ? dateItem.date : new Date(Date.now()).toLocaleString();
-  };
-
-  const openCustomer = (e, userqr) => {
-    e.preventDefault();
-    props.currentUserSelection(userqr); // emitting data to parent
   };
 
   const customername = (id) => {
@@ -86,7 +79,8 @@ export default function OrdersListing(props) {
               </div>
               <div
                 className={
-                  "Orders__status " + orderStatusColor(order.delivery_status)
+                  "Orders__status " +
+                  orderStatusColor(order.delivery_status.toString())
                 }
               >
                 {orderStatus(order.delivery_status)}

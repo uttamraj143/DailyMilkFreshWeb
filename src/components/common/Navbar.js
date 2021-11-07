@@ -10,7 +10,7 @@ import { ReactComponent as TruckIcon } from "components/svgs/truck.svg";
 import { ReactComponent as UsersIcon } from "components/svgs/users.svg";
 import { ReactComponent as UserBadge } from "components/svgs/userBadge.svg";
 import { ReactComponent as AssignUserIcon } from "components/svgs/userPlus.svg";
-import { ReactComponent as ExportIcon } from "components/svgs/export.svg";
+// import { ReactComponent as ExportIcon } from "components/svgs/export.svg";
 import { ReactComponent as ListIcon } from "components/svgs/checkList.svg";
 import { ReactComponent as NumberList } from "components/svgs/number_list.svg";
 import UserContext from "UserContext";
