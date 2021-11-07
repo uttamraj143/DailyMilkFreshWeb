@@ -83,38 +83,29 @@ export default function Orders() {
   };
 
   const sortByName = () => {
+    return;
     if (sortName) {
-      setUsers(
-        users.sort((a, b) => a.customername.localeCompare(b.customername))
-      );
+      setUsers(users.sort((a, b) => a.name.localeCompare(b.name)));
       setSortName(!sortName);
     } else {
-      setUsers(
-        users.sort((a, b) => b.customername.localeCompare(a.customername))
-      );
+      setUsers(users.sort((a, b) => b.name.localeCompare(a.name)));
       setSortName(!sortName);
     }
   };
 
   const sortByNumber = (e) => {
+    return;
     if (sortNumbers) {
-      setUsers(
-        users
-          .slice(0)
-          .sort((a, b) => parseInt(a.QRNumber) - parseInt(b.QRNumber))
-      );
+      setUsers(orders.slice(0).sort((a, b) => parseInt(a.id) - parseInt(b.id)));
       setSortNumbers(!sortNumbers);
     } else {
-      setUsers(
-        users
-          .slice(0)
-          .sort((a, b) => parseInt(b.QRNumber) - parseInt(a.QRNumber))
-      );
+      setUsers(orders.slice(0).sort((a, b) => parseInt(b.id) - parseInt(a.id)));
       setSortNumbers(!sortNumbers);
     }
   };
 
   const sortByLocation = (e) => {
+    return;
     if (sortLocation) {
       setUsers(users.sort((a, b) => a.address.localeCompare(b.address)));
       setSortLocation(!sortLocation);
@@ -160,9 +151,9 @@ export default function Orders() {
           <MiniNavbar
             isVisible={currentUser}
             clearCurrentUser={clearCurrentUser}
-            // sortByName={sortByName}
-            // sortByNumber={sortByNumber}
-            // sortByLocation={sortByLocation}
+            sortByName={sortByName}
+            sortByNumber={sortByNumber}
+            sortByLocation={sortByLocation}
           ></MiniNavbar>
           {currentUser ? (
             <OrderPage order={currentUser}></OrderPage>

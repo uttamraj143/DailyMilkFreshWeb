@@ -42,19 +42,18 @@ export default function Dashboard() {
         return <Products />;
       case "assign_users":
         return <AssignUsers />;
-      case "deliveries":
-        return <Deliveries />;
+      // case "deliveries":
+      //   return <Deliveries />;
       // case "export_data":
       //   return <ExportData />;
       case "delivery_type":
         return <DeliveryTypes />;
       case "settings":
         return <Settings />;
-
       case "1":
-        return <Orders />;
+        return <Orders />; // <Deliveries />;
       case "2":
-        return <Deliveries />;
+        return <Orders />;
       case "3":
         return <Agents />;
       case "4":

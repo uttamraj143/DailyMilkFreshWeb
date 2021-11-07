@@ -22,10 +22,10 @@ export default function Navbar(props) {
       title: "Orders",
       value: "orders_list",
     },
-    {
-      title: "Deliveries",
-      value: "deliveries",
-    },
+    // {
+    //   title: "Deliveries",
+    //   value: "deliveries",
+    // },
     {
       title: "Users",
       value: "users_list",
