@@ -13,6 +13,7 @@ import { ReactComponent as AssignUserIcon } from "components/svgs/userPlus.svg";
 // import { ReactComponent as ExportIcon } from "components/svgs/export.svg";
 import { ReactComponent as ListIcon } from "components/svgs/checkList.svg";
 import { ReactComponent as NumberList } from "components/svgs/number_list.svg";
+import { ReactComponent as QrIcon } from "components/svgs/qrcode.svg";
 import UserContext from "UserContext";
 
 export default function Navbar(props) {
@@ -51,6 +52,7 @@ export default function Navbar(props) {
       title: "Delivery Types",
     },
     // { title: "Export Data", value: "export_data" },
+    { title: "QR Scan", value: "qrscanner" },
     {
       value: "settings",
       title: "Account",
@@ -58,8 +60,8 @@ export default function Navbar(props) {
   ]);
   const [agentMenuOptions] = useState([
     {
-      title: "Orders",
-      value: "orders_list",
+      title: "QR Scan",
+      value: "qrscanner",
     },
     {
       title: "settings",
@@ -123,13 +125,24 @@ export default function Navbar(props) {
       case "4":
         return <ListIcon style={{ color: "white" }} />;
       case "5":
-        return <TruckIcon style={{ color: "white" }} />;
-      case "6":
         return <AssignUserIcon style={{ color: "white" }} />;
+      case "6":
+        return <TruckIcon style={{ color: "white" }} />;
       case "7":
-        return <NumberList style={{ color: "white" }} />;
-      // case "8":
-      //   return <ExportIcon style={{ color: "white" }} />;
+        return <QrIcon style={{ color: "white" }} />;
+      case "8":
+        return <SettingsIcon style={{ color: "white" }} />;
+      default:
+        return <SettingsIcon style={{ color: "white" }} />;
+    }
+  };
+
+  const agentmenuIcon = (menuNumber) => {
+    switch (menuNumber.toString()) {
+      case "1":
+        return <QrIcon style={{ color: "white" }} />;
+      case "2":
+        return <SettingsIcon style={{ color: "white" }} />;
       default:
         return <SettingsIcon style={{ color: "white" }} />;
     }
@@ -164,7 +177,7 @@ export default function Navbar(props) {
               return (
                 <li key={i} onClick={(e) => changeMenu(e, item.value)}>
                   <div className="Navbar__sideMenu-icons">
-                    {menuIcon(i + 1)}
+                    {userInfo.isAdmin ? menuIcon(i + 1) : agentmenuIcon(i + 1)}
                     <span className="Navbar__sideMenu-icons-img">
                       {item.title}
                     </span>
