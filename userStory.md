@@ -16,19 +16,22 @@ lazy Load - all Orders
 
 Protected Routes using hooks
 https://medium.com/@subalerts/creating-protected-routes-in-react-js-89e95974a822
-
 https://cdn.dribbble.com/users/420440/videos/12419/add_booking.mp4
 https://dummyapi.io/data/v1/user?page=1&limit=10
-
 https://www.savaslabs.com/blog/using-react-global-state-hooks-and-context
 https://medium.com/@akrush95/global-cached-state-in-react-using-hooks-context-and-local-storage-166eacf8ab46
 https://egghead.io/lessons/react-share-logic-across-multiple-react-components-with-custom-hooks
-
-add Footer
-Sort according to Date and fetch only with Date
-
 https://www.codegrepper.com/code-examples/javascript/pass+context+from+one+file+to+another+reactjs
 
 REDUX
 REDUX
 REDUX
+
+Scan Me
+History
+Statistics
+remove deliveries page -
+add Footer
+Sort according to Date and fetch only with Date
+animations transitions
+mini Navbar functionality

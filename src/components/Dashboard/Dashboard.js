@@ -51,9 +51,9 @@ export default function Dashboard() {
       case "settings":
         return <Settings />;
       case "1":
-        return <Orders />; // <Deliveries />;
-      case "2":
         return <Orders />;
+      case "2":
+        return <DeliveryTypes />;
       case "3":
         return <Agents />;
       case "4":
@@ -67,8 +67,12 @@ export default function Dashboard() {
     switch (currentComponent) {
       case "settings":
         return <Settings />;
+      case "2":
+        return <DeliveryTypes />;
+      case "4":
+        return <Settings />;
       default:
-        return <Orders />;
+        return <DeliveryTypes />;
     }
   };
 

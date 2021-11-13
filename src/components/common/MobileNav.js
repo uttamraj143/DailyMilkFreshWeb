@@ -40,7 +40,7 @@ export default function MobileNav(props) {
             icon={<HomeIcon style={{ color: "#90a0ee" }} />}
           />
           <BottomNavigationAction
-            label="Orders"
+            label="Delivery Types"
             icon={<CartIcon style={{ color: "#90a0ee" }} />}
           />
           {/* <BottomNavigationAction

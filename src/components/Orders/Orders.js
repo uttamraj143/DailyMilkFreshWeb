@@ -18,10 +18,10 @@ import "./Orders.scss";
 export default function Orders() {
   const userInfo = useContext(UserContext);
   const [currentUser, setCurrentUser] = useState(null);
-  const [sortNumbers, setSortNumbers] = useState(false);
+  // const [sortNumbers, setSortNumbers] = useState(false);
   const [addexport, exportToggle] = useState(false);
-  const [sortName, setSortName] = useState(false);
-  const [sortLocation, setSortLocation] = useState(false);
+  // const [sortName, setSortName] = useState(false);
+  // const [sortLocation, setSortLocation] = useState(false);
   const [page, setPage] = useState(1);
   const [orders, setOrders] = useState([]);
   const [convertedOrders, setConvertedOrders] = useState([]);
@@ -35,16 +35,6 @@ export default function Orders() {
 
   useEffect(() => {
     toggleSpinner(true);
-    listAgentUsers(access_token)
-      .then((res) => {
-        setOrders(res.data.data);
-      })
-      .catch((res) => {
-        console.log(res);
-        if (res && res.response && res.response.status === 401) {
-          refreshAccessToken();
-        }
-      });
     listUsers(null, access_token)
       .then((res) => {
         setUsers(res.data.data);
@@ -68,6 +58,16 @@ export default function Orders() {
     listProducts(null, access_token)
       .then((res) => {
         setProducts(res.data.data);
+      })
+      .catch((res) => {
+        console.log(res);
+        if (res && res.response && res.response.status === 401) {
+          refreshAccessToken();
+        }
+      });
+    listAgentUsers(access_token)
+      .then((res) => {
+        setOrders(res.data.data);
       })
       .catch((res) => {
         console.log(res);
@@ -138,8 +138,7 @@ export default function Orders() {
   };
 
   const orderType = (id) => {
-    let nameItem =
-      deliveryTypes && deliveryTypes.find((item) => item.delivery_type === id);
+    let nameItem = deliveryTypes.find((item) => item.delivery_type === id);
     return nameItem && nameItem.name;
   };
 
@@ -152,32 +151,38 @@ export default function Orders() {
     (e, val) => {
       e && e.preventDefault();
       setPage(val);
-      const slicedArray = orders.slice((val - 1) * 6, val * 6);
+      const slicedArray = convertedOrders.slice((val - 1) * 6, val * 6);
       setSortOrders(slicedArray);
-
-      setConvertedOrders([]);
-      orders.forEach((item) => {
-        let abc = {
-          user_name: customername(item.user_id),
-          agent_name: customername(item.agent_id),
-          delivery_type: orderType(item.delivery_type),
-          product: orderProducts(item.product_type),
-          delivery_status: orderStatus(item.delivery_status),
-          quantity: item.quantity,
-          price: item.price,
-          id: item.id,
-          modified_at: orderDate(item.modified_at),
-        };
-
-        setConvertedOrders((prevData) => [...prevData, abc]);
-      });
     },
-    [orders, addexport]
+    [convertedOrders]
   );
+
+  const nnn = useCallback(() => {
+    setConvertedOrders([]);
+    orders.forEach((item) => {
+      let abc = {
+        user_name: customername(item.user_id),
+        agent_name: customername(item.agent_id),
+        delivery_type: orderType(item.delivery_type),
+        product: orderProducts(item.product_type),
+        delivery_status: orderStatus(item.delivery_status),
+        quantity: item.quantity,
+        price: item.price,
+        id: item.id,
+        modified_at: orderDate(item.modified_at),
+      };
+
+      setConvertedOrders((prevData) => [...prevData, abc]);
+    });
+  }, [orders]);
 
   useEffect(() => {
     modifyOrders(null, 1);
-  }, [orders, modifyOrders]);
+  }, [convertedOrders, modifyOrders]);
+
+  useEffect(() => {
+    nnn();
+  }, [orders, nnn]);
 
   return (
     <div className="Orders__main-container">

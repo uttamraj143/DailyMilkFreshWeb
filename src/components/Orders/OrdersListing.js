@@ -8,42 +8,12 @@ export default function OrdersListing(props) {
   };
 
   const orderStatusColor = (id) => {
-    if (id === "0") return "Orders__blue"; // booked
-    if (id === "1") return "Orders__green"; //delivered
-    if (id === "2") return "Orders__red"; //cancelled
-    if (id === "3") return "Orders__orange"; //intransit
-    if (id === "4") return "Orders__yellow"; // pickedup
+    if (id === "booked") return "Orders__blue";
+    if (id === "delivered") return "Orders__green";
+    if (id === "cancelled") return "Orders__red";
+    if (id === "intransit") return "Orders__orange";
+    if (id === "pickedup") return "Orders__yellow";
     return "Orders__grey";
-  };
-
-  const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
-
-  const orderStatus = (userqr) => {
-    let statss = orderstatus[userqr];
-    return statss ? statss : "Not Available";
-  };
-
-  const orderDate = (userqr) => {
-    let dateItem = props.orders.find((item) => item.QRNumber === userqr);
-    return dateItem ? dateItem.date : new Date(Date.now()).toLocaleString();
-  };
-
-  const customername = (id) => {
-    let nameItem = props.users.find((item) => item.user_id === id);
-    let status = nameItem?.name;
-    return status;
-  };
-
-  const orderType = (id) => {
-    let nameItem =
-      props.deliveryTypes &&
-      props.deliveryTypes.find((item) => item.delivery_type === id);
-    return nameItem && nameItem.name;
-  };
-
-  const orderProducts = (id) => {
-    let nameItem = props.products.find((item) => item.product_type === id);
-    return nameItem && nameItem.name;
   };
 
   return (
@@ -57,7 +27,7 @@ export default function OrdersListing(props) {
             elevation={2}
           >
             <div className="Orders__date-address-row">
-              <div className="Orders__date">{orderDate(order.modified_at)}</div>
+              <div className="Orders__date">{order.modified_at}</div>
               <div className="Orders__address">{order.address}</div>
             </div>
 
@@ -83,27 +53,23 @@ export default function OrdersListing(props) {
                   orderStatusColor(order.delivery_status.toString())
                 }
               >
-                {orderStatus(order.delivery_status)}
+                {order.delivery_status}
               </div>
             </div>
 
             <div className="Orders__customername">
               <div className="Orders__cust-heading">Customer</div>
-              <div className="cust-idnumber">{customername(order.user_id)}</div>
+              <div className="cust-idnumber">{order.user_name}</div>
             </div>
 
             <div className="Orders__customername">
               <div className="Orders__cust-heading">Agent</div>
-              <div className="cust-idnumber">
-                {customername(order.agent_id)}
-              </div>
+              <div className="cust-idnumber">{order.agent_name}</div>
             </div>
 
             <div className="Orders__customername">
               <div className="Orders__cust-heading">Delivery Type</div>
-              <div className="cust-idnumber">
-                {orderType(order.delivery_type)}
-              </div>
+              <div className="cust-idnumber">{order.delivery_type}</div>
             </div>
 
             <div className="Orders__customername">
@@ -113,9 +79,7 @@ export default function OrdersListing(props) {
 
             <div className="Orders__products-row">
               <div className="Orders__product-id">Products</div>
-              <div className="Orders__product">
-                {orderProducts(order.product_type)}
-              </div>
+              <div className="Orders__product">{order.product}</div>
             </div>
           </Paper>
         );
