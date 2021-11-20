@@ -3,17 +3,17 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import DailyMilkFreshLogo from "logo.png";
 
-import { ReactComponent as SettingsIcon } from "components/svgs/settingsIcon.svg";
+import { ReactComponent as SettingsIcon } from "svgs/settingsIcon.svg";
 
-import { ReactComponent as CartIcon } from "components/svgs/cartIcon.svg";
-import { ReactComponent as TruckIcon } from "components/svgs/truck.svg";
-import { ReactComponent as UsersIcon } from "components/svgs/users.svg";
-import { ReactComponent as UserBadge } from "components/svgs/userBadge.svg";
-import { ReactComponent as AssignUserIcon } from "components/svgs/userPlus.svg";
-// import { ReactComponent as ExportIcon } from "components/svgs/export.svg";
-import { ReactComponent as ListIcon } from "components/svgs/checkList.svg";
-import { ReactComponent as NumberList } from "components/svgs/number_list.svg";
-import { ReactComponent as QrIcon } from "components/svgs/qrcode.svg";
+import { ReactComponent as CartIcon } from "svgs/cartIcon.svg";
+import { ReactComponent as TruckIcon } from "svgs/truck.svg";
+import { ReactComponent as UsersIcon } from "svgs/users.svg";
+import { ReactComponent as UserBadge } from "svgs/userBadge.svg";
+import { ReactComponent as AssignUserIcon } from "svgs/userPlus.svg";
+// import { ReactComponent as ExportIcon } from "svgs/export.svg";
+import { ReactComponent as ListIcon } from "svgs/checkList.svg";
+import { ReactComponent as NumberList } from "svgs/number_list.svg";
+import { ReactComponent as QrIcon } from "svgs/qrcode.svg";
 import UserContext from "UserContext";
 
 export default function Navbar(props) {

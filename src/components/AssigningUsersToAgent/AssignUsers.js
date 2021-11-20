@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import UserContext from "UserContext";
-import { ReactComponent as UserBadge } from "components/svgs/users.svg";
+import { ReactComponent as UserBadge } from "svgs/users.svg";
 
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";

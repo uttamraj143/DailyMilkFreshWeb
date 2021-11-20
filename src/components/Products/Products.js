@@ -3,7 +3,7 @@ import ProductsListing from "components/Products/ProductsListing";
 import AddProduct from "components/Products/AddProduct";
 import Spinner from "components/common/Spinner";
 import Skeleton from "@mui/material/Skeleton";
-import { ReactComponent as ProductIcon } from "components/svgs/checkList.svg";
+import { ReactComponent as ProductIcon } from "svgs/checkList.svg";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 // import MiniNavbar from 'components/common/MiniNavbar';

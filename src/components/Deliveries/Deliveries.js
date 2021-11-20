@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "UserContext";
-import { ReactComponent as CartIcon } from "components/svgs/cartIcon.svg";
+import { ReactComponent as CartIcon } from "svgs/cartIcon.svg";
 import SelectUser from "components/AssigningUsersToAgent/SelectUser";
 import SelectAgent from "components/AssigningUsersToAgent/SelectAgent";
 import Paper from "@mui/material/Paper";

@@ -3,7 +3,7 @@ import UsersListing from "components/Users/UsersListing";
 import AddUser from "components/Users/AddUser";
 import Spinner from "components/common/Spinner";
 import Skeleton from "@mui/material/Skeleton";
-import { ReactComponent as UserBadge } from "components/svgs/users.svg";
+import { ReactComponent as UserBadge } from "svgs/users.svg";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 // import MiniNavbar from 'components/common/MiniNavbar';

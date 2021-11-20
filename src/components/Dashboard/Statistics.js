@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 import "./Statistics.scss";
 import TextField from "@mui/material/TextField";
-import { ReactComponent as GraphIcon } from "components/svgs/graphIncrease.svg";
+import { ReactComponent as GraphIcon } from "svgs/graphIncrease.svg";
 
 const chartConfig = {
   type: "bar",

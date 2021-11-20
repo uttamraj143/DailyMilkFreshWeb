@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "UserContext";
 import { listDeliveryTypes, addDeliveryTypes } from "store/deliveries";
-import { ReactComponent as UsersIcon } from "components/svgs/userBadge.svg";
+import { ReactComponent as UsersIcon } from "svgs/userBadge.svg";
 
 import ListDeliveryTypes from "components/Deliveries/ListDeliveryTypes";
 import "./Deliveries.scss";

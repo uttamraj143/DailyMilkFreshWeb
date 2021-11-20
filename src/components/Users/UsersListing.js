@@ -1,5 +1,5 @@
 import Paper from "@mui/material/Paper";
-import userIcon from "components/svgs/singlePerson.svg";
+import userIcon from "svgs/singlePerson.svg";
 
 export default function OrdersListing(props) {
   return (

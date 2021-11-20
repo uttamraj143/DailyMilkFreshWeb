@@ -3,7 +3,7 @@ import UserContext from "UserContext";
 import OrdersListing from "components/Orders/OrdersListing";
 import OrderPage from "components/Orders/OrderPage";
 import MiniNavbar from "components/common/MiniNavbar";
-import { ReactComponent as CartIcon } from "components/svgs/cartIcon.svg";
+import { ReactComponent as CartIcon } from "svgs/cartIcon.svg";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Spinner from "components/common/Spinner";

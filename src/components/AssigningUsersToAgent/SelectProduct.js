@@ -3,8 +3,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import { listProducts } from "store/products";
-import CheckBoxOutlineBlankIcon from "components/svgs/unchecked.svg";
-import CheckBoxIcon from "components/svgs/checked.svg";
+import CheckBoxOutlineBlankIcon from "svgs/unchecked.svg";
+import CheckBoxIcon from "svgs/checked.svg";
 
 const icon = <img src={CheckBoxOutlineBlankIcon} alt="dsd" fontSize="small" />;
 const checkedIcon = <img src={CheckBoxIcon} alt="dsds" fontSize="small" />;

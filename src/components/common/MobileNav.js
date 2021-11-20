@@ -5,10 +5,11 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 
 import Paper from "@mui/material/Paper";
-import { ReactComponent as SettingsIcon } from "components/svgs/settingsIcon.svg";
-import { ReactComponent as CartIcon } from "components/svgs/cartIcon.svg";
-import { ReactComponent as QrIcon } from "components/svgs/qrcode.svg";
-import { ReactComponent as HomeIcon } from "components/svgs/home.svg";
+import { ReactComponent as SettingsIcon } from "svgs/settingsIcon.svg";
+import { ReactComponent as CartIcon } from "svgs/cartIcon.svg";
+import { ReactComponent as QrIcon } from "svgs/qrcode.svg";
+import { ReactComponent as TruckIcon } from "svgs/qrcode.svg";
+import { ReactComponent as HomeIcon } from "svgs/home.svg";
 
 export default function MobileNav(props) {
   const [value, setValue] = useState(0);
@@ -39,18 +40,18 @@ export default function MobileNav(props) {
             label="Home"
             icon={<HomeIcon style={{ color: "#90a0ee" }} />}
           />
-          <BottomNavigationAction
+          {/* <BottomNavigationAction
             label="Delivery Types"
             icon={<CartIcon style={{ color: "#90a0ee" }} />}
-          />
-          {/* <BottomNavigationAction
-            label="Deliveries"
-            icon={<TruckIcon style={{ color: "#90a0ee" }} />}
           /> */}
           <BottomNavigationAction
+            label="Deliveries"
+            icon={<TruckIcon style={{ color: "#90a0ee" }} />}
+          />
+          {/* <BottomNavigationAction
             label="Scan QR"
             icon={<QrIcon style={{ color: "#90a0ee" }} />}
-          />
+          /> */}
           <BottomNavigationAction
             label="Account"
             icon={<SettingsIcon style={{ color: "#90a0ee" }} />}

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Paper from "@mui/material/Paper";
-// import deleteIcon from "components/svgs/delete.svg";
-import cancelIcon from "components/svgs/cancel.svg";
-import editIcon from "components/svgs/pencil.svg";
-import saveIcon from "components/svgs/save.svg";
+// import deleteIcon from "svgs/delete.svg";
+import cancelIcon from "svgs/cancel.svg";
+import editIcon from "svgs/pencil.svg";
+import saveIcon from "svgs/save.svg";
 import { updateDeliveryTypes } from "store/deliveries";
 
 export default function ListDeliveryTypes(props) {
