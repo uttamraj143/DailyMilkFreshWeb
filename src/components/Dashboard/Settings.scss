@@ -1,6 +1,7 @@
 .Settings {
   &__main-container {
     width: 400px;
+    margin: auto;
     @media screen and (max-width: 450px) {
       width: 96%;
     }

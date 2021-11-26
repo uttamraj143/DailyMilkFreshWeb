@@ -50,7 +50,7 @@ export default function OrdersListing(props) {
                 &nbsp; {order.id}
               </div>
               <div
-                onClick={(e) => openCustomer(e, order.id)}
+                onClick={(e) => openCustomer(e, order.delivery_id)}
                 className={
                   "Orders__status " +
                   orderStatusColor(order.delivery_status.toString())

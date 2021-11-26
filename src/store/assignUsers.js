@@ -17,3 +17,12 @@ export const listAgentUsers = (access_token, assign_data) => {
     data: assign_data,
   });
 };
+
+export const updateLocationOfUser = (access_token, data) => {
+  return axiosInstance({
+    method: "POST",
+    url: `deliverytype/${data.userid}/updatedUserDeliveryDetails`,
+    data: data.latlong,
+    headers: { access_token: access_token },
+  });
+};

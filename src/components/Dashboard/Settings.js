@@ -2,10 +2,13 @@ import "./Settings.scss";
 import { useState, useContext, useEffect } from "react";
 import UserContext from "UserContext";
 import { editUser } from "store/user";
+import QRCode from "qrcode";
 
 export default function Settings() {
   const userInfo = useContext(UserContext);
+  const [imageUrl, setImageUrl] = useState("");
   const [selectedProfile, setSelectedProfile] = useState(true);
+  const { access_token, userDetails } = userInfo;
   const [user, setUserProfile] = useState({
     name: "",
     email_id: "",
@@ -21,9 +24,10 @@ export default function Settings() {
   useEffect(() => {
     setUserProfile((prevState) => ({
       ...prevState,
-      ...userInfo.userDetails,
+      ...userDetails,
     }));
-  }, [userInfo]);
+    generateQrCode();
+  }, [userDetails]);
 
   const assignUserProfile = (e, formType) => {
     e.preventDefault();
@@ -38,12 +42,21 @@ export default function Settings() {
     let data = {
       name: user.name,
       email_id: user.email_id,
-      access_token: userInfo.access_token,
+      access_token: access_token,
     };
     editUser(data).then((res) => {
       userInfo.saveuserDetails(res.data);
       alert("Successfully saved");
     });
+  };
+
+  const generateQrCode = async () => {
+    try {
+      const response = await QRCode.toDataURL(userDetails.user_id);
+      setImageUrl(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -129,6 +142,14 @@ export default function Settings() {
           </div>
         </div>
       )}
+
+      <div>
+        {imageUrl ? (
+          <a href={imageUrl} download>
+            <img width="350px" height="350px" src={imageUrl} alt="img" />
+          </a>
+        ) : null}
+      </div>
     </div>
   );
 }
