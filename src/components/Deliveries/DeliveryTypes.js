@@ -15,16 +15,17 @@ export default function DeliveryTypes() {
 
   useEffect(() => {
     const getDeliveryTypes = () => {
-      listDeliveryTypes(userInfo.access_token)
-        .then((res) => {
-          setDeliveryTypes(res.data.data);
-        })
-        .catch((res) => {
-          console.log(res);
-          if (res && res.response && res.response.status === 401) {
-            userInfo.refreshAccessToken();
-          }
-        });
+      if (userInfo.access_token)
+        listDeliveryTypes(userInfo.access_token)
+          .then((res) => {
+            setDeliveryTypes(res.data.data);
+          })
+          .catch((res) => {
+            console.log(res);
+            if (res && res.response && res.response.status === 401) {
+              userInfo.refreshAccessToken();
+            }
+          });
     };
     getDeliveryTypes();
   }, [userInfo.access_token, userInfo, addDeliveryTypeToggle]);

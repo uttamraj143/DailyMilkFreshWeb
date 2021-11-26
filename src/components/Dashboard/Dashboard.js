@@ -9,7 +9,6 @@ import Products from "components/Products/Products";
 import Agents from "components/Agents/Agents";
 import Settings from "components/Dashboard/Settings";
 // import ExportData from "components/Dashboard/ExportData";
-import QRCodeMain from "components/QRScanner/QrmainComponent";
 import Statistics from "components/Dashboard/Statistics";
 import UserContext from "UserContext";
 // import Deliveries from "components/Deliveries/Deliveries";
@@ -47,8 +46,8 @@ export default function Dashboard() {
       //   return <Deliveries />;
       // case "export_data":
       //   return <ExportData />;
-      case "qrscanner":
-        return <QRCodeMain />;
+      // case "qrscanner":
+      //   return <QRCodeMain />;
       case "delivery_type":
         return <DeliveryTypes />;
       case "settings":
@@ -56,11 +55,11 @@ export default function Dashboard() {
       case "1":
         return <Orders />;
       case "2":
-        return <DeliveryTypes />;
+        return <Orders />;
       case "3":
-        return <QRCodeMain />;
-      case "4":
         return <Settings />;
+      // case "4":
+      //   return <Settings />;
       default:
         return <Statistics />;
     }
@@ -68,18 +67,18 @@ export default function Dashboard() {
 
   const agentComponents = () => {
     switch (currentComponent) {
-      case "qrscan":
-        return <QRCodeMain />;
+      // case "qrscan":
+      //   return <QRCodeMain />;
       case "settings":
         return <Settings />;
       case "1":
         return <Settings />;
       case "2":
-        return <DeliveryTypes />;
+        return <Orders />;
       case "3":
-        return <QRCodeMain />;
-      case "4":
         return <Settings />;
+      // case "4":
+      //   return <Settings />;
       default:
         return <DeliveryTypes />;
     }

@@ -16,16 +16,18 @@ export default function OrdersListing(props) {
     return "Orders__grey";
   };
 
+  const goToMaps = (e, a, b) => {
+    e.preventDefault();
+    let url = `https://www.google.com/maps/search/?api=1&query= ${a} , ${b}`;
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
+
   return (
     <div className="Orders__card-container">
       {props.orders.map((order, index) => {
         return (
-          <Paper
-            key={index}
-            onClick={(e) => openCustomer(e, order.id)}
-            className="Orders__order"
-            elevation={2}
-          >
+          <Paper key={index} className="Orders__order" elevation={2}>
             <div className="Orders__date-address-row">
               <div className="Orders__date">{order.modified_at}</div>
               <div className="Orders__address">{order.address}</div>
@@ -48,6 +50,7 @@ export default function OrdersListing(props) {
                 &nbsp; {order.id}
               </div>
               <div
+                onClick={(e) => openCustomer(e, order.id)}
                 className={
                   "Orders__status " +
                   orderStatusColor(order.delivery_status.toString())
@@ -70,6 +73,16 @@ export default function OrdersListing(props) {
             <div className="Orders__customername">
               <div className="Orders__cust-heading">Delivery Type</div>
               <div className="cust-idnumber">{order.delivery_type}</div>
+            </div>
+
+            <div className="Orders__customername">
+              <div className="Orders__cust-heading">Google Location</div>
+              <div
+                onClick={(e) => goToMaps(e, order.lat, order.lng)}
+                className="cust-idnumber Orders__status "
+              >
+                Click Here - Maps
+              </div>
             </div>
 
             <div className="Orders__customername">

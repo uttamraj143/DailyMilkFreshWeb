@@ -75,7 +75,9 @@ export default function Orders() {
           refreshAccessToken();
         }
       });
-    toggleSpinner(false);
+    setTimeout(() => {
+      toggleSpinner(false);
+    }, 2000);
   }, [access_token, refreshAccessToken]);
 
   const currentUserSelection = (user) => {
@@ -161,6 +163,8 @@ export default function Orders() {
     setConvertedOrders([]);
     orders.forEach((item) => {
       let abc = {
+        user_id: item.user_id,
+        delivery_id: item.delivery_id,
         user_name: customername(item.user_id),
         agent_name: customername(item.agent_id),
         delivery_type: orderType(item.delivery_type),
@@ -168,6 +172,8 @@ export default function Orders() {
         delivery_status: orderStatus(item.delivery_status),
         quantity: item.quantity,
         price: item.price,
+        lat: item.lat,
+        lng: item.long,
         id: item.id,
         modified_at: orderDate(item.modified_at),
       };
@@ -235,9 +241,9 @@ export default function Orders() {
                   <OrdersListing
                     currentUserSelection={currentUserSelection}
                     orders={sortOrders}
-                    users={users}
-                    deliveryTypes={deliveryTypes}
-                    products={products}
+                    // users={users}
+                    // deliveryTypes={deliveryTypes}
+                    // products={products}
                   ></OrdersListing>
                   <div className="Orders__pagination">
                     <Stack spacing={2}>

@@ -52,7 +52,7 @@ export default function Navbar(props) {
       title: "Delivery Types",
     },
     // { title: "Export Data", value: "export_data" },
-    { title: "QR Scan", value: "qrscanner" },
+    // { title: "QR Scan", value: "qrscanner" },
     {
       value: "settings",
       title: "Account",
@@ -128,9 +128,9 @@ export default function Navbar(props) {
         return <AssignUserIcon style={{ color: "white" }} />;
       case "6":
         return <TruckIcon style={{ color: "white" }} />;
+      // case "7":
+      //   return <QrIcon style={{ color: "white" }} />;
       case "7":
-        return <QrIcon style={{ color: "white" }} />;
-      case "8":
         return <SettingsIcon style={{ color: "white" }} />;
       default:
         return <SettingsIcon style={{ color: "white" }} />;
@@ -139,10 +139,10 @@ export default function Navbar(props) {
 
   const agentmenuIcon = (menuNumber) => {
     switch (menuNumber.toString()) {
-      case "1":
-        return <QrIcon style={{ color: "white" }} />;
+      // case "1":
+      //   return <QrIcon style={{ color: "white" }} />;
       case "2":
-        return <SettingsIcon style={{ color: "white" }} />;
+        return <TruckIcon style={{ color: "white" }} />;
       default:
         return <SettingsIcon style={{ color: "white" }} />;
     }
