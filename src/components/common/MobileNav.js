@@ -6,8 +6,8 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 
 import Paper from "@mui/material/Paper";
 import { ReactComponent as SettingsIcon } from "svgs/settingsIcon.svg";
-import { ReactComponent as CartIcon } from "svgs/cartIcon.svg";
-import { ReactComponent as QrIcon } from "svgs/qrcode.svg";
+// import { ReactComponent as CartIcon } from "svgs/cartIcon.svg";
+// import { ReactComponent as QrIcon } from "svgs/qrcode.svg";
 import { ReactComponent as TruckIcon } from "svgs/truck.svg";
 import { ReactComponent as HomeIcon } from "svgs/home.svg";
 

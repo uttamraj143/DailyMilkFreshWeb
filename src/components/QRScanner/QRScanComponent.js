@@ -8,7 +8,7 @@ export default function QRScanComponent() {
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   // const qrRef = useRef(null);
   const userInfo = useContext(UserContext);
-  const { access_token, refreshAccessToken } = userInfo;
+  const { access_token } = userInfo;
 
   const handleErrorWebCam = (error) => {
     console.log(error);

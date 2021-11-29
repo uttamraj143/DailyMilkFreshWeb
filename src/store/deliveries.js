@@ -25,3 +25,11 @@ export const addDeliveryTypes = (access_token, data) => {
     headers: { access_token: access_token },
   });
 };
+
+export const listAgentDelivery = (userid, access_token) => {
+  return axiosInstance({
+    method: "GET",
+    url: `agent/${userid}/listDeliveries`,
+    headers: { access_token: access_token },
+  });
+};

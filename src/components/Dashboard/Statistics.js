@@ -192,22 +192,32 @@ export default function ProductionStatistics() {
           }}
         />
       </form>
-      <div onClick={(e) => onButtonClick(e)}>
-        Daily Milk Delivery Quantity (total delivered on this date)
-        <canvas ref={chartContainer2} />
-      </div>
       <div>
-        Per Agent Milk Delivery Quantity (total delivered by selected Agent
-        today/any day selection from Calender drop down)
+        <div onClick={(e) => onButtonClick(e)}>
+          <br />
+          Daily Milk Delivery Quantity (total delivered on this date)
+          <canvas ref={chartContainer2} />
+        </div>
+        <div>
+          <br />
+          <br />
+          <br />
+          <br />
+          Per Agent Milk Delivery Quantity (total delivered by selected Agent
+          today/any day selection from Calender drop down)
+        </div>
+        <div className="Statistics__donough">
+          <canvas ref={chartContainer} />
+        </div>
+        <div>
+          <br />
+          <br />
+          <br />
+          <br /> Daily Milk Delivery Quantity by Type last month (cow/buffallo /
+          ghee)
+        </div>
+        <canvas ref={chartContainer4} />
       </div>
-      <div className="Statistics__donough">
-        <canvas ref={chartContainer} />
-      </div>
-      <div>
-        {" "}
-        Daily Milk Delivery Quantity by Type last month (cow/buffallo / ghee)
-      </div>
-      <canvas ref={chartContainer4} />
     </div>
   );
 }

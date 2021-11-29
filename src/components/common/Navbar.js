@@ -10,10 +10,10 @@ import { ReactComponent as TruckIcon } from "svgs/truck.svg";
 import { ReactComponent as UsersIcon } from "svgs/users.svg";
 import { ReactComponent as UserBadge } from "svgs/userBadge.svg";
 import { ReactComponent as AssignUserIcon } from "svgs/userPlus.svg";
-// import { ReactComponent as ExportIcon } from "svgs/export.svg";
+import { ReactComponent as ExportIcon } from "svgs/export.svg";
 import { ReactComponent as ListIcon } from "svgs/checkList.svg";
-import { ReactComponent as NumberList } from "svgs/number_list.svg";
-import { ReactComponent as QrIcon } from "svgs/qrcode.svg";
+// import { ReactComponent as NumberList } from "svgs/number_list.svg";
+// import { ReactComponent as QrIcon } from "svgs/qrcode.svg";
 import UserContext from "UserContext";
 
 export default function Navbar(props) {
@@ -23,10 +23,6 @@ export default function Navbar(props) {
       title: "Orders",
       value: "orders_list",
     },
-    // {
-    //   title: "Deliveries",
-    //   value: "deliveries",
-    // },
     {
       title: "Users",
       value: "users_list",
@@ -51,8 +47,7 @@ export default function Navbar(props) {
       value: "delivery_type",
       title: "Delivery Types",
     },
-    // { title: "Export Data", value: "export_data" },
-    // { title: "QR Scan", value: "qrscanner" },
+    { title: "Deliveries", value: "deliveries" },
     {
       value: "settings",
       title: "Account",
@@ -60,8 +55,8 @@ export default function Navbar(props) {
   ]);
   const [agentMenuOptions] = useState([
     {
-      title: "QR Scan",
-      value: "qrscanner",
+      title: "Deliveries",
+      value: "deliveries",
     },
     {
       title: "settings",
@@ -127,10 +122,10 @@ export default function Navbar(props) {
       case "5":
         return <AssignUserIcon style={{ color: "white" }} />;
       case "6":
-        return <TruckIcon style={{ color: "white" }} />;
-      // case "7":
-      //   return <QrIcon style={{ color: "white" }} />;
+        return <ExportIcon style={{ color: "white" }} />;
       case "7":
+        return <TruckIcon style={{ color: "white" }} />;
+      case "8":
         return <SettingsIcon style={{ color: "white" }} />;
       default:
         return <SettingsIcon style={{ color: "white" }} />;
@@ -139,10 +134,10 @@ export default function Navbar(props) {
 
   const agentmenuIcon = (menuNumber) => {
     switch (menuNumber.toString()) {
-      // case "1":
-      //   return <QrIcon style={{ color: "white" }} />;
-      case "2":
+      case "1":
         return <TruckIcon style={{ color: "white" }} />;
+      case "2":
+        return <SettingsIcon style={{ color: "white" }} />;
       default:
         return <SettingsIcon style={{ color: "white" }} />;
     }

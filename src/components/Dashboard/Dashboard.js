@@ -11,7 +11,7 @@ import Settings from "components/Dashboard/Settings";
 // import ExportData from "components/Dashboard/ExportData";
 import Statistics from "components/Dashboard/Statistics";
 import UserContext from "UserContext";
-// import Deliveries from "components/Deliveries/Deliveries";
+import Deliveries from "components/Deliveries/Deliveries";
 import DeliveryTypes from "components/Deliveries/DeliveryTypes";
 import AssignUsers from "components/AssigningUsersToAgent/AssignUsers";
 
@@ -42,8 +42,8 @@ export default function Dashboard() {
         return <Products />;
       case "assign_users":
         return <AssignUsers />;
-      // case "deliveries":
-      //   return <Deliveries />;
+      case "deliveries":
+        return <Deliveries />;
       // case "export_data":
       //   return <ExportData />;
       // case "qrscanner":
@@ -67,20 +67,18 @@ export default function Dashboard() {
 
   const agentComponents = () => {
     switch (currentComponent) {
-      // case "qrscan":
-      //   return <QRCodeMain />;
       case "settings":
         return <Settings />;
+      case "deliveries":
+        return <Deliveries />;
       case "1":
-        return <Settings />;
+        return <Deliveries />;
       case "2":
-        return <Orders />;
+        return <Deliveries />;
       case "3":
         return <Settings />;
-      // case "4":
-      //   return <Settings />;
       default:
-        return <DeliveryTypes />;
+        return <Deliveries />;
     }
   };
 

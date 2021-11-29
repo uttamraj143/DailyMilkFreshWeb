@@ -26,6 +26,24 @@ export default function Settings() {
       ...prevState,
       ...userDetails,
     }));
+    const generateQrCode = async () => {
+      try {
+        var opts = {
+          errorCorrectionLevel: "H",
+          type: "image/jpeg",
+          quality: 1,
+          margin: 1,
+          color: {
+            dark: "#000",
+            light: "#FFF",
+          },
+        };
+        const response = await QRCode.toDataURL(userDetails.user_id, opts);
+        setImageUrl(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     generateQrCode();
   }, [userDetails]);
 
@@ -48,15 +66,6 @@ export default function Settings() {
       userInfo.saveuserDetails(res.data);
       alert("Successfully saved");
     });
-  };
-
-  const generateQrCode = async () => {
-    try {
-      const response = await QRCode.toDataURL(userDetails.user_id);
-      setImageUrl(response);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (

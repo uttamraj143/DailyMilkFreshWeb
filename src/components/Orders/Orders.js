@@ -121,34 +121,6 @@ export default function Orders() {
     // }
   };
 
-  const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
-
-  const orderStatus = (userqr) => {
-    let statss = orderstatus[userqr];
-    return statss ? statss : "Not Available";
-  };
-
-  const orderDate = (userqr) => {
-    let dateItem = orders.find((item) => item.QRNumber === userqr);
-    return dateItem ? dateItem.date : new Date(Date.now()).toLocaleString();
-  };
-
-  const customername = (id) => {
-    let nameItem = users.find((item) => item.user_id === id);
-    let status = nameItem?.name;
-    return status;
-  };
-
-  const orderType = (id) => {
-    let nameItem = deliveryTypes.find((item) => item.delivery_type === id);
-    return nameItem && nameItem.name;
-  };
-
-  const orderProducts = (id) => {
-    let nameItem = products.find((item) => item.product_type === id);
-    return nameItem && nameItem.name;
-  };
-
   const modifyOrders = useCallback(
     (e, val) => {
       e && e.preventDefault();
@@ -160,6 +132,34 @@ export default function Orders() {
   );
 
   const nnn = useCallback(() => {
+    const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
+
+    const orderStatus = (userqr) => {
+      let statss = orderstatus[userqr];
+      return statss ? statss : "Not Available";
+    };
+
+    const orderDate = (userqr) => {
+      let dateItem = orders.find((item) => item.QRNumber === userqr);
+      return dateItem ? dateItem.date : new Date(Date.now()).toLocaleString();
+    };
+
+    const customername = (id) => {
+      let nameItem = users.find((item) => item.user_id === id);
+      let status = nameItem?.name;
+      return status;
+    };
+
+    const orderType = (id) => {
+      let nameItem = deliveryTypes.find((item) => item.delivery_type === id);
+      return nameItem && nameItem.name;
+    };
+
+    const orderProducts = (id) => {
+      let nameItem = products.find((item) => item.product_type === id);
+      return nameItem && nameItem.name;
+    };
+
     setConvertedOrders([]);
     orders.forEach((item) => {
       let abc = {
@@ -180,7 +180,7 @@ export default function Orders() {
 
       setConvertedOrders((prevData) => [...prevData, abc]);
     });
-  }, [orders]);
+  }, [orders, deliveryTypes, products, users]);
 
   useEffect(() => {
     modifyOrders(null, 1);
