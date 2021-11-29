@@ -4,8 +4,8 @@ import { Container, Card, CardContent, Grid } from "@mui/material";
 import { updateLocationOfUser } from "store/assignUsers";
 import QrReader from "react-qr-reader";
 
-export default function QRScanComponent() {
-  const [scanResultWebCam, setScanResultWebCam] = useState("");
+export default function QRScanComponent(props) {
+  // const [scanResultWebCam, setScanResultWebCam] = useState("");
   // const qrRef = useRef(null);
   const userInfo = useContext(UserContext);
   const { access_token } = userInfo;
@@ -13,10 +13,12 @@ export default function QRScanComponent() {
   const handleErrorWebCam = (error) => {
     console.log(error);
   };
-  const handleScanWebCam = (result) => {
+  const handleScanWebCam = async (result) => {
     if (result) {
-      setScanResultWebCam(result);
-      updateLocationByAgent();
+      // await setScanResultWebCam(result);
+      await updateLocationByAgent();
+      // await api new Date().toisostring
+      props.clearCurrentUser(result);
     }
   };
 
@@ -67,7 +69,7 @@ export default function QRScanComponent() {
                 onError={handleErrorWebCam}
                 onScan={handleScanWebCam}
               />
-              <h3>Scanned By WebCam Code: {scanResultWebCam}</h3>
+              {/* <h3>Scanned By WebCam Code: {scanResultWebCam}</h3> */}
             </Grid>
           </Grid>
         </CardContent>

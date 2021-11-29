@@ -57,7 +57,7 @@ export default function AgentDeliveryListing(props) {
             isVisible={currentUser}
             clearCurrentUser={clearCurrentUser}
           ></MiniNavbar>
-          <QRScanComponent />
+          <QRScanComponent clearCurrentUser={clearCurrentUser} />
         </>
       ) : (
         <div className="Orders__card-container">

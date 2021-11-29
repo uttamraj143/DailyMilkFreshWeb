@@ -25,7 +25,7 @@ export default function Deliveries() {
     });
     setTimeout(() => {
       toggleSpinner(false);
-    }, 2000);
+    }, 1000);
   }, [userDetails.user_id, access_token]);
 
   return (
@@ -50,6 +50,7 @@ export default function Deliveries() {
         ) : (
           <ListAgentDeliveries
             agent={userInfo.userDetails.name}
+            // refreshdata={refreshdata}
             deliveryTypes={deliveryTypes}
             orders={deliveries}
           />
