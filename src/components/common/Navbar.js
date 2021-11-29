@@ -10,7 +10,7 @@ import { ReactComponent as TruckIcon } from "svgs/truck.svg";
 import { ReactComponent as UsersIcon } from "svgs/users.svg";
 import { ReactComponent as UserBadge } from "svgs/userBadge.svg";
 import { ReactComponent as AssignUserIcon } from "svgs/userPlus.svg";
-import { ReactComponent as ExportIcon } from "svgs/export.svg";
+// import { ReactComponent as ExportIcon } from "svgs/export.svg";
 import { ReactComponent as ListIcon } from "svgs/checkList.svg";
 // import { ReactComponent as NumberList } from "svgs/number_list.svg";
 // import { ReactComponent as QrIcon } from "svgs/qrcode.svg";
@@ -47,7 +47,7 @@ export default function Navbar(props) {
       value: "delivery_type",
       title: "Delivery Types",
     },
-    { title: "Deliveries", value: "deliveries" },
+    // { title: "Deliveries", value: "deliveries" },
     {
       value: "settings",
       title: "Account",
@@ -121,11 +121,11 @@ export default function Navbar(props) {
         return <ListIcon style={{ color: "white" }} />;
       case "5":
         return <AssignUserIcon style={{ color: "white" }} />;
+      // case "6":
+      //   return <ExportIcon style={{ color: "white" }} />;
       case "6":
-        return <ExportIcon style={{ color: "white" }} />;
-      case "7":
         return <TruckIcon style={{ color: "white" }} />;
-      case "8":
+      case "7":
         return <SettingsIcon style={{ color: "white" }} />;
       default:
         return <SettingsIcon style={{ color: "white" }} />;

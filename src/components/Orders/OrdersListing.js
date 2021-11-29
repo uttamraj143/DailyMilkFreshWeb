@@ -86,13 +86,15 @@ export default function OrdersListing(props) {
             </div>
 
             <div className="Orders__customername">
-              <div className="Orders__cust-heading">Quantity </div>
-              <div className="cust-idnumber">{order.quantity}</div>
+              <div className="Orders__cust-heading">Price </div>
+              <div className="cust-idnumber">&#8377; {order.price}/-</div>
             </div>
 
             <div className="Orders__products-row">
               <div className="Orders__product-id">Products</div>
-              <div className="Orders__product">{order.product}</div>
+              <div className="Orders__product">
+                {order.product} - {order.quantity}
+              </div>
             </div>
           </Paper>
         );

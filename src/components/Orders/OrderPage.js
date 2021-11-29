@@ -1,10 +1,8 @@
-import QRScanComponent from "components/QRScanner/QRScanComponent";
 import TextField from "@mui/material/TextField";
 
 export default function OrderPage(props) {
   return (
     <div>
-      <QRScanComponent />
       Cancel order Delivery id: {props.order}
       <TextField
         id="frdate"
