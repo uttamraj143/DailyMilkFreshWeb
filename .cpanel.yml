@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/user/public_html/admin.dailyfresh.farm
+    - export DEPLOYPATH=/home/qgos6o4zy1vk/public_html/admin.dailyfresh.farm
     - /bin/cp -R build $DEPLOYPATH
