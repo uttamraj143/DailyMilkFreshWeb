@@ -2,10 +2,11 @@ import { useState, useContext } from "react";
 import UserContext from "UserContext";
 import { Container, Card, CardContent, Grid } from "@mui/material";
 import { updateLocationOfUser } from "store/assignUsers";
+import { scannedDelivery } from "store/deliveries";
 import QrReader from "react-qr-reader";
 
 export default function QRScanComponent(props) {
-  // const [scanResultWebCam, setScanResultWebCam] = useState("");
+  const [scanResultWebCam, setScanResultWebCam] = useState("");
   // const qrRef = useRef(null);
   const userInfo = useContext(UserContext);
   const { access_token } = userInfo;
@@ -15,10 +16,21 @@ export default function QRScanComponent(props) {
   };
   const handleScanWebCam = async (result) => {
     if (result) {
-      // await setScanResultWebCam(result);
+      await setScanResultWebCam(result);
       await updateLocationByAgent();
-      // await api new Date().toisostring
-      props.clearCurrentUser(result);
+
+      let data = {
+        listDeliveries: {
+          delivery_id: "",
+          quantity: 2,
+          user_id: "729bfe03-d76e-4aae-83c3-17ba50866acd",
+          delivery_date: new Date().toISOString,
+        },
+      };
+      await scannedDelivery(data, access_token).then((res) => {
+        alert("success");
+        // props.clearCurrentUser();
+      });
     }
   };
 
@@ -69,7 +81,7 @@ export default function QRScanComponent(props) {
                 onError={handleErrorWebCam}
                 onScan={handleScanWebCam}
               />
-              {/* <h3>Scanned By WebCam Code: {scanResultWebCam}</h3> */}
+              <h3>User ID: {scanResultWebCam}</h3>
             </Grid>
           </Grid>
         </CardContent>

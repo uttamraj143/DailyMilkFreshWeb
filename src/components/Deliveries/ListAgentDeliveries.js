@@ -5,7 +5,8 @@ import QRScanComponent from "components/QRScanner/QRScanComponent";
 
 export default function AgentDeliveryListing(props) {
   const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
-  const [currentUser, setCurrentUser] = useState(null);
+  //const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(true);
 
   const openCustomer = (e, userqr) => {
     e.preventDefault();
