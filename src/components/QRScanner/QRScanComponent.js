@@ -16,20 +16,19 @@ export default function QRScanComponent(props) {
   };
   const handleScanWebCam = async (result) => {
     if (result) {
-      await setScanResultWebCam(result);
       await updateLocationByAgent();
-
       let data = {
         listDeliveries: {
-          delivery_id: "",
-          quantity: 2,
-          user_id: "729bfe03-d76e-4aae-83c3-17ba50866acd",
-          delivery_date: new Date().toISOString,
+          delivery_id: props.delivery_id,
+          quantity: props.quantity,
+          user_id: result,
+          delivery_date: new Date().toISOString(),
         },
       };
+      await setScanResultWebCam(result);
       await scannedDelivery(data, access_token).then((res) => {
         alert("success");
-        // props.clearCurrentUser();
+        props.clearCurrentUser();
       });
     }
   };
@@ -74,7 +73,7 @@ export default function QRScanComponent(props) {
         <CardContent>
           <Grid container spacing={2}>
             <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-              <h3>Qr Code Scan by Web Cam</h3>
+              <h3>Qr Code Scan by Camera</h3>
               <QrReader
                 delay={300}
                 style={{ width: "100%" }}
