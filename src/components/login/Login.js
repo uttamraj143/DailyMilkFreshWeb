@@ -121,7 +121,7 @@ export default function Login() {
           <form className="Login__sub-container">
             {/* <div className="Login__logo-name">DailyFreshMilk </div> */}
             {/* <div className="Login__logo-caption">MILK AT your door step</div> */}
-            <div className="Login__login-header"> Sign in -- Admin Panel </div>
+            <div className="Login__login-header"> Sign in - Admin Panel </div>
             {apiresponsemessage ? (
               <div className="Login__wrong-password">{apiresponsemessage}</div>
             ) : null}
