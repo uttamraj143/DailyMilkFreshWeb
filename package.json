@@ -1,7 +1,7 @@
 {
   "name": "dailymilkfresh",
   "homepage": "https://www.admin.dailyfresh.farm/",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "@mui/lab": "^5.0.0-alpha.57",
@@ -25,7 +25,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "dev": "react-scripts start",
+    "dev": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

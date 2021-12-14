@@ -22,21 +22,21 @@ import { assigningUsersToAgent } from "store/assignUsers";
 export default function AssignUsers() {
   const userInfo = useContext(UserContext);
   const [spinner, toggleSpinner] = useState(false);
+  const [dataEntered, toggleDataEntered] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [sendData, setSenddata] = useState({
     agent_id: "",
-    // assignlist: {
-    user_id: "",
+    users: "",
     quantity: "",
     delivery_type: "",
     product_type: "",
     price: "",
-    // },
   });
   const steps = getSteps();
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    dataEntered && setActiveStep(activeStep + 1);
+    toggleDataEntered(false);
   };
 
   const handleBack = () => {
@@ -46,24 +46,39 @@ export default function AssignUsers() {
   const SubmitData = (e) => {
     e.preventDefault();
     toggleSpinner(true);
+
+    let muser_id = sendData.users.map((item) => item.user_id);
+
+    // let assignList = {
+    //   user_id: sendData.user_id.map((item) => item.user_id),
+    //   quantity: sendData.quantity,
+    //   delivery_type: sendData.delivery_type,
+    //   product_type: sendData.product_type,
+    //   price: sendData.price,
+    // };
+    // return console.log(muser_id);
+
+    let assignList = [];
+    muser_id.map((item) => {
+      assignList.push({
+        user_id: item,
+        quantity: sendData.quantity,
+        delivery_type: sendData.delivery_type,
+        product_type: sendData.product_type,
+        price: sendData.price,
+      });
+    });
+
     let submit = {
       agent_id: sendData.agent_id,
-      assignlist: [
-        {
-          user_id: sendData.user_id,
-          quantity: sendData.quantity,
-          delivery_type: sendData.delivery_type,
-          product_type: sendData.product_type,
-          price: sendData.price,
-        },
-      ],
+      assignlist: assignList,
     };
 
     assigningUsersToAgent(userInfo.access_token, submit)
       .then((res) => {
         setSenddata({
           agent_id: "",
-          user_id: "",
+          users: "",
           quantity: "",
           delivery_type: "",
           product_type: "",
@@ -92,9 +107,10 @@ export default function AssignUsers() {
   const handleData = (e, g, n) => {
     e && e.preventDefault();
     if (n === "agent") setSenddata({ ...sendData, agent_id: g });
-    if (n === "user") setSenddata({ ...sendData, user_id: g });
+    if (n === "user") setSenddata({ ...sendData, users: g });
     if (n === "delivery_type") setSenddata({ ...sendData, delivery_type: g });
     if (n === "quantity") setSenddata({ ...sendData, quantity: g });
+    toggleDataEntered(true);
   };
 
   const handlePData = (e, value) => {
@@ -104,6 +120,7 @@ export default function AssignUsers() {
       price: value.price,
       product_type: value.product_type,
     });
+    toggleDataEntered(true);
   };
 
   function getStepContent(step) {
@@ -202,7 +219,7 @@ export default function AssignUsers() {
               <Button
                 className=""
                 variant="contained"
-                // disabled={if not selected data}
+                disabled={!dataEntered}
                 color="primary"
                 onClick={(e) =>
                   activeStep === steps.length - 1
