@@ -7,9 +7,9 @@ export default function AgentDeliveryListing(props) {
   const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
   const [currentUser, setCurrentUser] = useState(null);
 
-  const openCustomer = (e, userqr) => {
+  const openCustomer = (e, delivery_id, quantity) => {
     e.preventDefault();
-    setCurrentUser(userqr);
+    setCurrentUser({ delivery_id, quantity });
   };
 
   const clearCurrentUser = () => {
@@ -90,7 +90,9 @@ export default function AgentDeliveryListing(props) {
                     &nbsp; {order.id}
                   </div>
                   <div
-                    onClick={(e) => openCustomer(e, order.delivery_id)}
+                    onClick={(e) =>
+                      openCustomer(e, order.delivery_id, order.Product.quantity)
+                    }
                     className={
                       "Orders__status " +
                       orderStatusColor(

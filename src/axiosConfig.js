@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseURL =
-  process.env.REACT_APP_HOSTNAME || "http://dailyorganicfresh.dailyfresh.farm";
+  process.env.REACT_APP_HOSTNAME || "https://dailyorganicfresh.dailyfresh.farm";
 
 export const axiosInstance = axios.create({
   baseURL: baseURL,

@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/static/css/main.60140e11.chunk.css",
+    "main.js": "/static/js/main.d531bd2f.chunk.js",
+    "main.js.map": "/static/js/main.d531bd2f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.fcfca653.js",
+    "runtime-main.js.map": "/static/js/runtime-main.fcfca653.js.map",
+    "static/js/2.3cd5e193.chunk.js": "/static/js/2.3cd5e193.chunk.js",
+    "static/js/2.3cd5e193.chunk.js.map": "/static/js/2.3cd5e193.chunk.js.map",
+    "static/js/3.13fc6b19.chunk.js": "/static/js/3.13fc6b19.chunk.js",
+    "static/js/3.13fc6b19.chunk.js.map": "/static/js/3.13fc6b19.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.60140e11.chunk.css.map": "/static/css/main.60140e11.chunk.css.map",
+    "static/js/2.3cd5e193.chunk.js.LICENSE.txt": "/static/js/2.3cd5e193.chunk.js.LICENSE.txt",
+    "static/media/cancel.c228d75b.svg": "/static/media/cancel.c228d75b.svg",
+    "static/media/cartIcon.6b1811d7.svg": "/static/media/cartIcon.6b1811d7.svg",
+    "static/media/checkList.6edf7d94.svg": "/static/media/checkList.6edf7d94.svg",
+    "static/media/checked.4f7f3053.svg": "/static/media/checked.4f7f3053.svg",
+    "static/media/eye_close.73573ab2.svg": "/static/media/eye_close.73573ab2.svg",
+    "static/media/eye_open.e5325192.svg": "/static/media/eye_open.e5325192.svg",
+    "static/media/graphIncrease.ab0da9b0.svg": "/static/media/graphIncrease.ab0da9b0.svg",
+    "static/media/home.34970f2a.svg": "/static/media/home.34970f2a.svg",
+    "static/media/logo.9631ecf8.png": "/static/media/logo.9631ecf8.png",
+    "static/media/pencil.0c835751.svg": "/static/media/pencil.0c835751.svg",
+    "static/media/save.f8c222ed.svg": "/static/media/save.f8c222ed.svg",
+    "static/media/settingsIcon.6c3f2c68.svg": "/static/media/settingsIcon.6c3f2c68.svg",
+    "static/media/singlePerson.5b613f1e.svg": "/static/media/singlePerson.5b613f1e.svg",
+    "static/media/truck.81ad1cf6.svg": "/static/media/truck.81ad1cf6.svg",
+    "static/media/unchecked.3fb05906.svg": "/static/media/unchecked.3fb05906.svg",
+    "static/media/userBadge.1c64497a.svg": "/static/media/userBadge.1c64497a.svg",
+    "static/media/userPlus.3f85c2bd.svg": "/static/media/userPlus.3f85c2bd.svg",
+    "static/media/users.8954d35d.svg": "/static/media/users.8954d35d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fcfca653.js",
+    "static/js/2.3cd5e193.chunk.js",
+    "static/css/main.60140e11.chunk.css",
+    "static/js/main.d531bd2f.chunk.js"
+  ]
+}

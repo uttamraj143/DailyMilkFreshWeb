@@ -33,3 +33,12 @@ export const listAgentDelivery = (userid, access_token) => {
     headers: { access_token: access_token },
   });
 };
+
+export const scannedDelivery = (data, access_token) => {
+  return axiosInstance({
+    method: "POST",
+    url: "/agent/delivery",
+    headers: { access_token: access_token },
+    data: data,
+  });
+};

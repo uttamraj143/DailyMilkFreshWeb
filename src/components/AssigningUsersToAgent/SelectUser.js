@@ -35,9 +35,9 @@ export default function SelectUser(props) {
   return (
     <div className="AssignUsers__main">
       <Autocomplete
-        // multiple
+        multiple
         id="checkboxes-tags-demo"
-        onChange={(e, value) => props.handleData(e, value.user_id, "user")}
+        onChange={(e, value) => props.handleData(e, value, "user")}
         options={users}
         // disableCloseOnSelect
         getOptionLabel={(option) => option.name}
