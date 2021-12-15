@@ -26,10 +26,14 @@ export default function QRScanComponent(props) {
         },
       };
       await setScanResultWebCam(result);
-      await scannedDelivery(data, access_token).then((res) => {
-        alert("success");
-        props.clearCurrentUser();
-      });
+      await scannedDelivery(data, access_token)
+        .then((res) => {
+          alert("success");
+          props.clearCurrentUser();
+        })
+        .catch((res) => {
+          alert("failed, location");
+        });
     }
   };
 
