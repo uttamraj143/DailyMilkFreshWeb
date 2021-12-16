@@ -23,15 +23,28 @@ https://medium.com/@akrush95/global-cached-state-in-react-using-hooks-context-an
 https://egghead.io/lessons/react-share-logic-across-multiple-react-components-with-custom-hooks
 https://www.codegrepper.com/code-examples/javascript/pass+context+from+one+file+to+another+reactjs
 
-REDUX
-REDUX
-REDUX
-
-Scan Me
 History
 Statistics
 remove deliveries page -
-add Footer
 Sort according to Date and fetch only with Date
 animations transitions
 mini Navbar functionality
+
+Admin should select user and then there export option based on dates should be there and when he clicks on export then all the successful deliveries and date, quantity, product and price with total should be exported.
+
+cancel order
+
+When scanning QR code it is giving id after scan but after that ntng is happening.
+phoneNo: 8274635274
+paswword: 1234567890
+
+new Date().toISOString()
+
+on clicking of individual user -> need to open user history and their QR code
+can download excel of the history based on the from & to date
+
+similarly for Agent - their deliveries based on dates from & to - download
+
+Remove Custom from the dropdown
+
+after scan - can change quantity - dropdown

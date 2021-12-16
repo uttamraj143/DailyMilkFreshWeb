@@ -18,12 +18,14 @@ export default function QRScanComponent(props) {
     if (result) {
       await updateLocationByAgent();
       let data = {
-        listDeliveries: {
-          delivery_id: props.delivery_id,
-          quantity: props.quantity,
-          user_id: result,
-          delivery_date: new Date().toISOString(),
-        },
+        listDeliveries: [
+          {
+            delivery_id: props.currentUser.delivery_id,
+            quantity: props.currentUser.quantity,
+            user_id: result,
+            delivery_date: new Date().toISOString(),
+          },
+        ],
       };
       await setScanResultWebCam(result);
       await scannedDelivery(data, access_token)
@@ -32,7 +34,7 @@ export default function QRScanComponent(props) {
           props.clearCurrentUser();
         })
         .catch((res) => {
-          alert("failed, location");
+          alert("failed");
         });
     }
   };
@@ -65,7 +67,7 @@ export default function QRScanComponent(props) {
 
     navigator.geolocation.getCurrentPosition(success, error, options);
 
-    updateLocationOfUser(locdata, access_token).then((res) => {
+    updateLocationOfUser(access_token, locdata).then((res) => {
       console.log("user location updated");
     });
   };

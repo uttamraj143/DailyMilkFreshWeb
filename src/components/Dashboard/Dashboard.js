@@ -7,7 +7,7 @@ import Orders from "components/Orders/Orders";
 import Users from "components/Users/Users.js";
 import Products from "components/Products/Products";
 import Agents from "components/Agents/Agents";
-import Settings from "components/Dashboard/Settings";
+import Settings from "components/UserAccount/Settings";
 // import ExportData from "components/Dashboard/ExportData";
 import Statistics from "components/Dashboard/Statistics";
 import UserContext from "UserContext";

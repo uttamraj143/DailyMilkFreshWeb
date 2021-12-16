@@ -57,11 +57,14 @@ export default function AgentDeliveryListing(props) {
             isVisible={currentUser}
             clearCurrentUser={clearCurrentUser}
           ></MiniNavbar>
-          <QRScanComponent clearCurrentUser={clearCurrentUser} />
+          <QRScanComponent
+            currentUser={currentUser}
+            clearCurrentUser={clearCurrentUser}
+          />
         </>
       ) : (
         <div className="Orders__card-container">
-          {props.orders.map((order, index) => {
+          {props.deliveries.map((order, index) => {
             return (
               <Paper key={index} className="Orders__order" elevation={2}>
                 <div className="Orders__date-address-row">

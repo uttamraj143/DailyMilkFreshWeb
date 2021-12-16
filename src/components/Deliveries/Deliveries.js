@@ -17,15 +17,23 @@ export default function Deliveries() {
 
   useEffect(() => {
     toggleSpinner(true);
-    listAgentDelivery(userDetails.user_id, access_token).then((res) => {
-      setDeliveries(res.data.data);
-    });
-    listDeliveryTypes(access_token).then((res) => {
-      setDeliveryTypes(res.data.data);
-    });
-    setTimeout(() => {
-      toggleSpinner(false);
-    }, 1000);
+    listAgentDelivery(userDetails.user_id, access_token)
+      .then((res) => {
+        setDeliveries(res.data.data);
+      })
+      .catch((res) => {
+        toggleSpinner(true);
+      });
+    listDeliveryTypes(access_token)
+      .then((res) => {
+        setDeliveryTypes(res.data.data);
+        setTimeout(() => {
+          toggleSpinner(false);
+        }, 1000);
+      })
+      .catch((res) => {
+        toggleSpinner(true);
+      });
   }, [userDetails.user_id, access_token]);
 
   return (
@@ -36,7 +44,7 @@ export default function Deliveries() {
         </div>
       </div>
       <div>
-        {spinner ? (
+        {spinner && !deliveries.length ? (
           <>
             <Spinner />
             <Skeleton animation="wave" height={100} width="80%" />
@@ -52,7 +60,7 @@ export default function Deliveries() {
             agent={userInfo.userDetails.name}
             // refreshdata={refreshdata}
             deliveryTypes={deliveryTypes}
-            orders={deliveries}
+            deliveries={deliveries}
           />
         )}
       </div>
