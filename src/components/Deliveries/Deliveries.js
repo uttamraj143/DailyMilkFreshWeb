@@ -11,7 +11,7 @@ import "./Deliveries.scss";
 export default function Deliveries() {
   const userInfo = useContext(UserContext);
   const [deliveries, setDeliveries] = useState([]);
-  const { access_token, userDetails } = userInfo;
+  const { access_token, userDetails, refreshAccessToken } = userInfo;
   const [deliveryTypes, setDeliveryTypes] = useState([]);
   const [spinner, toggleSpinner] = useState(false);
 
@@ -23,6 +23,9 @@ export default function Deliveries() {
       })
       .catch((res) => {
         toggleSpinner(true);
+        if (res && res.response && res.response.status === 401) {
+          refreshAccessToken();
+        }
       });
     listDeliveryTypes(access_token)
       .then((res) => {
