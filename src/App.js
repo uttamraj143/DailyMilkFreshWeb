@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import "./App.scss";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PrivateRoute from "PrivateRoute";
 import UserContext from "UserContext";
 import Login from "components/login/Login";
 import Dashboard from "components/Dashboard/Dashboard";
-import Landing from "components/common/Landing";
+// import Landing from "components/common/Landing";
 import { refreshToken } from "store/auth";
 
 export default function App() {
@@ -67,17 +68,16 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <UserContext.Provider value={userSettings}>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact={true} path="*" component={Landing} />
-          </UserContext.Provider>
-        </Switch>
-      </Router>
-    </div>
+    <Router>
+      <UserContext.Provider value={userSettings}>
+        {/* <Navbar /> */}
+        <Routes>
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route exact path="/dashboard" element={<Dashboard />} />
+          </Route>
+          <Route exact path="/login" element={<Login />} />
+        </Routes>
+      </UserContext.Provider>
+    </Router>
   );
 }

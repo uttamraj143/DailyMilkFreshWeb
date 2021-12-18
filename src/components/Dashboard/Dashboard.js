@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import "./Dashboard.scss";
 import Navbar from "components/common/Navbar";
 import MobileNav from "components/common/MobileNav";
@@ -18,12 +18,13 @@ import AssignUsers from "components/AssigningUsersToAgent/AssignUsers";
 export default function Dashboard() {
   const userInfo = useContext(UserContext);
   const isAdmin = () => {
-    return userInfo.isAdmin;
+    return true;
+    // return userInfo.isAdmin;
   };
 
-  const isLoggedIn = () => {
-    return userInfo.isLoggedIn;
-  };
+  // const isLoggedIn = () => {
+  //   return userInfo.isLoggedIn;
+  // };
   const [currentComponent, setCurrentComponent] = useState("Welcome");
 
   const currentSelection = (sal) => {
@@ -84,17 +85,17 @@ export default function Dashboard() {
 
   return (
     <div>
-      {!isLoggedIn() ? (
-        <Redirect to="/login" />
-      ) : (
-        <div>
-          <Navbar currentMenuSelection={currentSelection}></Navbar>
-          <div className="AgentDashboard__main-container">
-            {isAdmin() ? adminComponents() : agentComponents()}
-          </div>
-          <MobileNav currentMenuSelection={currentSelection}></MobileNav>
+      {/* {!isLoggedIn() ? (
+        <Navigate to="/login" />
+      ) : ( */}
+      <div>
+        <Navbar currentMenuSelection={currentSelection}></Navbar>
+        <div className="AgentDashboard__main-container">
+          {isAdmin() ? adminComponents() : agentComponents()}
         </div>
-      )}
+        <MobileNav currentMenuSelection={currentSelection}></MobileNav>
+      </div>
+      {/* )} */}
     </div>
   );
 }
