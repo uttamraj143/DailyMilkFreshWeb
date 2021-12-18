@@ -31,7 +31,7 @@ export default function ListAgentDeliveryProducts(props) {
     <>
       {props.products.map((product, index) => {
         return (
-          <div>
+          <div key={index}>
             <div className="Deliveries__products-row">
               <div className="Orders__product-id">Delivery Status</div>
               <div

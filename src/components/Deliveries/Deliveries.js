@@ -37,7 +37,7 @@ export default function Deliveries() {
       .catch((res) => {
         toggleSpinner(true);
       });
-  }, [userDetails.user_id, access_token]);
+  }, [userDetails.user_id, access_token, refreshAccessToken]);
 
   return (
     <div className="Deliveries__main-container">

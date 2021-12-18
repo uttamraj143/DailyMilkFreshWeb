@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseURL =
-  "http://localhost:8000" || "https://dailyorganicfresh.dailyfresh.farm";
+  process.env.REACT_APP_HOSTNAME || "https://dailyorganicfresh.dailyfresh.farm";
 
 export const axiosInstance = axios.create({
   baseURL: baseURL,
