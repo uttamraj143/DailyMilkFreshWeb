@@ -14,13 +14,14 @@ import { listProducts } from "store/products";
 import { listDeliveryTypes } from "store/deliveries";
 import ExportData from "components/Dashboard/ExportData";
 import "./Orders.scss";
+import Paper from "@mui/material/Paper";
 
 export default function Orders() {
   const userInfo = useContext(UserContext);
   const [currentUser, setCurrentUser] = useState(null);
   // const [sortNumbers, setSortNumbers] = useState(false);
   const [addexport, exportToggle] = useState(false);
-  // const [sortName, setSortName] = useState(false);
+  const [sortName, setSortName] = useState(false);
   // const [sortLocation, setSortLocation] = useState(false);
   const [page, setPage] = useState(1);
   const [orders, setOrders] = useState([]);
@@ -89,14 +90,17 @@ export default function Orders() {
   };
 
   const sortByName = () => {
-    return;
-    // if (sortName) {
-    //   setUsers(users.sort((a, b) => a.name.localeCompare(b.name)));
-    //   setSortName(!sortName);
-    // } else {
-    //   setUsers(users.sort((a, b) => b.name.localeCompare(a.name)));
-    //   setSortName(!sortName);
-    // }
+    if (sortName) {
+      setSortOrders(
+        sortOrders.sort((a, b) => a.user_name.localeCompare(b.user_name))
+      );
+      setSortName(!sortName);
+    } else {
+      setSortOrders(
+        sortOrders.sort((a, b) => b.user_name.localeCompare(a.user_name))
+      );
+      setSortName(!sortName);
+    }
   };
 
   const sortByNumber = (e) => {
@@ -219,12 +223,14 @@ export default function Orders() {
             </div>
           </div>
           {addexport ? (
-            <ExportData
-              users={users}
-              deliveryTypes={deliveryTypes}
-              products={products}
-              orders={convertedOrders}
-            />
+            <Paper>
+              <ExportData
+                users={users}
+                deliveryTypes={deliveryTypes}
+                products={products}
+                orders={convertedOrders}
+              />
+            </Paper>
           ) : (
             <>
               <MiniNavbar

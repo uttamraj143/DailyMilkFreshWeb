@@ -22,22 +22,8 @@ History
 remove deliveries page -
 Sort according to Date and fetch only with Date
 animations transitions
-mini Navbar functionality
-
-Admin should select user and then there export option based on dates should be there and when he clicks on export then all the successful deliveries and date, quantity, product and price with total should be exported.
 
 cancel order
-
-successfull delivery
-
-on clicking of individual user -> need to open user history and their QR code
-can download excel of the history based on the from & to date
-
-similarly for Agent - their deliveries based on dates from & to - download
-
-Remove Custom from the dropdown
-
-after scan - can change quantity - dropdown
 
 export default function App() {
 return (

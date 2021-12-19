@@ -24,19 +24,16 @@ export default function ExportData(props) {
       field: "user_name",
       headerName: "Customer name",
       width: 200,
-      editable: false,
     },
     {
       field: "agent_name",
       headerName: "Agent name",
       width: 200,
-      editable: false,
     },
     {
       field: "product",
-      headerName: "Product Type",
+      headerName: "Product",
       width: 140,
-      editable: false,
     },
     {
       field: "delivery_type",
@@ -83,7 +80,7 @@ export default function ExportData(props) {
     <div style={{ height: 600, width: "100%" }}>
       <DataGrid
         nodeRef={nodeRef}
-        rows={props.orders}
+        rows={props.historyData}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

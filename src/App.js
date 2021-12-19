@@ -9,6 +9,7 @@ import Users from "components/Users/Users";
 import UsersHistory from "components/Users/UsersHistory";
 import Products from "components/Products/Products";
 import Agents from "components/Agents/Agents";
+import AgentsHistory from "components/Agents/AgentsHistory";
 import Settings from "components/UserAccount/Settings";
 // import ExportData from "components/Dashboard/ExportData";
 import Statistics from "components/Dashboard/Statistics";
@@ -91,6 +92,7 @@ export default function App() {
             <Route exact path="/users/:id" element={<UsersHistory />} />
             <Route exact path="/orders" element={<Orders />} />
             <Route exact path="/agents" element={<Agents />} />
+            <Route exact path="/agents/:id" element={<AgentsHistory />} />
             <Route exact path="/products" element={<Products />} />
             <Route exact path="/assign_users" element={<AssignUsers />} />
             <Route exact path="/delivery_type" element={<DeliveryTypes />} />

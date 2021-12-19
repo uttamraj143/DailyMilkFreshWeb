@@ -125,8 +125,12 @@
 
   &__top {
     max-width: 400px;
-    height: 100px;
+    // height: 100px;
     margin: 20px;
+    padding: 10px;
+  }
+
+  &__fromdate {
     padding: 10px;
   }
 }

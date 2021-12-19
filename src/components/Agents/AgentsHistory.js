@@ -1,11 +1,10 @@
 import { getHistory } from "store/deliveries";
-import { useEffect, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import UserContext from "UserContext";
-import QRCode from "qrcode";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import HistoryTable from "components/Users/HistoryTable";
-import "./Users.scss";
+import "components/Users/Users.scss";
 import MySnack from "components/common/MySnack";
 import Skeleton from "@mui/material/Skeleton";
 import Spinner from "components/common/Spinner";
@@ -20,37 +19,13 @@ export default function UsersHistory() {
   );
   const [alertmessage, setalertmessage] = useState(null);
   const [toSelectedDate, setToDate] = useState(new Date().toISOString());
-  const [imageUrl, setImageUrl] = useState("");
-
-  useEffect(() => {
-    const generateQrCode = async () => {
-      try {
-        var opts = {
-          errorCorrectionLevel: "H",
-          type: "image/jpeg",
-          quality: 1,
-          margin: 1,
-          color: {
-            dark: "#000",
-            light: "#FFF",
-          },
-        };
-        let curr_id = window.location.pathname.split("/")[2];
-        const response = await QRCode.toDataURL(curr_id, opts);
-        setImageUrl(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    generateQrCode();
-  }, []);
 
   const getCustomerData = (e) => {
     toggleSpinner(true);
     e.preventDefault();
     let curr_id = window.location.pathname.split("/")[2];
     let data = {
-      customer_user_id: [curr_id],
+      agent_id: [curr_id],
       from: fromSelectedDate,
       to: toSelectedDate,
     };
@@ -92,17 +67,8 @@ export default function UsersHistory() {
     <div className="main-container">
       {!spinner ? (
         <>
-          <Paper className="AssignUsers__sub" elevation={2}>
-            Customer Unique Scan Code
-            {imageUrl ? (
-              <a href={imageUrl} download>
-                <img width="350px" height="350px" src={imageUrl} alt="img" />
-              </a>
-            ) : null}
-          </Paper>
-
           <Paper className="Users__top">
-            Customer History Data
+            Agent History Data
             <div className="Users__fromdate">
               <TextField
                 id="fromdate"
@@ -136,12 +102,12 @@ export default function UsersHistory() {
             </button>{" "}
           </Paper>
           <Paper>
-            <HistoryTable
-              // users={users}
-              // deliveryTypes={deliveryTypes}
-              // products={products}
+            {/* <HistoryTable
+              users={users}
+              deliveryTypes={deliveryTypes}
+              products={products}
               historyData={historyData}
-            />
+            /> */}
           </Paper>
         </>
       ) : (

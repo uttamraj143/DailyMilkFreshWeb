@@ -1,11 +1,23 @@
 import Paper from "@mui/material/Paper";
+import { useNavigate } from "react-router-dom";
 
 export default function OrdersListing(props) {
+  let navigate = useNavigate();
+  const openUser = (e, id) => {
+    e.preventDefault();
+    navigate(`/agents/${id}`);
+  };
+
   return (
     <div className="Agents__card-container">
       {props.agents.map((user, index) => {
         return (
-          <Paper key={index} className="Agents__order" elevation={2}>
+          <Paper
+            key={index}
+            onClick={(e) => openUser(e, user.user_id)}
+            className="Agents__order"
+            elevation={2}
+          >
             <div className="Agents__customername">
               <div className="Agents__cust-id">
                 <span>
