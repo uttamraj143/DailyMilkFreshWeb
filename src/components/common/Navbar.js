@@ -21,15 +21,15 @@ export default function Navbar(props) {
   const [adminMenuOptions] = useState([
     {
       title: "Orders",
-      value: "orders_list",
+      value: "orders",
     },
     {
       title: "Users",
-      value: "users_list",
+      value: "users",
     },
     {
       title: "Agents",
-      value: "agents_list",
+      value: "agents",
     },
     // {
     //   title: 'Statistics',
@@ -37,7 +37,7 @@ export default function Navbar(props) {
     // },
     {
       title: "Products",
-      value: "products_list",
+      value: "products",
     },
     {
       value: "assign_users",
@@ -105,7 +105,8 @@ export default function Navbar(props) {
 
   const changeMenu = (e, sal) => {
     e.preventDefault();
-    props.currentMenuSelection(sal); // emitting data to parent
+    navigate(sal);
+    // props.currentMenuSelection(sal); // emitting data to parent
     if (!windowWidh) openSidebarMenus.current.checked = false;
   };
 

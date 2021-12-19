@@ -20,3 +20,17 @@
     padding: 2px;
   }
 }
+
+.main-container {
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 200px;
+  max-width: 1366px;
+  @media screen and (max-width: 450px) {
+    min-width: 96%;
+    padding: 60px 6px;
+    margin-left: unset;
+    max-width: unset;
+  }
+}

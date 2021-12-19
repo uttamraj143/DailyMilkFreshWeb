@@ -183,7 +183,7 @@ export default function AssignUsers() {
   }
 
   return (
-    <div className="AssignUsers__main">
+    <div className="main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
           <UserBadge /> {"  "} Assign Users to Agents

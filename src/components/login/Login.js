@@ -95,14 +95,14 @@ export default function Login() {
         userInfo.setIsAdmin(true);
         userInfo.setRefreshToken(refresh_token);
         userInfo.saveuserDetails(res.data.data);
-        return navigate("/dashboard");
+        return navigate("/");
       } else if (res.data.data.user_type === 2) {
         userInfo.setIsLoggedIn(true);
         userInfo.setAccessToken(token);
         userInfo.setIsAdmin(false);
         userInfo.setRefreshToken(refresh_token);
         userInfo.saveuserDetails(res.data.data);
-        return navigate("/dashboard");
+        return navigate("/");
       } else {
         setapiresponse("Un Authorized User");
       }

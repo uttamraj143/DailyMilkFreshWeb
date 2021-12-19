@@ -51,7 +51,7 @@ export default function DeliveryTypes() {
   };
 
   return (
-    <div className="Deliveries__main-container">
+    <div className="main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
           <UsersIcon /> {"  "} Delivery Types

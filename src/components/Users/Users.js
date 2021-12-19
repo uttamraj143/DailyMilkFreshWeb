@@ -56,7 +56,7 @@ export default function Users() {
   };
 
   return (
-    <div className="Users__main-container">
+    <div className="main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
           <UserBadge /> {"  "} Users

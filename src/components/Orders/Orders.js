@@ -191,7 +191,7 @@ export default function Orders() {
   }, [orders, nnn]);
 
   return (
-    <div className="Orders__main-container">
+    <div className="main-container">
       {spinner ? (
         <>
           <Spinner />

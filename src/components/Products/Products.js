@@ -43,7 +43,7 @@ export default function Products() {
   };
 
   return (
-    <div className="Products__main-container">
+    <div className="main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
           <ProductIcon /> {"  "} Products

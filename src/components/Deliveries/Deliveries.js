@@ -40,7 +40,7 @@ export default function Deliveries() {
   }, [userDetails.user_id, access_token, refreshAccessToken]);
 
   return (
-    <div className="Deliveries__main-container">
+    <div className="main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
           <CartIcon /> {"  "} Agent Deliveries
