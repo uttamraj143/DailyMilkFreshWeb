@@ -6,6 +6,7 @@ import UserContext from "UserContext";
 import Login from "components/login/Login";
 import Orders from "components/Orders/Orders";
 import Users from "components/Users/Users";
+import UsersHistory from "components/Users/UsersHistory";
 import Products from "components/Products/Products";
 import Agents from "components/Agents/Agents";
 import Settings from "components/UserAccount/Settings";
@@ -86,6 +87,7 @@ export default function App() {
           <Route exact path="/" element={<PrivateRoute />}>
             <Route exact path="/" element={<Dashboard />} />
             <Route exact path="/users" element={<Users />} />
+            <Route exact path="/users/:id" element={<UsersHistory />} />
             <Route exact path="/orders" element={<Orders />} />
             <Route exact path="/agents" element={<Agents />} />
             <Route exact path="/products" element={<Products />} />

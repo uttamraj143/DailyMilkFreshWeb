@@ -31,6 +31,8 @@ export default function MobileNav(props) {
         return isAdmin() ? navigate("orders") : navigate("deliveries");
       case "2":
         return navigate("settings");
+      default:
+        return navigate("/");
     }
   };
 
