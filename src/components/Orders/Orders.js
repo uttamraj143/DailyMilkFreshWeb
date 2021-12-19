@@ -143,9 +143,8 @@ export default function Orders() {
       return statss ? statss : "Not Available";
     };
 
-    const orderDate = (userqr) => {
-      let dateItem = orders.find((item) => item.QRNumber === userqr);
-      return dateItem ? dateItem.date : new Date(Date.now()).toLocaleString();
+    const orderDate = (dateItem) => {
+      return new Date(dateItem).toLocaleString("en-Gb");
     };
 
     const customername = (id) => {

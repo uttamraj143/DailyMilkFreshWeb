@@ -6,7 +6,7 @@ import {
   gridClasses,
 } from "@mui/x-data-grid";
 
-export default function ExportData(props) {
+export default function HistoryTable(props) {
   const [selectPage, setSelection] = useState([]);
   const nodeRef = useRef(null);
 
@@ -25,11 +25,11 @@ export default function ExportData(props) {
       headerName: "Customer name",
       width: 200,
     },
-    {
-      field: "agent_name",
-      headerName: "Agent name",
-      width: 200,
-    },
+    // {
+    //   field: "agent_name",
+    //   headerName: "Agent name",
+    //   width: 200,
+    // },
     {
       field: "product",
       headerName: "Product",
@@ -40,12 +40,6 @@ export default function ExportData(props) {
       headerName: "Delivery Type",
       description: "Delivery Type.",
       width: 120,
-    },
-    {
-      field: "delivery_status",
-      headerName: "Delivery Status",
-      description: "Delivery Status.",
-      width: 160,
     },
     {
       field: "quantity",
@@ -61,9 +55,9 @@ export default function ExportData(props) {
       editable: true,
     },
     {
-      field: "modified_at",
-      headerName: "Modified",
-      description: "Delivery Type.",
+      field: "delivered_at",
+      headerName: "Delivered",
+      description: "Delivery Time.",
       width: 200,
     },
   ];
@@ -83,7 +77,7 @@ export default function ExportData(props) {
         rows={props.historyData}
         columns={columns}
         pageSize={5}
-        rowsPerPageOptions={[5]}
+        rowsPerPageOptions={[10]}
         // checkboxSelection
         onSelectionModelChange={handleRowSelection}
         disableSelectionOnClick

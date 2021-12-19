@@ -5,8 +5,10 @@ import { updateLocationOfUser } from "store/assignUsers";
 import { scannedDelivery } from "store/deliveries";
 import QrReader from "react-qr-reader";
 import SelectQuantity from "components/AssigningUsersToAgent/SelectQuantity";
+import { useNavigate } from "react-router-dom";
 
 export default function QRScanComponent(props) {
+  let navigate = useNavigate();
   const [quantity, setQuantity] = useState(null);
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   // const qrRef = useRef(null);
@@ -37,6 +39,7 @@ export default function QRScanComponent(props) {
         .then((res) => {
           alert("success");
           props.clearCurrentUser();
+          navigate("/");
         })
         .catch((res) => {
           alert("failed");

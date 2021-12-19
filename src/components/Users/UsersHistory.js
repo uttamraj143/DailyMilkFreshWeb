@@ -13,7 +13,8 @@ import Spinner from "components/common/Spinner";
 export default function UsersHistory() {
   let userInfo = useContext(UserContext);
   const [spinner, toggleSpinner] = useState(false);
-  const [historyData, setHistoryData] = useState(null);
+  const [historyData, setHistoryData] = useState([]);
+  // const [modifiedHistory, setConvertedHistory] = useState(null);
   let { access_token } = userInfo;
   const [fromSelectedDate, setFromDate] = useState(
     new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
@@ -46,6 +47,7 @@ export default function UsersHistory() {
   }, []);
 
   const getCustomerData = (e) => {
+    setHistoryData([]);
     toggleSpinner(true);
     e.preventDefault();
     let curr_id = window.location.pathname.split("/")[2];
@@ -57,7 +59,8 @@ export default function UsersHistory() {
     if (curr_id) {
       getHistory(access_token, data)
         .then((res) => {
-          setHistoryData(res.data);
+          // setHistoryData(res.data);
+          modifyHistoryData(res.data.data);
           setTimeout(() => {
             toggleSpinner(false);
             setalertmessage("Data Fetched");
@@ -75,6 +78,22 @@ export default function UsersHistory() {
     }
   };
 
+  const modifyHistoryData = (hist) => {
+    // setHistoryData(hist);
+    hist.forEach((item, index) => {
+      let abc = {
+        id: index + 1,
+        user_name: item.UserDetail.name,
+        // agent_name: item.UserDetail.name,
+        delivery_type: item.DeliveryType.name,
+        product: item.Product.name,
+        quantity: item.quantity,
+        price: item.price,
+        delivered_at: new Date(item.delivered_at).toLocaleString("en-Gb"),
+      };
+      setHistoryData((prevData) => [...prevData, abc]);
+    });
+  };
   const captureFromDate = (e) => {
     e.preventDefault();
     let fromDate = new Date(e.target.value).toISOString();
@@ -136,12 +155,7 @@ export default function UsersHistory() {
             </button>{" "}
           </Paper>
           <Paper>
-            <HistoryTable
-              // users={users}
-              // deliveryTypes={deliveryTypes}
-              // products={products}
-              historyData={historyData}
-            />
+            <HistoryTable historyData={historyData} />
           </Paper>
         </>
       ) : (

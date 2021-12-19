@@ -6,7 +6,7 @@ export default function OrdersListing(props) {
   let navigate = useNavigate();
   const openUser = (e, id) => {
     e.preventDefault();
-    navigate(`/agents/${id}`);
+    navigate(`/users/${id}`);
   };
 
   return (
