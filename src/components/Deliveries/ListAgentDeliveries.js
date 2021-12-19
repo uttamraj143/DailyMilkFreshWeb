@@ -100,6 +100,8 @@ export default function AgentDeliveryListing(props) {
 
                 <ListAgentDeliveryProducts
                   products={order.products}
+                  delivery_id={order.delivery_id}
+                  user_id={order.user_id}
                   deliveryTypes={props.deliveryTypes}
                   setCurrentUser={setCurrentUser}
                 ></ListAgentDeliveryProducts>

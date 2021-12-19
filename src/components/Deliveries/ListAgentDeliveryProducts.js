@@ -1,18 +1,39 @@
 export default function ListAgentDeliveryProducts(props) {
-  const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
+  const orderstatus = [
+    "booked",
+    "deliveredO",
+    "deliveredS",
+    "cancelled",
+    "intransit",
+    "pickedup",
+  ];
 
   const orderStatusColor = (id) => {
     if (id === "booked") return "Orders__blue";
-    if (id === "delivered") return "Orders__green";
+    if (id === "deliveredO") return "Orders__green";
+    if (id === "deliveredS") return "Orders__green";
     if (id === "cancelled") return "Orders__red";
     if (id === "intransit") return "Orders__orange";
     if (id === "pickedup") return "Orders__yellow";
     return "Orders__grey";
   };
 
-  const openCustomer = (e, delivery_id, quantity) => {
+  const openCustomer = (
+    e,
+    delivery_id,
+    user_id,
+    quantity,
+    del_type,
+    product_type
+  ) => {
     e.preventDefault();
-    props.setCurrentUser({ delivery_id, quantity });
+    props.setCurrentUser({
+      delivery_id,
+      user_id,
+      quantity,
+      del_type,
+      product_type,
+    });
   };
 
   const orderStatus = (userqr) => {
@@ -36,7 +57,14 @@ export default function ListAgentDeliveryProducts(props) {
               <div className="Orders__product-id">Delivery Status</div>
               <div
                 onClick={(e) =>
-                  openCustomer(e, product.delivery_id, product.quantity)
+                  openCustomer(
+                    e,
+                    props.delivery_id,
+                    props.user_id,
+                    product.quantity,
+                    product.delivery_type,
+                    product.product_type
+                  )
                 }
                 className={
                   "Orders__status " +
