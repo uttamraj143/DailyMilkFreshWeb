@@ -19,6 +19,7 @@ import Navbar from "components/common/Navbar";
 import MobileNav from "components/common/MobileNav";
 import Dashboard from "components/Dashboard/Dashboard";
 import { refreshToken } from "store/auth";
+import Fournotfour from "components/common/Fournotfour";
 
 export default function App() {
   const pastLogin = JSON.parse(localStorage.getItem("loggedIn"));
@@ -96,8 +97,10 @@ export default function App() {
             <Route exact path="/settings" element={<Settings />} />
             <Route exact path="/deliveries" element={<Deliveries />} />
             <Route exact path="/statistics" element={<Statistics />} />
+            {/* <Route path="*" element={<Fournotfour />} /> */}
           </Route>
           <Route exact path="/login" element={<Login />} />
+          <Route path="*" element={<Fournotfour />} />
         </Routes>
         {isLoggedIn ? <MobileNav></MobileNav> : <> </>}
       </UserContext.Provider>

@@ -38,3 +38,36 @@ similarly for Agent - their deliveries based on dates from & to - download
 Remove Custom from the dropdown
 
 after scan - can change quantity - dropdown
+
+export default function App() {
+return (
+<AuthProvider>
+<Routes>
+<Route element={<Layout />}>
+<Route path="/" element={<PublicPage />} />
+<Route path="/public" element={<PublicPage />} />
+<Route path="/login" element={<LoginPage />} />
+<Route element={<RequireAuth />}>
+<Route path="/protected" element={<ProtectedPage />} />
+<Route path="/dashboard" element={<Dashboard />} />
+</Route>
+</Route>
+<Route path="\*" element={<NotFound />} />
+</Routes>
+</AuthProvider>
+);
+}
+function RequireAuth() {
+let auth = useAuth();
+let location = useLocation();
+
+if (!auth.user) {
+// Redirect them to the /login page, but save the current location they were
+// trying to go to when they were redirected. This allows us to send them
+// along to that page after they login, which is a nicer user experience
+// than dropping them off on the home page.
+return <Navigate to="/login" state={{ from: location }} />;
+}
+
+return <Outlet />;
+}
