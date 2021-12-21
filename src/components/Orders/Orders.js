@@ -12,7 +12,7 @@ import { listAgentUsers } from "store/assignUsers";
 import { listUsers } from "store/user";
 import { listProducts } from "store/products";
 import { listDeliveryTypes } from "store/deliveries";
-import ExportData from "components/Dashboard/ExportData";
+import ExportData from "components/Orders/ExportData";
 import "./Orders.scss";
 import Paper from "@mui/material/Paper";
 

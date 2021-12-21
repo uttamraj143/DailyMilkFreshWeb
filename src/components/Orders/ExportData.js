@@ -85,8 +85,8 @@ export default function ExportData(props) {
         nodeRef={nodeRef}
         rows={props.orders}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={30}
+        // rowsPerPageOptions={[5]}
         // checkboxSelection
         onSelectionModelChange={handleRowSelection}
         disableSelectionOnClick

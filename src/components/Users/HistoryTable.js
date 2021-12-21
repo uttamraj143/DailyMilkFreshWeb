@@ -76,7 +76,7 @@ export default function HistoryTable(props) {
         nodeRef={nodeRef}
         rows={props.historyData}
         columns={columns}
-        pageSize={5}
+        pageSize={30}
         rowsPerPageOptions={[10]}
         // checkboxSelection
         onSelectionModelChange={handleRowSelection}
