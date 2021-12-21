@@ -19,10 +19,10 @@ import Paper from "@mui/material/Paper";
 export default function Orders() {
   const userInfo = useContext(UserContext);
   const [currentUser, setCurrentUser] = useState(null);
-  // const [sortNumbers, setSortNumbers] = useState(false);
+  const [sortNumbers, setSortNumbers] = useState(false);
   const [addexport, exportToggle] = useState(false);
   const [sortName, setSortName] = useState(false);
-  // const [sortLocation, setSortLocation] = useState(false);
+  const [sortLocation, setSortLocation] = useState(false);
   const [page, setPage] = useState(1);
   const [orders, setOrders] = useState([]);
   const [convertedOrders, setConvertedOrders] = useState([]);
@@ -103,26 +103,32 @@ export default function Orders() {
     }
   };
 
-  const sortByNumber = (e) => {
-    return;
-    // if (sortNumbers) {
-    //   setUsers(orders.slice(0).sort((a, b) => parseInt(a.id) - parseInt(b.id)));
-    //   setSortNumbers(!sortNumbers);
-    // } else {
-    //   setUsers(orders.slice(0).sort((a, b) => parseInt(b.id) - parseInt(a.id)));
-    //   setSortNumbers(!sortNumbers);
-    // }
+  const sortByProduct = (e) => {
+    if (sortNumbers) {
+      setSortOrders(
+        sortOrders.sort((a, b) => a.product.localeCompare(b.product))
+      );
+      setSortNumbers(!sortNumbers);
+    } else {
+      setSortOrders(
+        sortOrders.sort((a, b) => b.product.localeCompare(a.product))
+      );
+      setSortNumbers(!sortNumbers);
+    }
   };
 
-  const sortByLocation = (e) => {
-    return;
-    // if (sortLocation) {
-    //   setUsers(users.sort((a, b) => a.address.localeCompare(b.address)));
-    //   setSortLocation(!sortLocation);
-    // } else {
-    //   setUsers(users.sort((a, b) => b.address.localeCompare(a.address)));
-    //   setSortLocation(!sortLocation);
-    // }
+  const sortByAgent = () => {
+    if (sortLocation) {
+      setSortOrders(
+        sortOrders.sort((a, b) => a.agent_name.localeCompare(b.agent_name))
+      );
+      setSortLocation(!sortLocation);
+    } else {
+      setSortOrders(
+        sortOrders.sort((a, b) => b.agent_name.localeCompare(a.agent_name))
+      );
+      setSortLocation(!sortLocation);
+    }
   };
 
   const modifyOrders = useCallback(
@@ -236,8 +242,8 @@ export default function Orders() {
                 isVisible={currentUser}
                 clearCurrentUser={clearCurrentUser}
                 sortByName={sortByName}
-                sortByNumber={sortByNumber}
-                sortByLocation={sortByLocation}
+                sortByProduct={sortByProduct}
+                sortByAgent={sortByAgent}
               ></MiniNavbar>
               {currentUser ? (
                 <OrderPage order={currentUser}></OrderPage>

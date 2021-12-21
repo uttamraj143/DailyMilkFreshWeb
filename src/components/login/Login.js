@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
@@ -26,6 +26,10 @@ export default function Login() {
   let navigate = useNavigate();
 
   const userInfo = useContext(UserContext);
+  let { isLoggedIn } = userInfo;
+  useEffect(() => {
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn, navigate]);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);

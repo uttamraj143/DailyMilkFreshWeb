@@ -4,6 +4,8 @@ import { Container, Card, CardContent, Grid } from "@mui/material";
 import { updateLocationOfUser } from "store/assignUsers";
 import { scannedDelivery } from "store/deliveries";
 import QrReader from "react-qr-reader";
+import Spinner from "components/common/Spinner";
+import Skeleton from "@mui/material/Skeleton";
 import SelectQuantity from "components/AssigningUsersToAgent/SelectQuantity";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +15,7 @@ export default function QRScanComponent(props) {
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   // const qrRef = useRef(null);
   const userInfo = useContext(UserContext);
+  const [spinner, toggleSpinner] = useState(false);
   const { access_token } = userInfo;
 
   const handleErrorWebCam = (error) => {
@@ -20,6 +23,7 @@ export default function QRScanComponent(props) {
   };
   const handleScanWebCam = async (result) => {
     if (!result) return;
+    toggleSpinner(true);
     if (result === props.currentUser.user_id) {
       await updateLocationByAgent();
       let data = {
@@ -44,7 +48,13 @@ export default function QRScanComponent(props) {
         .catch((res) => {
           alert("failed");
         });
-    } else alert("Wrong User Selected");
+      toggleSpinner(false);
+    } else {
+      alert("Wrong User Selected");
+      setTimeout(() => {
+        toggleSpinner(false);
+      }, 2000);
+    }
   };
 
   const handleData = (e, b) => {
@@ -90,26 +100,41 @@ export default function QRScanComponent(props) {
   };
 
   return (
-    <Container className="conatiner">
-      <Card>
-        <h2 className="title">Scan QR Code with DailyFreshMilk</h2>
-        <h3>Please select the quantity</h3>
-        <SelectQuantity handleData={handleData}></SelectQuantity>
-        <CardContent>
-          <Grid container spacing={2}>
-            <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-              <h3>Qr Code Scan by Camera</h3>
-              <QrReader
-                delay={300}
-                style={{ width: "100%" }}
-                onError={handleErrorWebCam}
-                onScan={handleScanWebCam}
-              />
-              <h3>User ID: {scanResultWebCam}</h3>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
-    </Container>
+    <>
+      {!spinner ? (
+        <Container className="container">
+          <Card>
+            <h2 className="title">Scan QR Code with DailyFreshMilk</h2>
+            <h3>Please select the quantity</h3>
+            <SelectQuantity handleData={handleData}></SelectQuantity>
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+                  <h3>Qr Code Scan by Camera</h3>
+                  <QrReader
+                    delay={300}
+                    style={{ width: "100%" }}
+                    onError={handleErrorWebCam}
+                    onScan={handleScanWebCam}
+                  />
+                  <h3>User ID: {scanResultWebCam}</h3>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Container>
+      ) : (
+        <div className="Agents__spinners">
+          <Spinner />
+          <Skeleton animation="wave" height={100} width="80%" />
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            width={210}
+            height={118}
+          />
+        </div>
+      )}
+    </>
   );
 }

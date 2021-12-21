@@ -7,6 +7,7 @@ import Login from "components/login/Login";
 import Orders from "components/Orders/Orders";
 import Users from "components/Users/Users";
 import UsersHistory from "components/Users/UsersHistory";
+import OrdersCancel from "components/Orders/OrdersCancel";
 import Products from "components/Products/Products";
 import Agents from "components/Agents/Agents";
 import AgentsHistory from "components/Agents/AgentsHistory";
@@ -91,6 +92,7 @@ export default function App() {
             <Route exact path="/users" element={<Users />} />
             <Route exact path="/users/:id" element={<UsersHistory />} />
             <Route exact path="/orders" element={<Orders />} />
+            <Route exact path="/orders/:id" element={<OrdersCancel />} />
             <Route exact path="/agents" element={<Agents />} />
             <Route exact path="/agents/:id" element={<AgentsHistory />} />
             <Route exact path="/products" element={<Products />} />

@@ -17,7 +17,7 @@ export default function SelectProduct(props) {
 
   useEffect(() => {
     const getAllProducts = () => {
-      listProducts(null, access_token)
+      listProducts(1, access_token)
         .then((res) => {
           setProducts(res.data.data);
           //   toggleSpinner(false);
