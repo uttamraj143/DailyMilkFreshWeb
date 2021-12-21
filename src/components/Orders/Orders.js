@@ -142,7 +142,14 @@ export default function Orders() {
   );
 
   const nnn = useCallback(() => {
-    const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
+    const orderstatus = [
+      "booked",
+      "delivered_morning",
+      "delivered_evening",
+      "cancelled",
+      "intransit",
+      "pickedup",
+    ];
 
     const orderStatus = (userqr) => {
       let statss = orderstatus[userqr];

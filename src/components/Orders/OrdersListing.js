@@ -9,7 +9,8 @@ export default function OrdersListing(props) {
 
   const orderStatusColor = (id) => {
     if (id === "booked") return "Orders__blue";
-    if (id === "delivered") return "Orders__green";
+    if (id === "delivered_morning") return "Orders__green";
+    if (id === "delivered_evening") return "Orders__green";
     if (id === "cancelled") return "Orders__red";
     if (id === "intransit") return "Orders__orange";
     if (id === "pickedup") return "Orders__yellow";
