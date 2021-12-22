@@ -8,15 +8,28 @@ import {
 
 export default function HistoryTable(props) {
   const [selectPage, setSelection] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
   const nodeRef = useRef(null);
 
   function CustomToolbar() {
     return (
       <GridToolbarContainer className={gridClasses.toolbarContainer}>
         <GridToolbarExport />
+        <div>
+          {" "}
+          (Total Amount is {totalPrice} for {totalQuantity} items)
+        </div>
       </GridToolbarContainer>
     );
   }
+
+  useEffect(() => {
+    props.orders.forEach((item) => {
+      setTotalPrice((prev) => parseInt(prev) + item.price);
+      setTotalQuantity((prev) => parseInt(prev) + item.quantity);
+    });
+  }, []);
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
