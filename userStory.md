@@ -22,3 +22,25 @@ Orders Sort according to Date and fetch only with Date
 animations transitions
 cancel order
 total price in excel
+
+1. Unable to open user details after clicking.
+2. Assign users should also show apartment name.
+3. quantity with 500ml or kg or ltr
+4. When click outside remove type pad and getting Undo type
+5. Scrolling not working when opening menu
+6. Admin or User edit option not enabled but able to see it may be UI bootstrap issue.
+7. Remove QR code for Admin.
+8. When selecting user give his order details so that he can update details in that page.
+9. Updating product details with complete cell option.
+10. Upload image and storing it in server.
+11. location update only when 0, 0
+12. Update Location - separate button - if needed by agent using a Button
+13. products need edit option so that we can change the price and name of the product
+14. And there I need an option to add an image
+15. And in assign users to agents there if I enter 101 I am getting 4-5 options there I need like block or apartment name so that we can I identify which customer
+16. in user data as a admin I should have access to edit that details which are already added to make changes like from morning delivery to evening delivery or change of milk like cow to buffalo or desi cow milk like that
+17. On opening user page is white
+
+--- _ -------------- _
+
+18. in accounts I am unable to open edit admin option the button is there but unable to access it

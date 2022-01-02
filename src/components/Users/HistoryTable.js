@@ -25,7 +25,7 @@ export default function HistoryTable(props) {
   }
 
   useEffect(() => {
-    props.orders.forEach((item) => {
+    props.historyData.forEach((item) => {
       setTotalPrice((prev) => parseInt(prev) + item.price);
       setTotalQuantity((prev) => parseInt(prev) + item.quantity);
     });
