@@ -76,9 +76,7 @@ export default function Orders() {
           refreshAccessToken();
         }
       });
-    setTimeout(() => {
-      toggleSpinner(false);
-    }, 2000);
+    toggleSpinner(false);
   }, [access_token, refreshAccessToken]);
 
   const currentUserSelection = (user) => {

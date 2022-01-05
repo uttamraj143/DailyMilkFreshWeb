@@ -51,9 +51,7 @@ export default function QRScanComponent(props) {
       toggleSpinner(false);
     } else {
       alert("Wrong User Selected");
-      setTimeout(() => {
-        toggleSpinner(false);
-      }, 2000);
+      toggleSpinner(false);
     }
   };
 

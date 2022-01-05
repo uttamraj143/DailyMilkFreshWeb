@@ -30,9 +30,7 @@ export default function Deliveries() {
     listDeliveryTypes(access_token)
       .then((res) => {
         setDeliveryTypes(res.data.data);
-        setTimeout(() => {
-          toggleSpinner(false);
-        }, 1000);
+        toggleSpinner(false);
       })
       .catch((res) => {
         toggleSpinner(true);

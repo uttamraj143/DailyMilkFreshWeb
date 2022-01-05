@@ -23,9 +23,7 @@ export default function Products() {
     listProducts(null, userInfo.access_token)
       .then((res) => {
         setProducts(res.data.data);
-        setTimeout(() => {
-          toggleSpinner(false);
-        }, 1000);
+        toggleSpinner(false);
       })
       .catch((res) => {
         // optional chaining

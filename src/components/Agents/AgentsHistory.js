@@ -34,10 +34,8 @@ export default function UsersHistory() {
       getHistory(access_token, data)
         .then((res) => {
           modifyHistoryData(res.data.data);
-          setTimeout(() => {
-            toggleSpinner(false);
-            setalertmessage("Data Fetched");
-          }, 1000);
+          toggleSpinner(false);
+          setalertmessage("Data Fetched");
         })
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {

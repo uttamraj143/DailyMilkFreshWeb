@@ -23,9 +23,7 @@ export default function Agents() {
     function getAllAgents() {
       listUsers(2, userInfo.access_token)
         .then((res) => {
-          setTimeout(() => {
-            toggleSpinner(false);
-          }, 1000);
+          toggleSpinner(false);
           setAgents(res.data.data);
         })
         .catch((res) => {

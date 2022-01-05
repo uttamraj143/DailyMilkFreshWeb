@@ -61,10 +61,8 @@ export default function UsersHistory() {
         .then((res) => {
           // setHistoryData(res.data);
           modifyHistoryData(res.data.data);
-          setTimeout(() => {
-            toggleSpinner(false);
-            setalertmessage("Data Fetched");
-          }, 1000);
+          toggleSpinner(false);
+          setalertmessage("Data Fetched");
         })
         .catch((res) => {
           if (res && res.response && res.response.status === 401) {
