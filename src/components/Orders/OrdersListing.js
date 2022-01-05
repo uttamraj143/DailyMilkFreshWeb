@@ -1,5 +1,6 @@
 import Paper from "@mui/material/Paper";
 // import { useState } from "react";
+import location from "svgs/location.gif";
 
 export default function OrdersListing(props) {
   const openCustomer = (e, userqr) => {
@@ -77,16 +78,6 @@ export default function OrdersListing(props) {
             </div>
 
             <div className="Orders__customername">
-              <div className="Orders__cust-heading">Google Location</div>
-              <div
-                onClick={(e) => goToMaps(e, order.lat, order.lng)}
-                className="cust-idnumber Orders__status "
-              >
-                Click Here - Maps
-              </div>
-            </div>
-
-            <div className="Orders__customername">
               <div className="Orders__cust-heading">Price </div>
               <div className="cust-idnumber">&#8377; {order.price}/-</div>
             </div>
@@ -95,6 +86,23 @@ export default function OrdersListing(props) {
               <div className="Orders__product-id">Products</div>
               <div className="Orders__product">
                 {order.product} - {order.quantity}
+              </div>
+            </div>
+
+            <div className="Orders__customername">
+              <div className="Orders__cust-heading">Google Location</div>
+              <div
+                className="Orders__status"
+                onClick={(e) => goToMaps(e, order.lat, order.lng)}
+              >
+                <span>
+                  <img
+                    height="40px"
+                    width="40px"
+                    src={location}
+                    alt="Daily"
+                  ></img>{" "}
+                </span>
               </div>
             </div>
           </Paper>
