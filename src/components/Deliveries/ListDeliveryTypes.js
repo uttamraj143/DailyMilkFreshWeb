@@ -15,6 +15,12 @@ export default function ListDeliveryTypes(props) {
     setEdit(id);
   };
 
+  const cancelEdit = (e) => {
+    e.preventDefault();
+    setDeliveryType(props.deliverytype);
+    setEdit(false);
+  };
+
   const handleChange = (e, no) => {
     e.preventDefault();
 
@@ -80,8 +86,8 @@ export default function ListDeliveryTypes(props) {
             <img
               className="Deliveries__types-svg"
               src={cancelIcon}
-              alt="save"
-              onClick={(e) => setEdit(false)}
+              alt="cancel"
+              onClick={(e) => cancelEdit(e)}
             ></img>
           </>
         ) : (

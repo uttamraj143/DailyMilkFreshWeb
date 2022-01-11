@@ -26,6 +26,21 @@
     cursor: pointer;
   }
 
+  &__edit-product {
+    padding: 4px 20px;
+    color: #5c4c2d;
+    background-color: #b5965b80;
+    border-radius: 6px;
+  }
+
+  &__available {
+    padding: 4px 20px;
+    border-radius: 6px;
+    color: #384c3f;
+    background-color: #b8edd4;
+    font-weight: bold;
+  }
+
   &__card-container {
     display: flex;
     justify-content: center;
@@ -64,6 +79,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    padding-bottom: 5px;
     border-bottom: 2px solid #80808066;
   }
 

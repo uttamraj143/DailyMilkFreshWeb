@@ -1,11 +1,13 @@
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { updateProduct } from "store/products";
 
 export default function ProductsListing(props) {
   const [product, setProduct] = useState(props.products);
+  let navigate = useNavigate();
   const orderStatusColor = (status) => {
-    if (status === 1) return "Orders__blue";
+    if (status === 1) return "Products__available";
     if (status === 0) return "Orders__yellow";
     return "Orders__grey";
   };
@@ -23,6 +25,11 @@ export default function ProductsListing(props) {
       availability: newff.toString(),
     };
     updateProduct(props.access_token, product.id, data);
+  };
+
+  const changeProductDetails = (e, id) => {
+    e.preventDefault();
+    navigate(`/products/${id}`);
   };
 
   return (
@@ -55,6 +62,16 @@ export default function ProductsListing(props) {
         <div className="Products__products-row">
           <div className="Products__date">Product Type</div>
           <div className="Products__right-column">{product.product_type}</div>
+        </div>
+
+        <div className="Products__products-row">
+          <div className="Products__date">Edit Product </div>
+          <div
+            onClick={(e) => changeProductDetails(e, product.id)}
+            className="Products__right-column Products__status Products__edit-product"
+          >
+            Edit Product
+          </div>
         </div>
       </Paper>
     </div>
