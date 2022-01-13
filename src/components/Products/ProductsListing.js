@@ -36,7 +36,6 @@ export default function ProductsListing(props) {
     <div className="Products__card-box">
       <Paper className="Products__order" elevation={2}>
         <div className="Products__customername">
-          <div className="Products__cust-id">In Stock </div>
           <div
             onClick={(e) => changeAvailability(e)}
             className={
@@ -44,6 +43,13 @@ export default function ProductsListing(props) {
             }
           >
             {product.availability === 1 ? "Available" : "Not available"}
+          </div>
+
+          <div
+            onClick={(e) => changeProductDetails(e, product.id)}
+            className="Products__status Products__edit-product"
+          >
+            Edit Product
           </div>
         </div>
 
@@ -62,16 +68,6 @@ export default function ProductsListing(props) {
         <div className="Products__products-row">
           <div className="Products__date">Product Type</div>
           <div className="Products__right-column">{product.product_type}</div>
-        </div>
-
-        <div className="Products__products-row">
-          <div className="Products__date">Edit Product </div>
-          <div
-            onClick={(e) => changeProductDetails(e, product.id)}
-            className="Products__right-column Products__status Products__edit-product"
-          >
-            Edit Product
-          </div>
         </div>
       </Paper>
     </div>
