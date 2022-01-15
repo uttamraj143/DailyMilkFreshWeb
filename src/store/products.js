@@ -11,13 +11,13 @@ export const listProducts = (num, access_token) => {
   });
 };
 
-export const getSingleProduct = (id, access_token) => {
-  return axiosInstance({
-    method: "POST",
-    url: `product/${id}`,
-    headers: { access_token: access_token },
-  });
-};
+// export const getSingleProduct = (id, access_token) => {
+//   return axiosInstance({
+//     method: "POST",
+//     url: `product/${id}`,
+//     headers: { access_token: access_token },
+//   });
+// };
 
 export const updateProduct = (access_token, id, data) => {
   return axiosInstance({

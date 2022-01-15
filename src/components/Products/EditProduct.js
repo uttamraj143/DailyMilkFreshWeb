@@ -1,41 +1,55 @@
-import { getSingleProduct } from "store/products";
-import { useEffect, useContext, useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import ProductsListing from "components/Products/ProductsListing";
+import AddProduct from "components/Products/AddProduct";
+import Spinner from "components/common/Spinner";
+import Skeleton from "@mui/material/Skeleton";
+import { ReactComponent as ProductIcon } from "svgs/checkList.svg";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+// import MiniNavbar from 'components/common/MiniNavbar';
+import "./Products.scss";
+import { listProducts } from "store/products";
 import UserContext from "UserContext";
 import Paper from "@mui/material/Paper";
 import MySnack from "components/common/MySnack";
-import Skeleton from "@mui/material/Skeleton";
-import Spinner from "components/common/Spinner";
 
-export default function UsersHistory() {
-  let userInfo = useContext(UserContext);
+export default function EditProducts() {
+  const navigate = useNavigate();
+  const userInfo = useContext(UserContext);
   const [spinner, toggleSpinner] = useState(false);
-  let { access_token } = userInfo;
-  const [alertmessage, setalertmessage] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState();
 
   useEffect(() => {
-    getCustomerData();
-  }, []);
-
-  const getCustomerData = () => {
     toggleSpinner(true);
-    let curr_id = window.location.pathname.split("/")[2];
+    listProducts(null, userInfo.access_token)
+      .then((res) => {
+        setProducts(res.data.data);
+        setCurrentProduct();
+        toggleSpinner(false);
+      })
+      .catch((res) => {
+        // optional chaining
+        let status = res?.response?.status;
+        if (status & (status === 401)) {
+          userInfo.refreshAccessToken();
+          toggleSpinner(false);
+        }
+      });
+  }, [userInfo.access_token]);
 
+  const setCurrentProduct = () => {
+    let curr_id = window.location.pathname.split("/")[2];
     if (curr_id) {
-      getSingleProduct(curr_id, access_token)
-        .then((res) => {
-          toggleSpinner(false);
-          setalertmessage("Data Fetched");
-        })
-        .catch((res) => {
-          if (res && res.response && res.response.status === 401) {
-            toggleSpinner(true);
-            setalertmessage("Refreshing");
-            userInfo.refreshAccessToken();
-          }
-          toggleSpinner(false);
-          setalertmessage("Cannot connect to API ");
-        });
+      let abb = products.find((item) => item.id == curr_id);
+      setSelectedProduct(abb);
     }
+  };
+
+  const goBack = (e) => {
+    e.preventDefault();
+    navigate("/products");
   };
 
   //   const modifyHistoryData = (hist) => {
@@ -57,14 +71,21 @@ export default function UsersHistory() {
 
   return (
     <div className="main-container">
+      <div className="Orders__main-heading">
+        <div className="General-main-heading">
+          <ProductIcon /> {"  "} Edit Product
+        </div>
+        <div>
+          <button className="Users__refresh-button" onClick={(e) => goBack(e)}>
+            {" "}
+            Back to Products
+          </button>
+        </div>
+      </div>
       {!spinner ? (
-        <>
-          <Paper className="AssignUsers__sub" elevation={2}>
-            Customer Unique Scan Code
-          </Paper>
-        </>
+        <div>fdffdfdf</div>
       ) : (
-        <div className="Agents__spinners">
+        <div className="Products__spinners">
           <Spinner />
           <Skeleton animation="wave" height={100} width="80%" />
           <Skeleton
@@ -73,9 +94,9 @@ export default function UsersHistory() {
             width={210}
             height={118}
           />
+          {/* <img height="150px" width="150px" src={Spinner} alt="Daily"></img> */}
         </div>
       )}
-      {alertmessage && <MySnack message={alertmessage} />}
     </div>
   );
 }

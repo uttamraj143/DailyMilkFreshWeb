@@ -30,10 +30,10 @@ export default function OrdersListing(props) {
       {props.orders.map((order, index) => {
         return (
           <Paper key={index} className="Orders__order" elevation={2}>
-            <div className="Orders__date-address-row">
-              <div className="Orders__date">{order.modified_at}</div>
-              <div className="Orders__address">{order.address}</div>
-            </div>
+            {/* <div className="Orders__date-address-row"> */}
+            {/* <div className="Orders__date">{order.modified_at}</div> */}
+            {/* <div className="Orders__address">{order.address}</div> */}
+            {/* </div> */}
 
             <div className="Orders__customername">
               <div className="Orders__cust-id">
