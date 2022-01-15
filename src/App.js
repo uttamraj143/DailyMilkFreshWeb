@@ -23,7 +23,7 @@ import MobileNav from "components/common/MobileNav";
 import Dashboard from "components/Dashboard/Dashboard";
 import { refreshToken } from "store/auth";
 import Fournotfour from "components/common/Fournotfour";
-// import { ReactQueryDevtools } from "react-query/devtools";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 export default function App() {
   const pastLogin = JSON.parse(localStorage.getItem("loggedIn"));
@@ -111,7 +111,7 @@ export default function App() {
         </Routes>
         {isLoggedIn ? <MobileNav></MobileNav> : <> </>}
       </UserContext.Provider>
-      {/* <ReactQueryDevtools  /> */}
+      <ReactQueryDevtools />
     </Router>
   );
 }

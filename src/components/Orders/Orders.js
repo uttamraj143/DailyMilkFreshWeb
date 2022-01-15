@@ -36,16 +36,16 @@ export default function Orders() {
 
   useEffect(() => {
     toggleSpinner(true);
-    listUsers(null, access_token)
-      .then((res) => {
-        setUsers(res.data.data);
-      })
-      .catch((res) => {
-        console.log(res);
-        if (res && res.response && res.response.status === 401) {
-          refreshAccessToken();
-        }
-      });
+    // listUsers(null, access_token)
+    //   .then((res) => {
+    //     setUsers(res.data.data);
+    //   })
+    //   .catch((res) => {
+    //     console.log(res);
+    //     if (res && res.response && res.response.status === 401) {
+    //       refreshAccessToken();
+    //     }
+    //   });
     listDeliveryTypes(access_token)
       .then((res) => {
         setDeliveryTypes(res.data.data);

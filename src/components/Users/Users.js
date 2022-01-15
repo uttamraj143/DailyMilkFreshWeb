@@ -11,6 +11,8 @@ import "./Users.scss";
 import { listUsers } from "store/user";
 import UserContext from "UserContext";
 
+import { useQuery } from "react-query";
+
 export default function Users() {
   const userInfo = useContext(UserContext);
   const [spinner, toggleSpinner] = useState(true);
@@ -18,6 +20,23 @@ export default function Users() {
   const [addagenttoggle, toggleAddUser] = useState(false);
   const [page, setPage] = useState(1);
   const [modifiedUsers, setSortUsers] = useState([]);
+
+  const { data, isLoading, refetch } = useQuery(
+    [3, userInfo.access_token],
+    listUsers,
+    {
+      onSuccess: () => {
+        data?.data && setUsers(data.data.data);
+        !isLoading && toggleSpinner(false);
+      },
+      onError: (error) => {
+        if (error && error.response && error.response.status === 401) {
+          toggleSpinner(true);
+          userInfo.refreshAccessToken();
+        }
+      },
+    }
+  );
 
   const modifyUsers = useCallback(
     (e, val) => {
@@ -30,29 +49,13 @@ export default function Users() {
   );
 
   useEffect(() => {
-    const getAllUsers = () => {
-      listUsers(3, userInfo.access_token)
-        .then((res) => {
-          toggleSpinner(false);
-          setUsers(res.data.data);
-        })
-        .catch((res) => {
-          if (res && res.response && res.response.status === 401) {
-            toggleSpinner(true);
-            userInfo.refreshAccessToken();
-          }
-        });
-    };
-    getAllUsers();
-  }, [userInfo.access_token, addagenttoggle, userInfo]);
-
-  useEffect(() => {
     modifyUsers(null, 1);
   }, [users, modifyUsers]);
 
   const addUserClicked = (e) => {
     e && e.preventDefault();
     toggleAddUser(!addagenttoggle);
+    refetch();
   };
 
   return (
