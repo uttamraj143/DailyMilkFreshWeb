@@ -152,13 +152,13 @@ export default function Settings() {
         </div>
       )}
 
-      <div>
-        {imageUrl ? (
+      {/* <div>
+        {selectedProfile && imageUrl ? (
           <a href={imageUrl} download>
             <img width="350px" height="350px" src={imageUrl} alt="img" />
           </a>
         ) : null}
-      </div>
+      </div> */}
     </div>
   );
 }

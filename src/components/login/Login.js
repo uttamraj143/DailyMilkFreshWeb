@@ -114,7 +114,7 @@ export default function Login() {
   };
   return (
     <div className="Login__main-container">
-      <Paper className="Login__paper" elevation={2}>
+      <div className="Login__paper">
         <img
           className="Login__logo-image"
           src={DailyMilkFreshLogo}
@@ -202,7 +202,7 @@ export default function Login() {
             setClickOnce={setClickOnce}
           ></ForgotPassword>
         )}
-      </Paper>
+      </div>
     </div>
   );
 }

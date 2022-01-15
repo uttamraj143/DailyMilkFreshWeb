@@ -8,6 +8,7 @@ import Spinner from "components/common/Spinner";
 import Skeleton from "@mui/material/Skeleton";
 import SelectQuantity from "components/AssigningUsersToAgent/SelectQuantity";
 import { useNavigate } from "react-router-dom";
+import "./Qrscanner.scss"
 
 export default function QRScanComponent(props) {
   let navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function QRScanComponent(props) {
     if (!result) return;
     toggleSpinner(true);
     if (result === props.currentUser.user_id) {
-      await updateLocationByAgent();
+      // await updateLocationByAgent();
       let data = {
         listDeliveries: [
           {
@@ -60,7 +61,8 @@ export default function QRScanComponent(props) {
     setQuantity(b);
   };
 
-  const updateLocationByAgent = () => {
+  const updateLocationByAgent = (e) => {
+    e.preventDefault()
     let locdata = {
       lat: 0,
       long: 0,
@@ -102,9 +104,11 @@ export default function QRScanComponent(props) {
       {!spinner ? (
         <Container className="container">
           <Card>
-            <h2 className="title">Scan QR Code with DailyFreshMilk</h2>
-            <h3>Please select the quantity</h3>
+            {/* <h2 className="title">Scan QR Code with DailyFreshMilk</h2> */}
+            <div className="QRScanner__heading">For change in quantity select here</div>
             <SelectQuantity handleData={handleData}></SelectQuantity>
+
+            <div onClick={e => updateLocationByAgent(e)} className="QRScanner__location">Click Here to Update Location</div>
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>

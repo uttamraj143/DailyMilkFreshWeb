@@ -16,7 +16,6 @@ npx npm-check-updates -u
 4. This order should be assigned to Respective Agent/delivery boy & (delivery boy can update quantity)
 5. Per customer can download their monthly bills (in excel)
 6. Rates, payment need not implement
-7. There is existing Milk management in wordpress, check implementation
 
 Orders Sort according to Date and fetch only with Date
 animations transitions
@@ -39,8 +38,18 @@ total price in excel
 14. And there I need an option to add an image
 15. And in assign users to agents there if I enter 101 I am getting 4-5 options there I need like block or apartment name so that we can I identify which customer
 16. in user data as a admin I should have access to edit that details which are already added to make changes like from morning delivery to evening delivery or change of milk like cow to buffalo or desi cow milk like that
-17. On opening user page is white
 
 --- _ -------------- _
 
 18. in accounts I am unable to open edit admin option the button is there but unable to access it
+
+
+Update location separate button in orders
+orders - update location button
+Should be able to cancel the Order
+Edit Product page with new options
+make scan qr - UI neat - with user name and phone number - download this frame
+in host/users/:id give option to edit/update delivery details
+quantity with 500ml or kg or ltr (with respect to key from the Product api)
+
+In iOS, Assign users, on autocomplete dropdown, on clicking outside getting undo type

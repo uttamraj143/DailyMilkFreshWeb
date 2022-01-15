@@ -1,0 +1,23 @@
+.QRScanner {
+  &__heading {
+    color: #385472;
+    /* background: #edb89e57; */
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 4px;
+  }
+}
+
+.QRScanner {
+  &__location {
+    color: #385472;
+    background: #38547257;
+    text-align: center;
+    max-width: 300px;
+    margin-top: 15px;
+    padding: 6px;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
