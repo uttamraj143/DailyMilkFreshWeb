@@ -111,8 +111,9 @@ export default function UsersHistory() {
         <>
           <Paper className="AssignUsers__sub" elevation={2}>
             Customer Unique Scan Code
+            
             {imageUrl ? (
-              <a href={imageUrl} download>
+              <a href={imageUrl}>
                 <img width="350px" height="350px" src={imageUrl} alt="img" />
               </a>
             ) : null}
