@@ -20,6 +20,7 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.22.2",
     "react-qr-reader": "github:JodusNodus/react-qr-reader#pull/192/head",
+    "react-query": "^3.34.8",
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
     "sass": "^1.45.0",

@@ -15,6 +15,7 @@ import { listDeliveryTypes } from "store/deliveries";
 import ExportData from "components/Orders/ExportData";
 import "./Orders.scss";
 import Paper from "@mui/material/Paper";
+import { useQuery } from "react-query";
 
 export default function Orders() {
   const userInfo = useContext(UserContext);
@@ -34,18 +35,21 @@ export default function Orders() {
 
   const { access_token, refreshAccessToken } = userInfo;
 
+  const getusers = useQuery([null, access_token], listUsers, {
+    onSuccess: (data) => {
+      data?.data && setUsers(data.data.data);
+      // toggleSpinner(false);
+    },
+    onError: (error) => {
+      if (error && error.response && error.response.status === 401) {
+        // toggleSpinner(true);
+        refreshAccessToken();
+      }
+    },
+  });
+
   useEffect(() => {
     toggleSpinner(true);
-    listUsers(null, access_token)
-      .then((res) => {
-        setUsers(res.data.data);
-      })
-      .catch((res) => {
-        console.log(res);
-        if (res && res.response && res.response.status === 401) {
-          refreshAccessToken();
-        }
-      });
     listDeliveryTypes(access_token)
       .then((res) => {
         setDeliveryTypes(res.data.data);

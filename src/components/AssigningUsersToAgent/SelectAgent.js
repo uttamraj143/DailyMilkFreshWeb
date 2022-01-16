@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import { listUsers } from "store/user";
 import CheckBoxOutlineBlankIcon from "svgs/unchecked.svg";
 import CheckBoxIcon from "svgs/checked.svg";
+import { useQuery } from "react-query";
 
 const icon = <img src={CheckBoxOutlineBlankIcon} alt="dsd" fontSize="small" />;
 const checkedIcon = <img src={CheckBoxIcon} alt="dsds" fontSize="small" />;
@@ -14,22 +15,16 @@ export default function SelectUser(props) {
   const [users, setUsers] = useState([]);
   const { access_token, refreshAccessToken } = props;
 
-  useEffect(() => {
-    const getAllUsers = () => {
-      listUsers(2, access_token)
-        .then((res) => {
-          // toggleSpinner(false);
-          setUsers(res.data.data);
-        })
-        .catch((res) => {
-          if (res && res.response && res.response.status === 401) {
-            // toggleSpinner(true);
-            refreshAccessToken();
-          }
-        });
-    };
-    getAllUsers();
-  }, [access_token, refreshAccessToken]);
+  const { isLoading } = useQuery([2, access_token], listUsers, {
+    onSuccess: (data) => {
+      data?.data && setUsers(data.data.data);
+    },
+    onError: (error) => {
+      if (error && error.response && error.response.status === 401) {
+        refreshAccessToken();
+      }
+    },
+  });
 
   return (
     <div className="AssignUsers__main">

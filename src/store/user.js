@@ -24,14 +24,15 @@ export const editUser = (data) => {
   });
 };
 
-export const listUsers = (type, access_token) => {
+export const listUsers = (queryKeys) => {
+  const { queryKey } = queryKeys;
   return axiosInstance({
     method: "POST",
     url: "/user/listUsers",
     data: {
-      type_of_user: type,
+      type_of_user: queryKey[0],
     },
-    headers: { access_token: access_token },
+    headers: { access_token: queryKey[1] },
   });
 };
 
