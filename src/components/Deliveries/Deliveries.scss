@@ -40,4 +40,18 @@
   &__edit-input {
     margin: 10px 0;
   }
+
+  &__status {
+    cursor: pointer;
+    color: rgb(192, 103, 144);
+    font-weight: bold;
+  }
+
+  &__products-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-top: 2px solid #80808066;
+    padding-top: 7px;
+  }
 }

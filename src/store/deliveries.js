@@ -42,3 +42,12 @@ export const scannedDelivery = (data, access_token) => {
     data: data,
   });
 };
+
+export const getHistory = (access_token, data) => {
+  return axiosInstance({
+    method: "POST",
+    url: "/history/getHistory",
+    headers: { access_token: access_token },
+    data: data,
+  });
+};

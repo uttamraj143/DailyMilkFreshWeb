@@ -6,6 +6,8 @@
     position: relative;
     text-align: center;
     height: 100vh;
+    // overflow: auto;
+    // background: rgba(0, 0, 0, 0.54118);
   }
 
   &__paper {
@@ -13,12 +15,15 @@
     width: 500px;
     @media screen and (max-width: 500px) {
       width: unset;
+      max-width: 96%;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 
   &__sub-container {
     height: auto;
-    width: 500px;
+    width: 450px;
     margin: 50px auto;
     @media screen and (max-width: 1000px) {
       padding: 0;
@@ -56,7 +61,8 @@
     margin: 30px;
     // font-weight: 600;
     // text-transform: uppercase;
-    color: #37a4db;
+    color: #42444d;
+    font-family: "Montserrat";
   }
 
   &__wrong-password {

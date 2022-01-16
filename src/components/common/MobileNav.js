@@ -1,4 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import UserContext from "UserContext";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import BottomNavigation from "@mui/material/BottomNavigation";
@@ -12,12 +14,26 @@ import { ReactComponent as TruckIcon } from "svgs/truck.svg";
 import { ReactComponent as HomeIcon } from "svgs/home.svg";
 
 export default function MobileNav(props) {
+  const userInfo = useContext(UserContext);
+  const isAdmin = () => {
+    return userInfo.isAdmin;
+  };
   const [value, setValue] = useState(0);
+  let navigate = useNavigate();
   const ref = useRef(null);
 
   const changeMobileMenu = (e, sal) => {
     e.preventDefault();
-    props.currentMenuSelection((sal + 1).toString()); // emitting data to parent
+    switch (sal.toString()) {
+      case "0":
+        return navigate("/");
+      case "1":
+        return isAdmin() ? navigate("orders") : navigate("deliveries");
+      case "2":
+        return navigate("settings");
+      default:
+        return navigate("/");
+    }
   };
 
   return (

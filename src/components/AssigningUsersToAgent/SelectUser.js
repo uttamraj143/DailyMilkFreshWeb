@@ -3,6 +3,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import { listUsers } from "store/user";
+import { useQuery } from "react-query";
 import CheckBoxOutlineBlankIcon from "svgs/unchecked.svg";
 import CheckBoxIcon from "svgs/checked.svg";
 
@@ -14,23 +15,16 @@ export default function SelectUser(props) {
   const { access_token, refreshAccessToken } = props;
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const getAllUsers = () => {
-      listUsers(3, access_token)
-        .then((res) => {
-          // toggleSpinner(false);
-          setUsers(res.data.data);
-        })
-        .catch((res) => {
-          if (res && res.response && res.response.status === 401) {
-            // toggleSpinner(true);
-            refreshAccessToken();
-            // window.location.reload();
-          }
-        });
-    };
-    getAllUsers();
-  }, [access_token, refreshAccessToken]);
+  const { refetch } = useQuery([3, access_token], listUsers, {
+    onSuccess: (data) => {
+      data?.data && setUsers(data.data.data);
+    },
+    onError: (error) => {
+      if (error && error.response && error.response.status === 401) {
+        refreshAccessToken();
+      }
+    },
+  });
 
   return (
     <div className="AssignUsers__main">

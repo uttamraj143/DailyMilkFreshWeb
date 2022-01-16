@@ -11,32 +11,41 @@ import "./Deliveries.scss";
 export default function Deliveries() {
   const userInfo = useContext(UserContext);
   const [deliveries, setDeliveries] = useState([]);
-  const { access_token, userDetails } = userInfo;
+  const { access_token, userDetails, refreshAccessToken } = userInfo;
   const [deliveryTypes, setDeliveryTypes] = useState([]);
   const [spinner, toggleSpinner] = useState(false);
 
   useEffect(() => {
     toggleSpinner(true);
-    listAgentDelivery(userDetails.user_id, access_token).then((res) => {
-      setDeliveries(res.data.data);
-    });
-    listDeliveryTypes(access_token).then((res) => {
-      setDeliveryTypes(res.data.data);
-    });
-    setTimeout(() => {
-      toggleSpinner(false);
-    }, 1000);
-  }, [userDetails.user_id, access_token]);
+    listAgentDelivery(userDetails.user_id, access_token)
+      .then((res) => {
+        setDeliveries(res.data.data);
+      })
+      .catch((res) => {
+        toggleSpinner(true);
+        if (res && res.response && res.response.status === 401) {
+          refreshAccessToken();
+        }
+      });
+    listDeliveryTypes(access_token)
+      .then((res) => {
+        setDeliveryTypes(res.data.data);
+        toggleSpinner(false);
+      })
+      .catch((res) => {
+        toggleSpinner(true);
+      });
+  }, [userDetails.user_id, access_token, refreshAccessToken]);
 
   return (
-    <div className="Deliveries__main-container">
+    <div className="main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
           <CartIcon /> {"  "} Agent Deliveries
         </div>
       </div>
       <div>
-        {spinner ? (
+        {spinner && !deliveries.length ? (
           <>
             <Spinner />
             <Skeleton animation="wave" height={100} width="80%" />
@@ -52,7 +61,7 @@ export default function Deliveries() {
             agent={userInfo.userDetails.name}
             // refreshdata={refreshdata}
             deliveryTypes={deliveryTypes}
-            orders={deliveries}
+            deliveries={deliveries}
           />
         )}
       </div>

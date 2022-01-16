@@ -74,7 +74,7 @@ export default function AddUser(props) {
         setalertmessage("successfully saved");
         setTimeout(() => {
           props.addUserClicked();
-        }, 2000);
+        }, 1000);
       })
       .catch((err) => {
         setalertmessage("Failed to saved");

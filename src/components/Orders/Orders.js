@@ -12,16 +12,18 @@ import { listAgentUsers } from "store/assignUsers";
 import { listUsers } from "store/user";
 import { listProducts } from "store/products";
 import { listDeliveryTypes } from "store/deliveries";
-import ExportData from "components/Dashboard/ExportData";
+import ExportData from "components/Orders/ExportData";
 import "./Orders.scss";
+import Paper from "@mui/material/Paper";
+import { useQuery } from "react-query";
 
 export default function Orders() {
   const userInfo = useContext(UserContext);
   const [currentUser, setCurrentUser] = useState(null);
-  // const [sortNumbers, setSortNumbers] = useState(false);
+  const [sortNumbers, setSortNumbers] = useState(false);
   const [addexport, exportToggle] = useState(false);
-  // const [sortName, setSortName] = useState(false);
-  // const [sortLocation, setSortLocation] = useState(false);
+  const [sortName, setSortName] = useState(false);
+  const [sortLocation, setSortLocation] = useState(false);
   const [page, setPage] = useState(1);
   const [orders, setOrders] = useState([]);
   const [convertedOrders, setConvertedOrders] = useState([]);
@@ -33,18 +35,21 @@ export default function Orders() {
 
   const { access_token, refreshAccessToken } = userInfo;
 
+  const getusers = useQuery([null, access_token], listUsers, {
+    onSuccess: (data) => {
+      data?.data && setUsers(data.data.data);
+      // toggleSpinner(false);
+    },
+    onError: (error) => {
+      if (error && error.response && error.response.status === 401) {
+        // toggleSpinner(true);
+        refreshAccessToken();
+      }
+    },
+  });
+
   useEffect(() => {
     toggleSpinner(true);
-    listUsers(null, access_token)
-      .then((res) => {
-        setUsers(res.data.data);
-      })
-      .catch((res) => {
-        console.log(res);
-        if (res && res.response && res.response.status === 401) {
-          refreshAccessToken();
-        }
-      });
     listDeliveryTypes(access_token)
       .then((res) => {
         setDeliveryTypes(res.data.data);
@@ -75,9 +80,7 @@ export default function Orders() {
           refreshAccessToken();
         }
       });
-    setTimeout(() => {
-      toggleSpinner(false);
-    }, 2000);
+    toggleSpinner(false);
   }, [access_token, refreshAccessToken]);
 
   const currentUserSelection = (user) => {
@@ -89,36 +92,45 @@ export default function Orders() {
   };
 
   const sortByName = () => {
-    return;
-    // if (sortName) {
-    //   setUsers(users.sort((a, b) => a.name.localeCompare(b.name)));
-    //   setSortName(!sortName);
-    // } else {
-    //   setUsers(users.sort((a, b) => b.name.localeCompare(a.name)));
-    //   setSortName(!sortName);
-    // }
+    if (sortName) {
+      setSortOrders(
+        sortOrders.sort((a, b) => a.user_name.localeCompare(b.user_name))
+      );
+      setSortName(!sortName);
+    } else {
+      setSortOrders(
+        sortOrders.sort((a, b) => b.user_name.localeCompare(a.user_name))
+      );
+      setSortName(!sortName);
+    }
   };
 
-  const sortByNumber = (e) => {
-    return;
-    // if (sortNumbers) {
-    //   setUsers(orders.slice(0).sort((a, b) => parseInt(a.id) - parseInt(b.id)));
-    //   setSortNumbers(!sortNumbers);
-    // } else {
-    //   setUsers(orders.slice(0).sort((a, b) => parseInt(b.id) - parseInt(a.id)));
-    //   setSortNumbers(!sortNumbers);
-    // }
+  const sortByProduct = (e) => {
+    if (sortNumbers) {
+      setSortOrders(
+        sortOrders.sort((a, b) => a.product.localeCompare(b.product))
+      );
+      setSortNumbers(!sortNumbers);
+    } else {
+      setSortOrders(
+        sortOrders.sort((a, b) => b.product.localeCompare(a.product))
+      );
+      setSortNumbers(!sortNumbers);
+    }
   };
 
-  const sortByLocation = (e) => {
-    return;
-    // if (sortLocation) {
-    //   setUsers(users.sort((a, b) => a.address.localeCompare(b.address)));
-    //   setSortLocation(!sortLocation);
-    // } else {
-    //   setUsers(users.sort((a, b) => b.address.localeCompare(a.address)));
-    //   setSortLocation(!sortLocation);
-    // }
+  const sortByAgent = () => {
+    if (sortLocation) {
+      setSortOrders(
+        sortOrders.sort((a, b) => a.agent_name.localeCompare(b.agent_name))
+      );
+      setSortLocation(!sortLocation);
+    } else {
+      setSortOrders(
+        sortOrders.sort((a, b) => b.agent_name.localeCompare(a.agent_name))
+      );
+      setSortLocation(!sortLocation);
+    }
   };
 
   const modifyOrders = useCallback(
@@ -132,16 +144,22 @@ export default function Orders() {
   );
 
   const nnn = useCallback(() => {
-    const orderstatus = ["booked", "intransit", "delivered", "pickedup", "red"];
+    const orderstatus = [
+      "booked",
+      "delivered_morning",
+      "delivered_evening",
+      "cancelled",
+      "intransit",
+      "pickedup",
+    ];
 
     const orderStatus = (userqr) => {
       let statss = orderstatus[userqr];
       return statss ? statss : "Not Available";
     };
 
-    const orderDate = (userqr) => {
-      let dateItem = orders.find((item) => item.QRNumber === userqr);
-      return dateItem ? dateItem.date : new Date(Date.now()).toLocaleString();
+    const orderDate = (dateItem) => {
+      return new Date(dateItem).toLocaleString("en-Gb");
     };
 
     const customername = (id) => {
@@ -191,7 +209,7 @@ export default function Orders() {
   }, [orders, nnn]);
 
   return (
-    <div className="Orders__main-container">
+    <div className="main-container">
       {spinner ? (
         <>
           <Spinner />
@@ -219,20 +237,22 @@ export default function Orders() {
             </div>
           </div>
           {addexport ? (
-            <ExportData
-              users={users}
-              deliveryTypes={deliveryTypes}
-              products={products}
-              orders={convertedOrders}
-            />
+            <Paper>
+              <ExportData
+                users={users}
+                deliveryTypes={deliveryTypes}
+                products={products}
+                orders={convertedOrders}
+              />
+            </Paper>
           ) : (
             <>
               <MiniNavbar
                 isVisible={currentUser}
                 clearCurrentUser={clearCurrentUser}
                 sortByName={sortByName}
-                sortByNumber={sortByNumber}
-                sortByLocation={sortByLocation}
+                sortByProduct={sortByProduct}
+                sortByAgent={sortByAgent}
               ></MiniNavbar>
               {currentUser ? (
                 <OrderPage order={currentUser}></OrderPage>

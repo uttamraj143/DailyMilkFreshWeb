@@ -1,6 +1,6 @@
 import "./Navbar.scss";
 import { useState, useRef, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DailyMilkFreshLogo from "logo.png";
 
 import { ReactComponent as SettingsIcon } from "svgs/settingsIcon.svg";
@@ -21,15 +21,15 @@ export default function Navbar(props) {
   const [adminMenuOptions] = useState([
     {
       title: "Orders",
-      value: "orders_list",
+      value: "orders",
     },
     {
       title: "Users",
-      value: "users_list",
+      value: "users",
     },
     {
       title: "Agents",
-      value: "agents_list",
+      value: "agents",
     },
     // {
     //   title: 'Statistics',
@@ -37,7 +37,7 @@ export default function Navbar(props) {
     // },
     {
       title: "Products",
-      value: "products_list",
+      value: "products",
     },
     {
       value: "assign_users",
@@ -64,7 +64,7 @@ export default function Navbar(props) {
     },
   ]);
 
-  let history = useHistory();
+  let navigate = useNavigate();
   const openSidebarMenus = useRef();
   const [windowWidh] = useState(Boolean(window.innerWidth > 1025));
   const wrapperRef = useRef(null);
@@ -95,17 +95,18 @@ export default function Navbar(props) {
     userInfo.setAccessToken(null);
     userInfo.setIsAdmin(false);
     userInfo.setRefreshToken(null);
-    return history.push("/");
+    return navigate("/");
   };
 
   const homepage = (e) => {
     e.preventDefault();
-    return history.push("/");
+    return navigate("/");
   };
 
   const changeMenu = (e, sal) => {
     e.preventDefault();
-    props.currentMenuSelection(sal); // emitting data to parent
+    navigate(sal);
+    // props.currentMenuSelection(sal); // emitting data to parent
     if (!windowWidh) openSidebarMenus.current.checked = false;
   };
 

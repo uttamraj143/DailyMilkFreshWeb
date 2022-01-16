@@ -1,4 +1,4 @@
-import './MiniNavbar.scss';
+import "./MiniNavbar.scss";
 
 export default function MiniNavbar(props) {
   const goback = (e) => {
@@ -11,14 +11,14 @@ export default function MiniNavbar(props) {
     props.sortByName();
   };
 
-  const sortByNumber = (e) => {
+  const sortByProduct = (e) => {
     e.preventDefault();
-    props.sortByNumber();
+    props.sortByProduct();
   };
 
-  const sortByLocation = (e) => {
+  const sortByAgent = (e) => {
     e.preventDefault();
-    props.sortByLocation();
+    props.sortByAgent();
   };
 
   return (
@@ -36,7 +36,7 @@ export default function MiniNavbar(props) {
               fillRule="evenodd"
               d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"
             />
-          </svg>{' '}
+          </svg>{" "}
           <span> &nbsp; Back</span>
         </div>
       ) : (
@@ -57,11 +57,11 @@ export default function MiniNavbar(props) {
                 d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z"
               />
               <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zm-8.46-.5a.5.5 0 0 1-1 0V3.707L2.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L4.5 3.707V13.5z" />
-            </svg>{' '}
+            </svg>{" "}
             <span>Name</span>
           </div>
           <div
-            onClick={(e) => sortByLocation(e)}
+            onClick={(e) => sortByAgent(e)}
             className="MiniNavbar__flexcenter"
           >
             <svg
@@ -77,10 +77,10 @@ export default function MiniNavbar(props) {
               />
               <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zm-8.46-.5a.5.5 0 0 1-1 0V3.707L2.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L4.5 3.707V13.5z" />
             </svg>
-            <span>Location</span>
+            <span>Agent Name</span>
           </div>
           <div
-            onClick={(e) => sortByNumber(e)}
+            onClick={(e) => sortByProduct(e)}
             className="MiniNavbar__flexcenter"
           >
             <svg
@@ -97,7 +97,7 @@ export default function MiniNavbar(props) {
               />
               <path d="M4.5 13.5a.5.5 0 0 1-1 0V3.707L2.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L4.5 3.707V13.5z" />
             </svg>
-            <span>User Id</span>
+            <span>Product</span>
           </div>
         </>
       )}

@@ -1,12 +1,24 @@
 import Paper from "@mui/material/Paper";
+import { useNavigate } from "react-router-dom";
 import userIcon from "svgs/singlePerson.svg";
 
 export default function OrdersListing(props) {
+  let navigate = useNavigate();
+  const openUser = (e, id) => {
+    e.preventDefault();
+    navigate(`/users/${id}`);
+  };
+
   return (
     <div className="Users__card-container">
       {props.users.map((user, index) => {
         return (
-          <Paper key={index} className="Users__order" elevation={2}>
+          <Paper
+            onClick={(e) => openUser(e, user.user_id)}
+            key={index}
+            className="Users__order"
+            elevation={2}
+          >
             <div className="Users__customername">
               <div className="Users__cust-id">
                 <span>

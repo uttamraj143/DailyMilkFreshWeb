@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 import Paper from "@mui/material/Paper";
@@ -23,9 +23,13 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [apiresponsemessage, setapiresponse] = useState(null);
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const userInfo = useContext(UserContext);
+  let { isLoggedIn } = userInfo;
+  useEffect(() => {
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn, navigate]);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -95,14 +99,14 @@ export default function Login() {
         userInfo.setIsAdmin(true);
         userInfo.setRefreshToken(refresh_token);
         userInfo.saveuserDetails(res.data.data);
-        return history.push("/dashboard");
+        return navigate("/");
       } else if (res.data.data.user_type === 2) {
         userInfo.setIsLoggedIn(true);
         userInfo.setAccessToken(token);
         userInfo.setIsAdmin(false);
         userInfo.setRefreshToken(refresh_token);
         userInfo.saveuserDetails(res.data.data);
-        return history.push("/dashboard");
+        return navigate("/");
       } else {
         setapiresponse("Un Authorized User");
       }
@@ -110,7 +114,7 @@ export default function Login() {
   };
   return (
     <div className="Login__main-container">
-      <Paper className="Login__paper" elevation={2}>
+      <div className="Login__paper">
         <img
           className="Login__logo-image"
           src={DailyMilkFreshLogo}
@@ -198,7 +202,7 @@ export default function Login() {
             setClickOnce={setClickOnce}
           ></ForgotPassword>
         )}
-      </Paper>
+      </div>
     </div>
   );
 }

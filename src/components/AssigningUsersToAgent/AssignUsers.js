@@ -60,7 +60,7 @@ export default function AssignUsers() {
 
     let assignList = [];
     muser_id.map((item) => {
-      assignList.push({
+      return assignList.push({
         user_id: item,
         quantity: sendData.quantity,
         delivery_type: sendData.delivery_type,
@@ -183,7 +183,7 @@ export default function AssignUsers() {
   }
 
   return (
-    <div className="AssignUsers__main">
+    <div className="main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
           <UserBadge /> {"  "} Assign Users to Agents

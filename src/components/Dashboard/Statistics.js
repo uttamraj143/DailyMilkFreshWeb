@@ -165,7 +165,7 @@ export default function ProductionStatistics() {
   }, [chartContainer4]);
 
   return (
-    <div className="Statistics__main-container">
+    <div className="Statistics__main-container main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
           <GraphIcon /> {"  "} Admin Panel

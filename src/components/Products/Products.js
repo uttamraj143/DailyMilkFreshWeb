@@ -23,9 +23,7 @@ export default function Products() {
     listProducts(null, userInfo.access_token)
       .then((res) => {
         setProducts(res.data.data);
-        setTimeout(() => {
-          toggleSpinner(false);
-        }, 1000);
+        toggleSpinner(false);
       })
       .catch((res) => {
         // optional chaining
@@ -43,7 +41,7 @@ export default function Products() {
   };
 
   return (
-    <div className="Products__main-container">
+    <div className="main-container">
       <div className="Orders__main-heading">
         <div className="General-main-heading">
           <ProductIcon /> {"  "} Products
