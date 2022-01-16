@@ -21,22 +21,18 @@ export default function Users() {
   const [page, setPage] = useState(1);
   const [modifiedUsers, setSortUsers] = useState([]);
 
-  const { data, isLoading, refetch } = useQuery(
-    [3, userInfo.access_token],
-    listUsers,
-    {
-      onSuccess: () => {
-        data?.data && setUsers(data.data.data);
-        !isLoading && toggleSpinner(false);
-      },
-      onError: (error) => {
-        if (error && error.response && error.response.status === 401) {
-          toggleSpinner(true);
-          userInfo.refreshAccessToken();
-        }
-      },
-    }
-  );
+  const { refetch } = useQuery([3, userInfo.access_token], listUsers, {
+    onSuccess: (data) => {
+      data?.data && setUsers(data.data.data);
+      toggleSpinner(false);
+    },
+    onError: (error) => {
+      if (error && error.response && error.response.status === 401) {
+        toggleSpinner(true);
+        userInfo.refreshAccessToken();
+      }
+    },
+  });
 
   const modifyUsers = useCallback(
     (e, val) => {
@@ -55,7 +51,7 @@ export default function Users() {
   const addUserClicked = (e) => {
     e && e.preventDefault();
     toggleAddUser(!addagenttoggle);
-    refetch();
+    if (addagenttoggle === true) refetch();
   };
 
   return (

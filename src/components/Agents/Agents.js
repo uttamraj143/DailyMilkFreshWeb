@@ -11,6 +11,7 @@ import Skeleton from "@mui/material/Skeleton";
 import "./Agents.scss";
 import { listUsers } from "store/user";
 import UserContext from "UserContext";
+import { useQuery } from "react-query";
 
 export default function Agents() {
   const userInfo = useContext(UserContext);
@@ -19,26 +20,23 @@ export default function Agents() {
   const [spinner, toggleSpinner] = useState(true);
   const [page] = useState(1);
 
-  useEffect(() => {
-    function getAllAgents() {
-      listUsers(2, userInfo.access_token)
-        .then((res) => {
-          toggleSpinner(false);
-          setAgents(res.data.data);
-        })
-        .catch((res) => {
-          if (res && res.response && res.response.status === 401) {
-            toggleSpinner(true);
-            userInfo.refreshAccessToken();
-          }
-        });
-    }
-    getAllAgents();
-  }, [userInfo.access_token, addagenttoggle, userInfo]);
+  const { refetch } = useQuery([2, userInfo.access_token], listUsers, {
+    onSuccess: (data) => {
+      data?.data && setAgents(data.data.data);
+      toggleSpinner(false);
+    },
+    onError: (error) => {
+      if (error && error.response && error.response.status === 401) {
+        toggleSpinner(true);
+        userInfo.refreshAccessToken();
+      }
+    },
+  });
 
   const addAgentClicked = (e) => {
     e && e.preventDefault();
     toggleAddAgent(!addagenttoggle);
+    if (addagenttoggle === true) refetch();
   };
 
   return (
