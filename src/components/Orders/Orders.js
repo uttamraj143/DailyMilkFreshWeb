@@ -29,13 +29,13 @@ export default function Orders() {
   const [convertedOrders, setConvertedOrders] = useState([]);
   const [sortOrders, setSortOrders] = useState([]);
   const [users, setUsers] = useState([]);
-  const [spinner, toggleSpinner] = useState(false);
+  const [spinner, toggleSpinner] = useState(true);
   const [products, setProducts] = useState([]);
   const [deliveryTypes, setDeliveryTypes] = useState([]);
 
   const { access_token, refreshAccessToken } = userInfo;
 
-  const getusers = useQuery([null, access_token], listUsers, {
+  const { refetch } = useQuery([null, access_token], listUsers, {
     onSuccess: (data) => {
       data?.data && setUsers(data.data.data);
       // toggleSpinner(false);
