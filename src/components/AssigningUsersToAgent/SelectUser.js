@@ -15,9 +15,10 @@ export default function SelectUser(props) {
   const { access_token, refreshAccessToken } = props;
   const [users, setUsers] = useState([]);
 
-  const { refetch } = useQuery([3, access_token], listUsers, {
+  const { isLoading } = useQuery([3, access_token], listUsers, {
     onSuccess: (data) => {
       data?.data && setUsers(data.data.data);
+      console.log(isLoading);
     },
     onError: (error) => {
       if (error && error.response && error.response.status === 401) {

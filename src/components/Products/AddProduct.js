@@ -8,6 +8,7 @@ export default function AddProduct(props) {
     name: "",
     description: "",
     price: "",
+    measurement: "",
   });
 
   const onSubmit = async (data) => {
@@ -46,11 +47,7 @@ export default function AddProduct(props) {
     <div className="Products__sub-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="Login__col-3">
-          {errors.name && (
-            <div className="Users__errors">
-              Name needs to be at least 3 characters
-            </div>
-          )}
+          {errors.name && <div className="Users__errors">Name needs to be at least 3 characters</div>}
           <input
             className="Login__input-focus-effect"
             type="text"
@@ -67,9 +64,7 @@ export default function AddProduct(props) {
         </div>
 
         <div className="Login__col-3">
-          {errors.price && (
-            <div className="Users__errors">This field is required</div>
-          )}
+          {errors.price && <div className="Users__errors">This field is required</div>}
 
           <input
             className="Login__input-focus-effect"
@@ -84,11 +79,7 @@ export default function AddProduct(props) {
         </div>
 
         <div className="Login__col-3">
-          {errors.description && (
-            <div className="Users__errors">
-              Please enter a valid description min 8 char"
-            </div>
-          )}
+          {errors.description && <div className="Users__errors">Please enter a valid description min 8 char"</div>}
           <input
             className="Login__input-focus-effect"
             type="description"
@@ -99,12 +90,19 @@ export default function AddProduct(props) {
         </div>
 
         <div className="Login__col-3">
+          {errors.measurement && <div className="Users__errors">Please enter a valid measurement Kg/packet/Litre"</div>}
           <input
-            className={
-              errors.length
-                ? "Users__refresh-button Users__refresh-button-disabled"
-                : "Users__refresh-button"
-            }
+            className="Login__input-focus-effect"
+            type="measurement"
+            placeholder="measurement"
+            {...register("measurement", { required: "required", min: 5 })}
+          ></input>
+          <span className="focus-border"></span>
+        </div>
+
+        <div className="Login__col-3">
+          <input
+            className={errors.length ? "Users__refresh-button Users__refresh-button-disabled" : "Users__refresh-button"}
             type="submit"
             value="Add New Product"
           ></input>

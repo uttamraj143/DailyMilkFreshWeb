@@ -8,7 +8,7 @@ const icon = <img src={CheckBoxOutlineBlankIcon} alt="dsd" fontSize="small" />;
 const checkedIcon = <img src={CheckBoxIcon} alt="dsds" fontSize="small" />;
 <CheckBoxIcon fontSize="small" />;
 
-export default function SelectUser(props) {
+export default function SelectQuantity(props) {
   const all = Array(100)
     .fill()
     .map((_, index) => index + 1);
@@ -24,22 +24,11 @@ export default function SelectUser(props) {
         getOptionLabel={(option) => option.toString()}
         renderOption={(props, option, { selected }) => (
           <li {...props}>
-            <Checkbox
-              icon={icon}
-              checkedIcon={checkedIcon}
-              style={{ marginRight: 8 }}
-              checked={selected}
-            />
+            <Checkbox icon={icon} checkedIcon={checkedIcon} style={{ marginRight: 8 }} checked={selected} />
             {option}
           </li>
         )}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Select quantity"
-            placeholder="quantity"
-          />
-        )}
+        renderInput={(params) => <TextField {...params} label="Select quantity" placeholder="quantity" />}
       />
     </div>
   );

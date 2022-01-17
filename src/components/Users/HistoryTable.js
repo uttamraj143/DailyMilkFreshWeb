@@ -29,7 +29,7 @@ export default function HistoryTable(props) {
       setTotalPrice((prev) => parseInt(prev) + item.price);
       setTotalQuantity((prev) => parseInt(prev) + item.quantity);
     });
-  }, []);
+  }, [props.historyData]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
