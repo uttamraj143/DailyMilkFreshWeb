@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 import UserContext from "UserContext";
 import OrdersListing from "components/Orders/OrdersListing";
-import OrderPage from "components/Orders/OrderPage";
+import OrdersCancel from "components/Orders/OrdersCancel";
 import MiniNavbar from "components/common/MiniNavbar";
 import { ReactComponent as CartIcon } from "svgs/cartIcon.svg";
 import Pagination from "@mui/material/Pagination";
@@ -224,7 +224,7 @@ export default function Orders() {
                 sortByAgent={sortByAgent}
               ></MiniNavbar>
               {currentUser ? (
-                <OrderPage order={currentUser}></OrderPage>
+                <OrdersCancel order={currentUser}></OrdersCancel>
               ) : (
                 <div>
                   <OrdersListing

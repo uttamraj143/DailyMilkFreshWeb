@@ -12,6 +12,7 @@ import Spinner from "components/common/Spinner";
 import { toPng } from "html-to-image";
 import { useQuery } from "react-query";
 import { listUsers } from "store/user";
+import { saveAs } from "file-saver";
 
 export default function UsersHistory() {
   let userInfo = useContext(UserContext);
@@ -130,8 +131,8 @@ export default function UsersHistory() {
   // };
 
   const onCapture = () => {
-    toPng(document.getElementById("chai")).then(function (dataUrl) {
-      //saveAs(dataUrl, "my-node.png");
+    toPng(document.getElementById("chaiuserqr")).then(function (dataUrl) {
+      saveAs(dataUrl, currUser.name + "qrcode.jpg");
     });
   };
 
@@ -144,15 +145,13 @@ export default function UsersHistory() {
               Customer Unique Scan Code - Download
             </div>{" "}
             <br></br>
-            <div id="chai">
+            <div style={{ backgroundColor: "white" }} id="chaiuserqr">
               {imageUrl ? (
                 <div>
                   <img width="350px" height="350px" src={imageUrl} alt="img" />
                 </div>
               ) : null}
-              <div>
-                {currUser.name}, {currUser.phone_no}, <br></br> {currUser.address}
-              </div>
+              {currUser.name}, {currUser.phone_no}, <br></br> {currUser.address}
             </div>
           </Paper>
 
