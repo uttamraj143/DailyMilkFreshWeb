@@ -9,6 +9,7 @@ import "./Users.scss";
 import MySnack from "components/common/MySnack";
 import Skeleton from "@mui/material/Skeleton";
 import Spinner from "components/common/Spinner";
+import { toPng } from "html-to-image";
 
 export default function UsersHistory() {
   let userInfo = useContext(UserContext);
@@ -16,9 +17,7 @@ export default function UsersHistory() {
   const [historyData, setHistoryData] = useState([]);
   // const [modifiedHistory, setConvertedHistory] = useState(null);
   let { access_token } = userInfo;
-  const [fromSelectedDate, setFromDate] = useState(
-    new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
-  );
+  const [fromSelectedDate, setFromDate] = useState(new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
   const [alertmessage, setalertmessage] = useState(null);
   const [toSelectedDate, setToDate] = useState(new Date().toISOString());
   const [imageUrl, setImageUrl] = useState("");
@@ -28,7 +27,7 @@ export default function UsersHistory() {
       try {
         var opts = {
           errorCorrectionLevel: "H",
-          type: "image/jpeg",
+          type: "application/octet-stream",
           quality: 1,
           margin: 1,
           color: {
@@ -38,7 +37,8 @@ export default function UsersHistory() {
         };
         let curr_id = window.location.pathname.split("/")[2];
         const response = await QRCode.toDataURL(curr_id, opts);
-        setImageUrl(response);
+        var url = response.replace(/^data:image\/[^;]+/, "data:application/octet-stream");
+        setImageUrl(url);
       } catch (error) {
         console.log(error);
       }
@@ -105,18 +105,32 @@ export default function UsersHistory() {
     setToDate(toDate);
   };
 
+  // const downloadQR = (e) => {
+  //   htmlToImage.toPng(document.getElementById("my-node")).then(function (dataUrl) {
+  //     download(dataUrl, "my-node.png");
+  //   });
+  // };
+
+  const onCapture = () => {
+    toPng(document.getElementById("chai")).then(function (dataUrl) {
+      //saveAs(dataUrl, "my-node.png");
+    });
+  };
+
   return (
     <div className="main-container">
       {!spinner ? (
         <>
           <Paper className="AssignUsers__sub" elevation={2}>
             Customer Unique Scan Code
-            
-            {imageUrl ? (
-              <a href={imageUrl}>
-                <img width="350px" height="350px" src={imageUrl} alt="img" />
-              </a>
-            ) : null}
+            <div id="chai">
+              {imageUrl ? (
+                <div>
+                  <img width="350px" height="350px" src={imageUrl} alt="img" />
+                </div>
+              ) : null}
+            </div>
+            <div onClick={onCapture}>Download</div>
           </Paper>
 
           <Paper className="Users__top">
@@ -146,10 +160,7 @@ export default function UsersHistory() {
                 }}
               />
             </div>
-            <button
-              className="Users__refresh-button"
-              onClick={(e) => getCustomerData(e)}
-            >
+            <button className="Users__refresh-button" onClick={(e) => getCustomerData(e)}>
               Submit
             </button>{" "}
           </Paper>
@@ -161,12 +172,7 @@ export default function UsersHistory() {
         <div className="Agents__spinners">
           <Spinner />
           <Skeleton animation="wave" height={100} width="80%" />
-          <Skeleton
-            variant="rectangular"
-            animation="wave"
-            width={210}
-            height={118}
-          />
+          <Skeleton variant="rectangular" animation="wave" width={210} height={118} />
         </div>
       )}
       {alertmessage && <MySnack message={alertmessage} />}
