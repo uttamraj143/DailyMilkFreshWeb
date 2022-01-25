@@ -10,10 +10,12 @@ import MySnack from "components/common/MySnack";
 import Skeleton from "@mui/material/Skeleton";
 import Spinner from "components/common/Spinner";
 import { toPng } from "html-to-image";
+import { useQuery } from "react-query";
+import { listUsers } from "store/user";
 
 export default function UsersHistory() {
   let userInfo = useContext(UserContext);
-  const [spinner, toggleSpinner] = useState(false);
+  const [spinner, toggleSpinner] = useState(true);
   const [historyData, setHistoryData] = useState([]);
   // const [modifiedHistory, setConvertedHistory] = useState(null);
   let { access_token } = userInfo;
@@ -21,6 +23,22 @@ export default function UsersHistory() {
   const [alertmessage, setalertmessage] = useState(null);
   const [toSelectedDate, setToDate] = useState(new Date().toISOString());
   const [imageUrl, setImageUrl] = useState("");
+  const [currUser, setCurrUser] = useState();
+
+  useQuery([3, userInfo.access_token], listUsers, {
+    retry: 1,
+    onSuccess: (data) => {
+      let curr_id = window.location.pathname.split("/")[2];
+      data?.data && setCurrUser(data.data.data.find((i) => i.user_id === curr_id));
+      toggleSpinner(false);
+    },
+    onError: (error) => {
+      if (error && error.response && error.response.status === 401) {
+        toggleSpinner(true);
+        userInfo.refreshAccessToken();
+      }
+    },
+  });
 
   useEffect(() => {
     const generateQrCode = async () => {
@@ -122,15 +140,20 @@ export default function UsersHistory() {
       {!spinner ? (
         <>
           <Paper className="AssignUsers__sub" elevation={2}>
-            Customer Unique Scan Code
+            <div className="Users__refresh-button " onClick={onCapture}>
+              Customer Unique Scan Code - Download
+            </div>{" "}
+            <br></br>
             <div id="chai">
               {imageUrl ? (
                 <div>
                   <img width="350px" height="350px" src={imageUrl} alt="img" />
                 </div>
               ) : null}
+              <div>
+                {currUser.name}, {currUser.phone_no}, <br></br> {currUser.address}
+              </div>
             </div>
-            <div onClick={onCapture}>Download</div>
           </Paper>
 
           <Paper className="Users__top">
