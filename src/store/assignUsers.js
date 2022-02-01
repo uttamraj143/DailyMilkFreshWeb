@@ -18,11 +18,11 @@ export const listAgentUsers = (access_token, assign_data) => {
   });
 };
 
-export const updateLocationOfUser = (access_token, data, delivery_id) => {
+export const updateLocationOfUser = (access_token, latlong, delivery_id) => {
   return axiosInstance({
     method: "POST",
     url: `agentuser/${delivery_id}/updatedUserDeliveryDetails`,
-    data: data.latlong,
+    data: latlong,
     headers: { access_token: access_token },
   });
 };

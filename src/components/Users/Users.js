@@ -22,6 +22,7 @@ export default function Users() {
   const [modifiedUsers, setSortUsers] = useState([]);
 
   const { refetch } = useQuery([3, userInfo.access_token], listUsers, {
+    retry: 1,
     onSuccess: (data) => {
       data?.data && setUsers(data.data.data);
       toggleSpinner(false);
@@ -61,10 +62,7 @@ export default function Users() {
           <UserBadge /> {"  "} Users
         </div>
         <div>
-          <button
-            className="Users__refresh-button"
-            onClick={(e) => addUserClicked(e)}
-          >
+          <button className="Users__refresh-button" onClick={(e) => addUserClicked(e)}>
             {addagenttoggle ? "Cancel Adding" : "Add new User"}
           </button>
         </div>
@@ -73,10 +71,7 @@ export default function Users() {
       {!spinner ? (
         <div>
           {addagenttoggle ? (
-            <AddUser
-              addUserClicked={addUserClicked}
-              access_token={userInfo.access_token}
-            ></AddUser>
+            <AddUser addUserClicked={addUserClicked} access_token={userInfo.access_token}></AddUser>
           ) : (
             <>
               <UsersListing users={modifiedUsers}></UsersListing>
@@ -88,11 +83,7 @@ export default function Users() {
                     variant="outlined"
                     color="primary"
                     boundaryCount={2}
-                    count={
-                      users.length % 6 === 0
-                        ? users.length / 6
-                        : Math.floor(users.length / 6) + 1
-                    }
+                    count={users.length % 6 === 0 ? users.length / 6 : Math.floor(users.length / 6) + 1}
                     page={page}
                   />
                 </Stack>
@@ -104,12 +95,7 @@ export default function Users() {
         <div className="Users__spinners">
           <Spinner />
           <Skeleton animation="wave" height={100} width="80%" />
-          <Skeleton
-            variant="rectangular"
-            animation="wave"
-            width={210}
-            height={118}
-          />
+          <Skeleton variant="rectangular" animation="wave" width={210} height={118} />
           {/* <img height="150px" width="150px" src={Spinner} alt="Daily"></img> */}
         </div>
       )}

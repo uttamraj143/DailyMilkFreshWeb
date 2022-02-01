@@ -2,11 +2,11 @@ import "./Settings.scss";
 import { useState, useContext, useEffect } from "react";
 import UserContext from "UserContext";
 import { editUser } from "store/user";
-import QRCode from "qrcode";
+// import QRCode from "qrcode";
 
 export default function Settings() {
   const userInfo = useContext(UserContext);
-  const [imageUrl, setImageUrl] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
   const [selectedProfile, setSelectedProfile] = useState(true);
   const { access_token, userDetails } = userInfo;
   const [user, setUserProfile] = useState({
@@ -26,25 +26,25 @@ export default function Settings() {
       ...prevState,
       ...userDetails,
     }));
-    const generateQrCode = async () => {
-      try {
-        var opts = {
-          errorCorrectionLevel: "H",
-          type: "image/jpeg",
-          quality: 1,
-          margin: 1,
-          color: {
-            dark: "#000",
-            light: "#FFF",
-          },
-        };
-        const response = await QRCode.toDataURL(userDetails.user_id, opts);
-        setImageUrl(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    generateQrCode();
+    // const generateQrCode = async () => {
+    //   try {
+    //     var opts = {
+    //       errorCorrectionLevel: "H",
+    //       type: "image/jpeg",
+    //       quality: 1,
+    //       margin: 1,
+    //       color: {
+    //         dark: "#000",
+    //         light: "#FFF",
+    //       },
+    //     };
+    //     const response = await QRCode.toDataURL(userDetails.user_id, opts);
+    //     setImageUrl(response);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    // generateQrCode();
   }, [userDetails]);
 
   const assignUserProfile = (e, formType) => {

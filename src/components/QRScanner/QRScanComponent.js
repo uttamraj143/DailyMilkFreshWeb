@@ -8,7 +8,7 @@ import Spinner from "components/common/Spinner";
 import Skeleton from "@mui/material/Skeleton";
 import SelectQuantity from "components/AssigningUsersToAgent/SelectQuantity";
 import { useNavigate } from "react-router-dom";
-import "./Qrscanner.scss"
+import "./Qrscanner.scss";
 
 export default function QRScanComponent(props) {
   let navigate = useNavigate();
@@ -18,6 +18,10 @@ export default function QRScanComponent(props) {
   const userInfo = useContext(UserContext);
   const [spinner, toggleSpinner] = useState(false);
   const { access_token } = userInfo;
+  const [latlong, setLatlong] = useState({
+    lat: 0,
+    long: 0,
+  });
 
   const handleErrorWebCam = (error) => {
     console.log(error);
@@ -62,11 +66,7 @@ export default function QRScanComponent(props) {
   };
 
   const updateLocationByAgent = (e) => {
-    e.preventDefault()
-    let locdata = {
-      lat: 0,
-      long: 0,
-    };
+    e.preventDefault();
 
     var options = {
       enableHighAccuracy: true,
@@ -76,8 +76,7 @@ export default function QRScanComponent(props) {
 
     function success(pos) {
       var crd = pos.coords;
-      locdata.lat = crd.latitude;
-      locdata.long = crd.longitude;
+      setLatlong({ lat: crd.latitude, long: crd.longitude });
       console.log("Your current position is:");
       console.log(`Latitude : ${crd.latitude}`);
       console.log(`Longitude: ${crd.longitude}`);
@@ -90,13 +89,13 @@ export default function QRScanComponent(props) {
 
     navigator.geolocation.getCurrentPosition(success, error, options);
 
-    updateLocationOfUser(
-      access_token,
-      locdata,
-      props.currentUser.delivery_id
-    ).then((res) => {
-      console.log("user location updated");
-    });
+    updateLocationOfUser(access_token, latlong, props.currentUser.delivery_id)
+      .then((res) => {
+        console.log("user location updated");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -108,17 +107,14 @@ export default function QRScanComponent(props) {
             <div className="QRScanner__heading">For change in quantity select here</div>
             <SelectQuantity handleData={handleData}></SelectQuantity>
 
-            <div onClick={e => updateLocationByAgent(e)} className="QRScanner__location">Click Here to Update Location</div>
+            <div onClick={(e) => updateLocationByAgent(e)} className="QRScanner__location">
+              Click Here to Update Location
+            </div>
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
                   <h3>Qr Code Scan by Camera</h3>
-                  <QrReader
-                    delay={300}
-                    style={{ width: "100%" }}
-                    onError={handleErrorWebCam}
-                    onScan={handleScanWebCam}
-                  />
+                  <QrReader delay={300} style={{ width: "100%" }} onError={handleErrorWebCam} onScan={handleScanWebCam} />
                   <h3>User ID: {scanResultWebCam}</h3>
                 </Grid>
               </Grid>
@@ -129,12 +125,7 @@ export default function QRScanComponent(props) {
         <div className="Agents__spinners">
           <Spinner />
           <Skeleton animation="wave" height={100} width="80%" />
-          <Skeleton
-            variant="rectangular"
-            animation="wave"
-            width={210}
-            height={118}
-          />
+          <Skeleton variant="rectangular" animation="wave" width={210} height={118} />
         </div>
       )}
     </>

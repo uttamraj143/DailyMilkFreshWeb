@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
@@ -18,6 +18,7 @@ export default function SelectUser(props) {
   const { isLoading } = useQuery([2, access_token], listUsers, {
     onSuccess: (data) => {
       data?.data && setUsers(data.data.data);
+      console.log(isLoading);
     },
     onError: (error) => {
       if (error && error.response && error.response.status === 401) {

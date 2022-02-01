@@ -29,7 +29,7 @@ export default function ExportData(props) {
       setTotalPrice((prev) => parseInt(prev) + item.price);
       setTotalQuantity((prev) => parseInt(prev) + item.quantity);
     });
-  }, []);
+  }, [props.orders]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },

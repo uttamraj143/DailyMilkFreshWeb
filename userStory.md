@@ -43,13 +43,10 @@ total price in excel
 
 18. in accounts I am unable to open edit admin option the button is there but unable to access it
 
-
-Update location separate button in orders
-orders - update location button
-Should be able to cancel the Order
-Edit Product page with new options
-make scan qr - UI neat - with user name and phone number - download this frame
-in host/users/:id give option to edit/update delivery details
-quantity with 500ml or kg or ltr (with respect to key from the Product api)
+19. Should be able to cancel the Order
+20. Edit Product page with new options
+21. make scan qr - UI neat - with user name and phone number - download this frame
+22. in host/users/:id give option to edit/update delivery details
+23. quantity with 500ml or kg or ltr (with respect to key from the Product api)
 
 In iOS, Assign users, on autocomplete dropdown, on clicking outside getting undo type

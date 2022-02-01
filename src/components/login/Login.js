@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
-import Paper from "@mui/material/Paper";
 
 import TextField from "@mui/material/TextField";
 

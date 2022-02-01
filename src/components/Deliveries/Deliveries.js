@@ -49,12 +49,7 @@ export default function Deliveries() {
           <>
             <Spinner />
             <Skeleton animation="wave" height={100} width="80%" />
-            <Skeleton
-              variant="rectangular"
-              animation="wave"
-              width={210}
-              height={118}
-            />
+            <Skeleton variant="rectangular" animation="wave" width={210} height={118} />
           </>
         ) : (
           <ListAgentDeliveries
